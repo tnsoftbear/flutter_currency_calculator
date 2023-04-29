@@ -1,0 +1,40 @@
+name: currency_calc
+description: Currency Calculator by tnsoftbear
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.19.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  http: ^0.13.5
+  intl: any
+  shared_preferences: ^2.1.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  hive_generator: ^2.0.0
+  build_runner: ^2.3.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  generate: true # Enable generation of localized Strings from arb files.
+  uses-material-design: true
+  assets:
+    - assets/images/
+  fonts:
+    - family: IndieFlower
+      fonts:
+        - asset: fonts/IndieFlower-Regular.ttf
+    - family: MaterialIcons
+      fonts:
+        - asset: fonts/MaterialIcons-Regular.ttf
+    - family: Montserrat
+      fonts:
+        - asset: fonts/Montserrat-Regular.ttf
