@@ -1,34 +1,57 @@
 # Currency Calculator
 
-My 1st experiment with flutter and dart in April of 2023.
+My 1st experiment with flutter and dart in April of 2023.  
+This is a simple demo app for currency conversion.
 
-This is a simple demo app for currency conversion. It supports two languages: English and Russian.
+## The feature first architecture
 
-Module logic is separated to application, infrastructure and domain layers. 
-I think, the "package by feature" style (aka the ["feature first"](https://codewithandrea.com/articles/flutter-project-structure/)) could look like this :)   
+Module logic is separated to application, infrastructure and domain layers.
+Project structure is organized in the "package by feature" style
+(aka the ["feature first"](https://codewithandrea.com/articles/flutter-project-structure/)).
+Logic is separated to features, and each feature has its own namespace with all layers inside.
+Features do not call each other, except the "Front" feature,
+which defines the application entry point and general configuration of appearance.
 
-Logic is separated to features, and each feature has its own folder with all layers inside.
-Features do not call each other, except the "Front" feature, which defines the application entry point and general configuration of appearance.
+Application layer calls logic from the Infrastructure and Domain layer.
+Presentation logic is located in the Application layer in the "view" folders.
+Infrastructure layer calls logic from Domain layer.
+It contains logic that accesses external resources, such as API, database, etc.
+Domain layer operates only in bounds of its own space.
+It is pure functional core with business logic and data models.
 
-Application layer calls logic from the Infrastructure and Domain layer. Presentation logic is located in the Application layer in the "view" folders.
-Infrastructure layer calls logic from Domain layer. It contains logic that accesses external resources, such as API, database, etc.
-Domain layer operates only in bounds of its own space. It is pure functional core with business logic and data models.
+## Features
 
-Most important business logic is located in the "Conversion" feature,
-and it handles the Currency Calculator and the Conversion History screens.
+### Currency Conversion feature
 
-**Infrastructure layer** is responsible for the currency exchange rate loading by API, 
-and for the currency conversion history storage in the [Hive](https://docs.hivedb.dev/) database.
+Most important business logic is located in the "Conversion" feature.
+It handles the Currency Calculator and the Conversion History screens.
+
+**Infrastructure layer** is responsible for the currency exchange rate loading by API.
+It caches retrieved exchange rate in the [Hive](https://docs.hivedb.dev/) DB.
+The lifetime of cached data is set to 1 day in configuration object. 
+The Hive DB is also used for storing currency conversion history.
 
 Rate fetchers implement common interface and are provided by factory.
 **Application layer** operates by this interface and provides the currency exchange rate to the UI.
-It translates with help of localization package, and format currency amounts and numbers with help of the [Intl](https://pub.dev/packages/intl) package.  
-Preferred color theme can be configured in settings. Theme is applied to the whole app.
-Custom colors are added with help of [theme extension](https://api.flutter.dev/flutter/material/ThemeExtension-class.html).
+It translates with help of localization package, and format currency amounts 
+and exchange rate numbers with help of the [Intl](https://pub.dev/packages/intl) package.  
 
 **Domain layer** validates input values and calculates the currency conversion.
 
-We have unit tests for validation and few functional tests for checking application view.
+### Settings feature
+
+Settings screen allows to configure several options:  
+
+* Application supports two languages: English and Russian. They define appropriate localization.
+* Preferred color is configurable by selection of the application theme. Theme is applied to the whole app.
+Custom colors are added with help of [theme extension](https://api.flutter.dev/flutter/material/ThemeExtension-class.html).
+* Font family is configured there as well.
+
+Settings are stored with help of the [Shared preferences](https://pub.dev/packages/shared_preferences) package.
+
+### Tests
+
+There are few unit tests for conversion input validation and calculation logic.
 
 ## Install
 
@@ -50,9 +73,9 @@ flutter build apk --no-tree-shake-icons
 
 ## Screens
 
-![Currency calculator screen](./doc/pic/scr-1.jpg)
-![Settings screen](./doc/pic/scr-2.jpg)
-![History screen](./doc/pic/scr-3.jpg)
+![Currency calculator screen](./doc/pic/scr-1.png)
+![Settings screen](./doc/pic/scr-2.png)
+![History screen](./doc/pic/scr-3.png)
 
 ## Links
 
