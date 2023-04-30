@@ -3,11 +3,10 @@
 My 1st experiment with flutter and dart in April of 2023.  
 This is a simple demo app for currency conversion.
 
-## The feature first architecture
+## Architecture
 
 Module logic is separated to application, infrastructure and domain layers.
-Project structure is organized in the "package by feature" style
-(aka the ["feature first"](https://codewithandrea.com/articles/flutter-project-structure/)).
+Project structure is organized by the the ["feature first"](https://codewithandrea.com/articles/flutter-project-structure/) style.
 Logic is separated to features, and each feature has its own namespace with all layers inside.
 Features do not call each other, except the "Front" feature,
 which defines the application entry point and general configuration of appearance.
@@ -30,6 +29,7 @@ It handles the Currency Calculator and the Conversion History screens.
 It caches retrieved exchange rate in the [Hive](https://docs.hivedb.dev/) DB.
 The lifetime of cached data is set to 1 day in configuration object. 
 The Hive DB is also used for storing currency conversion history.
+DB access methods are encapsulated in the repository classes.
 
 Rate fetchers implement common interface and are provided by factory.
 **Application layer** operates by this interface and provides the currency exchange rate to the UI.
@@ -84,3 +84,140 @@ flutter build apk --no-tree-shake-icons
 * [Style guide for Flutter repo](https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo)
 * [Internationalizing Flutter apps](https://docs.flutter.dev/development/accessibility-and-localization/internationalization)
 * [Flutter 3: How to extend ThemeData](https://medium.com/geekculture/flutter-3-how-to-extend-themedata-56b8923bf1aa)
+
+## lib folder structure
+
+```sh
+lib
+├───main.dart
+│   
+├───feature
+│   ├───about
+│   │   └───app
+│   │       └───view
+│   │           └───screen
+│   │                   about_screen.dart
+│   │                   
+│   ├───conversion
+│   │   ├───app
+│   │   │   ├───config
+│   │   │   │       conversion_config.dart
+│   │   │   │       
+│   │   │   ├───history
+│   │   │   │   └───view
+│   │   │   │       ├───screen
+│   │   │   │       │       all_history_screen.dart
+│   │   │   │       │       
+│   │   │   │       └───widget
+│   │   │   │           ├───all_history
+│   │   │   │           │       all_history_data_table_source.dart
+│   │   │   │           │       all_history_data_table_widget.dart
+│   │   │   │           │       
+│   │   │   │           ├───dto
+│   │   │   │           │       history_output_row.dart
+│   │   │   │           │       
+│   │   │   │           └───last_history
+│   │   │   │                   last_history_data_table_widget.dart
+│   │   │   │                   
+│   │   │   └───rate
+│   │   │       ├───fetch
+│   │   │       │       rate_fetcher_factory.dart
+│   │   │       │       
+│   │   │       ├───translate
+│   │   │       │       conversion_validation_translator.dart
+│   │   │       │       
+│   │   │       └───view
+│   │   │           ├───screen
+│   │   │           │       calculator_screen.dart
+│   │   │           │       
+│   │   │           └───widget
+│   │   │               └───calculator
+│   │   │                       calculator_widget.dart
+│   │   │                       
+│   │   ├───domain
+│   │   │   ├───constant
+│   │   │   │       currency_constant.dart
+│   │   │   │       
+│   │   │   ├───history
+│   │   │   │   └───model
+│   │   │   │           conversion_history_record.dart
+│   │   │   │           conversion_history_record.g.dart
+│   │   │   │           
+│   │   │   └───rate
+│   │   │       ├───calculate
+│   │   │       │       currency_converter.dart
+│   │   │       │       
+│   │   │       ├───fetch
+│   │   │       │   │   rate_cached_fetcher.dart
+│   │   │       │   │   
+│   │   │       │   ├───cache
+│   │   │       │   │       rate_cacher.dart
+│   │   │       │   │       
+│   │   │       │   └───load
+│   │   │       │           rate_fetcher.dart
+│   │   │       │           
+│   │   │       ├───model
+│   │   │       │       exchange_rate_record.dart
+│   │   │       │       exchange_rate_record.g.dart
+│   │   │       │       
+│   │   │       └───validate
+│   │   │               conversion_validation_result.dart
+│   │   │               conversion_validator.dart
+│   │   │               
+│   │   └───infra
+│   │       ├───history
+│   │       │   └───repository
+│   │       │           conversion_history_record_repository.dart
+│   │       │           
+│   │       └───rate
+│   │           ├───constant
+│   │           │       rate_fetching_constant.dart
+│   │           │       
+│   │           ├───fetch
+│   │           │   ├───cache
+│   │           │   │       rate_hive_cacher.dart
+│   │           │   │       rate_memory_cacher.dart
+│   │           │   │       
+│   │           │   └───load
+│   │           │           fawaz_ahmed_rate_fetcher.dart
+│   │           │           fixer_io_rate_fetcher.dart
+│   │           │           
+│   │           └───repository
+│   │                   exchange_rate_record_repository.dart
+│   │                   
+│   ├───front
+│   │   └───app
+│   │       ├───constant
+│   │       │       appearance_constant.dart
+│   │       │       route_constant.dart
+│   │       │       
+│   │       └───view
+│   │           ├───theme
+│   │           │       additional_colors.dart
+│   │           │       theme_builder.dart
+│   │           │       
+│   │           └───widget
+│   │                   front_header_bar.dart
+│   │                   front_main_menu.dart
+│   │                   front_material_app.dart
+│   │                   
+│   └───setting
+│       └───app
+│           ├───manage
+│           │       setting_manager.dart
+│           │       
+│           └───view
+│               ├───screen
+│               │       setting_screen.dart
+│               │       
+│               └───widget
+│                       font_family_setting_table_row.dart
+│                       locale_setting_table_row.dart
+│                       setting_widget_export.dart
+│                       theme_setting_table_row.dart
+│                       
+└───l10n
+        all_en.arb
+        all_ru.arb
+        
+```
