@@ -1,13 +1,11 @@
 import 'package:currency_calc/feature/front/app/constant/appearance_constant.dart';
+import 'package:currency_calc/feature/setting/infra/repository/setting_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingManager {
   static Future<String> detectLanguageCode() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final languageCode =
-        await prefs.getString("languageCode") ?? AppearanceConstant.LC_DEFAULT;
-    return languageCode;
+    return await SettingRepository.loadString("languageCode") ??
+        AppearanceConstant.LC_DEFAULT;
   }
 
   static Future<Locale> detectLocale() async {
@@ -17,31 +15,24 @@ class SettingManager {
   }
 
   static Future<void> saveLanguageCode(String languageCode) async {
-    await SharedPreferences.getInstance()
-      ..setString("languageCode", languageCode);
+    await SettingRepository.saveString("languageCode", languageCode);
   }
 
   static Future<String> detectFontFamily() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final fontFamily =
-        await prefs.getString("fontFamily") ?? AppearanceConstant.FF_DEFAULT;
-    return fontFamily;
+    return await SettingRepository.loadString("fontFamily") ??
+        AppearanceConstant.FF_DEFAULT;
   }
 
   static Future<void> saveFontFamily(String fontFamily) async {
-    await SharedPreferences.getInstance()
-      ..setString("fontFamily", fontFamily);
+    await SettingRepository.saveString("fontFamily", fontFamily);
   }
 
   static Future<String> detectThemeType() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final themeType =
-        await prefs.getString("themeType") ?? AppearanceConstant.THEME_DEFAULT;
-    return themeType;
+    return await SettingRepository.loadString("themeType") ??
+        AppearanceConstant.THEME_DEFAULT;
   }
 
   static Future<void> saveThemeType(String themeType) async {
-    await SharedPreferences.getInstance()
-      ..setString("themeType", themeType);
+    await SettingRepository.saveString("themeType", themeType);
   }
 }

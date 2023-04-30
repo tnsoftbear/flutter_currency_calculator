@@ -89,7 +89,7 @@ flutter build apk --no-tree-shake-icons
 
 ```sh
 lib
-├───main.dart
+│   main.dart
 │   
 ├───feature
 │   ├───about
@@ -202,22 +202,29 @@ lib
 │   │                   front_material_app.dart
 │   │                   
 │   └───setting
-│       └───app
-│           ├───manage
-│           │       setting_manager.dart
-│           │       
-│           └───view
-│               ├───screen
-│               │       setting_screen.dart
-│               │       
-│               └───widget
-│                       font_family_setting_table_row.dart
-│                       locale_setting_table_row.dart
-│                       setting_widget_export.dart
-│                       theme_setting_table_row.dart
-│                       
+│       ├───app
+│       │   ├───manage
+│       │   │       setting_manager.dart
+│       │   │       
+│       │   └───view
+│       │       ├───screen
+│       │       │       setting_screen.dart
+│       │       │       
+│       │       └───widget
+│       │               font_family_setting_table_row.dart
+│       │               locale_setting_table_row.dart
+│       │               setting_widget_export.dart
+│       │               theme_setting_table_row.dart
+│       │               
+│       └───infra
+│           └───repository
+│                   setting_repository.dart
+│                   
 └───l10n
         all_en.arb
         all_ru.arb
-        
 ```
+
+---
+
+(c) 2023, github.com/tnsoftbear
