@@ -4,6 +4,7 @@ import 'package:currency_calc/feature/front/app/view/widget/front_material_app.d
 import 'package:currency_calc/feature/front/app/constant/appearance_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/all_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SettingScreen extends StatelessWidget {
   @override
@@ -32,14 +33,16 @@ class SettingScreen extends StatelessWidget {
               // instead of BorderRadius.circular(8.0), to make the const constructor call
               borderRadius: const BorderRadius.all(Radius.circular(8.0)),
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Table(
+              columnWidths: {
+                0: const FlexColumnWidth(0.25),
+                1: const FlexColumnWidth(0.75),
+              },
+              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
               children: [
-                _buildLocaleSetting(context),
-                _buildFontFamilySetting(context),
-                _buildThemeSetting(context)
+                _buildLocaleSettingTableRow(context),
+                _buildFontFamilySettingTableRow(context),
+                _buildThemeSettingTableRow(context)
               ],
             ),
           ),
@@ -55,37 +58,44 @@ class SettingScreen extends StatelessWidget {
     FrontMaterialApp.assignLocale(context, locale);
   }
 
-  _buildLocaleSetting(BuildContext context) {
+  _buildLocaleSettingTableRow(BuildContext context) {
     final tr = AppLocalizations.of(context);
-    List<Map<String, String>> languages = [
+    List<Map<String, String>> options = [
       {
         'title': tr.settingLocaleEnLabel,
         'value': AppearanceConstant.LC_EN,
+        'icon': 'icons/flags/svg/us.svg',
       },
       {
         'title': tr.settingLocaleRuLabel,
         'value': AppearanceConstant.LC_RU,
+        'icon': 'icons/flags/svg/ru.svg',
       },
     ];
-    final List<Widget> localeList = languages.map((language) {
+    final List<Widget> languageWidgetList = options.map((language) {
       return Expanded(
-        child: RadioListTile(
-          title: Text(language['title']!),
-          value: language['value'],
-          groupValue: Localizations.localeOf(context).languageCode,
-          onChanged: (languageCode) => _onLocaleChange(context, languageCode),
-        ),
-      );
+          child: RadioListTile(
+        title: SvgPicture.asset(language['icon']!,
+            package: 'country_icons',
+            height: 32,
+            semanticsLabel: language['title']),
+        value: language['value'],
+        groupValue: Localizations.localeOf(context).languageCode,
+        onChanged: (languageCode) => _onLocaleChange(context, languageCode),
+      ));
     }).toList();
-    final List<Widget> localeWidgetList =
-        <Widget>[Text(tr.settingSelectLanguage)] + localeList;
-    return Row(children: localeWidgetList);
+    return TableRow(children: [
+      Text(tr.settingSelectLanguage),
+      Row(
+        children: languageWidgetList,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      ),
+    ]);
   }
 
-  _buildFontFamilySetting(BuildContext context) {
+  _buildFontFamilySettingTableRow(BuildContext context) {
     final tr = AppLocalizations.of(context);
     final List<Widget> fontFamilyWidgetList = [
-      Text(tr.settingSelectFontFamily),
       DropdownButton<String>(
         value: FrontMaterialApp.getFontFamily(context),
         onChanged: (String? fontFamily) =>
@@ -99,43 +109,53 @@ class SettingScreen extends StatelessWidget {
         }).toList(),
       ),
     ];
-    return Row(
-        children: fontFamilyWidgetList,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween);
+    return TableRow(children: [
+      Text(tr.settingSelectFontFamily),
+      Row(
+          children: fontFamilyWidgetList,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween),
+    ]);
   }
 
-  _buildThemeSetting(BuildContext context) {
+  _buildThemeSettingTableRow(BuildContext context) {
     final tr = AppLocalizations.of(context);
-    List<Map<String, String>> themes = [
+    List<Map<String, dynamic>> themes = [
       {
         'title': tr.settingThemeBlue,
         'value': AppearanceConstant.THEME_BLUE,
+        'color': Colors.blue,
       },
       {
         'title': tr.settingThemeGreen,
         'value': AppearanceConstant.THEME_GREEN,
+        'color': Colors.green,
       },
       {
         'title': tr.settingThemeRed,
         'value': AppearanceConstant.THEME_RED,
+        'color': Colors.red,
       },
     ];
-    final List<Widget> themeWidgetList = [
-      Text(tr.settingSelectTheme),
-      DropdownButton(
-        value: FrontMaterialApp.getThemeType(context),
-        onChanged: (String? themeType) =>
+    final currentTheme = FrontMaterialApp.getThemeType(context);
+    final List<Widget> themeWidgetList = themes.map((options) {
+      return Expanded(
+          child: RadioListTile(
+        value: options['value'],
+        groupValue: currentTheme,
+        onChanged: (themeType) =>
             FrontMaterialApp.assignThemeType(context, themeType),
-        items: themes.map((options) {
-          return DropdownMenuItem(
-            value: options['value'],
-            child: Text(options['title']!),
-          );
-        }).toList(),
-      ),
-    ];
-    return Row(
-        children: themeWidgetList,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween);
+        secondary: Container(
+          width: 16,
+          height: 16,
+          color: options['color'],
+        ),
+      ));
+    }).toList();
+    return TableRow(children: [
+      Text(tr.settingSelectTheme),
+      Row(
+          children: themeWidgetList,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween)
+    ]);
   }
 }
