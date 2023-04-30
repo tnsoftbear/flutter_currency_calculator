@@ -60,7 +60,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
       child: Container(
         decoration: BoxDecoration(
           color: additionalColors.linenLucidColor,
-          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+          borderRadius: BorderRadius.circular(8.0),
         ),
         child: Column(
           children: [
@@ -103,7 +103,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: additionalColors.linenLucidColor,
-                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                  borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: TextField(
                   key: Key('sourceAmount'),

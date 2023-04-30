@@ -31,7 +31,7 @@ class AboutScreen extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: additionalColors.linenTurbidColor,
-              borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+              borderRadius: BorderRadius.circular(8.0),
             ),
             child: Text(
               tr.aboutContent,
