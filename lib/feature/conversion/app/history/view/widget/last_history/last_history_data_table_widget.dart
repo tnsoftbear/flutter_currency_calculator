@@ -95,7 +95,7 @@ class _LastHistoryDataTableWidget extends State<LastHistoryDataTableWidget> {
     final skipCount = totalCount > LAST_HISTORY_RECORD_COUNT
         ? totalCount - LAST_HISTORY_RECORD_COUNT
         : 0;
-    final historyRecords = repo
+    final historyRecords = await repo
         .loadAll() // box.values
         .skip(skipCount)
         .map((e) => HistoryOutputRow(

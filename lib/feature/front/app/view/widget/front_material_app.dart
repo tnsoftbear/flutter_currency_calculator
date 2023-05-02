@@ -66,13 +66,17 @@ class _FrontMaterialAppState extends State<FrontMaterialApp> {
   String _themeType = AppearanceConstant.THEME_DEFAULT;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     SettingManager.detectLocale().then((locale) => _locale = locale);
     SettingManager.detectFontFamily()
         .then((fontFamily) => _fontFamily = fontFamily);
     SettingManager.detectThemeType()
         .then((themeType) => _themeType = themeType);
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
