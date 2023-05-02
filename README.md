@@ -83,7 +83,7 @@ Few reminders for myself:
 flutter pub run build_runner build --delete-conflicting-outputs
 # Generate translation classes
 flutter gen-l10n
-# Generate lib/ folder tree
+# Generate lib/ folder tree in Windows
 echo ```sh > ./doc/lib_tree.md & echo lib >> ./doc/lib_tree.md & tree /F lib | more +3 >> ./doc/lib_tree.md & echo ``` >> ./doc/lib_tree.md
 ```
 
