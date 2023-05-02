@@ -1,4 +1,4 @@
-import 'package:currency_calc/feature/front/app/constant/route_constant.dart';
+import 'package:currency_calc/feature/front/app/route/app_router.dart';
 import 'package:currency_calc/feature/front/app/view/theme/additional_colors.dart';
 import 'package:currency_calc/feature/front/app/constant/appearance_constant.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +39,7 @@ class FrontMainMenu extends StatelessWidget {
                 // To close the Drawer
                 Navigator.pop(context);
                 // Navigating to About Page
-                Navigator.pushNamed(context, RouteConstant.aboutRoute);
+                Navigator.pushNamed(context, AppRouter.R_ABOUT);
               },
             ),
             ListTile(
@@ -55,8 +55,7 @@ class FrontMainMenu extends StatelessWidget {
                 // To close the Drawer
                 Navigator.pop(context);
                 // Navigating to About Page
-                Navigator.pushNamed(
-                    context, RouteConstant.currencyConversionRoute);
+                Navigator.pushNamed(context, AppRouter.R_CALCULATE);
               },
             ),
             ListTile(
@@ -72,8 +71,7 @@ class FrontMainMenu extends StatelessWidget {
                 // To close the Drawer
                 Navigator.pop(context);
                 // Navigating to About Page
-                Navigator.pushNamed(
-                    context, RouteConstant.currencyConversionAllHistoryRoute);
+                Navigator.pushNamed(context, AppRouter.R_HISTORY);
               },
             ),
             ListTile(
@@ -89,7 +87,7 @@ class FrontMainMenu extends StatelessWidget {
                 // To close the Drawer
                 Navigator.pop(context);
                 // Navigating to About Page
-                Navigator.pushNamed(context, RouteConstant.settingRoute);
+                Navigator.pushNamed(context, AppRouter.R_SETTING);
               },
             ),
           ],
