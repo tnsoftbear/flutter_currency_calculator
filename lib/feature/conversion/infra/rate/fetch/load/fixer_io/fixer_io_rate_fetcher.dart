@@ -8,8 +8,8 @@ class FixerIoRateFetcher extends RateFetcher {
 
   FixerIoRateFetcher({required this.url, required this.apiKey});
 
-  Future<double> fetchExchangeRate(String from, String to) async {
-    final url = this.url + '?from=$from&to=$to&amount=1';
+  Future<double> fetchExchangeRate(String sourceCurrency, String targetCurrency) async {
+    final url = this.url + '?from=$sourceCurrency&to=$targetCurrency&amount=1';
     final response =
         await http.get(Uri.parse(url), headers: {'apikey': this.apiKey});
     if (response.statusCode == 200) {

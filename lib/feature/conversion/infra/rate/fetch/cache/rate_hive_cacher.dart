@@ -7,8 +7,8 @@ class RateHiveCacher extends RateCacher {
 
   RateHiveCacher(this.ttl);
 
-  Future<double?> get(String from, String to) async {
-    final key = _makeKey(from, to);
+  Future<double?> get(String sourceCurrency, String targetCurrency) async {
+    final key = _makeKey(sourceCurrency, targetCurrency);
     final repo = ExchangeRateRecordRepository();
     await repo.init();
     ExchangeRateRecord? record = await repo.loadByKey(key);
@@ -25,11 +25,11 @@ class RateHiveCacher extends RateCacher {
     return Future.value(null);
   }
 
-  Future<void> set(String from, String to, double rate) async {
-    final key = _makeKey(from, to);
+  Future<void> set(String sourceCurrency, String targetCurrency, double rate) async {
+    final key = _makeKey(sourceCurrency, targetCurrency);
     final record = ExchangeRateRecord(
-      sourceCurrency: from,
-      targetCurrency: to,
+      sourceCurrency: sourceCurrency,
+      targetCurrency: targetCurrency,
       exchangeRate: rate,
       createdAt: DateTime.now(),
     );
@@ -38,7 +38,7 @@ class RateHiveCacher extends RateCacher {
     await repo.saveByKey(key, record);
   }
 
-  String _makeKey(String from, String to) {
-    return from + to;
+  String _makeKey(String sourceCurrency, String targetCurrency) {
+    return sourceCurrency + targetCurrency;
   }
 }

@@ -3,8 +3,8 @@ import 'package:currency_calc/feature/conversion/domain/rate/fetch/load/rate_fet
 import 'package:currency_calc/feature/conversion/domain/rate/fetch/rate_cached_fetcher.dart';
 import 'package:currency_calc/feature/conversion/infra/rate/constant/rate_fetching_constant.dart';
 import 'package:currency_calc/feature/conversion/infra/rate/fetch/cache/rate_hive_cacher.dart';
-import 'package:currency_calc/feature/conversion/infra/rate/fetch/load/fawaz_ahmed_rate_fetcher.dart';
-import 'package:currency_calc/feature/conversion/infra/rate/fetch/load/fixer_io_rate_fetcher.dart';
+import 'package:currency_calc/feature/conversion/infra/rate/fetch/load/fawaz_ahmed/fawaz_ahmed_rate_fetcher.dart';
+import 'package:currency_calc/feature/conversion/infra/rate/fetch/load/fixer_io/fixer_io_rate_fetcher.dart';
 
 class RateFetcherFactory {
   static RateFetcher create(ConversionConfig config) {

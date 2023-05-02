@@ -8,14 +8,17 @@ class RateCachedFetcher implements RateFetcher {
   RateCachedFetcher(this._currencyRateFetcher, this._currencyRateCacher);
 
   @override
-  Future<double> fetchExchangeRate(String from, String to) async {
-    final cachedCurrencyRate = await _currencyRateCacher.get(from, to);
+  Future<double> fetchExchangeRate(
+      String sourceCurrency, String targetCurrency) async {
+    final cachedCurrencyRate =
+        await _currencyRateCacher.get(sourceCurrency, targetCurrency);
     if (cachedCurrencyRate != null) {
       return cachedCurrencyRate;
     }
 
-    final currencyRate = await _currencyRateFetcher.fetchExchangeRate(from, to);
-    await _currencyRateCacher.set(from, to, currencyRate);
+    final currencyRate = await _currencyRateFetcher.fetchExchangeRate(
+        sourceCurrency, targetCurrency);
+    await _currencyRateCacher.set(sourceCurrency, targetCurrency, currencyRate);
     return currencyRate;
   }
 }

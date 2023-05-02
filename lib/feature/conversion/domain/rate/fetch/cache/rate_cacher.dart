@@ -1,4 +1,4 @@
 abstract class RateCacher {
-  Future<double?> get(String from, String to);
-  Future<void> set(String from, String to, double rate);
+  Future<double?> get(String sourceCurrency, String targetCurrency);
+  Future<void> set(String sourceCurrency, String targetCurrency, double rate);
 }

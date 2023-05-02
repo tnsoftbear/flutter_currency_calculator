@@ -7,6 +7,7 @@ This is a simple demo app for currency conversion.
 
 Module logic is separated to application, infrastructure and domain layers.
 Project structure is organized by the the ["feature first"](https://codewithandrea.com/articles/flutter-project-structure/) style.
+See namespaces structure in folder tree view in the [lib/ tree](doc/lib_tree.md) document. 
 Logic is separated to features, and each feature has its own namespace with all layers inside.
 Features do not call each other, except the "Front" feature,
 which defines the application entry point and general configuration of appearance.
@@ -49,11 +50,13 @@ Custom colors are added with help of [theme extension](https://api.flutter.dev/f
 
 Settings are stored with help of the [Shared preferences](https://pub.dev/packages/shared_preferences) package.
 
-### Tests
+## Tests
 
 There are few unit tests for conversion input validation and calculation logic.
 
-## Install
+## Run
+
+### Install
 
 ```sh
 # Install dependencies
@@ -62,7 +65,7 @@ flutter pub get
 flutter create -t app .
 ```
 
-## Build
+### Build
 
 `<uses-permission android:name="android.permission.INTERNET" />` is added 
 to the `android/app/src/main/AndroidManifest.xml` file, because application uses the network.
@@ -70,6 +73,25 @@ to the `android/app/src/main/AndroidManifest.xml` file, because application uses
 ```sh
 flutter build apk --no-tree-shake-icons 
 ```
+
+### Develop
+
+Few reminders for myself:
+
+```sh
+# Generate code
+flutter pub run build_runner build --delete-conflicting-outputs
+# Generate translation classes
+flutter gen-l10n
+# Generate lib/ folder tree
+echo ```sh > ./doc/lib_tree.md & echo lib >> ./doc/lib_tree.md & tree /F lib | more +3 >> ./doc/lib_tree.md & echo ``` >> ./doc/lib_tree.md
+```
+
+#### TODO
+
+* [ ] JSON model for rate fetching
+* [ ] Riverpod
+* [ ] Swipe screens
 
 ## Screens
 
@@ -84,146 +106,6 @@ flutter build apk --no-tree-shake-icons
 * [Style guide for Flutter repo](https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo)
 * [Internationalizing Flutter apps](https://docs.flutter.dev/development/accessibility-and-localization/internationalization)
 * [Flutter 3: How to extend ThemeData](https://medium.com/geekculture/flutter-3-how-to-extend-themedata-56b8923bf1aa)
-
-## lib folder structure
-
-```sh
-lib
-│   main.dart
-│   
-├───feature
-│   ├───about
-│   │   └───app
-│   │       └───view
-│   │           └───screen
-│   │                   about_screen.dart
-│   │                   
-│   ├───conversion
-│   │   ├───app
-│   │   │   ├───config
-│   │   │   │       conversion_config.dart
-│   │   │   │       
-│   │   │   ├───history
-│   │   │   │   └───view
-│   │   │   │       ├───screen
-│   │   │   │       │       all_history_screen.dart
-│   │   │   │       │       
-│   │   │   │       └───widget
-│   │   │   │           ├───all_history
-│   │   │   │           │       all_history_data_table_source.dart
-│   │   │   │           │       all_history_data_table_widget.dart
-│   │   │   │           │       
-│   │   │   │           ├───dto
-│   │   │   │           │       history_output_row.dart
-│   │   │   │           │       
-│   │   │   │           └───last_history
-│   │   │   │                   last_history_data_table_widget.dart
-│   │   │   │                   
-│   │   │   └───rate
-│   │   │       ├───fetch
-│   │   │       │       rate_fetcher_factory.dart
-│   │   │       │       
-│   │   │       ├───translate
-│   │   │       │       conversion_validation_translator.dart
-│   │   │       │       
-│   │   │       └───view
-│   │   │           ├───screen
-│   │   │           │       calculator_screen.dart
-│   │   │           │       
-│   │   │           └───widget
-│   │   │               └───calculator
-│   │   │                       calculator_widget.dart
-│   │   │                       
-│   │   ├───domain
-│   │   │   ├───constant
-│   │   │   │       currency_constant.dart
-│   │   │   │       
-│   │   │   ├───history
-│   │   │   │   └───model
-│   │   │   │           conversion_history_record.dart
-│   │   │   │           conversion_history_record.g.dart
-│   │   │   │           
-│   │   │   └───rate
-│   │   │       ├───calculate
-│   │   │       │       currency_converter.dart
-│   │   │       │       
-│   │   │       ├───fetch
-│   │   │       │   │   rate_cached_fetcher.dart
-│   │   │       │   │   
-│   │   │       │   ├───cache
-│   │   │       │   │       rate_cacher.dart
-│   │   │       │   │       
-│   │   │       │   └───load
-│   │   │       │           rate_fetcher.dart
-│   │   │       │           
-│   │   │       ├───model
-│   │   │       │       exchange_rate_record.dart
-│   │   │       │       exchange_rate_record.g.dart
-│   │   │       │       
-│   │   │       └───validate
-│   │   │               conversion_validation_result.dart
-│   │   │               conversion_validator.dart
-│   │   │               
-│   │   └───infra
-│   │       ├───history
-│   │       │   └───repository
-│   │       │           conversion_history_record_repository.dart
-│   │       │           
-│   │       └───rate
-│   │           ├───constant
-│   │           │       rate_fetching_constant.dart
-│   │           │       
-│   │           ├───fetch
-│   │           │   ├───cache
-│   │           │   │       rate_hive_cacher.dart
-│   │           │   │       rate_memory_cacher.dart
-│   │           │   │       
-│   │           │   └───load
-│   │           │           fawaz_ahmed_rate_fetcher.dart
-│   │           │           fixer_io_rate_fetcher.dart
-│   │           │           
-│   │           └───repository
-│   │                   exchange_rate_record_repository.dart
-│   │                   
-│   ├───front
-│   │   └───app
-│   │       ├───constant
-│   │       │       appearance_constant.dart
-│   │       │       route_constant.dart
-│   │       │       
-│   │       └───view
-│   │           ├───theme
-│   │           │       additional_colors.dart
-│   │           │       theme_builder.dart
-│   │           │       
-│   │           └───widget
-│   │                   front_header_bar.dart
-│   │                   front_main_menu.dart
-│   │                   front_material_app.dart
-│   │                   
-│   └───setting
-│       ├───app
-│       │   ├───manage
-│       │   │       setting_manager.dart
-│       │   │       
-│       │   └───view
-│       │       ├───screen
-│       │       │       setting_screen.dart
-│       │       │       
-│       │       └───widget
-│       │               font_family_setting_table_row.dart
-│       │               locale_setting_table_row.dart
-│       │               setting_widget_export.dart
-│       │               theme_setting_table_row.dart
-│       │               
-│       └───infra
-│           └───repository
-│                   setting_repository.dart
-│                   
-└───l10n
-        all_en.arb
-        all_ru.arb
-```
 
 ---
 
