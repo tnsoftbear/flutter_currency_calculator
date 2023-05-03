@@ -1,9 +1,10 @@
-import 'package:currency_calc/feature/conversion/app/history/view/widget/dto/history_output_row.dart';
-import 'package:currency_calc/feature/conversion/infra/history/repository/conversion_history_record_repository.dart';
+import 'package:currency_calc/feature/conversion/app/history/model/last_history_model.dart';
+import 'package:currency_calc/feature/conversion/app/history/view/widget/dto/history_output_dto.dart';
+import 'package:currency_calc/feature/conversion/app/history/view/widget/last_history/last_history_output_dto_producer.dart';
 import 'package:currency_calc/feature/front/app/view/theme/additional_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/all_localizations.dart';
-import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class LastHistoryDataTableWidget extends StatefulWidget {
   @override
@@ -11,112 +12,118 @@ class LastHistoryDataTableWidget extends StatefulWidget {
 }
 
 class _LastHistoryDataTableWidget extends State<LastHistoryDataTableWidget> {
-  late List<HistoryOutputRow> _historyRecords;
-
-  static const LAST_HISTORY_RECORD_COUNT = 5;
-
   @override
   void initState() {
     super.initState();
-    _historyRecords = [];
   }
 
   @override
   Widget build(BuildContext context) {
     final appLoc = AppLocalizations.of(context);
-    _loadHistoryRecords(context);
     final AdditionalColors additionalColors =
         Theme.of(context).extension<AdditionalColors>()!;
-
-    return Visibility(
-      visible: _historyRecords.isNotEmpty,
-      child: DataTable(
-        columnSpacing: 8,
-        horizontalMargin: 16,
-        decoration: BoxDecoration(
-          color: additionalColors.linenColor,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        columns: [
-          DataColumn(
-              label: Text(appLoc.conversionHistoryDateColumnTitle),
-              tooltip: appLoc.conversionHistoryDateColumnTooltip),
-          DataColumn(
-              label: Text(appLoc.conversionHistorySourceColumnTitle),
-              tooltip: appLoc.conversionHistorySourceColumnTooltip),
-          DataColumn(
-              label: Text(appLoc.conversionHistoryTargetColumnTitle),
-              tooltip: appLoc.conversionHistoryTargetColumnTooltip),
-          DataColumn(
-              label: Text(appLoc.conversionHistoryRateColumnTitle),
-              tooltip: appLoc.conversionHistoryRateColumnTooltip),
-          DataColumn(
-              label: Text(appLoc.conversionHistoryActionsColumnTitle),
-              tooltip: appLoc.conversionHistoryActionsColumnTooltip),
-        ],
-        rows: List.generate(
-          _historyRecords.length,
-          (index) => DataRow(
-            cells: [
-              DataCell(Text(_historyRecords[index].date,
-                  style: TextStyle(fontSize: 12))),
-              DataCell(Text(_historyRecords[index].from)),
-              DataCell(Text(_historyRecords[index].to)),
-              DataCell(Text(_historyRecords[index].rate)),
-              DataCell(
-                IconButton(
-                  icon: Icon(Icons.delete,
-                      size: 20, color: Theme.of(context).colorScheme.primary),
-                  onPressed: () => _onDeletePressed(index),
-                ),
+    return FutureBuilder<List<HistoryOutputDto>>(
+        future: _produceOutputDtos(context),
+        builder: (BuildContext context,
+            AsyncSnapshot<List<HistoryOutputDto>> snapshot) {
+          List<Widget> children;
+          if (snapshot.hasData) {
+            if (snapshot.data!.isEmpty) {
+              children = [];
+            } else {
+              final data = snapshot.data!;
+              children = [
+                DataTable(
+                  columnSpacing: 8,
+                  horizontalMargin: 16,
+                  decoration: BoxDecoration(
+                    color: additionalColors.linenColor,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  columns: [
+                    DataColumn(
+                        label: Text(appLoc.conversionHistoryDateColumnTitle),
+                        tooltip: appLoc.conversionHistoryDateColumnTooltip),
+                    DataColumn(
+                        label: Text(appLoc.conversionHistorySourceColumnTitle),
+                        tooltip: appLoc.conversionHistorySourceColumnTooltip),
+                    DataColumn(
+                        label: Text(appLoc.conversionHistoryTargetColumnTitle),
+                        tooltip: appLoc.conversionHistoryTargetColumnTooltip),
+                    DataColumn(
+                        label: Text(appLoc.conversionHistoryRateColumnTitle),
+                        tooltip: appLoc.conversionHistoryRateColumnTooltip),
+                    DataColumn(
+                        label: Text(appLoc.conversionHistoryActionsColumnTitle),
+                        tooltip: appLoc.conversionHistoryActionsColumnTooltip),
+                  ],
+                  rows: List.generate(
+                    data.length,
+                    (index) => DataRow(
+                      cells: [
+                        DataCell(Text(data[index].date,
+                            style: TextStyle(fontSize: 12))),
+                        DataCell(Text(data[index].from)),
+                        DataCell(Text(data[index].to)),
+                        DataCell(Text(data[index].rate)),
+                        DataCell(
+                          IconButton(
+                            icon: Icon(Icons.delete,
+                                size: 20,
+                                color: Theme.of(context).colorScheme.primary),
+                            onPressed: () => _onDeletePressed(index),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ];
+            }
+          } else if (snapshot.hasError) {
+            children = <Widget>[
+              const Icon(
+                Icons.error_outline,
+                color: Colors.red,
+                size: 60,
               ),
-            ],
-          ),
-        ),
-      ),
-    );
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: Text('Error: ${snapshot.error}'),
+              ),
+            ];
+          } else {
+            children = const <Widget>[
+              SizedBox(
+                width: 60,
+                height: 60,
+                child: CircularProgressIndicator(),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 16),
+                child: Text('Awaiting result...'),
+              ),
+            ];
+          }
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: children,
+            ),
+          );
+        });
   }
 
   _onDeletePressed(int index) async {
-    final repo = ConversionHistoryRecordRepository();
-    await repo.init();
-    final deleteIndex = repo.countAll() - index - 1;
-    await repo.deleteByIndex(deleteIndex);
+    context.read<LastHistoryModel>().deleteRecordByTableIndex(index);
   }
 
-  Future<void> _loadHistoryRecords(BuildContext context) async {
+  Future<List<HistoryOutputDto>> _produceOutputDtos(
+      BuildContext context) async {
     final localeName = Localizations.localeOf(context).toString();
-    final df = DateFormat.yMMMd(localeName);
-    final tf = DateFormat.Hms(localeName);
-    final nf = NumberFormat.decimalPattern(localeName);
-    final repo = ConversionHistoryRecordRepository();
-    await repo.init();
-    final totalCount = repo.countAll();
-    final skipCount = totalCount > LAST_HISTORY_RECORD_COUNT
-        ? totalCount - LAST_HISTORY_RECORD_COUNT
-        : 0;
-    final historyRecords = await repo
-        .loadAll() // box.values
-        .skip(skipCount)
-        .map((e) => HistoryOutputRow(
-            df.format(e.date) + "\n" + tf.format(e.date),
-            _formatCurrency(e.sourceAmount, e.sourceCurrency),
-            _formatCurrency(e.targetAmount, e.targetCurrency),
-            nf.format(e.rate)))
-        .toList()
-        .reversed
-        .toList();
-    setState(() {
-      _historyRecords = historyRecords;
-    });
-  }
-
-  String _formatCurrency(double amount, String currencyCode) {
-    final localeName = Localizations.localeOf(context).toString();
-    final format = NumberFormat.simpleCurrency(
-      locale: localeName,
-      name: currencyCode,
-    );
-    return format.format(amount);
+    final records = await context.watch<LastHistoryModel>().load();
+    final historyOutputDtos =
+        LastHistoryOutputDtoProducer.produce(records, localeName);
+    return historyOutputDtos;
   }
 }

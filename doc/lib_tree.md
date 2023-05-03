@@ -15,6 +15,9 @@ lib
 |   |   |   |       conversion_config.dart
 |   |   |   |       
 |   |   |   +---history
+|   |   |   |   +---model
+|   |   |   |   |       last_history_model.dart
+|   |   |   |   |       
 |   |   |   |   \---view
 |   |   |   |       +---screen
 |   |   |   |       |       all_history_screen.dart
@@ -25,10 +28,11 @@ lib
 |   |   |   |           |       all_history_data_table_widget.dart
 |   |   |   |           |       
 |   |   |   |           +---dto
-|   |   |   |           |       history_output_row.dart
+|   |   |   |           |       history_output_dto.dart
 |   |   |   |           |       
 |   |   |   |           \---last_history
 |   |   |   |                   last_history_data_table_widget.dart
+|   |   |   |                   last_history_output_dto_producer.dart
 |   |   |   |                   
 |   |   |   \---rate
 |   |   |       +---fetch
@@ -104,7 +108,9 @@ lib
 |   |   \---app
 |   |       +---constant
 |   |       |       appearance_constant.dart
-|   |       |       route_constant.dart
+|   |       |       
+|   |       +---route
+|   |       |       app_router.dart
 |   |       |       
 |   |       \---view
 |   |           +---theme

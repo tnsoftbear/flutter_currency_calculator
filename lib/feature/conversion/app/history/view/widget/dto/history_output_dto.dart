@@ -1,10 +1,10 @@
-class HistoryOutputRow {
+class HistoryOutputDto {
   String date = '';
   String from = '';
   String to = '';
   String rate = '';
 
-  HistoryOutputRow(
+  HistoryOutputDto(
     this.date,
     this.from,
     this.to,

@@ -1,4 +1,4 @@
-import 'package:currency_calc/feature/conversion/app/history/view/widget/dto/history_output_row.dart';
+import 'package:currency_calc/feature/conversion/app/history/view/widget/dto/history_output_dto.dart';
 import 'package:currency_calc/feature/conversion/infra/history/repository/conversion_history_record_repository.dart';
 import 'package:currency_calc/feature/front/app/view/theme/additional_colors.dart';
 import 'package:flutter/material.dart';
@@ -13,18 +13,18 @@ class AllHistoryDataTableWidget extends StatefulWidget {
 }
 
 class _HistoryDataTableWidget extends State<AllHistoryDataTableWidget> {
-  late List<HistoryOutputRow> _historyRecords;
+  late List<HistoryOutputDto> _historyRecords;
 
   @override
   void initState() {
-    super.initState();
     _historyRecords = [];
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final tr = AppLocalizations.of(context);
     _loadHistoryRecords(context);
+    final tr = AppLocalizations.of(context);
     final AdditionalColors additionalColors =
         Theme.of(context).extension<AdditionalColors>()!;
 
@@ -79,7 +79,7 @@ class _HistoryDataTableWidget extends State<AllHistoryDataTableWidget> {
     await repo.init();
     final historyRecords = repo
         .loadAll()
-        .map((e) => HistoryOutputRow(
+        .map((e) => HistoryOutputDto(
             df.format(e.date) + "\n" + tf.format(e.date),
             _formatCurrency(e.sourceAmount, e.sourceCurrency),
             _formatCurrency(e.targetAmount, e.targetCurrency),

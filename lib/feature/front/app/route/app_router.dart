@@ -14,8 +14,8 @@ class AppRouter {
   static Map<String, WidgetBuilder> init() {
     return {
       R_ABOUT: (context) => AboutScreen(),
-      R_CALCULATE: (context) => AllHistoryScreen(),
-      R_HISTORY: (context) => CalculatorScreen(),
+      R_CALCULATE: (context) => CalculatorScreen(),
+      R_HISTORY: (context) => AllHistoryScreen(),
       R_SETTING: (context) => SettingScreen(),
     };
   }

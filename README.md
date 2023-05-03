@@ -39,6 +39,11 @@ and exchange rate numbers with help of the [Intl](https://pub.dev/packages/intl)
 
 **Domain layer** validates input values and calculates the currency conversion.
 
+We display the last 5 conversions at the Calculator screen in the bottom History widget.
+The history widget is constructed with help of FutureBuilder, because it depends on data loaded by async call.
+Since the history widget is updated after the saving of currency conversion, 
+it is notified about the change with help of the [Provider](https://pub.dev/packages/provider) package. 
+
 ### Settings feature
 
 Settings screen allows to configure several options:  

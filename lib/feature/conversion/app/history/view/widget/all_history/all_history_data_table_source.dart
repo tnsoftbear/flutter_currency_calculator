@@ -1,9 +1,9 @@
-import 'package:currency_calc/feature/conversion/app/history/view/widget/dto/history_output_row.dart';
+import 'package:currency_calc/feature/conversion/app/history/view/widget/dto/history_output_dto.dart';
 import 'package:currency_calc/feature/conversion/infra/history/repository/conversion_history_record_repository.dart';
 import 'package:flutter/material.dart';
 
 class AllHistoryDataTableSource extends DataTableSource {
-  List<HistoryOutputRow> _historyRecords;
+  List<HistoryOutputDto> _historyRecords;
   BuildContext _context;
 
   AllHistoryDataTableSource(BuildContext this._context, this._historyRecords);

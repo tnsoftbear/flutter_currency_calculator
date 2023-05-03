@@ -1,17 +1,17 @@
 import 'dart:developer';
-
 import 'package:currency_calc/feature/conversion/app/config/conversion_config.dart';
+import 'package:currency_calc/feature/conversion/app/history/model/last_history_model.dart';
 import 'package:currency_calc/feature/conversion/app/rate/fetch/rate_fetcher_factory.dart';
 import 'package:currency_calc/feature/conversion/app/rate/translate/conversion_validation_translator.dart';
 import 'package:currency_calc/feature/conversion/domain/constant/currency_constant.dart';
 import 'package:currency_calc/feature/conversion/domain/history/model/conversion_history_record.dart';
 import 'package:currency_calc/feature/conversion/domain/rate/calculate/currency_converter.dart';
 import 'package:currency_calc/feature/conversion/domain/rate/validate/conversion_validator.dart';
-import 'package:currency_calc/feature/conversion/infra/history/repository/conversion_history_record_repository.dart';
 import 'package:currency_calc/feature/front/app/view/theme/additional_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/all_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class CalculatorWidget extends StatefulWidget {
   @override
@@ -35,7 +35,6 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
 
   @override
   void initState() {
-    super.initState();
     _isLoading = false;
     _areActionButtonsVisible = false;
     _rate = 0.0;
@@ -46,6 +45,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
     _sourceCurrency = CurrencyConstant.CURRENCIES[0];
     _targetAmount = 0.0;
     _targetCurrency = CurrencyConstant.CURRENCIES[1];
+    super.initState();
   }
 
   @override
@@ -235,9 +235,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
       ..targetAmount = _targetAmount
       ..rate = _rate
       ..date = DateTime.now();
-    final repo = ConversionHistoryRecordRepository();
-    await repo.init();
-    await repo.save(historyRecord);
+    context.read<LastHistoryModel>().addRecord(historyRecord);
     FocusScope.of(context).requestFocus(_sourceAmountTextFieldFocusNode);
     _resetInputs();
     log(

@@ -7,7 +7,9 @@ class ConversionHistoryRecordRepository {
   Box<ConversionHistoryRecord>? box;
 
   Future<ConversionHistoryRecordRepository> init() async {
-    box = await Hive.openBox<ConversionHistoryRecord>(BOX_NAME);
+    if (box == null || box!.isOpen == false) {
+      box = await Hive.openBox<ConversionHistoryRecord>(BOX_NAME);
+    }
     return this;
   }
 
