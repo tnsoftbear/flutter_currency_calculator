@@ -1,28 +1,27 @@
 import 'package:currency_calc/feature/front/app/constant/appearance_constant.dart';
-import 'package:currency_calc/feature/front/app/view/widget/front_material_app.dart';
+import 'package:currency_calc/feature/setting/app/manage/model/setting_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/all_localizations.dart';
+import 'package:provider/provider.dart';
 
 class FontFamilySettingTableRow extends TableRow {
   FontFamilySettingTableRow(BuildContext context)
       : super(children: [
           Text(AppLocalizations.of(context).settingSelectFontFamily),
-          Row(
-            children: [
-              DropdownButton<String>(
-                value: FrontMaterialApp.getFontFamily(context),
-                onChanged: (String? fontFamily) =>
-                    FrontMaterialApp.assignFontFamily(context, fontFamily),
-                items: AppearanceConstant.FONT_FAMILIES
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-              ),
-            ],
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          ),
+          _buildFontFamilyDropdown(context),
         ]);
+
+  static DropdownButton _buildFontFamilyDropdown(BuildContext context) {
+    final menuItemList =
+        AppearanceConstant.FONT_FAMILIES.map((String fontFamily) {
+      return DropdownMenuItem<String>(
+          value: fontFamily, child: Text(fontFamily));
+    }).toList();
+
+    final settingModel = context.read<SettingModel>();
+    return DropdownButton(
+        value: settingModel.fontFamily,
+        items: menuItemList,
+        onChanged: (fontFamily) => settingModel.setFontFamily(fontFamily));
+  }
 }

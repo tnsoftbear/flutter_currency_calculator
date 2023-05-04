@@ -8,6 +8,7 @@ import 'package:currency_calc/feature/conversion/domain/history/model/conversion
 import 'package:currency_calc/feature/conversion/domain/rate/calculate/currency_converter.dart';
 import 'package:currency_calc/feature/conversion/domain/rate/validate/conversion_validator.dart';
 import 'package:currency_calc/feature/front/app/view/theme/additional_colors.dart';
+import 'package:currency_calc/feature/setting/app/manage/model/setting_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/all_localizations.dart';
 import 'package:intl/intl.dart';
@@ -42,9 +43,10 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
     _resultMessage = '';
     _sourceAmount = 0.0;
     _sourceAmountInput = '';
-    _sourceCurrency = CurrencyConstant.CURRENCIES[0];
     _targetAmount = 0.0;
-    _targetCurrency = CurrencyConstant.CURRENCIES[1];
+    final settingModel = context.read<SettingModel>();
+    _sourceCurrency = settingModel.sourceCurrencyCode;
+    _targetCurrency = settingModel.targetCurrencyCode;
     super.initState();
   }
 
@@ -53,7 +55,6 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
     final tr = AppLocalizations.of(context);
     final AdditionalColors additionalColors =
         Theme.of(context).extension<AdditionalColors>()!;
-
     return Padding(
       key: ValueKey("currencyConversionCalculatorWidget"),
       padding: const EdgeInsets.all(16.0),
@@ -70,8 +71,8 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                 onChanged: (String? newValue) {
                   setState(() {
                     _sourceCurrency = newValue!;
-                    _updateConversion();
                   });
+                  _updateConversion();
                 },
                 items: CurrencyConstant.CURRENCIES
                     .map<DropdownMenuItem<String>>((String value) {
@@ -86,8 +87,8 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                 onChanged: (String? newValue) {
                   setState(() {
                     _targetCurrency = newValue!;
-                    _updateConversion();
                   });
+                  _updateConversion();
                 },
                 items: CurrencyConstant.CURRENCIES
                     .map<DropdownMenuItem<String>>((String value) {
@@ -193,6 +194,10 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
       });
       return;
     }
+
+    final settingModel = context.read<SettingModel>();
+    settingModel.setSourceCurrencyCode(_sourceCurrency);
+    settingModel.setTargetCurrencyCode(_targetCurrency);
 
     setState(() {
       _isLoading = true;

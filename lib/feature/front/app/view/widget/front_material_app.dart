@@ -1,107 +1,57 @@
-import 'package:currency_calc/feature/conversion/app/rate/view/screen/calculator_screen.dart';
 import 'package:currency_calc/feature/front/app/route/app_router.dart';
 import 'package:currency_calc/feature/front/app/view/theme/theme_builder.dart';
-import 'package:currency_calc/feature/front/app/constant/appearance_constant.dart';
-import 'package:currency_calc/feature/setting/app/manage/setting_manager.dart';
+import 'package:currency_calc/feature/setting/app/manage/model/setting_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/all_localizations.dart';
+import 'package:provider/provider.dart';
 
 class FrontMaterialApp extends StatefulWidget {
   const FrontMaterialApp({Key? key}) : super(key: key);
 
   State<FrontMaterialApp> createState() => _FrontMaterialAppState();
 
-  static void assignLocale(BuildContext context, Locale newLocale) async {
-    _FrontMaterialAppState state =
-        context.findAncestorStateOfType<_FrontMaterialAppState>()!;
-    state.setLocale(newLocale);
-
-    SettingManager.saveLanguageCode(newLocale.languageCode);
-  }
-
-  static void assignFontFamily(
-      BuildContext context, String? newFontFamily) async {
-    if (newFontFamily == null) {
-      return;
-    }
-
-    _FrontMaterialAppState state =
-        context.findAncestorStateOfType<_FrontMaterialAppState>()!;
-    state.setFontFamily(newFontFamily);
-
-    SettingManager.saveFontFamily(newFontFamily);
-  }
-
-  static String getFontFamily(BuildContext context) {
-    _FrontMaterialAppState state =
-        context.findAncestorStateOfType<_FrontMaterialAppState>()!;
-    return state._fontFamily;
-  }
-
-  static void assignThemeType(BuildContext context, String? themeType) async {
-    if (themeType == null) {
-      return;
-    }
-
-    _FrontMaterialAppState state =
-        context.findAncestorStateOfType<_FrontMaterialAppState>()!;
-    state.setThemeType(themeType);
-
-    SettingManager.saveThemeType(themeType);
-  }
-
-  static String getThemeType(BuildContext context) {
-    _FrontMaterialAppState state =
-        context.findAncestorStateOfType<_FrontMaterialAppState>()!;
-    return state._themeType;
-  }
+  // static void assignFontFamily(
+  //     BuildContext context, String? newFontFamily) async {
+  //   if (newFontFamily == null) {
+  //     return;
+  //   }
+  //
+  //   _FrontMaterialAppState state =
+  //       context.findAncestorStateOfType<_FrontMaterialAppState>()!;
+  //   state.setFontFamily(newFontFamily);
+  //
+  //   SettingManager.saveFontFamily(newFontFamily);
+  // }
+  //
+  // static String getFontFamily(BuildContext context) {
+  //   _FrontMaterialAppState state =
+  //       context.findAncestorStateOfType<_FrontMaterialAppState>()!;
+  //   return state._fontFamily;
+  // }
 }
 
 class _FrontMaterialAppState extends State<FrontMaterialApp> {
-  Locale? _locale;
-  String _fontFamily = AppearanceConstant.FF_DEFAULT;
-  String _themeType = AppearanceConstant.THEME_DEFAULT;
+  //String _fontFamily = AppearanceConstant.FF_DEFAULT;
 
   @override
   void initState() {
-    SettingManager.detectLocale().then((locale) => _locale = locale);
-    SettingManager.detectFontFamily()
-        .then((fontFamily) => _fontFamily = fontFamily);
-    SettingManager.detectThemeType()
-        .then((themeType) => _themeType = themeType);
+    // SettingManager.detectFontFamily()
+    //     .then((fontFamily) => _fontFamily = fontFamily);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final settingModel = context.watch<SettingModel>();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
-      theme: ThemeBuilder.buildTheme(_themeType, _fontFamily),
+      theme: ThemeBuilder.buildTheme(settingModel.themeType, settingModel.fontFamily),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      locale: _locale,
-      home: CalculatorScreen(),
+      locale: settingModel.detectLocale(),
       initialRoute: AppRouter.R_DEFAULT,
       routes: AppRouter.init(),
     );
-  }
-
-  void setLocale(Locale newLocale) {
-    setState(() {
-      _locale = newLocale;
-    });
-  }
-
-  void setFontFamily(String newFontFamily) {
-    setState(() {
-      _fontFamily = newFontFamily;
-    });
-  }
-
-  void setThemeType(String themeType) {
-    setState(() {
-      _themeType = themeType;
-    });
   }
 }

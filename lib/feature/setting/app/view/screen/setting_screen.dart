@@ -40,7 +40,7 @@ class SettingScreen extends StatelessWidget {
               children: [
                 LocaleSettingTableRow(context),
                 FontFamilySettingTableRow(context),
-                ThemeSettingTableRow(context)
+                ThemeSettingTableRow(context),
               ],
             ),
           ),

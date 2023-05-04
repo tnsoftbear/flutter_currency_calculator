@@ -26,6 +26,8 @@
   "conversionValidationErrSourceCurrencyInvalid": "Source currency is invalid",
   "conversionValidationErrTargetCurrencyInvalid": "Target currency is invalid",
   "menuTitle": "Menu",
+  "settingDefaultSourceCurrency": "Source currency:",
+  "settingDefaultTargetCurrency": "Target currency:",
   "settingLocaleEnLabel": "English",
   "settingLocaleRuLabel": "Русский",
   "settingSelectFontFamily": "Font family:",

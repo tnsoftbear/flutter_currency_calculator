@@ -1,3 +1,4 @@
+import 'package:currency_calc/feature/conversion/domain/constant/currency_constant.dart';
 import 'package:currency_calc/feature/front/app/constant/appearance_constant.dart';
 import 'package:currency_calc/feature/setting/infra/repository/setting_repository.dart';
 import 'package:flutter/material.dart';
@@ -34,5 +35,23 @@ class SettingManager {
 
   static Future<void> saveThemeType(String themeType) async {
     await SettingRepository.saveString("themeType", themeType);
+  }
+
+  static Future<String> detectSourceCurrencyCode() async {
+    return await SettingRepository.loadString("sourceCurrencyCode") ??
+        CurrencyConstant.SOURCE_CURRENCY_DEFAULT;
+  }
+
+  static Future<void> saveDefaultSourceCurrencyCode(String currencyCode) async {
+    await SettingRepository.saveString("sourceCurrencyCode", currencyCode);
+  }
+
+  static Future<String> detectTargetCurrencyCode() async {
+    return await SettingRepository.loadString("defaultTargetCurrencyCode") ??
+        CurrencyConstant.TARGET_CURRENCY_DEFAULT;
+  }
+
+  static Future<void> saveDefaultTargetCurrencyCode(String currencyCode) async {
+    await SettingRepository.saveString("defaultTargetCurrencyCode", currencyCode);
   }
 }

@@ -6,17 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/all_localizations.dart';
 import 'package:provider/provider.dart';
 
-class LastHistoryDataTableWidget extends StatefulWidget {
-  @override
-  _LastHistoryDataTableWidget createState() => _LastHistoryDataTableWidget();
-}
-
-class _LastHistoryDataTableWidget extends State<LastHistoryDataTableWidget> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+class LastHistoryDataTableWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appLoc = AppLocalizations.of(context);
@@ -71,7 +61,7 @@ class _LastHistoryDataTableWidget extends State<LastHistoryDataTableWidget> {
                             icon: Icon(Icons.delete,
                                 size: 20,
                                 color: Theme.of(context).colorScheme.primary),
-                            onPressed: () => _onDeletePressed(index),
+                            onPressed: () => _onDeletePressed(context, index),
                           ),
                         ),
                       ],
@@ -114,7 +104,7 @@ class _LastHistoryDataTableWidget extends State<LastHistoryDataTableWidget> {
         });
   }
 
-  _onDeletePressed(int index) async {
+  _onDeletePressed(BuildContext context, int index) async {
     context.read<LastHistoryModel>().deleteRecordByTableIndex(index);
   }
 

@@ -9,17 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/all_localizations.dart';
 import 'package:provider/provider.dart';
 
-class CalculatorScreen extends StatefulWidget {
-  @override
-  CalculatorScreenState createState() => CalculatorScreenState();
-}
-
-class CalculatorScreenState extends State<CalculatorScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+class CalculatorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

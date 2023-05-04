@@ -1,7 +1,8 @@
 import 'package:currency_calc/feature/front/app/constant/appearance_constant.dart';
-import 'package:currency_calc/feature/front/app/view/widget/front_material_app.dart';
+import 'package:currency_calc/feature/setting/app/manage/model/setting_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/all_localizations.dart';
+import 'package:provider/provider.dart';
 
 class ThemeSettingTableRow extends TableRow {
   final BuildContext context;
@@ -36,14 +37,13 @@ class ThemeSettingTableRow extends TableRow {
       },
     ];
 
-    final currentTheme = FrontMaterialApp.getThemeType(context);
+    final settingModel = context.read<SettingModel>();
     final List<Widget> themeWidgetList = themes.map((options) {
       return Expanded(
         child: RadioListTile(
           value: options['value'],
-          groupValue: currentTheme,
-          onChanged: (themeType) =>
-              FrontMaterialApp.assignThemeType(context, themeType),
+          groupValue: settingModel.themeType,
+          onChanged: (themeType) => settingModel.setThemeType(themeType),
           secondary: Container(
             width: 16,
             height: 16,

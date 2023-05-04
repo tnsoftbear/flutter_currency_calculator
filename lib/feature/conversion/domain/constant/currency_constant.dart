@@ -13,5 +13,8 @@ class CurrencyConstant {
     'RUB',
   ];
 
+  static const SOURCE_CURRENCY_DEFAULT = 'USD';
+  static const TARGET_CURRENCY_DEFAULT = 'EUR';
+
   static const LAST_HISTORY_RECORD_COUNT = 5;
 }
