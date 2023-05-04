@@ -36,6 +36,8 @@
   "settingSelectFontFamily": "Шрифт:",
   "settingSelectLanguage": "Язык:",
   "settingSelectTheme": "Цветовая тема:",
+  "settingTabAppearance": "Вид",
+  "settingTabCurrency": "Валюта",
   "settingSourceCurrency": "Исходная валюта",
   "settingTargetCurrency": "Целевая валюта",
   "settingThemeBlue": "Синяя",

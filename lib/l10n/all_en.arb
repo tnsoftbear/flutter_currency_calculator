@@ -37,6 +37,8 @@
   "settingSelectLanguage": "Language:",
   "settingSelectTheme": "Color theme:",
   "settingSourceCurrency": "Source currency",
+  "settingTabAppearance": "Appearance",
+  "settingTabCurrency": "Currencies",
   "settingTargetCurrency": "Target currency",
   "settingThemeBlue": "Blue",
   "settingThemeGreen": "Green",

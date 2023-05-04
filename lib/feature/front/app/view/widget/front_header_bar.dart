@@ -2,10 +2,11 @@ import 'package:currency_calc/feature/setting/app/view/screen/setting_screen.dar
 import 'package:flutter/material.dart';
 
 class FrontHeaderBar extends AppBar {
-  FrontHeaderBar({required this.titleText, bool this.isSettingMenu = true});
+  FrontHeaderBar({required this.titleText, bool this.isSettingMenu = true, this.bottom});
 
   final String titleText;
   final bool isSettingMenu;
+  final PreferredSizeWidget? bottom;
 
   @override
   _HeaderBarState createState() => _HeaderBarState();
@@ -29,6 +30,7 @@ class _HeaderBarState extends State<FrontHeaderBar> {
     return AppBar(
       title: Text(widget.titleText),
       actions: actions,
+      bottom: widget.bottom,
     );
   }
 }

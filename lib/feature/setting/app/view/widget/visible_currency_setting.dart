@@ -111,6 +111,8 @@ class VisibleCurrencySetting extends StatelessWidget {
       }
       currencyCodes.remove(currencyCode);
     }
+    settingModel.setVisibleSourceCurrencyCodes(currencyCodes);
+
     // Replace selected source currency, if it is absent in drop-down list
     if (!currencyCodes.contains(settingModel.selectedSourceCurrencyCode)) {
       if (currencyCodes.length > 1 &&
@@ -124,7 +126,6 @@ class VisibleCurrencySetting extends StatelessWidget {
         settingModel.setSourceCurrencyCode(currencyCodes.first);
       }
     }
-    settingModel.setVisibleSourceCurrencyCodes(currencyCodes);
   }
 
   void _onChangedVisibleTargetCurrency(
@@ -141,6 +142,8 @@ class VisibleCurrencySetting extends StatelessWidget {
       }
       currencyCodes.remove(currencyCode);
     }
+    settingModel.setVisibleTargetCurrencyCodes(currencyCodes);
+
     // Replace selected target currency, if it is absent in drop-down list
     if (!currencyCodes.contains(settingModel.selectedTargetCurrencyCode)) {
       if (currencyCodes.length > 1 &&
@@ -154,6 +157,5 @@ class VisibleCurrencySetting extends StatelessWidget {
         settingModel.setTargetCurrencyCode(currencyCodes.first);
       }
     }
-    settingModel.setVisibleTargetCurrencyCodes(currencyCodes);
   }
 }
