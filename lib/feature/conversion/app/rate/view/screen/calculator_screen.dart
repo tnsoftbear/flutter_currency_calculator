@@ -10,12 +10,14 @@ import 'package:flutter_gen/gen_l10n/all_localizations.dart';
 import 'package:provider/provider.dart';
 
 class CalculatorScreen extends StatelessWidget {
+  const CalculatorScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: FrontHeaderBar(
           titleText: AppLocalizations.of(context).conversionTitle),
-      drawer: FrontMainMenu(),
+      drawer: const FrontMainMenu(),
       body: Container(
         padding: EdgeInsets.only(bottom: 16),
         decoration: const BoxDecoration(

@@ -5,12 +5,9 @@ import 'package:currency_calc/feature/front/app/constant/appearance_constant.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/all_localizations.dart';
 
-class AllHistoryScreen extends StatefulWidget {
-  @override
-  _AllHistoryScreenState createState() => _AllHistoryScreenState();
-}
+class AllHistoryScreen extends StatelessWidget {
+  const AllHistoryScreen({Key? key}) : super(key: key);
 
-class _AllHistoryScreenState extends State<AllHistoryScreen> {
   @override
   Widget build(BuildContext context) {
     final tr = AppLocalizations.of(context);

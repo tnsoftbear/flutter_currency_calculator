@@ -13,10 +13,10 @@ class AppRouter {
 
   static Map<String, WidgetBuilder> init() {
     return {
-      R_ABOUT: (context) => AboutScreen(),
-      R_CALCULATE: (context) => CalculatorScreen(),
-      R_HISTORY: (context) => AllHistoryScreen(),
-      R_SETTING: (context) => SettingScreen(),
+      R_ABOUT: (context) => const AboutScreen(),
+      R_CALCULATE: (context) => const CalculatorScreen(),
+      R_HISTORY: (context) => const AllHistoryScreen(),
+      R_SETTING: (context) => const SettingScreen(),
     };
   }
 }

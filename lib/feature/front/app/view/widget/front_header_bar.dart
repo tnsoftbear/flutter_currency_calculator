@@ -21,7 +21,7 @@ class _HeaderBarState extends State<FrontHeaderBar> {
               onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => SettingScreen())),
+                      builder: (context) => const SettingScreen())),
             )
           ]
         : <Widget>[];

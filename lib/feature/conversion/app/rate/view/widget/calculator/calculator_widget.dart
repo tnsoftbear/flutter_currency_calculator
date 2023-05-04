@@ -8,7 +8,7 @@ import 'package:currency_calc/feature/conversion/domain/history/model/conversion
 import 'package:currency_calc/feature/conversion/domain/rate/calculate/currency_converter.dart';
 import 'package:currency_calc/feature/conversion/domain/rate/validate/conversion_validator.dart';
 import 'package:currency_calc/feature/front/app/view/theme/additional_colors.dart';
-import 'package:currency_calc/feature/setting/app/manage/model/setting_model.dart';
+import 'package:currency_calc/feature/setting/app/model/setting_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/all_localizations.dart';
 import 'package:intl/intl.dart';
