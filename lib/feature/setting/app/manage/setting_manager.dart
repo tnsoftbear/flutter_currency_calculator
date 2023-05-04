@@ -37,21 +37,61 @@ class SettingManager {
     await SettingRepository.saveString("themeType", themeType);
   }
 
-  static Future<String> detectSourceCurrencyCode() async {
-    return await SettingRepository.loadString("sourceCurrencyCode") ??
-        CurrencyConstant.SOURCE_CURRENCY_DEFAULT;
+  static Future<String> detectSelectedSourceCurrencyCode() async {
+    final currencyCode =
+        await SettingRepository.loadString("selectedSourceCurrencyCode") ??
+            CurrencyConstant.SOURCE_CURRENCY_CODE_DEFAULT;
+    final currencyCodes = await detectVisibleSourceCurrencyCodes();
+    if (!currencyCodes.contains(currencyCode)) {
+      return currencyCodes.first;
+    }
+    return currencyCode;
   }
 
   static Future<void> saveDefaultSourceCurrencyCode(String currencyCode) async {
-    await SettingRepository.saveString("sourceCurrencyCode", currencyCode);
+    await SettingRepository.saveString("selectedSourceCurrencyCode", currencyCode);
   }
 
-  static Future<String> detectTargetCurrencyCode() async {
-    return await SettingRepository.loadString("defaultTargetCurrencyCode") ??
-        CurrencyConstant.TARGET_CURRENCY_DEFAULT;
+  static Future<String> detectSelectedTargetCurrencyCode() async {
+    final currencyCode =
+        await SettingRepository.loadString("selectedTargetCurrencyCode") ??
+            CurrencyConstant.TARGET_CURRENCY_CODE_DEFAULT;
+    final currencyCodes = await detectVisibleTargetCurrencyCodes();
+    if (!currencyCodes.contains(currencyCode)) {
+      return currencyCodes.first;
+    }
+    return currencyCode;
   }
 
   static Future<void> saveDefaultTargetCurrencyCode(String currencyCode) async {
-    await SettingRepository.saveString("defaultTargetCurrencyCode", currencyCode);
+    await SettingRepository.saveString("selectedTargetCurrencyCode", currencyCode);
+  }
+
+  static Future<List<String>> detectVisibleSourceCurrencyCodes() async {
+    final currencyCodes =
+        await SettingRepository.loadVisibleSourceCurrencyCodes();
+    if (currencyCodes == null || currencyCodes.isEmpty) {
+      return CurrencyConstant.CURRENCY_CODES;
+    }
+    return currencyCodes;
+  }
+
+  static Future<void> saveVisibleSourceCurrencyCodes(
+      List<String> currencyCodes) async {
+    await SettingRepository.saveVisibleSourceCurrencyCodes(currencyCodes);
+  }
+
+  static Future<List<String>> detectVisibleTargetCurrencyCodes() async {
+    final currencyCodes =
+        await SettingRepository.loadVisibleTargetCurrencyCodes();
+    if (currencyCodes == null || currencyCodes.isEmpty) {
+      return CurrencyConstant.CURRENCY_CODES;
+    }
+    return currencyCodes;
+  }
+
+  static Future<void> saveVisibleTargetCurrencyCodes(
+      List<String> currencyCodes) async {
+    await SettingRepository.saveVisibleTargetCurrencyCodes(currencyCodes);
   }
 }

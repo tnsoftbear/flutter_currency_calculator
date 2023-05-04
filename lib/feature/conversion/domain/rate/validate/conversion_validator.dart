@@ -9,11 +9,11 @@ class ConversionValidator {
       required String amount}) {
     final result = ConversionValidationResult();
 
-    if (!CurrencyConstant.CURRENCIES.contains(sourceCurrency)) {
+    if (!CurrencyConstant.CURRENCY_CODES.contains(sourceCurrency)) {
       result.addError(ConversionValidationResult.ERR_SOURCE_CURRENCY_INVALID);
     }
 
-    if (!CurrencyConstant.CURRENCIES.contains(targetCurrency)) {
+    if (!CurrencyConstant.CURRENCY_CODES.contains(targetCurrency)) {
       result.addError(ConversionValidationResult.ERR_TARGET_CURRENCY_INVALID);
     }
 

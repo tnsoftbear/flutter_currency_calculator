@@ -1,5 +1,5 @@
 class CurrencyConstant {
-  static const CURRENCIES = [
+  static const CURRENCY_CODES = [
     'USD',
     'EUR',
     'GBP',
@@ -13,8 +13,8 @@ class CurrencyConstant {
     'RUB',
   ];
 
-  static const SOURCE_CURRENCY_DEFAULT = 'USD';
-  static const TARGET_CURRENCY_DEFAULT = 'EUR';
+  static const SOURCE_CURRENCY_CODE_DEFAULT = 'USD';
+  static const TARGET_CURRENCY_CODE_DEFAULT = 'EUR';
 
   static const LAST_HISTORY_RECORD_COUNT = 5;
 }

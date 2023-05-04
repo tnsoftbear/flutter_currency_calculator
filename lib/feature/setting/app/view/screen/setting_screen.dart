@@ -33,16 +33,22 @@ class SettingScreen extends StatelessWidget {
               color: additionalColors.linenTurbidColor,
               borderRadius: BorderRadius.circular(8.0),
             ),
-            child: Table(
-              columnWidths: {
-                0: const FlexColumnWidth(0.25),
-                1: const FlexColumnWidth(0.75),
-              },
-              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                LocaleSettingTableRow(context),
-                FontFamilySettingTableRow(context),
-                ThemeSettingTableRow(context),
+                Table(
+                  columnWidths: {
+                    0: const FlexColumnWidth(0.25),
+                    1: const FlexColumnWidth(0.75),
+                  },
+                  defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                  children: [
+                    LocaleSettingTableRow(context),
+                    FontFamilySettingTableRow(context),
+                    ThemeSettingTableRow(context),
+                  ],
+                ),
+                VisibleCurrencySetting(),
               ],
             ),
           ),

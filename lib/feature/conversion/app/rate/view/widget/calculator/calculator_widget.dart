@@ -45,8 +45,8 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
     _sourceAmountInput = '';
     _targetAmount = 0.0;
     final settingModel = context.read<SettingModel>();
-    _sourceCurrency = settingModel.sourceCurrencyCode;
-    _targetCurrency = settingModel.targetCurrencyCode;
+    _sourceCurrency = settingModel.selectedSourceCurrencyCode;
+    _targetCurrency = settingModel.selectedTargetCurrencyCode;
     super.initState();
   }
 
@@ -55,6 +55,13 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
     final tr = AppLocalizations.of(context);
     final AdditionalColors additionalColors =
         Theme.of(context).extension<AdditionalColors>()!;
+    final settingModel = context.watch<SettingModel>();
+    if (!settingModel.visibleSourceCurrencyCodes.contains(_sourceCurrency)) {
+      _sourceCurrency = settingModel.selectedSourceCurrencyCode;
+    }
+    if (!settingModel.visibleTargetCurrencyCodes.contains(_targetCurrency)) {
+      _targetCurrency = settingModel.selectedTargetCurrencyCode;
+    }
     return Padding(
       key: ValueKey("currencyConversionCalculatorWidget"),
       padding: const EdgeInsets.all(16.0),
@@ -74,7 +81,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                   });
                   _updateConversion();
                 },
-                items: CurrencyConstant.CURRENCIES
+                items: settingModel.visibleSourceCurrencyCodes
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -90,7 +97,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                   });
                   _updateConversion();
                 },
-                items: CurrencyConstant.CURRENCIES
+                items: settingModel.visibleTargetCurrencyCodes
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,

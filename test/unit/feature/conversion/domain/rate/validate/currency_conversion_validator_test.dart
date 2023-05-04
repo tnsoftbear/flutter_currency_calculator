@@ -7,8 +7,8 @@ void main() {
   group('CurrencyConversionValidator', () {
     test('validate should return no errors for valid inputs', () {
       final result = ConversionValidator.validate(
-          sourceCurrency: CurrencyConstant.CURRENCIES[0],
-          targetCurrency: CurrencyConstant.CURRENCIES[1],
+          sourceCurrency: CurrencyConstant.CURRENCY_CODES[0],
+          targetCurrency: CurrencyConstant.CURRENCY_CODES[1],
           amount: '100.00');
       expect(result.errors.length, 0);
     });
@@ -18,7 +18,7 @@ void main() {
             () {
           final result = ConversionValidator.validate(
               sourceCurrency: 'XYZ',
-              targetCurrency: CurrencyConstant.CURRENCIES[1],
+              targetCurrency: CurrencyConstant.CURRENCY_CODES[1],
               amount: '100.00');
           expect(result.errors.length, 1);
           expect(result.errors[0],
@@ -29,7 +29,7 @@ void main() {
         'validate should return an error when target currency is invalid and others are valid',
             () {
           final result = ConversionValidator.validate(
-              sourceCurrency: CurrencyConstant.CURRENCIES[0],
+              sourceCurrency: CurrencyConstant.CURRENCY_CODES[0],
               targetCurrency: 'XYZ',
               amount: '100.00');
           expect(result.errors.length, 1);
@@ -41,8 +41,8 @@ void main() {
         'validate should return an error when source and target currencies are same and others are valid',
             () {
           final result = ConversionValidator.validate(
-              sourceCurrency: CurrencyConstant.CURRENCIES[0],
-              targetCurrency: CurrencyConstant.CURRENCIES[0],
+              sourceCurrency: CurrencyConstant.CURRENCY_CODES[0],
+              targetCurrency: CurrencyConstant.CURRENCY_CODES[0],
               amount: '100.00');
           expect(result.errors.length, 1);
           expect(result.errors[0],
@@ -52,8 +52,8 @@ void main() {
 
     test('validate should return an error when amount is not numeric', () {
       final result = ConversionValidator.validate(
-          sourceCurrency: CurrencyConstant.CURRENCIES[0],
-          targetCurrency: CurrencyConstant.CURRENCIES[1],
+          sourceCurrency: CurrencyConstant.CURRENCY_CODES[0],
+          targetCurrency: CurrencyConstant.CURRENCY_CODES[1],
           amount: 'not a number');
       expect(result.errors.length, 1);
       expect(result.errors[0],
@@ -62,8 +62,8 @@ void main() {
 
     test('validate should return an error when amount is not positive', () {
       final result = ConversionValidator.validate(
-          sourceCurrency: CurrencyConstant.CURRENCIES[0],
-          targetCurrency: CurrencyConstant.CURRENCIES[1],
+          sourceCurrency: CurrencyConstant.CURRENCY_CODES[0],
+          targetCurrency: CurrencyConstant.CURRENCY_CODES[1],
           amount: '0.00');
       expect(result.errors.length, 1);
       expect(result.errors[0],

@@ -7,8 +7,10 @@ class SettingModel with ChangeNotifier {
   String _languageCode = "";
   String _fontFamily = "";
   String _themeType = "";
-  String _sourceCurrencyCode = "";
-  String _targetCurrencyCode = "";
+  String _selectedSourceCurrencyCode = "";
+  String _selectedTargetCurrencyCode = "";
+  List<String> _visibleSourceCurrencyCodes = [];
+  List<String> _visibleTargetCurrencyCodes = [];
 
   String get languageCode => _languageCode;
 
@@ -16,16 +18,24 @@ class SettingModel with ChangeNotifier {
 
   String get themeType => _themeType;
 
-  String get sourceCurrencyCode => _sourceCurrencyCode;
+  String get selectedSourceCurrencyCode => _selectedSourceCurrencyCode;
 
-  String get targetCurrencyCode => _targetCurrencyCode;
+  String get selectedTargetCurrencyCode => _selectedTargetCurrencyCode;
+
+  List<String> get visibleSourceCurrencyCodes => _visibleSourceCurrencyCodes;
+
+  List<String> get visibleTargetCurrencyCodes => _visibleTargetCurrencyCodes;
 
   Future<SettingModel> init() async {
     _languageCode = await SettingManager.detectLanguageCode();
     _fontFamily = await SettingManager.detectFontFamily();
     _themeType = await SettingManager.detectThemeType();
-    _sourceCurrencyCode = await SettingManager.detectSourceCurrencyCode();
-    _targetCurrencyCode = await SettingManager.detectTargetCurrencyCode();
+    _selectedSourceCurrencyCode = await SettingManager.detectSelectedSourceCurrencyCode();
+    _selectedTargetCurrencyCode = await SettingManager.detectSelectedTargetCurrencyCode();
+    _visibleSourceCurrencyCodes =
+        await SettingManager.detectVisibleSourceCurrencyCodes();
+    _visibleTargetCurrencyCodes =
+        await SettingManager.detectVisibleTargetCurrencyCodes();
     return this;
   }
 
@@ -55,16 +65,28 @@ class SettingModel with ChangeNotifier {
   }
 
   void setSourceCurrencyCode(String? currencyCode) {
-    _sourceCurrencyCode =
-        currencyCode ?? CurrencyConstant.SOURCE_CURRENCY_DEFAULT;
-    SettingManager.saveDefaultSourceCurrencyCode(_sourceCurrencyCode);
+    _selectedSourceCurrencyCode =
+        currencyCode ?? CurrencyConstant.SOURCE_CURRENCY_CODE_DEFAULT;
+    SettingManager.saveDefaultSourceCurrencyCode(_selectedSourceCurrencyCode);
     notifyListeners();
   }
 
   void setTargetCurrencyCode(String? currencyCode) {
-    _targetCurrencyCode =
-        currencyCode ?? CurrencyConstant.TARGET_CURRENCY_DEFAULT;
-    SettingManager.saveDefaultTargetCurrencyCode(_targetCurrencyCode);
+    _selectedTargetCurrencyCode =
+        currencyCode ?? CurrencyConstant.TARGET_CURRENCY_CODE_DEFAULT;
+    SettingManager.saveDefaultTargetCurrencyCode(_selectedTargetCurrencyCode);
+    notifyListeners();
+  }
+
+  void setVisibleSourceCurrencyCodes(List<String>? currencyCodes) {
+    _visibleSourceCurrencyCodes = currencyCodes ?? CurrencyConstant.CURRENCY_CODES;
+    SettingManager.saveVisibleSourceCurrencyCodes(_visibleSourceCurrencyCodes);
+    notifyListeners();
+  }
+
+  void setVisibleTargetCurrencyCodes(List<String>? currencyCodes) {
+    _visibleTargetCurrencyCodes = currencyCodes ?? CurrencyConstant.CURRENCY_CODES;
+    SettingManager.saveVisibleTargetCurrencyCodes(_visibleTargetCurrencyCodes);
     notifyListeners();
   }
 }

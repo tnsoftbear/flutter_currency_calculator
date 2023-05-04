@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 class LastHistoryDataTableWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final appLoc = AppLocalizations.of(context);
+    final tr = AppLocalizations.of(context);
     final AdditionalColors additionalColors =
         Theme.of(context).extension<AdditionalColors>()!;
     return FutureBuilder<List<HistoryOutputDto>>(
@@ -32,20 +32,20 @@ class LastHistoryDataTableWidget extends StatelessWidget {
                   ),
                   columns: [
                     DataColumn(
-                        label: Text(appLoc.conversionHistoryDateColumnTitle),
-                        tooltip: appLoc.conversionHistoryDateColumnTooltip),
+                        label: Text(tr.conversionHistoryDateColumnTitle),
+                        tooltip: tr.conversionHistoryDateColumnTooltip),
                     DataColumn(
-                        label: Text(appLoc.conversionHistorySourceColumnTitle),
-                        tooltip: appLoc.conversionHistorySourceColumnTooltip),
+                        label: Text(tr.conversionHistorySourceColumnTitle),
+                        tooltip: tr.conversionHistorySourceColumnTooltip),
                     DataColumn(
-                        label: Text(appLoc.conversionHistoryTargetColumnTitle),
-                        tooltip: appLoc.conversionHistoryTargetColumnTooltip),
+                        label: Text(tr.conversionHistoryTargetColumnTitle),
+                        tooltip: tr.conversionHistoryTargetColumnTooltip),
                     DataColumn(
-                        label: Text(appLoc.conversionHistoryRateColumnTitle),
-                        tooltip: appLoc.conversionHistoryRateColumnTooltip),
+                        label: Text(tr.conversionHistoryRateColumnTitle),
+                        tooltip: tr.conversionHistoryRateColumnTooltip),
                     DataColumn(
-                        label: Text(appLoc.conversionHistoryActionsColumnTitle),
-                        tooltip: appLoc.conversionHistoryActionsColumnTooltip),
+                        label: Text(tr.conversionHistoryActionsColumnTitle),
+                        tooltip: tr.conversionHistoryActionsColumnTooltip),
                   ],
                   rows: List.generate(
                     data.length,
@@ -79,11 +79,11 @@ class LastHistoryDataTableWidget extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 16),
-                child: Text('Error: ${snapshot.error}'),
+                child: Text(tr.generalError(snapshot.error.toString())),
               ),
             ];
           } else {
-            children = const <Widget>[
+            children = <Widget>[
               SizedBox(
                 width: 60,
                 height: 60,
@@ -91,7 +91,7 @@ class LastHistoryDataTableWidget extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.only(top: 16),
-                child: Text('Awaiting result...'),
+                child: Text(tr.generalLoading),
               ),
             ];
           }
