@@ -36,9 +36,7 @@ class FrontMainMenu extends StatelessWidget {
                 style: additionalColors.menuItemStyle,
               ),
               onTap: () {
-                // To close the Drawer
-                Navigator.pop(context);
-                // Navigating to About Page
+                Navigator.pop(context); // To close the Drawer
                 Navigator.pushNamed(context, AppRouter.R_ABOUT);
               },
             ),
@@ -52,9 +50,7 @@ class FrontMainMenu extends StatelessWidget {
                 style: additionalColors.menuItemStyle,
               ),
               onTap: () {
-                // To close the Drawer
                 Navigator.pop(context);
-                // Navigating to About Page
                 Navigator.pushNamed(context, AppRouter.R_CALCULATE);
               },
             ),
@@ -68,9 +64,7 @@ class FrontMainMenu extends StatelessWidget {
                 style: additionalColors.menuItemStyle,
               ),
               onTap: () {
-                // To close the Drawer
                 Navigator.pop(context);
-                // Navigating to About Page
                 Navigator.pushNamed(context, AppRouter.R_HISTORY);
               },
             ),
@@ -84,9 +78,7 @@ class FrontMainMenu extends StatelessWidget {
                 style: additionalColors.menuItemStyle,
               ),
               onTap: () {
-                // To close the Drawer
                 Navigator.pop(context);
-                // Navigating to About Page
                 Navigator.pushNamed(context, AppRouter.R_SETTING);
               },
             ),

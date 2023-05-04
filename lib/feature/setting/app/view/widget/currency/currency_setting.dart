@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/all_localizations.dart';
 import 'package:provider/provider.dart';
 
-class VisibleCurrencySetting extends StatelessWidget {
+class CurrencySetting extends StatelessWidget {
+  const CurrencySetting({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final tr = AppLocalizations.of(context);

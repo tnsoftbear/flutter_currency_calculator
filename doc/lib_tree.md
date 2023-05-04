@@ -127,16 +127,26 @@ lib
 |       |   +---manage
 |       |   |       setting_manager.dart
 |       |   |       
+|       |   +---model
+|       |   |       setting_model.dart
+|       |   |       
 |       |   \---view
 |       |       +---screen
 |       |       |       setting_screen.dart
 |       |       |       
 |       |       \---widget
-|       |               font_family_setting_table_row.dart
-|       |               locale_setting_table_row.dart
-|       |               setting_widget_export.dart
-|       |               theme_setting_table_row.dart
-|       |               
+|       |           +---appearance
+|       |           |   |   appearance_setting.dart
+|       |           |   |   
+|       |           |   \---option
+|       |           |           appearance_setting_option_export.dart
+|       |           |           font_family_setting_table_row.dart
+|       |           |           locale_setting_table_row.dart
+|       |           |           theme_setting_table_row.dart
+|       |           |           
+|       |           \---currency
+|       |                   currency_setting.dart
+|       |                   
 |       \---infra
 |           \---repository
 |                   setting_repository.dart

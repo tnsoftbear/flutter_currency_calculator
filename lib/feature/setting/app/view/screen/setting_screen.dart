@@ -1,7 +1,8 @@
 import 'package:currency_calc/feature/front/app/view/theme/additional_colors.dart';
 import 'package:currency_calc/feature/front/app/view/widget/front_header_bar.dart';
 import 'package:currency_calc/feature/front/app/constant/appearance_constant.dart';
-import 'package:currency_calc/feature/setting/app/view/widget/setting_widget_export.dart';
+import 'package:currency_calc/feature/setting/app/view/widget/appearance/appearance_setting.dart';
+import 'package:currency_calc/feature/setting/app/view/widget/currency/currency_setting.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/all_localizations.dart';
 
@@ -15,18 +16,10 @@ class SettingScreen extends StatelessWidget {
     final tr = AppLocalizations.of(context);
     return DefaultTabController(
       length: 2,
-      animationDuration: const Duration(milliseconds: 500),
       child: Scaffold(
         appBar: FrontHeaderBar(
           titleText: tr.settingTitle,
           isSettingMenu: false,
-          // bottom: TabBar(
-          //   controller: _tabController,
-          //   tabs: [
-          //     Tab(text: tr.settingTabAppearance),
-          //     Tab(text: tr.settingTabCurrency),
-          //   ],
-          // ),
         ),
         body: Container(
           padding: const EdgeInsets.all(16),
@@ -57,20 +50,8 @@ class SettingScreen extends StatelessWidget {
                 Expanded(
                   child: TabBarView(
                     children: [
-                      Table(
-                        columnWidths: {
-                          0: const FlexColumnWidth(0.25),
-                          1: const FlexColumnWidth(0.75),
-                        },
-                        defaultVerticalAlignment:
-                            TableCellVerticalAlignment.middle,
-                        children: [
-                          LocaleSettingTableRow(context),
-                          FontFamilySettingTableRow(context),
-                          ThemeSettingTableRow(context),
-                        ],
-                      ),
-                      VisibleCurrencySetting(),
+                      AppearanceSetting(),
+                      CurrencySetting(),
                     ],
                   ),
                 ),
