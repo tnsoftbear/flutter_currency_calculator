@@ -1,19 +1,19 @@
-import 'package:currency_calc/feature/conversion/domain/constant/currency_constant.dart';
-
 import 'conversion_validation_result.dart';
 
 class ConversionValidator {
   static ConversionValidationResult validate(
       {required String sourceCurrency,
       required String targetCurrency,
-      required String amount}) {
+      required String amount,
+      required List<String> visibleSourceCurrencyCodes,
+      required List<String> visibleTargetCurrencyCodes}) {
     final result = ConversionValidationResult();
 
-    if (!CurrencyConstant.CURRENCY_CODES.contains(sourceCurrency)) {
+    if (!visibleSourceCurrencyCodes.contains(sourceCurrency)) {
       result.addError(ConversionValidationResult.ERR_SOURCE_CURRENCY_INVALID);
     }
 
-    if (!CurrencyConstant.CURRENCY_CODES.contains(targetCurrency)) {
+    if (!visibleTargetCurrencyCodes.contains(targetCurrency)) {
       result.addError(ConversionValidationResult.ERR_TARGET_CURRENCY_INVALID);
     }
 

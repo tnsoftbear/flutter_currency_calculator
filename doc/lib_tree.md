@@ -104,6 +104,35 @@ lib
 |   |           \---repository
 |   |                   exchange_rate_record_repository.dart
 |   |                   
+|   +---currency
+|   |   +---internal
+|   |   |   +---app
+|   |   |   |   +---load
+|   |   |   |   |       currency_loader.dart
+|   |   |   |   |       
+|   |   |   |   \---populate
+|   |   |   |           currency_populator.dart
+|   |   |   |           
+|   |   |   +---domain
+|   |   |   |   +---collect
+|   |   |   |   |       currency_collector.dart
+|   |   |   |   |       
+|   |   |   |   \---model
+|   |   |   |           currency.dart
+|   |   |   |           currency.g.dart
+|   |   |   |           
+|   |   |   \---infra
+|   |   |       +---fetch
+|   |   |       |   \---load
+|   |   |       |       \---fawaz_ahmed
+|   |   |       |               fawaz_ahmed_available_currency_fetcher.dart
+|   |   |       |               
+|   |   |       \---repository
+|   |   |               currency_repository.dart
+|   |   |               
+|   |   \---public
+|   |           currency_facade.dart
+|   |           
 |   +---front
 |   |   \---app
 |   |       +---constant

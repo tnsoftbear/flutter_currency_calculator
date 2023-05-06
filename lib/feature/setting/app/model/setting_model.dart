@@ -4,13 +4,13 @@ import 'package:currency_calc/feature/setting/app/manage/setting_manager.dart';
 import 'package:flutter/cupertino.dart';
 
 class SettingModel with ChangeNotifier {
-  String _languageCode = "";
-  String _fontFamily = "";
-  String _themeType = "";
-  String _selectedSourceCurrencyCode = "";
-  String _selectedTargetCurrencyCode = "";
-  List<String> _visibleSourceCurrencyCodes = [];
-  List<String> _visibleTargetCurrencyCodes = [];
+  late String _languageCode;
+  late String _fontFamily;
+  late String _themeType;
+  late String _selectedSourceCurrencyCode;
+  late String _selectedTargetCurrencyCode;
+  late List<String> _visibleSourceCurrencyCodes;
+  late List<String> _visibleTargetCurrencyCodes;
 
   String get languageCode => _languageCode;
 
@@ -26,22 +26,31 @@ class SettingModel with ChangeNotifier {
 
   List<String> get visibleTargetCurrencyCodes => _visibleTargetCurrencyCodes;
 
+  SettingManager settingManager;
+
+  SettingModel(this.settingManager);
+
   Future<SettingModel> init() async {
-    _languageCode = await SettingManager.detectLanguageCode();
-    _fontFamily = await SettingManager.detectFontFamily();
-    _themeType = await SettingManager.detectThemeType();
-    _selectedSourceCurrencyCode = await SettingManager.detectSelectedSourceCurrencyCode();
-    _selectedTargetCurrencyCode = await SettingManager.detectSelectedTargetCurrencyCode();
+    _languageCode = await settingManager.detectLanguageCode();
+    _fontFamily = await settingManager.detectFontFamily();
+    _themeType = await settingManager.detectThemeType();
+    // (!) Temporal coupling:
+    // settingManager.detectVisibleSourceCurrencyCodes() must be called before settingManager.detectSelectedSourceCurrencyCode()
+    // because selected currency code must be included in visible currency codes.
     _visibleSourceCurrencyCodes =
-        await SettingManager.detectVisibleSourceCurrencyCodes();
+        await settingManager.detectVisibleSourceCurrencyCodes();
     _visibleTargetCurrencyCodes =
-        await SettingManager.detectVisibleTargetCurrencyCodes();
+        await settingManager.detectVisibleTargetCurrencyCodes();
+    _selectedSourceCurrencyCode =
+        await settingManager.detectSelectedSourceCurrencyCode();
+    _selectedTargetCurrencyCode =
+        await settingManager.detectSelectedTargetCurrencyCode();
     return this;
   }
 
   void setLanguageCode(String? languageCode) {
     _languageCode = languageCode ?? AppearanceConstant.LC_DEFAULT;
-    SettingManager.saveLanguageCode(_languageCode);
+    settingManager.saveLanguageCode(_languageCode);
     notifyListeners();
   }
 
@@ -54,39 +63,41 @@ class SettingModel with ChangeNotifier {
 
   void setFontFamily(String? fontFamily) {
     _fontFamily = fontFamily ?? AppearanceConstant.FF_DEFAULT;
-    SettingManager.saveFontFamily(_fontFamily);
+    settingManager.saveFontFamily(_fontFamily);
     notifyListeners();
   }
 
   void setThemeType(String? themeType) {
     _themeType = themeType ?? AppearanceConstant.THEME_DEFAULT;
-    SettingManager.saveThemeType(_themeType);
+    settingManager.saveThemeType(_themeType);
     notifyListeners();
   }
 
   void setSourceCurrencyCode(String? currencyCode) {
     _selectedSourceCurrencyCode =
         currencyCode ?? CurrencyConstant.SOURCE_CURRENCY_CODE_DEFAULT;
-    SettingManager.saveDefaultSourceCurrencyCode(_selectedSourceCurrencyCode);
+    settingManager.saveDefaultSourceCurrencyCode(_selectedSourceCurrencyCode);
     notifyListeners();
   }
 
   void setTargetCurrencyCode(String? currencyCode) {
     _selectedTargetCurrencyCode =
         currencyCode ?? CurrencyConstant.TARGET_CURRENCY_CODE_DEFAULT;
-    SettingManager.saveDefaultTargetCurrencyCode(_selectedTargetCurrencyCode);
+    settingManager.saveDefaultTargetCurrencyCode(_selectedTargetCurrencyCode);
     notifyListeners();
   }
 
   void setVisibleSourceCurrencyCodes(List<String>? currencyCodes) {
-    _visibleSourceCurrencyCodes = currencyCodes ?? CurrencyConstant.CURRENCY_CODES;
-    SettingManager.saveVisibleSourceCurrencyCodes(_visibleSourceCurrencyCodes);
+    _visibleSourceCurrencyCodes =
+        currencyCodes ?? CurrencyConstant.CURRENCY_CODES;
+    settingManager.saveVisibleSourceCurrencyCodes(_visibleSourceCurrencyCodes);
     notifyListeners();
   }
 
   void setVisibleTargetCurrencyCodes(List<String>? currencyCodes) {
-    _visibleTargetCurrencyCodes = currencyCodes ?? CurrencyConstant.CURRENCY_CODES;
-    SettingManager.saveVisibleTargetCurrencyCodes(_visibleTargetCurrencyCodes);
+    _visibleTargetCurrencyCodes =
+        currencyCodes ?? CurrencyConstant.CURRENCY_CODES;
+    settingManager.saveVisibleTargetCurrencyCodes(_visibleTargetCurrencyCodes);
     notifyListeners();
   }
 }

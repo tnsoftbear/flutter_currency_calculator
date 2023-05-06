@@ -76,7 +76,7 @@ flutter create -t app .
 to the `android/app/src/main/AndroidManifest.xml` file, because application uses the network.
 
 ```sh
-flutter build apk --no-tree-shake-icons 
+flutter build apk --no-tree-shake-icons
 ```
 
 ### Develop

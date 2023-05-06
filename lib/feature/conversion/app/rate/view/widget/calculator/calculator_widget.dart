@@ -3,10 +3,10 @@ import 'package:currency_calc/feature/conversion/app/config/conversion_config.da
 import 'package:currency_calc/feature/conversion/app/history/model/last_history_model.dart';
 import 'package:currency_calc/feature/conversion/app/rate/fetch/rate_fetcher_factory.dart';
 import 'package:currency_calc/feature/conversion/app/rate/translate/conversion_validation_translator.dart';
-import 'package:currency_calc/feature/conversion/domain/constant/currency_constant.dart';
 import 'package:currency_calc/feature/conversion/domain/history/model/conversion_history_record.dart';
 import 'package:currency_calc/feature/conversion/domain/rate/calculate/currency_converter.dart';
 import 'package:currency_calc/feature/conversion/domain/rate/validate/conversion_validator.dart';
+import 'package:currency_calc/feature/currency/public/currency_facade.dart';
 import 'package:currency_calc/feature/front/app/view/theme/additional_colors.dart';
 import 'package:currency_calc/feature/setting/app/model/setting_model.dart';
 import 'package:flutter/material.dart';
@@ -190,7 +190,11 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
     final validationResult = ConversionValidator.validate(
         sourceCurrency: _sourceCurrency,
         targetCurrency: _targetCurrency,
-        amount: _sourceAmountInput);
+        amount: _sourceAmountInput,
+        visibleSourceCurrencyCodes:
+            await CurrencyFacade().loadVisibleSourceCurrencyCodes(),
+        visibleTargetCurrencyCodes:
+            await CurrencyFacade().loadVisibleTargetCurrencyCodes());
     if (!validationResult.isSuccess()) {
       setState(() {
         _resultMessage =
