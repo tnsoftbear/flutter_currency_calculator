@@ -1,6 +1,6 @@
 import 'package:currency_calc/feature/conversion/domain/history/model/conversion_history_record.dart';
 import 'package:currency_calc/feature/conversion/domain/rate/model/exchange_rate_record.dart';
-import 'package:currency_calc/feature/currency/internal/domain/model/currency.dart';
+import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
 import 'package:currency_calc/feature/front/app/view/widget/front_material_app.dart';
 import 'package:currency_calc/feature/setting/app/manage/setting_manager.dart';
 import 'package:currency_calc/feature/setting/app/model/setting_model.dart';
@@ -15,16 +15,16 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(ConversionHistoryRecordAdapter());
   Hive.registerAdapter(ExchangeRateRecordAdapter());
-  Hive.registerAdapter(CurrencyAdapter()); // TODO: вынести в фасад
+
+  final currencyFeatureFacade = CurrencyFeatureFacade();
 
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  final settingModel = await SettingModel(SettingManager()).init();
+  final settingManager = SettingManager(currencyFeatureFacade);
+  final settingModel = await SettingModel(settingManager).init();
 
-  runApp(
-      ChangeNotifierProvider(
-        create: (_) => settingModel,
-        child: const FrontMaterialApp()
-      )
-  );
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => settingModel),
+    Provider(create: (_) => currencyFeatureFacade),
+  ], child: const FrontMaterialApp()));
 }

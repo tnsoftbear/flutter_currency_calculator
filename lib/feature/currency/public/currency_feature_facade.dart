@@ -1,6 +1,11 @@
+import 'package:currency_calc/feature/currency/internal/app/init/currency_feature_initializer.dart';
 import 'package:currency_calc/feature/currency/internal/app/load/currency_loader.dart';
 
-class CurrencyFacade {
+class CurrencyFeatureFacade {
+  CurrencyFeatureFacade() {
+    CurrencyFeatureInitializer();
+  }
+
   Future<List<String>> loadVisibleSourceCurrencyCodes() async {
     return CurrencyLoader.loadVisibleSourceCurrencyCodes();
   }

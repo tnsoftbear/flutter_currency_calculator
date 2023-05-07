@@ -2,6 +2,8 @@ import 'package:currency_calc/feature/conversion/app/history/model/last_history_
 import 'package:currency_calc/feature/conversion/app/history/view/widget/dto/history_output_dto.dart';
 import 'package:currency_calc/feature/conversion/app/history/view/widget/last_history/last_history_output_dto_producer.dart';
 import 'package:currency_calc/feature/front/app/view/theme/additional_colors.dart';
+import 'package:currency_calc/feature/front/app/view/widget/standard_error_label.dart';
+import 'package:currency_calc/feature/front/app/view/widget/standard_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/all_localizations.dart';
 import 'package:provider/provider.dart';
@@ -70,37 +72,19 @@ class LastHistoryDataTableWidget extends StatelessWidget {
                 )
               ];
             }
-          } else if (snapshot.hasError) {
-            children = <Widget>[
-              const Icon(
-                Icons.error_outline,
-                color: Colors.red,
-                size: 60,
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: children,
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: Text(tr.generalError(snapshot.error.toString())),
-              ),
-            ];
-          } else {
-            children = <Widget>[
-              SizedBox(
-                width: 60,
-                height: 60,
-                child: CircularProgressIndicator(),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 16),
-                child: Text(tr.generalLoading),
-              ),
-            ];
+            );
           }
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: children,
-            ),
-          );
+
+          if (snapshot.hasError) {
+            return StandardErrorLabel(snapshot.error.toString());
+          }
+
+          return StandardProgressIndicator();
         });
   }
 

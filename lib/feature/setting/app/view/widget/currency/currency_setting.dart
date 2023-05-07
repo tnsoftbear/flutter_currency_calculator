@@ -1,4 +1,6 @@
-import 'package:currency_calc/feature/currency/public/currency_facade.dart';
+import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
+import 'package:currency_calc/feature/front/app/view/widget/standard_error_label.dart';
+import 'package:currency_calc/feature/front/app/view/widget/standard_progress_indicator.dart';
 import 'package:currency_calc/feature/setting/app/model/setting_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/all_localizations.dart';
@@ -13,13 +15,14 @@ class CurrencySetting extends StatelessWidget {
     final settingModel = context.watch<SettingModel>();
     final visibleSourceCurrencyCodes = settingModel.visibleSourceCurrencyCodes;
     final visibleTargetCurrencyCodes = settingModel.visibleTargetCurrencyCodes;
+    final currencyFeatureFacade = context.read<CurrencyFeatureFacade>();
     return FutureBuilder(
-        future: CurrencyFacade().loadAllCurrencyCodes(),
+        future: currencyFeatureFacade.loadAllCurrencyCodes(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return Text(tr.generalError(snapshot.error.toString()));
+            return StandardErrorLabel(snapshot.error.toString());
           } else if (!snapshot.hasData) {
-            return const CircularProgressIndicator();
+            return StandardProgressIndicator();
           }
 
           return SingleChildScrollView(

@@ -1,10 +1,14 @@
 import 'package:currency_calc/feature/conversion/domain/constant/currency_constant.dart';
-import 'package:currency_calc/feature/currency/public/currency_facade.dart';
+import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
 import 'package:currency_calc/feature/front/app/constant/appearance_constant.dart';
 import 'package:currency_calc/feature/setting/infra/repository/setting_repository.dart';
 import 'package:flutter/material.dart';
 
 class SettingManager {
+  CurrencyFeatureFacade _currencyFeatureFacade;
+
+  SettingManager(this._currencyFeatureFacade);
+
   Future<String> detectLanguageCode() async {
     return await SettingRepository.loadString("languageCode") ??
         AppearanceConstant.LC_DEFAULT;
@@ -72,7 +76,7 @@ class SettingManager {
     final currencyCodes =
         await SettingRepository.loadVisibleSourceCurrencyCodes();
     if (currencyCodes == null || currencyCodes.isEmpty) {
-      return CurrencyFacade().loadVisibleSourceCurrencyCodes();
+      return _currencyFeatureFacade.loadVisibleSourceCurrencyCodes();
     }
     return currencyCodes;
   }
@@ -86,7 +90,7 @@ class SettingManager {
     final currencyCodes =
         await SettingRepository.loadVisibleTargetCurrencyCodes();
     if (currencyCodes == null || currencyCodes.isEmpty) {
-      return CurrencyFacade().loadVisibleTargetCurrencyCodes();
+      return _currencyFeatureFacade.loadVisibleTargetCurrencyCodes();
     }
     return currencyCodes;
   }

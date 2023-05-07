@@ -6,7 +6,7 @@ import 'package:currency_calc/feature/conversion/app/rate/translate/conversion_v
 import 'package:currency_calc/feature/conversion/domain/history/model/conversion_history_record.dart';
 import 'package:currency_calc/feature/conversion/domain/rate/calculate/currency_converter.dart';
 import 'package:currency_calc/feature/conversion/domain/rate/validate/conversion_validator.dart';
-import 'package:currency_calc/feature/currency/public/currency_facade.dart';
+import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
 import 'package:currency_calc/feature/front/app/view/theme/additional_colors.dart';
 import 'package:currency_calc/feature/setting/app/model/setting_model.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +30,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
   late String _sourceAmountInput;
   late String _sourceCurrency;
   late String _targetCurrency;
+  late CurrencyFeatureFacade _currencyFeatureFacade;
 
   final _sourceAmountController = TextEditingController();
   final _sourceAmountTextFieldFocusNode = FocusNode();
@@ -47,6 +48,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
     final settingModel = context.read<SettingModel>();
     _sourceCurrency = settingModel.selectedSourceCurrencyCode;
     _targetCurrency = settingModel.selectedTargetCurrencyCode;
+    _currencyFeatureFacade = context.read<CurrencyFeatureFacade>();
     super.initState();
   }
 
@@ -192,9 +194,9 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
         targetCurrency: _targetCurrency,
         amount: _sourceAmountInput,
         visibleSourceCurrencyCodes:
-            await CurrencyFacade().loadVisibleSourceCurrencyCodes(),
+            await _currencyFeatureFacade.loadVisibleSourceCurrencyCodes(),
         visibleTargetCurrencyCodes:
-            await CurrencyFacade().loadVisibleTargetCurrencyCodes());
+            await _currencyFeatureFacade.loadVisibleTargetCurrencyCodes());
     if (!validationResult.isSuccess()) {
       setState(() {
         _resultMessage =
