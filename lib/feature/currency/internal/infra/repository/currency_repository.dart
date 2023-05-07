@@ -1,5 +1,6 @@
 import 'package:currency_calc/feature/currency/internal/domain/model/currency.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CurrencyRepository {
   static const BOX_NAME = 'Currency';
@@ -71,5 +72,21 @@ class CurrencyRepository {
             .where((currency) => currency.isVisibleForTarget)
             .map((currency) => currency.code)
             .toList();
+  }
+
+  Future<DateTime?> loadLastUpdateDate() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (!prefs.containsKey('lastUpdateTimestamp')) {
+      return null;
+    }
+
+    final int lastUpdateTimestamp = prefs.getInt('lastUpdateTimestamp') ?? 0;
+    return DateTime.fromMillisecondsSinceEpoch(lastUpdateTimestamp);
+  }
+
+  Future<void> saveLastUpdateDateToNow() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final nowTs = DateTime.now().millisecondsSinceEpoch;
+    await prefs.setInt('lastUpdateTimestamp', nowTs);
   }
 }

@@ -3,27 +3,23 @@ import 'package:currency_calc/feature/currency/internal/domain/model/currency.da
 import 'package:currency_calc/feature/currency/internal/infra/repository/currency_repository.dart';
 
 class CurrencyLoader {
-  static Future<List<String>> loadVisibleSourceCurrencyCodes() async {
-    if (true) { // TODO: check if loaded currencies TTL is not expired
-      await CurrencyPopulator.populate();
-    }
-    CurrencyRepository currencyRepo = CurrencyRepository();
-    return await currencyRepo.loadVisibleSourceCurrencyCodes();
+  final CurrencyRepository currencyRepository;
+  final CurrencyPopulator currencyPopulator;
+
+  CurrencyLoader(this.currencyRepository, this.currencyPopulator);
+
+  Future<List<String>> loadVisibleSourceCurrencyCodes() async {
+    await currencyPopulator.populateIfNeeded();
+    return await currencyRepository.loadVisibleSourceCurrencyCodes();
   }
 
-  static Future<List<String>> loadVisibleTargetCurrencyCodes() async {
-    if (true) { // TODO: check if loaded currencies TTL is not expired
-      await CurrencyPopulator.populate();
-    }
-    CurrencyRepository currencyRepo = CurrencyRepository();
-    return await currencyRepo.loadVisibleTargetCurrencyCodes();
+  Future<List<String>> loadVisibleTargetCurrencyCodes() async {
+    await currencyPopulator.populateIfNeeded();
+    return await currencyRepository.loadVisibleTargetCurrencyCodes();
   }
 
-  static Future<List<Currency>> loadAllCurrencies() async {
-    if (true) { // TODO: check if loaded currencies TTL is not expired
-      await CurrencyPopulator.populate();
-    }
-    CurrencyRepository currencyRepo = CurrencyRepository();
-    return await currencyRepo.loadAllCurrencies();
+  Future<List<Currency>> loadAllCurrencies() async {
+    await currencyPopulator.populateIfNeeded();
+    return await currencyRepository.loadAllCurrencies();
   }
 }
