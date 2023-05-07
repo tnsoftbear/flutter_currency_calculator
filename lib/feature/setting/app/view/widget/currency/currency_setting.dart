@@ -13,11 +13,9 @@ class CurrencySetting extends StatelessWidget {
   Widget build(BuildContext context) {
     final tr = AppLocalizations.of(context);
     final settingModel = context.watch<SettingModel>();
-    final visibleSourceCurrencyCodes = settingModel.visibleSourceCurrencyCodes;
-    final visibleTargetCurrencyCodes = settingModel.visibleTargetCurrencyCodes;
     final currencyFeatureFacade = context.read<CurrencyFeatureFacade>();
     return FutureBuilder(
-        future: currencyFeatureFacade.loadAllCurrencyCodes(),
+        future: currencyFeatureFacade.loadAllCurrencies(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return StandardErrorLabel(snapshot.error.toString());
@@ -25,35 +23,44 @@ class CurrencySetting extends StatelessWidget {
             return StandardProgressIndicator();
           }
 
+          final theme = Theme.of(context);
+
           return SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Container(
               child: Table(
                 border: TableBorder.all(),
                 columnWidths: {
-                  0: FlexColumnWidth(2),
-                  1: FlexColumnWidth(1),
-                  2: FlexColumnWidth(2),
+                  0: FlexColumnWidth(1),
+                  1: FlexColumnWidth(4),
+                  2: FlexColumnWidth(1),
                   3: FlexColumnWidth(1),
                 },
                 children: [
                   TableRow(
-                    decoration:
-                        BoxDecoration(color: Theme.of(context).primaryColor),
+                    decoration: BoxDecoration(color: theme.primaryColor),
                     children: [
                       TableCell(
                         child: Center(
                           child: Text(
-                            tr.settingSourceCurrency,
-                            style: TextStyle(color: Colors.white),
+                            tr.settingCurrencyCode,
+                            style: theme.primaryTextTheme.titleSmall,
                           ),
                         ),
                       ),
                       TableCell(
                         child: Center(
                           child: Text(
-                            tr.settingCurrencyVisible,
-                            style: TextStyle(color: Colors.white),
+                            tr.settingCurrencyName,
+                            style: theme.primaryTextTheme.titleSmall,
+                          ),
+                        ),
+                      ),
+                      TableCell(
+                        child: Center(
+                          child: Text(
+                            tr.settingSourceCurrency,
+                            style: theme.primaryTextTheme.titleSmall,
                           ),
                         ),
                       ),
@@ -61,52 +68,44 @@ class CurrencySetting extends StatelessWidget {
                         child: Center(
                           child: Text(
                             tr.settingTargetCurrency,
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                      TableCell(
-                        child: Center(
-                          child: Text(
-                            tr.settingCurrencyVisible,
-                            style: TextStyle(color: Colors.white),
+                            style: theme.primaryTextTheme.titleSmall,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  for (var currency in snapshot.data as List<String>)
+                  for (var currency in snapshot.data as List<Currency>)
                     TableRow(
                       children: [
                         TableCell(
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(currency),
+                            child: Text(currency.code),
                           ),
-                        ),
-                        TableCell(
-                          child: Checkbox(
-                              key: Key('visibleSourceCurrencyCodes_$currency'),
-                              value:
-                                  visibleSourceCurrencyCodes.contains(currency),
-                              onChanged: (bool? visible) =>
-                                  _onChangedVisibleSourceCurrency(
-                                      currency, visible, settingModel)),
                         ),
                         TableCell(
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(currency),
+                            child: Text(currency.name),
                           ),
                         ),
                         TableCell(
                           child: Checkbox(
-                              key: Key('visibleTargetCurrencyCodes_$currency'),
-                              value:
-                                  visibleTargetCurrencyCodes.contains(currency),
+                              key: Key(
+                                  'visibleSourceCurrencyCodes_${currency.code}'),
+                              value: currency.isVisibleForSource,
+                              onChanged: (bool? visible) =>
+                                  _onChangedVisibleSourceCurrency(
+                                      currency.code, visible, settingModel)),
+                        ),
+                        TableCell(
+                          child: Checkbox(
+                              key: Key(
+                                  'visibleTargetCurrencyCodes_${currency.code}'),
+                              value: currency.isVisibleForTarget,
                               onChanged: (bool? visible) =>
                                   _onChangedVisibleTargetCurrency(
-                                      currency, visible, settingModel)),
+                                      currency.code, visible, settingModel)),
                         ),
                       ],
                     ),

@@ -1,5 +1,8 @@
 import 'package:currency_calc/feature/currency/internal/app/init/currency_feature_initializer.dart';
 import 'package:currency_calc/feature/currency/internal/app/load/currency_loader.dart';
+import 'package:currency_calc/feature/currency/internal/domain/model/currency.dart';
+
+export "package:currency_calc/feature/currency/internal/domain/model/currency.dart";
 
 class CurrencyFeatureFacade {
   CurrencyFeatureFacade() {
@@ -14,7 +17,7 @@ class CurrencyFeatureFacade {
     return CurrencyLoader.loadVisibleTargetCurrencyCodes();
   }
 
-  Future<List<String>> loadAllCurrencyCodes() async {
-    return CurrencyLoader.loadAllCurrencyCodes();
+  Future<List<Currency>> loadAllCurrencies() async {
+    return CurrencyLoader.loadAllCurrencies();
   }
 }

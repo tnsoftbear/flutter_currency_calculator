@@ -1,4 +1,5 @@
 import 'package:currency_calc/feature/currency/internal/app/populate/currency_populator.dart';
+import 'package:currency_calc/feature/currency/internal/domain/model/currency.dart';
 import 'package:currency_calc/feature/currency/internal/infra/repository/currency_repository.dart';
 
 class CurrencyLoader {
@@ -18,11 +19,11 @@ class CurrencyLoader {
     return await currencyRepo.loadVisibleTargetCurrencyCodes();
   }
 
-  static Future<List<String>> loadAllCurrencyCodes() async {
+  static Future<List<Currency>> loadAllCurrencies() async {
     if (true) { // TODO: check if loaded currencies TTL is not expired
       await CurrencyPopulator.populate();
     }
     CurrencyRepository currencyRepo = CurrencyRepository();
-    return await currencyRepo.loadAllCurrencyCodes();
+    return await currencyRepo.loadAllCurrencies();
   }
 }

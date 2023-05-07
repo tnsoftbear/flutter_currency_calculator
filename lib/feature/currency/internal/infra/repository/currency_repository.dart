@@ -47,6 +47,11 @@ class CurrencyRepository {
   //   return box!.values.toList();
   // }
 
+  Future<List<Currency>> loadAllCurrencies() async {
+    await init();
+    return box!.values.toList();
+  }
+
   Future<Map<String, Currency>> loadAllIndexedByCode() async {
     await init();
     return {for (var currency in box!.values) currency.code: currency};
@@ -57,16 +62,7 @@ class CurrencyRepository {
     return box!.values
             .where((currency) => currency.isVisibleForSource)
             .map((currency) => currency.code)
-            .toList() ??
-        [];
-  }
-
-  Future<List<String>> loadAllCurrencyCodes() async {
-    await init();
-    return box!.values
-        .map((currency) => currency.code)
-        .toList() ??
-        [];
+            .toList();
   }
 
   Future<List<String>> loadVisibleTargetCurrencyCodes() async {
@@ -74,7 +70,6 @@ class CurrencyRepository {
     return box!.values
             .where((currency) => currency.isVisibleForTarget)
             .map((currency) => currency.code)
-            .toList() ??
-        [];
+            .toList();
   }
 }
