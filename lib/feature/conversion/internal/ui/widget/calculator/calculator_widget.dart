@@ -10,7 +10,7 @@ import 'package:currency_calc/feature/conversion/internal/domain/calculate/curre
 import 'package:currency_calc/feature/conversion/internal/domain/validate/conversion_validator.dart';
 import 'package:currency_calc/feature/setting/internal/app/model/setting_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/all_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 

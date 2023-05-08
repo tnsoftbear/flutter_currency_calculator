@@ -3,7 +3,7 @@ import 'package:currency_calc/feature/front/ui/theme/additional_colors.dart';
 import 'package:currency_calc/feature/front/ui/widget/front_header_bar.dart';
 import 'package:currency_calc/feature/front/ui/widget/front_main_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/all_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({Key? key}) : super(key: key);

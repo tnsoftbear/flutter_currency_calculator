@@ -2,7 +2,7 @@ import 'package:currency_calc/feature/front/app/route/app_router.dart';
 import 'package:currency_calc/feature/front/app/constant/appearance_constant.dart';
 import 'package:currency_calc/feature/front/ui/theme/additional_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/all_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FrontMainMenu extends StatelessWidget {
   const FrontMainMenu({Key? key}) : super(key: key);

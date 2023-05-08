@@ -4,7 +4,7 @@ import 'package:currency_calc/feature/front/ui/theme/additional_colors.dart';
 import 'package:currency_calc/feature/front/ui/widget/front_header_bar.dart';
 import 'package:currency_calc/feature/setting/internal/ui/widget/appearance/appearance_setting.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/all_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class SettingScreen extends StatelessWidget {

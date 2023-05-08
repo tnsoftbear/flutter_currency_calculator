@@ -2,7 +2,7 @@ import 'package:currency_calc/feature/front/ui/theme/additional_colors.dart';
 import 'package:currency_calc/feature/history/internal/infra/repository/conversion_history_record_repository.dart';
 import 'package:currency_calc/feature/history/internal/ui/widget/dto/history_output_dto.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/all_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 
 import 'all_history_data_table_source.dart';

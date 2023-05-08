@@ -6,7 +6,7 @@ import 'package:currency_calc/feature/history/internal/infra/repository/conversi
 import 'package:currency_calc/feature/history/public/history_feature_facade.dart';
 import 'package:currency_calc/feature/conversion/internal/ui/widget/calculator/calculator_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/all_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class CalculatorScreen extends StatelessWidget {

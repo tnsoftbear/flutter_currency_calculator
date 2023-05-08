@@ -3,7 +3,7 @@ import 'package:currency_calc/feature/currency/internal/ui/setting/currency_chec
 import 'package:currency_calc/feature/front/ui/widget/standard_error_label.dart';
 import 'package:currency_calc/feature/front/ui/widget/standard_progress_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/all_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class CurrencySettingWidget extends StatelessWidget {

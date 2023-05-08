@@ -5,7 +5,7 @@ import 'package:currency_calc/feature/history/internal/app/model/last_history_mo
 import 'package:currency_calc/feature/history/internal/ui/widget/dto/history_output_dto.dart';
 import 'package:currency_calc/feature/history/internal/ui/widget/last_history/last_history_output_dto_producer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/all_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class LastHistoryWidget extends StatelessWidget {

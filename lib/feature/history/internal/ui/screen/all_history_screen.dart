@@ -3,7 +3,7 @@ import 'package:currency_calc/feature/front/ui/widget/front_header_bar.dart';
 import 'package:currency_calc/feature/front/ui/widget/front_main_menu.dart';
 import 'package:currency_calc/feature/history/internal/ui/widget/all_history/all_history_data_table_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/all_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AllHistoryScreen extends StatelessWidget {
   const AllHistoryScreen({Key? key}) : super(key: key);
