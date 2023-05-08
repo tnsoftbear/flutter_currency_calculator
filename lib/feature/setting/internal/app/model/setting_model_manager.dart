@@ -1,4 +1,3 @@
-import 'package:currency_calc/feature/currency/internal/infra/repository/currency_repository.dart';
 import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
 import 'package:currency_calc/feature/front/app/constant/appearance_constant.dart';
 import 'package:currency_calc/feature/setting/internal/app/model/setting_model.dart';
@@ -48,7 +47,7 @@ class SettingModelManager {
         await SettingRepository.loadString("selectedSourceCurrencyCode") ??
             SettingModel.SOURCE_CURRENCY_CODE_DEFAULT;
     final sourceCurrencyCodes =
-        await CurrencyRepository().loadVisibleSourceCurrencyCodes();
+        await _currencyFeatureFacade.loadVisibleSourceCurrencyCodes();
     if (sourceCurrencyCodes.isNotEmpty &&
         !sourceCurrencyCodes.contains(currencyCode)) {
       return sourceCurrencyCodes.first;
@@ -67,7 +66,7 @@ class SettingModelManager {
         await SettingRepository.loadString("selectedTargetCurrencyCode") ??
             SettingModel.TARGET_CURRENCY_CODE_DEFAULT;
     final targetCurrencyCodes =
-        await CurrencyRepository().loadVisibleTargetCurrencyCodes();
+        await _currencyFeatureFacade.loadVisibleTargetCurrencyCodes();
     if (targetCurrencyCodes.isNotEmpty &&
         !targetCurrencyCodes.contains(currencyCode)) {
       if (targetCurrencyCodes.first == sourceCurrencyCode &&

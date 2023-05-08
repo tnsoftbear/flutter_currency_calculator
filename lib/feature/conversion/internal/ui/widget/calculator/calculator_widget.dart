@@ -1,13 +1,12 @@
 import 'dart:developer';
 import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
 import 'package:currency_calc/feature/front/ui/theme/additional_colors.dart';
-import 'package:currency_calc/feature/history/internal/app/model/last_history_model.dart';
-import 'package:currency_calc/feature/history/internal/domain/model/conversion_history_record.dart';
 import 'package:currency_calc/feature/conversion/internal/app/config/conversion_config.dart';
 import 'package:currency_calc/feature/conversion/internal/app/fetch/rate_fetcher_factory.dart';
 import 'package:currency_calc/feature/conversion/internal/app/translate/conversion_validation_translator.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/calculate/currency_converter.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/validate/conversion_validator.dart';
+import 'package:currency_calc/feature/history/internal/app/model/last_history_model.dart';
 import 'package:currency_calc/feature/setting/internal/app/model/setting_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -58,10 +57,12 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
     final AdditionalColors additionalColors =
         Theme.of(context).extension<AdditionalColors>()!;
     final settingModel = context.watch<SettingModel>();
-    if (!settingModel.visibleSourceCurrencyCodes.contains(_selectedSourceCurrencyCode)) {
+    if (!settingModel.visibleSourceCurrencyCodes
+        .contains(_selectedSourceCurrencyCode)) {
       _selectedSourceCurrencyCode = settingModel.selectedSourceCurrencyCode;
     }
-    if (!settingModel.visibleTargetCurrencyCodes.contains(_selectedTargetCurrencyCode)) {
+    if (!settingModel.visibleTargetCurrencyCodes
+        .contains(_selectedTargetCurrencyCode)) {
       _selectedTargetCurrencyCode = settingModel.selectedTargetCurrencyCode;
     }
     return Padding(
@@ -218,7 +219,8 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
 
     final rateFetcher = RateFetcherFactory.create(ConversionConfig());
     rateFetcher
-        .fetchExchangeRate(_selectedSourceCurrencyCode, _selectedTargetCurrencyCode)
+        .fetchExchangeRate(
+            _selectedSourceCurrencyCode, _selectedTargetCurrencyCode)
         .then((rate) {
       final localeName = Localizations.localeOf(context).toString();
       final currencyFormatter = NumberFormat.simpleCurrency(
@@ -231,8 +233,8 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
         _resultMessage = tr.conversionCalculationResult(
             currencyFormatter.format(_targetAmount));
         final rateFormatted = numberFormatter.format(_rate);
-        _rateMessage = tr.conversionRateResult(
-            rateFormatted, _selectedSourceCurrencyCode, _selectedTargetCurrencyCode);
+        _rateMessage = tr.conversionRateResult(rateFormatted,
+            _selectedSourceCurrencyCode, _selectedTargetCurrencyCode);
         _isLoading = false;
         _areActionButtonsVisible = true;
       });
@@ -246,14 +248,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
   }
 
   void _onSavePressed() async {
-    var historyRecord = ConversionHistoryRecord()
-      ..sourceCurrency = _selectedSourceCurrencyCode
-      ..targetCurrency = _selectedTargetCurrencyCode
-      ..sourceAmount = _sourceAmount
-      ..targetAmount = _targetAmount
-      ..rate = _rate
-      ..date = DateTime.now();
-    context.read<LastHistoryModel>().addRecord(historyRecord);
+    context.read<LastHistoryModel>().add(
+        _selectedSourceCurrencyCode,
+        _selectedTargetCurrencyCode,
+        _sourceAmount,
+        _targetAmount,
+        _rate);
+
+    // context.read<HistoryFeatureFacade>().addConversionHistoryRecord(
+    //     _selectedSourceCurrencyCode,
+    //     _selectedTargetCurrencyCode,
+    //     _sourceAmount,
+    //     _targetAmount,
+    //     _rate);
     FocusScope.of(context).requestFocus(_sourceAmountTextFieldFocusNode);
     _resetInputs();
     log(

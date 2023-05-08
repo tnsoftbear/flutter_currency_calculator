@@ -28,28 +28,28 @@ class SettingModel with ChangeNotifier {
 
   List<String> get visibleTargetCurrencyCodes => _visibleTargetCurrencyCodes;
 
-  SettingModelManager settingModelManager;
+  SettingModelManager _settingModelManager;
 
-  SettingModel(this.settingModelManager);
+  SettingModel(this._settingModelManager);
 
   Future<SettingModel> init() async {
-    _languageCode = await settingModelManager.detectLanguageCode();
-    _fontFamily = await settingModelManager.detectFontFamily();
-    _themeType = await settingModelManager.detectThemeType();
+    _languageCode = await _settingModelManager.detectLanguageCode();
+    _fontFamily = await _settingModelManager.detectFontFamily();
+    _themeType = await _settingModelManager.detectThemeType();
     _selectedSourceCurrencyCode =
-        await settingModelManager.detectSelectedSourceCurrencyCode();
-    _selectedTargetCurrencyCode = await settingModelManager
+        await _settingModelManager.detectSelectedSourceCurrencyCode();
+    _selectedTargetCurrencyCode = await _settingModelManager
         .detectSelectedTargetCurrencyCode(_selectedSourceCurrencyCode);
     _visibleSourceCurrencyCodes =
-        await settingModelManager.detectVisibleSourceCurrencyCodes();
+        await _settingModelManager.detectVisibleSourceCurrencyCodes();
     _visibleTargetCurrencyCodes =
-        await settingModelManager.detectVisibleTargetCurrencyCodes();
+        await _settingModelManager.detectVisibleTargetCurrencyCodes();
     return this;
   }
 
   void setLanguageCode(String? languageCode) {
     _languageCode = languageCode ?? AppearanceConstant.LC_DEFAULT;
-    settingModelManager.saveLanguageCode(_languageCode);
+    _settingModelManager.saveLanguageCode(_languageCode);
     notifyListeners();
   }
 
@@ -62,40 +62,40 @@ class SettingModel with ChangeNotifier {
 
   void setFontFamily(String? fontFamily) {
     _fontFamily = fontFamily ?? AppearanceConstant.FF_DEFAULT;
-    settingModelManager.saveFontFamily(_fontFamily);
+    _settingModelManager.saveFontFamily(_fontFamily);
     notifyListeners();
   }
 
   void setThemeType(String? themeType) {
     _themeType = themeType ?? AppearanceConstant.THEME_DEFAULT;
-    settingModelManager.saveThemeType(_themeType);
+    _settingModelManager.saveThemeType(_themeType);
     notifyListeners();
   }
 
   void setSourceCurrencyCode(String? currencyCode) {
     _selectedSourceCurrencyCode = currencyCode ?? SOURCE_CURRENCY_CODE_DEFAULT;
-    settingModelManager
+    _settingModelManager
         .saveDefaultSourceCurrencyCode(_selectedSourceCurrencyCode);
     notifyListeners();
   }
 
   void setTargetCurrencyCode(String? currencyCode) {
     _selectedTargetCurrencyCode = currencyCode ?? TARGET_CURRENCY_CODE_DEFAULT;
-    settingModelManager
+    _settingModelManager
         .saveDefaultTargetCurrencyCode(_selectedTargetCurrencyCode);
     notifyListeners();
   }
 
   void setVisibleSourceCurrencyCodes(List<String> currencyCodes) {
     _visibleSourceCurrencyCodes = currencyCodes;
-    settingModelManager
+    _settingModelManager
         .saveVisibleSourceCurrencyCodes(_visibleSourceCurrencyCodes);
     notifyListeners();
   }
 
   void setVisibleTargetCurrencyCodes(List<String> currencyCodes) {
     _visibleTargetCurrencyCodes = currencyCodes;
-    settingModelManager
+    _settingModelManager
         .saveVisibleTargetCurrencyCodes(_visibleTargetCurrencyCodes);
     notifyListeners();
   }

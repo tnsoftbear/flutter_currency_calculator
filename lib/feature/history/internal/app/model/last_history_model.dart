@@ -32,9 +32,17 @@ class LastHistoryModel with ChangeNotifier {
     //log("History records loaded inside notifier (${_historyRecords.length})");
   }
 
-  Future<void> addRecord(ConversionHistoryRecord record) async {
+  Future<void> add(String sourceCurrencyCode, String targetCurrencyCode,
+      double sourceAmount, double targetAmount, double rate) async {
+    var historyRecord = ConversionHistoryRecord()
+      ..sourceCurrency = sourceCurrencyCode
+      ..targetCurrency = targetCurrencyCode
+      ..sourceAmount = sourceAmount
+      ..targetAmount = targetAmount
+      ..rate = rate
+      ..date = DateTime.now();
     await _repo.init();
-    await _repo.save(record);
+    await _repo.save(historyRecord);
     notifyListeners();
   }
 
