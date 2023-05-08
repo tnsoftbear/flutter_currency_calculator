@@ -4,6 +4,7 @@ import 'package:currency_calc/feature/currency/internal/app/populate/currency_po
 import 'package:currency_calc/feature/currency/internal/domain/model/currency.dart';
 import 'package:currency_calc/feature/currency/internal/infra/fetch/load/fawaz_ahmed/fawaz_ahmed_available_currency_fetcher.dart';
 import 'package:currency_calc/feature/currency/internal/infra/repository/currency_repository.dart';
+import 'package:currency_calc/feature/currency/internal/ui/setting/currency_setting_widget.dart';
 export "package:currency_calc/feature/currency/internal/domain/model/currency.dart";
 
 class CurrencyFeatureFacade {
@@ -32,5 +33,9 @@ class CurrencyFeatureFacade {
 
   Future<List<Currency>> loadAllCurrencies() async {
     return _currencyLoader.loadAllCurrencies();
+  }
+
+  CurrencySettingWidget createCurrencySettingWidget() {
+    return CurrencySettingWidget();
   }
 }

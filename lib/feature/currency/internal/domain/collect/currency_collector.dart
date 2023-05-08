@@ -1,5 +1,5 @@
-import 'package:currency_calc/feature/conversion/domain/constant/currency_constant.dart';
 import 'package:currency_calc/feature/currency/internal/domain/model/currency.dart';
+import 'package:currency_calc/feature/conversion/internal/domain/constant/currency_constant.dart';
 
 class CurrencyCollector {
   static CurrencyMap collectMissingCurrencies(
