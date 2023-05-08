@@ -1,4 +1,5 @@
 import 'package:currency_calc/feature/conversion/domain/constant/currency_constant.dart';
+import 'package:currency_calc/feature/currency/internal/infra/repository/currency_repository.dart';
 import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
 import 'package:currency_calc/feature/front/app/constant/appearance_constant.dart';
 import 'package:currency_calc/feature/setting/infra/repository/setting_repository.dart';
@@ -46,8 +47,8 @@ class SettingManager {
     final currencyCode =
         await SettingRepository.loadString("selectedSourceCurrencyCode") ??
             CurrencyConstant.SOURCE_CURRENCY_CODE_DEFAULT;
-    final currencyCodes = await detectVisibleSourceCurrencyCodes();
-    if (!currencyCodes.contains(currencyCode)) {
+    final currencyCodes = await CurrencyRepository().loadVisibleSourceCurrencyCodes();
+    if (currencyCodes.isNotEmpty && !currencyCodes.contains(currencyCode)) {
       return currencyCodes.first;
     }
     return currencyCode;
@@ -61,8 +62,8 @@ class SettingManager {
     final currencyCode =
         await SettingRepository.loadString("selectedTargetCurrencyCode") ??
             CurrencyConstant.TARGET_CURRENCY_CODE_DEFAULT;
-    final currencyCodes = await detectVisibleTargetCurrencyCodes();
-    if (!currencyCodes.contains(currencyCode)) {
+    final currencyCodes = await CurrencyRepository().loadVisibleTargetCurrencyCodes();
+    if (currencyCodes.isNotEmpty && !currencyCodes.contains(currencyCode)) {
       return currencyCodes.first;
     }
     return currencyCode;
@@ -76,7 +77,7 @@ class SettingManager {
     final currencyCodes =
         await SettingRepository.loadVisibleSourceCurrencyCodes();
     if (currencyCodes == null || currencyCodes.isEmpty) {
-      return _currencyFeatureFacade.loadVisibleSourceCurrencyCodes();
+      return await _currencyFeatureFacade.loadVisibleSourceCurrencyCodes();
     }
     return currencyCodes;
   }
@@ -90,7 +91,7 @@ class SettingManager {
     final currencyCodes =
         await SettingRepository.loadVisibleTargetCurrencyCodes();
     if (currencyCodes == null || currencyCodes.isEmpty) {
-      return _currencyFeatureFacade.loadVisibleTargetCurrencyCodes();
+      return await _currencyFeatureFacade.loadVisibleTargetCurrencyCodes();
     }
     return currencyCodes;
   }

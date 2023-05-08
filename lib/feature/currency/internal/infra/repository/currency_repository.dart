@@ -15,13 +15,15 @@ class CurrencyRepository {
   }
 
   Future<Currency?> loadByCode(String code) async {
+    await init();
     return await box!.get(code);
   }
 
-  // Future<void> saveByCode(String code, Currency currency) async {
-  //   await box!.put(code, currency);
-  //   //await box!.close();
-  // }
+  Future<void> save(Currency currency) async {
+    await init();
+    await box!.put(currency.code, currency);
+    //await box!.close();
+  }
 
   Future<void> saveAll(Map<String, Currency> currencies) async {
     await init();
@@ -58,6 +60,13 @@ class CurrencyRepository {
     return {for (var currency in box!.values) currency.code: currency};
   }
 
+  Future<List<Currency>> loadVisibleSourceCurrencies() async {
+    await init();
+    return box!.values
+        .where((currency) => currency.isVisibleForSource)
+        .toList();
+  }
+
   Future<List<String>> loadVisibleSourceCurrencyCodes() async {
     await init();
     return box!.values
@@ -66,12 +75,33 @@ class CurrencyRepository {
             .toList();
   }
 
+  Future<int> countVisibleSourceCurrencies() async {
+    await init();
+    return box!.values
+            .where((currency) => currency.isVisibleForSource)
+            .length;
+  }
+
+  Future<List<Currency>> loadVisibleTargetCurrencies() async {
+    await init();
+    return box!.values
+        .where((currency) => currency.isVisibleForTarget)
+        .toList();
+  }
+
   Future<List<String>> loadVisibleTargetCurrencyCodes() async {
     await init();
     return box!.values
             .where((currency) => currency.isVisibleForTarget)
             .map((currency) => currency.code)
             .toList();
+  }
+
+  Future<int> countVisibleTargetCurrencies() async {
+    await init();
+    return box!.values
+            .where((currency) => currency.isVisibleForTarget)
+            .length;
   }
 
   Future<DateTime?> loadLastUpdateDate() async {

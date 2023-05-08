@@ -8,13 +8,18 @@ export "package:currency_calc/feature/currency/internal/domain/model/currency.da
 
 class CurrencyFeatureFacade {
   late CurrencyLoader _currencyLoader;
+  late CurrencyPopulator _currencyPopulator;
 
   CurrencyFeatureFacade() {
     CurrencyFeatureInitializer();
     final currencyRepo = CurrencyRepository();
     final currencyFetcher = FawazAhmedAvailableCurrencyFetcher();
-    final currencyPopulator = CurrencyPopulator(currencyRepo, currencyFetcher);
-    _currencyLoader = CurrencyLoader(currencyRepo, currencyPopulator);
+    _currencyPopulator = CurrencyPopulator(currencyRepo, currencyFetcher);
+    _currencyLoader = CurrencyLoader(currencyRepo, _currencyPopulator);
+  }
+
+  Future<void> populateIfNeeded() async {
+    await _currencyPopulator.populateIfNeeded();
   }
 
   Future<List<String>> loadVisibleSourceCurrencyCodes() async {

@@ -1,7 +1,9 @@
+//import 'package:currency_calc/feature/currency/internal/infra/repository/currency_repository.dart';
 import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
 import 'package:currency_calc/feature/front/app/view/widget/standard_error_label.dart';
 import 'package:currency_calc/feature/front/app/view/widget/standard_progress_indicator.dart';
 import 'package:currency_calc/feature/setting/app/model/setting_model.dart';
+import 'package:currency_calc/feature/setting/app/view/widget/currency/currency_checkbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/all_localizations.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +33,7 @@ class CurrencySetting extends StatelessWidget {
               child: Table(
                 border: TableBorder.all(),
                 columnWidths: {
-                  0: FlexColumnWidth(1),
+                  0: FlexColumnWidth(1.5),
                   1: FlexColumnWidth(4),
                   2: FlexColumnWidth(1),
                   3: FlexColumnWidth(1),
@@ -90,22 +92,10 @@ class CurrencySetting extends StatelessWidget {
                           ),
                         ),
                         TableCell(
-                          child: Checkbox(
-                              key: Key(
-                                  'visibleSourceCurrencyCodes_${currency.code}'),
-                              value: currency.isVisibleForSource,
-                              onChanged: (bool? visible) =>
-                                  _onChangedVisibleSourceCurrency(
-                                      currency.code, visible, settingModel)),
+                          child: CurrencyCheckbox(currency, true),
                         ),
                         TableCell(
-                          child: Checkbox(
-                              key: Key(
-                                  'visibleTargetCurrencyCodes_${currency.code}'),
-                              value: currency.isVisibleForTarget,
-                              onChanged: (bool? visible) =>
-                                  _onChangedVisibleTargetCurrency(
-                                      currency.code, visible, settingModel)),
+                          child: CurrencyCheckbox(currency, false),
                         ),
                       ],
                     ),
@@ -116,64 +106,77 @@ class CurrencySetting extends StatelessWidget {
         });
   }
 
-  void _onChangedVisibleSourceCurrency(
-      String currencyCode, bool? visible, SettingModel settingModel) {
-    visible ??= false;
-    final currencyCodes =
-        List<String>.from(settingModel.visibleSourceCurrencyCodes);
-    print(currencyCodes);
-    if (visible) {
-      currencyCodes.add(currencyCode);
-    } else {
-      // Reject to remove last currency.
-      if (currencyCodes.length == 1) {
-        return;
-      }
-      currencyCodes.remove(currencyCode);
-    }
-    settingModel.setVisibleSourceCurrencyCodes(currencyCodes);
-
-    // Replace selected source currency, if it is absent in drop-down list
-    if (!currencyCodes.contains(settingModel.selectedSourceCurrencyCode)) {
-      if (currencyCodes.length > 1 &&
-          settingModel.selectedTargetCurrencyCode == currencyCodes.first) {
-        // Replace with the second currency from the visible currency list,
-        // because the first currency is already selected as target currency.
-        settingModel.setSourceCurrencyCode(currencyCodes[1]);
-      } else {
-        // Replace with the first currency in the visible currency list
-        settingModel.setSourceCurrencyCode(currencyCodes.first);
-      }
-    }
-  }
-
-  void _onChangedVisibleTargetCurrency(
-      String currencyCode, bool? visible, SettingModel settingModel) {
-    visible ??= false;
-    final currencyCodes =
-        List<String>.from(settingModel.visibleTargetCurrencyCodes);
-    if (visible) {
-      currencyCodes.add(currencyCode);
-    } else {
-      // Reject to remove last currency.
-      if (currencyCodes.length == 1) {
-        return;
-      }
-      currencyCodes.remove(currencyCode);
-    }
-    settingModel.setVisibleTargetCurrencyCodes(currencyCodes);
-
-    // Replace selected target currency, if it is absent in drop-down list
-    if (!currencyCodes.contains(settingModel.selectedTargetCurrencyCode)) {
-      if (currencyCodes.length > 1 &&
-          settingModel.selectedSourceCurrencyCode == currencyCodes.first) {
-        // Replace with the second currency in the visible currency list,
-        // because the first currency is already selected as source currency.
-        settingModel.setTargetCurrencyCode(currencyCodes[1]);
-      } else {
-        // Replace with the first currency in the visible currency list
-        settingModel.setTargetCurrencyCode(currencyCodes.first);
-      }
-    }
-  }
+  // Future<void> _onChangedVisibleSourceCurrency(
+  //     String currencyCode, bool? visible, SettingModel settingModel) async {
+  //   visible ??= false;
+  //   final currencyRepository = CurrencyRepository();
+  //   final updatingCurrency = await currencyRepository.loadByCode(currencyCode);
+  //   if (visible) {
+  //     updatingCurrency!.isVisibleForSource = true;
+  //     await currencyRepository.save(updatingCurrency);
+  //   } else {
+  //     // Reject to remove last currency.
+  //     if (currencyRepository.countVisibleSourceCurrencies() == 1) {
+  //       return;
+  //     }
+  //     updatingCurrency!.isVisibleForSource = false;
+  //     await currencyRepository.save(updatingCurrency);
+  //   }
+  //
+  //   // Replace selected source currency, if it is absent in drop-down list
+  //   final selectedSourceCurrency = await currencyRepository
+  //       .loadByCode(settingModel.selectedSourceCurrencyCode);
+  //   if (!selectedSourceCurrency!.isVisibleForSource) {
+  //     final visibleSourceCurrencies =
+  //         await currencyRepository.loadVisibleSourceCurrencies();
+  //     if (await currencyRepository.countVisibleSourceCurrencies() > 1) {
+  //       if (settingModel.selectedTargetCurrencyCode ==
+  //           visibleSourceCurrencies.first.code) {
+  //         // Replace with the second currency from the visible currency list,
+  //         // because the first currency is already selected as target currency.
+  //         settingModel.setSourceCurrencyCode(visibleSourceCurrencies[1].code);
+  //       }
+  //     } else {
+  //       // Replace with the first currency in the visible currency list
+  //       settingModel.setSourceCurrencyCode(visibleSourceCurrencies.first.code);
+  //     }
+  //   }
+  // }
+  //
+  // Future<void> _onChangedVisibleTargetCurrency(
+  //     String currencyCode, bool? visible, SettingModel settingModel) async {
+  //   visible ??= false;
+  //   final currencyRepository = CurrencyRepository();
+  //   final updatingCurrency = await currencyRepository.loadByCode(currencyCode);
+  //   if (visible) {
+  //     updatingCurrency!.isVisibleForTarget = true;
+  //     await currencyRepository.save(updatingCurrency);
+  //   } else {
+  //     // Reject to remove last currency.
+  //     if (currencyRepository.countVisibleTargetCurrencies() == 1) {
+  //       return;
+  //     }
+  //     updatingCurrency!.isVisibleForTarget = false;
+  //     await currencyRepository.save(updatingCurrency);
+  //   }
+  //
+  //   // Replace selected target currency, if it is absent in drop-down list
+  //   final selectedTargetCurrency = await currencyRepository
+  //       .loadByCode(settingModel.selectedTargetCurrencyCode);
+  //   if (!selectedTargetCurrency!.isVisibleForTarget) {
+  //     final visibleTargetCurrencies =
+  //         await currencyRepository.loadVisibleTargetCurrencies();
+  //     if (await currencyRepository.countVisibleTargetCurrencies() > 1) {
+  //       if (settingModel.selectedSourceCurrencyCode ==
+  //           visibleTargetCurrencies.first.code) {
+  //         // Replace with the second currency in the visible currency list,
+  //         // because the first currency is already selected as source currency.
+  //         settingModel.setTargetCurrencyCode(visibleTargetCurrencies[1].code);
+  //       }
+  //     } else {
+  //       // Replace with the first currency in the visible currency list
+  //       settingModel.setTargetCurrencyCode(visibleTargetCurrencies.first.code);
+  //     }
+  //   }
+  // }
 }

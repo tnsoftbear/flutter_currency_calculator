@@ -17,9 +17,11 @@ void main() async {
   Hive.registerAdapter(ExchangeRateRecordAdapter());
 
   final currencyFeatureFacade = CurrencyFeatureFacade();
+  await currencyFeatureFacade.populateIfNeeded();
 
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
   final settingManager = SettingManager(currencyFeatureFacade);
   final settingModel = await SettingModel(settingManager).init();
 
