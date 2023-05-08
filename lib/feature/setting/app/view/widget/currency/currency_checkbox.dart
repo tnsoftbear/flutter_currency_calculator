@@ -47,6 +47,7 @@ class _CurrencyCheckboxState extends State<CurrencyCheckbox> {
     visible ??= false;
     final settingModel = context.read<SettingModel>();
     final currencyRepository = CurrencyRepository();
+
     if (visible) {
       updatingCurrency.isVisibleForSource = true;
       await currencyRepository.save(updatingCurrency);
@@ -66,6 +67,13 @@ class _CurrencyCheckboxState extends State<CurrencyCheckbox> {
     setState(() {
       _currency = updatingCurrency;
     });
+
+    await _correctSelectedSourceCurrency();
+  }
+
+  Future<void> _correctSelectedSourceCurrency() async {
+    final settingModel = context.read<SettingModel>();
+    final currencyRepository = CurrencyRepository();
 
     // Replace selected source currency, if it is absent in drop-down list
     final selectedSourceCurrency = await currencyRepository
@@ -87,7 +95,7 @@ class _CurrencyCheckboxState extends State<CurrencyCheckbox> {
 
       if (newSelectedSourceCurrencyCode != "") {
         settingModel.setSourceCurrencyCode(newSelectedSourceCurrencyCode);
-        log('Selected source currency is changed from ${updatingCurrency.code} to $newSelectedSourceCurrencyCode (target is ${settingModel.selectedTargetCurrencyCode})');
+        log('Selected source currency is changed from ${_currency.code} to $newSelectedSourceCurrencyCode (target is ${settingModel.selectedTargetCurrencyCode})');
       }
     }
   }
@@ -97,6 +105,7 @@ class _CurrencyCheckboxState extends State<CurrencyCheckbox> {
     visible ??= false;
     final settingModel = context.read<SettingModel>();
     final currencyRepository = CurrencyRepository();
+
     if (visible) {
       updatingCurrency.isVisibleForTarget = true;
       await currencyRepository.save(updatingCurrency);
@@ -116,6 +125,13 @@ class _CurrencyCheckboxState extends State<CurrencyCheckbox> {
     setState(() {
       _currency = updatingCurrency;
     });
+
+    await _correctSelectedTargetCurrency();
+  }
+
+  Future<void> _correctSelectedTargetCurrency() async {
+    final settingModel = context.read<SettingModel>();
+    final currencyRepository = CurrencyRepository();
 
     // Replace selected target currency, if it is absent in drop-down list
     final selectedTargetCurrency = await currencyRepository
@@ -137,7 +153,7 @@ class _CurrencyCheckboxState extends State<CurrencyCheckbox> {
 
       if (newSelectedTargetCurrencyCode != "") {
         settingModel.setTargetCurrencyCode(newSelectedTargetCurrencyCode);
-        log('Selected target currency is changed from ${updatingCurrency.code} to $newSelectedTargetCurrencyCode (source is ${settingModel.selectedSourceCurrencyCode})');
+        log('Selected target currency is changed from ${_currency.code} to $newSelectedTargetCurrencyCode (source is ${settingModel.selectedSourceCurrencyCode})');
       }
     }
   }
