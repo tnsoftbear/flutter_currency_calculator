@@ -5,31 +5,48 @@ This is a simple demo app for currency conversion.
 
 ## Architecture
 
-Module logic is separated to application, infrastructure and domain layers.
 Project structure is organized by the the ["feature first"](https://codewithandrea.com/articles/flutter-project-structure/) style.
-See namespaces structure in folder tree view in the [lib/ tree](doc/lib_tree.md) document. 
-Logic is separated to features, and each feature has its own namespace with all layers inside.
-Features do not call each other, except the "Front" feature,
-which defines the application entry point and general configuration of appearance.
 
-Application layer calls logic from the Infrastructure and Domain layer.
-Presentation logic is located in the Application layer in the "view" folders.
-Infrastructure layer calls logic from Domain layer.
+Each feature defines published API for inter-feature communication.
+It can be found in the facade class in `/lib/feature/<feature_name>/public/` folder.
+Features should not call each other directly, but only through the public API.
+
+Feature internal logic is located in the `/lib/feature/<feature_name>/internal/` folder.
+It is separated to ui, application, infrastructure and domain layers.
+See namespaces structure in folder tree view in the [lib/ tree](doc/lib_tree.md) document.
+
+Features can call widgets located in the `/lib/feature/front` namespace, where we define common widgets, 
+like the application entry point and general configuration of appearance.
+Application bootstrapping logic is in the `/lib/boot/` folder.
+
+**Presentation layer** is located in the `/ui` folders. It can call logic of the Application and Domain layers.
+
+**Application layer** (`/app`) can call logic of the Infrastructure (`/infra`) and Domain (`/domain`) layers.
+
+**Infrastructure layer** can call logic of Domain layer.
 It contains logic that accesses external resources, such as API, database, etc.
-Domain layer operates only in bounds of its own space.
-It is pure functional core with business logic and data models.
+
+**Domain layer** operates only in bounds of its own space.
+It is pure functional core with business logic, entities and data models.
 
 ## Features
+
+You can find there the next features:
+
+* **Conversion** - calculates currency conversion according to the exchange rate.
+* **History** - displays the history of currency conversions.
+* **Currency** - provides the list of available currencies.
+* **Settings** - allows to configure application appearance and available currencies.
+* **About** - displays information about the application.
 
 ### Currency Conversion feature
 
 Most important business logic is located in the "Conversion" feature.
-It handles the Currency Calculator and the Conversion History screens.
+It handles the Currency Calculator.
 
 **Infrastructure layer** is responsible for the currency exchange rate loading by API.
 It caches retrieved exchange rate in the [Hive](https://docs.hivedb.dev/) DB.
 The lifetime of cached data is set to 1 day in configuration object. 
-The Hive DB is also used for storing currency conversion history.
 DB access methods are encapsulated in the repository classes.
 
 Rate fetchers implement common interface and are provided by factory.
@@ -42,7 +59,8 @@ and exchange rate numbers with help of the [Intl](https://pub.dev/packages/intl)
 We display the last 5 conversions at the Calculator screen in the bottom History widget.
 The history widget is constructed with help of FutureBuilder, because it depends on data loaded by async call.
 Since the history widget is updated after the saving of currency conversion, 
-it is notified about the change with help of the [Provider](https://pub.dev/packages/provider) package. 
+it is notified about the change with help of the [Provider](https://pub.dev/packages/provider) package.
+The Last History widget is a part of the History feature and it is exposed by Facade class of its feature's public API.
 
 ### Settings feature
 
