@@ -1,7 +1,8 @@
 import 'package:currency_calc/feature/currency/internal/domain/model/currency.dart';
-import 'package:currency_calc/feature/conversion/internal/domain/constant/currency_constant.dart';
 
 class CurrencyCollector {
+  static const VISIBLE_CURRENCY_CODES = ['EUR', 'GBP', 'RUB', 'USD'];
+
   static CurrencyMap collectMissingCurrencies(
       CurrencyMap existingCurrencies, CurrencyMap fetchedCurrencies) {
     final CurrencyMap resultCurrencies = {};
@@ -15,7 +16,7 @@ class CurrencyCollector {
 
   static void applyVisibility(CurrencyMap currencies) {
     currencies.forEach((currencyCode, currency) {
-      if (CurrencyConstant.CURRENCY_CODES.contains(currencyCode)) {
+      if (VISIBLE_CURRENCY_CODES.contains(currencyCode)) {
         currency.isVisibleForSource = true;
         currency.isVisibleForTarget = true;
       }

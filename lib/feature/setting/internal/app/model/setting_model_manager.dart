@@ -1,7 +1,7 @@
 import 'package:currency_calc/feature/currency/internal/infra/repository/currency_repository.dart';
 import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
 import 'package:currency_calc/feature/front/app/constant/appearance_constant.dart';
-import 'package:currency_calc/feature/conversion/internal/domain/constant/currency_constant.dart';
+import 'package:currency_calc/feature/setting/internal/app/model/setting_model.dart';
 import 'package:currency_calc/feature/setting/internal/infra/repository/setting_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -46,7 +46,7 @@ class SettingModelManager {
   Future<String> detectSelectedSourceCurrencyCode() async {
     final currencyCode =
         await SettingRepository.loadString("selectedSourceCurrencyCode") ??
-            CurrencyConstant.SOURCE_CURRENCY_CODE_DEFAULT;
+            SettingModel.SOURCE_CURRENCY_CODE_DEFAULT;
     final sourceCurrencyCodes =
         await CurrencyRepository().loadVisibleSourceCurrencyCodes();
     if (sourceCurrencyCodes.isNotEmpty &&
@@ -65,7 +65,7 @@ class SettingModelManager {
       String sourceCurrencyCode) async {
     final currencyCode =
         await SettingRepository.loadString("selectedTargetCurrencyCode") ??
-            CurrencyConstant.TARGET_CURRENCY_CODE_DEFAULT;
+            SettingModel.TARGET_CURRENCY_CODE_DEFAULT;
     final targetCurrencyCodes =
         await CurrencyRepository().loadVisibleTargetCurrencyCodes();
     if (targetCurrencyCodes.isNotEmpty &&

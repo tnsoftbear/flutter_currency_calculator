@@ -1,9 +1,11 @@
 import 'package:currency_calc/feature/front/app/constant/appearance_constant.dart';
-import 'package:currency_calc/feature/conversion/internal/domain/constant/currency_constant.dart';
 import 'package:currency_calc/feature/setting/internal/app/model/setting_model_manager.dart';
 import 'package:flutter/cupertino.dart';
 
 class SettingModel with ChangeNotifier {
+  static const SOURCE_CURRENCY_CODE_DEFAULT = 'USD';
+  static const TARGET_CURRENCY_CODE_DEFAULT = 'EUR';
+
   late String _languageCode;
   late String _fontFamily;
   late String _themeType;
@@ -71,30 +73,30 @@ class SettingModel with ChangeNotifier {
   }
 
   void setSourceCurrencyCode(String? currencyCode) {
-    _selectedSourceCurrencyCode =
-        currencyCode ?? CurrencyConstant.SOURCE_CURRENCY_CODE_DEFAULT;
-    settingModelManager.saveDefaultSourceCurrencyCode(_selectedSourceCurrencyCode);
+    _selectedSourceCurrencyCode = currencyCode ?? SOURCE_CURRENCY_CODE_DEFAULT;
+    settingModelManager
+        .saveDefaultSourceCurrencyCode(_selectedSourceCurrencyCode);
     notifyListeners();
   }
 
   void setTargetCurrencyCode(String? currencyCode) {
-    _selectedTargetCurrencyCode =
-        currencyCode ?? CurrencyConstant.TARGET_CURRENCY_CODE_DEFAULT;
-    settingModelManager.saveDefaultTargetCurrencyCode(_selectedTargetCurrencyCode);
+    _selectedTargetCurrencyCode = currencyCode ?? TARGET_CURRENCY_CODE_DEFAULT;
+    settingModelManager
+        .saveDefaultTargetCurrencyCode(_selectedTargetCurrencyCode);
     notifyListeners();
   }
 
-  void setVisibleSourceCurrencyCodes(List<String>? currencyCodes) {
-    _visibleSourceCurrencyCodes =
-        currencyCodes ?? CurrencyConstant.CURRENCY_CODES;
-    settingModelManager.saveVisibleSourceCurrencyCodes(_visibleSourceCurrencyCodes);
+  void setVisibleSourceCurrencyCodes(List<String> currencyCodes) {
+    _visibleSourceCurrencyCodes = currencyCodes;
+    settingModelManager
+        .saveVisibleSourceCurrencyCodes(_visibleSourceCurrencyCodes);
     notifyListeners();
   }
 
-  void setVisibleTargetCurrencyCodes(List<String>? currencyCodes) {
-    _visibleTargetCurrencyCodes =
-        currencyCodes ?? CurrencyConstant.CURRENCY_CODES;
-    settingModelManager.saveVisibleTargetCurrencyCodes(_visibleTargetCurrencyCodes);
+  void setVisibleTargetCurrencyCodes(List<String> currencyCodes) {
+    _visibleTargetCurrencyCodes = currencyCodes;
+    settingModelManager
+        .saveVisibleTargetCurrencyCodes(_visibleTargetCurrencyCodes);
     notifyListeners();
   }
 }
