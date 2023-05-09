@@ -1,7 +1,6 @@
 import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
 import 'package:currency_calc/front/app/constant/appearance_constant.dart';
 import 'package:currency_calc/front/ui/theme/additional_colors.dart';
-import 'package:currency_calc/front/ui/widget/front_header_bar.dart';
 import 'package:currency_calc/feature/setting/internal/ui/widget/appearance/appearance_setting.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -21,9 +20,15 @@ class SettingScreen extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: FrontHeaderBar(
-          titleText: tr.settingTitle,
-          isSettingMenu: false,
+        appBar: AppBar(
+          title: Text(tr.settingTitle),
+          bottom: TabBar(
+            //labelColor: Theme.of(context).primaryColor,
+            tabs: [
+              Tab(text: tr.settingTabAppearance),
+              Tab(text: tr.settingTabCurrency),
+            ],
+          ),
         ),
         body: Container(
           padding: const EdgeInsets.all(16),
@@ -43,13 +48,13 @@ class SettingScreen extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                TabBar(
-                  labelColor: Theme.of(context).primaryColor,
-                  tabs: [
-                    Tab(text: tr.settingTabAppearance),
-                    Tab(text: tr.settingTabCurrency),
-                  ],
-                ),
+                // TabBar(
+                //   labelColor: Theme.of(context).primaryColor,
+                //   tabs: [
+                //     Tab(text: tr.settingTabAppearance),
+                //     Tab(text: tr.settingTabCurrency),
+                //   ],
+                // ),
                 const SizedBox(height: 16),
                 Expanded(
                   child: TabBarView(

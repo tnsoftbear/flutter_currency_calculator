@@ -44,7 +44,7 @@ You can find there the next features:
 ### Currency Conversion feature
 
 Most important business logic is located in the "Conversion" feature.
-It handles the Currency Calculator.
+It handles the currency exchange rate calculation at the main Calculator screen.
 
 **Infrastructure layer** is responsible for the currency exchange rate loading by API.
 It caches retrieved exchange rate in the [Hive](https://docs.hivedb.dev/) DB.
@@ -58,11 +58,16 @@ and exchange rate numbers with help of the [Intl](https://pub.dev/packages/intl)
 
 **Domain layer** validates input values and calculates the currency conversion.
 
-We display the last 5 conversions at the Calculator screen in the bottom History widget.
-The history widget is constructed with help of FutureBuilder, because it depends on data loaded by async call.
+### History feature
+
+Application allows you to save currency conversion to the history and display it in the History screen.
+
+Additionally, it displays the last 5 conversions at the Calculator screen in the bottom the Last History widget.
+This history widget is constructed with help of FutureBuilder, because it depends on data loaded by async call.
 Since the history widget is updated after the saving of currency conversion, 
 it is notified about the change with help of the [Provider](https://pub.dev/packages/provider) package.
-The Last History widget is a part of the History feature and it is exposed by Facade class of its feature's public API.
+The Last History widget is a part of the History feature and it is exposed 
+by the respective Facade class, so it can be called by the Conversion feature.
 
 ### Settings feature
 
@@ -72,8 +77,15 @@ Settings screen allows to configure several options:
 * Preferred color is configurable by selection of the application theme. Theme is applied to the whole app.
 Custom colors are added with help of [theme extension](https://api.flutter.dev/flutter/material/ThemeExtension-class.html).
 * Font family is configured there as well.
+* Define available currencies displayed at the Calculator screen.
 
 Settings are stored with help of the [Shared preferences](https://pub.dev/packages/shared_preferences) package.
+
+### Currency feature
+
+Currency feature provides the list of available currencies that are fetched from the public API.
+Big thanks to the [fawazahmed0/currency-api](https://github.com/fawazahmed0/currency-api) repository
+for providing the currency list and the actual exchange rate. 
 
 ## Tests
 

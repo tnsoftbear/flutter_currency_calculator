@@ -27,6 +27,7 @@ dev_dependencies:
   build_runner: ^2.3.3
   lints: ^2.0.1
   flutter_lints: ^2.0.1
+  vertical_tabs_flutter: ^1.0.0
 
 flutter:
   generate: true # Enable generation of localized Strings from arb files.

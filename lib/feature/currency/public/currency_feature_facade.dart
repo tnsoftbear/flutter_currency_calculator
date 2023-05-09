@@ -35,6 +35,14 @@ class CurrencyFeatureFacade {
     return _currencyLoader.loadAllCurrencies();
   }
 
+  Future<List<Currency>> loadOneLetterCurrencies(String letter) async {
+    return _currencyLoader.loadOneLetterCurrencies(letter);
+  }
+
+  Future<List<String>> loadCurrencyLetters() async {
+    return _currencyLoader.loadCurrencyLetters();
+  }
+
   CurrencySettingWidget createCurrencySettingWidget() {
     return CurrencySettingWidget();
   }

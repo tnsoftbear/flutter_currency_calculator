@@ -22,4 +22,14 @@ class CurrencyLoader {
     await currencyPopulator.populateIfNeeded();
     return await currencyRepository.loadAllCurrencies();
   }
+
+  Future<List<Currency>> loadOneLetterCurrencies(String letter) async {
+    await currencyPopulator.populateIfNeeded();
+    return await currencyRepository.loadOneLetterCurrencies(letter);
+  }
+
+  Future<List<String>> loadCurrencyLetters() async {
+    await currencyPopulator.populateIfNeeded();
+    return await currencyRepository.loadCurrencyLetters();
+  }
 }

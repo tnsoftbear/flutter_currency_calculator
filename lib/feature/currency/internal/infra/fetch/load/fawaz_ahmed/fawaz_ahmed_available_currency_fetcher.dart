@@ -21,12 +21,12 @@ class FawazAhmedAvailableCurrencyFetcher implements CurrencyFetcher {
         final code = key.toUpperCase();
         resultCurrencies[code] = Currency(code, name, true, true);
       }
+      return resultCurrencies;
 
-      int takeCount = 10;
-      List<String> keys = resultCurrencies.keys.toList().sublist(0, takeCount); // список ключей для сохранения
-      Map<String, Currency> result = Map.fromEntries(resultCurrencies.entries.where((entry) => keys.contains(entry.key)));
-
-      return result;
+      // int takeCount = 10;
+      // List<String> keys = resultCurrencies.keys.toList().sublist(0, takeCount); // список ключей для сохранения
+      // Map<String, Currency> result = Map.fromEntries(resultCurrencies.entries.where((entry) => keys.contains(entry.key)));
+      // return result;
     } else {
       throw Exception('Failed to load available currencies');
     }
