@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:currency_calc/feature/currency/internal/app/init/currency_feature_initializer.dart';
 import 'package:currency_calc/feature/currency/internal/app/load/currency_loader.dart';
 import 'package:currency_calc/feature/currency/internal/app/populate/currency_populator.dart';

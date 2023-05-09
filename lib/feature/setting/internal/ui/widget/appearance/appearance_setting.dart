@@ -6,17 +6,19 @@ class AppearanceSetting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Table(
-      columnWidths: {
-        0: const FlexColumnWidth(0.25),
-        1: const FlexColumnWidth(0.75),
-      },
-      defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-      children: [
-        LocaleSettingTableRow(context),
-        FontFamilySettingTableRow(context),
-        ThemeSettingTableRow(context),
-      ],
-    );
+    return Container(
+        padding: const EdgeInsets.all(16),
+        child: Table(
+          columnWidths: {
+            0: const FlexColumnWidth(0.25),
+            1: const FlexColumnWidth(0.75),
+          },
+          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+          children: [
+            LocaleSettingTableRow(context),
+            FontFamilySettingTableRow(context),
+            ThemeSettingTableRow(context),
+          ],
+        ));
   }
 }

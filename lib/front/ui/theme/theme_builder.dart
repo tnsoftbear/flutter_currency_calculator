@@ -28,6 +28,7 @@ class ThemeBuilder {
         iconTheme: const IconThemeData(color: Colors.white),
         listTileTheme: const ListTileThemeData(
           iconColor: Colors.white,
+          textColor: Colors.white,
           style: ListTileStyle.drawer,
         ),
         extensions: <ThemeExtension<dynamic>>[

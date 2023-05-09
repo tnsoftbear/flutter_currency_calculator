@@ -11,8 +11,9 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final AdditionalColors additionalColors =
-        Theme.of(context).extension<AdditionalColors>()!;
+        theme.extension<AdditionalColors>()!;
     final tr = AppLocalizations.of(context);
     final currencyFeatureFacade = context.read<CurrencyFeatureFacade>();
     final currencySettingWidget =
@@ -23,7 +24,7 @@ class SettingScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(tr.settingTitle),
           bottom: TabBar(
-            labelColor: Theme.of(context).listTileTheme.textColor,
+            labelColor: theme.listTileTheme.textColor,
             tabs: [
               Tab(text: tr.settingTabAppearance),
               Tab(text: tr.settingTabCurrency),
@@ -40,7 +41,6 @@ class SettingScreen extends StatelessWidget {
             ),
           ),
           child: Container(
-            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: additionalColors.linenTurbidColor,
               borderRadius: BorderRadius.circular(8.0),
@@ -48,19 +48,15 @@ class SettingScreen extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // TabBar(
-                //   labelColor: Theme.of(context).primaryColor,
-                //   tabs: [
-                //     Tab(text: tr.settingTabAppearance),
-                //     Tab(text: tr.settingTabCurrency),
-                //   ],
-                // ),
-                const SizedBox(height: 16),
                 Expanded(
                   child: TabBarView(
                     children: [
                       AppearanceSetting(),
-                      currencySettingWidget,
+                      Container(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 8, horizontal: 4),
+                          child: currencySettingWidget),
+                      //currencySettingWidget,
                     ],
                   ),
                 ),

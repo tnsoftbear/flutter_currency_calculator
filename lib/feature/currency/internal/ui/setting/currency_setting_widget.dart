@@ -26,20 +26,20 @@ class CurrencySettingWidget extends StatelessWidget {
           final tabViews = letters.data!
               .map((letter) => CurrencySettingOneLetterTab(letter))
               .toList();
+          final theme = Theme.of(context);
 
           return DefaultTabController(
             length: letters.data!.length,
             child: VerticalTabs(
+                backgroundColor: Colors.transparent,
+                tabBackgroundColor: Colors.transparent,
+                selectedTabBackgroundColor: theme.primaryColor.withOpacity(0.2),
                 tabsWidth: 50,
                 contentScrollAxis: Axis.vertical,
-                indicatorColor: Theme.of(context).primaryColor,
-                selectedTabBackgroundColor:
-                    Theme.of(context).primaryColor.withOpacity(0.1),
+                indicatorColor: theme.primaryColor,
                 indicatorSide: IndicatorSide.start,
                 tabs: tabs,
                 contents: tabViews),
-            //const SizedBox(height: 16),
-            //Expanded(child: TabBarView(children: tabViews)),
           );
         });
   }
