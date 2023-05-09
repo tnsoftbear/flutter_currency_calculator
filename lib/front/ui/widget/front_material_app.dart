@@ -1,5 +1,5 @@
-import 'package:currency_calc/feature/front/app/route/app_router.dart';
-import 'package:currency_calc/feature/front/ui/theme/theme_builder.dart';
+import 'package:currency_calc/front/app/route/app_router.dart';
+import 'package:currency_calc/front/ui/theme/theme_builder.dart';
 import 'package:currency_calc/feature/setting/internal/app/model/setting_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

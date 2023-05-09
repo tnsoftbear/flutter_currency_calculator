@@ -2,9 +2,6 @@
 lib  
 |   main.dart
 |   
-+---boot
-|       bootstrapper.dart
-|       
 +---feature
 |   +---about
 |   |   +---internal
@@ -123,26 +120,6 @@ lib
 |   |   \---public
 |   |           currency_feature_facade.dart
 |   |           
-|   +---front
-|   |   +---app
-|   |   |   +---constant
-|   |   |   |       appearance_constant.dart
-|   |   |   |       
-|   |   |   \---route
-|   |   |           app_router.dart
-|   |   |           
-|   |   \---ui
-|   |       +---theme
-|   |       |       additional_colors.dart
-|   |       |       theme_builder.dart
-|   |       |       
-|   |       \---widget
-|   |               front_header_bar.dart
-|   |               front_main_menu.dart
-|   |               front_material_app.dart
-|   |               standard_error_label.dart
-|   |               standard_progress_indicator.dart
-|   |               
 |   +---history
 |   |   +---internal
 |   |   |   +---app
@@ -207,6 +184,29 @@ lib
 |       |                       
 |       \---public
 |               setting_feature_facade.dart
+|               
++---front
+|   +---app
+|   |   +---boot
+|   |   |       bootstrapper.dart
+|   |   |       
+|   |   +---constant
+|   |   |       appearance_constant.dart
+|   |   |       
+|   |   \---route
+|   |           app_router.dart
+|   |           
+|   \---ui
+|       +---theme
+|       |       additional_colors.dart
+|       |       theme_builder.dart
+|       |       
+|       \---widget
+|               front_header_bar.dart
+|               front_main_menu.dart
+|               front_material_app.dart
+|               standard_error_label.dart
+|               standard_progress_indicator.dart
 |               
 \---l10n
         all_en.arb

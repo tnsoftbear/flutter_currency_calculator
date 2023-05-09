@@ -15,10 +15,6 @@ Feature internal logic is located in the `/lib/feature/<feature_name>/internal/`
 It is separated to ui, application, infrastructure and domain layers.
 See namespaces structure in folder tree view in the [lib/ tree](doc/lib_tree.md) document.
 
-Features can call widgets located in the `/lib/feature/front` namespace, where we define common widgets, 
-like the application entry point and general configuration of appearance.
-Application bootstrapping logic is in the `/lib/boot/` folder.
-
 **Presentation layer** is located in the `/ui` folders. It can call logic of the Application and Domain layers.
 
 **Application layer** (`/app`) can call logic of the Infrastructure (`/infra`) and Domain (`/domain`) layers.
@@ -28,6 +24,12 @@ It contains logic that accesses external resources, such as API, database, etc.
 
 **Domain layer** operates only in bounds of its own space.
 It is pure functional core with business logic, entities and data models.
+
+### Shared code
+
+Features can call widgets located in the `/lib/front` namespace, where we define common widgets,
+the application entry point and general configuration of UI appearance.
+Application bootstrapping logic is in the `/lib/front/app/boot/` folder.
 
 ## Features
 

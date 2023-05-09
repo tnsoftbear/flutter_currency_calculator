@@ -1,5 +1,5 @@
 import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
-import 'package:currency_calc/feature/front/app/constant/appearance_constant.dart';
+import 'package:currency_calc/front/app/constant/appearance_constant.dart';
 import 'package:currency_calc/feature/setting/internal/app/model/setting_model.dart';
 import 'package:currency_calc/feature/setting/internal/infra/repository/setting_repository.dart';
 import 'package:flutter/material.dart';

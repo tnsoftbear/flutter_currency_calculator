@@ -1,4 +1,4 @@
-import 'package:currency_calc/boot/bootstrapper.dart';
+import 'package:currency_calc/front/app/boot/bootstrapper.dart';
 import 'package:flutter/material.dart';
 
 void main() async {

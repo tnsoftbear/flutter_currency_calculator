@@ -1,5 +1,5 @@
-import 'package:currency_calc/feature/front/app/constant/appearance_constant.dart';
-import 'package:currency_calc/feature/front/ui/theme/additional_colors.dart';
+import 'package:currency_calc/front/app/constant/appearance_constant.dart';
+import 'package:currency_calc/front/ui/theme/additional_colors.dart';
 import 'package:flutter/material.dart';
 
 class ThemeBuilder {

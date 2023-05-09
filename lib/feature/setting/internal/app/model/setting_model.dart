@@ -1,4 +1,4 @@
-import 'package:currency_calc/feature/front/app/constant/appearance_constant.dart';
+import 'package:currency_calc/front/app/constant/appearance_constant.dart';
 import 'package:currency_calc/feature/setting/internal/app/model/setting_model_manager.dart';
 import 'package:flutter/cupertino.dart';
 

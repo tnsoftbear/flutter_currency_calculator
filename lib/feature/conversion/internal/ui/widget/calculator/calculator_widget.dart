@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
-import 'package:currency_calc/feature/front/ui/theme/additional_colors.dart';
+import 'package:currency_calc/front/ui/theme/additional_colors.dart';
 import 'package:currency_calc/feature/conversion/internal/app/config/conversion_config.dart';
 import 'package:currency_calc/feature/conversion/internal/app/fetch/rate_fetcher_factory.dart';
 import 'package:currency_calc/feature/conversion/internal/app/translate/conversion_validation_translator.dart';

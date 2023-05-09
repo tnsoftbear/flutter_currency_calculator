@@ -1,7 +1,7 @@
 import 'package:currency_calc/feature/about/public/about_feature_facade.dart';
 import 'package:currency_calc/feature/conversion/public/conversion_feature_facade.dart';
 import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
-import 'package:currency_calc/feature/front/ui/widget/front_material_app.dart';
+import 'package:currency_calc/front/ui/widget/front_material_app.dart';
 import 'package:currency_calc/feature/history/public/history_feature_facade.dart';
 import 'package:currency_calc/feature/setting/internal/app/model/setting_model.dart';
 import 'package:currency_calc/feature/setting/internal/app/model/setting_model_manager.dart';
