@@ -739,7 +739,7 @@ packages:
     source: hosted
     version: "2.1.4"
   vertical_tabs_flutter:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: vertical_tabs_flutter
       sha256: d855257c7f042fb0429a1d1add679458a54692cf6aa46c6d0347fef7de5c4e27

@@ -29,6 +29,7 @@ class CurrencySettingOneLetterTab extends StatelessWidget {
           return SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Container(
+              padding: EdgeInsets.all(16),
               child: Table(
                 border: TableBorder.all(),
                 columnWidths: {

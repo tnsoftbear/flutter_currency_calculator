@@ -13,6 +13,7 @@ class ThemeBuilder {
     if (themeType == AppearanceConstant.THEME_GREEN) {
       return ThemeData(
         fontFamily: fontFamily,
+        primaryColor: Colors.green[300],
         scaffoldBackgroundColor: Colors.green[300],
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: Colors.green,
@@ -42,6 +43,7 @@ class ThemeBuilder {
     if (themeType == AppearanceConstant.THEME_RED) {
       return ThemeData(
         fontFamily: fontFamily,
+        primaryColor: Colors.red[300],
         scaffoldBackgroundColor: Colors.red[300],
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: Colors.red,
@@ -70,6 +72,7 @@ class ThemeBuilder {
 
     return ThemeData(
       fontFamily: fontFamily,
+      primaryColor: Colors.blue[300],
       scaffoldBackgroundColor: Colors.blue[300],
       colorScheme: ColorScheme.fromSwatch(
         primarySwatch: Colors.blue,
@@ -84,6 +87,7 @@ class ThemeBuilder {
       iconTheme: const IconThemeData(color: Colors.white),
       listTileTheme: const ListTileThemeData(
         iconColor: Colors.white,
+        textColor: Colors.white,
         style: ListTileStyle.drawer,
       ),
       extensions: <ThemeExtension<dynamic>>[

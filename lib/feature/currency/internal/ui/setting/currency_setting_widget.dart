@@ -4,6 +4,7 @@ import 'package:currency_calc/front/ui/widget/standard_error_label.dart';
 import 'package:currency_calc/front/ui/widget/standard_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vertical_tabs_flutter/vertical_tabs.dart';
 
 class CurrencySettingWidget extends StatelessWidget {
   const CurrencySettingWidget({Key? key}) : super(key: key);
@@ -13,28 +14,32 @@ class CurrencySettingWidget extends StatelessWidget {
     final currencyFeatureFacade = context.read<CurrencyFeatureFacade>();
     return FutureBuilder(
         future: currencyFeatureFacade.loadCurrencyLetters(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return StandardErrorLabel(snapshot.error.toString());
-          } else if (!snapshot.hasData) {
+        builder: (context, letters) {
+          if (letters.hasError) {
+            return StandardErrorLabel(letters.error.toString());
+          } else if (!letters.hasData) {
             return StandardProgressIndicator();
           }
 
           final tabs =
-              snapshot.data!.map((letter) => Tab(text: letter)).toList();
-          final tabViews = snapshot.data!
+              letters.data!.map((letter) => Tab(text: letter)).toList();
+          final tabViews = letters.data!
               .map((letter) => CurrencySettingOneLetterTab(letter))
               .toList();
 
           return DefaultTabController(
-            length: snapshot.data!.length,
-            child: Column(
-              children: [
-                TabBar(labelColor: Theme.of(context).primaryColor, tabs: tabs),
-                const SizedBox(height: 16),
-                Expanded(child: TabBarView(children: tabViews)),
-              ],
-            ),
+            length: letters.data!.length,
+            child: VerticalTabs(
+                tabsWidth: 50,
+                contentScrollAxis: Axis.vertical,
+                indicatorColor: Theme.of(context).primaryColor,
+                selectedTabBackgroundColor:
+                    Theme.of(context).primaryColor.withOpacity(0.1),
+                indicatorSide: IndicatorSide.start,
+                tabs: tabs,
+                contents: tabViews),
+            //const SizedBox(height: 16),
+            //Expanded(child: TabBarView(children: tabViews)),
           );
         });
   }

@@ -19,6 +19,7 @@ dependencies:
   country_icons: ^2.0.2
   flutter_svg: ^2.0.5
   provider: ^6.0.5
+  vertical_tabs_flutter: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -27,7 +28,6 @@ dev_dependencies:
   build_runner: ^2.3.3
   lints: ^2.0.1
   flutter_lints: ^2.0.1
-  vertical_tabs_flutter: ^1.0.0
 
 flutter:
   generate: true # Enable generation of localized Strings from arb files.

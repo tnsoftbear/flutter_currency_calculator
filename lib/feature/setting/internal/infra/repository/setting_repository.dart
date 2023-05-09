@@ -19,7 +19,7 @@ class SettingRepository {
   }
 
   static Future<void> saveVisibleSourceCurrencyCodes(List<String> currencyCodes) async {
-    log(currencyCodes.join(","));
+    //log(currencyCodes.join(","));
     await SharedPreferences.getInstance()
       ..setStringList("visibleSourceCurrencyCodes", currencyCodes);
   }
@@ -30,7 +30,7 @@ class SettingRepository {
   }
 
   static Future<void> saveVisibleTargetCurrencyCodes(List<String> currencyCodes) async {
-    log(currencyCodes.join(","));
+    //log(currencyCodes.join(","));
     await SharedPreferences.getInstance()
       ..setStringList("visibleTargetCurrencyCodes", currencyCodes);
   }

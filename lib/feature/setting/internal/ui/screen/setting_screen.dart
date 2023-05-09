@@ -23,7 +23,7 @@ class SettingScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(tr.settingTitle),
           bottom: TabBar(
-            //labelColor: Theme.of(context).primaryColor,
+            labelColor: Theme.of(context).listTileTheme.textColor,
             tabs: [
               Tab(text: tr.settingTabAppearance),
               Tab(text: tr.settingTabCurrency),

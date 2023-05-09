@@ -19,7 +19,7 @@ class FawazAhmedAvailableCurrencyFetcher implements CurrencyFetcher {
       for (var key in fetchedCurrencies.keys) {
         var name = fetchedCurrencies[key]!;
         final code = key.toUpperCase();
-        resultCurrencies[code] = Currency(code, name, true, true);
+        resultCurrencies[code] = Currency(code, name);
       }
       return resultCurrencies;
 
