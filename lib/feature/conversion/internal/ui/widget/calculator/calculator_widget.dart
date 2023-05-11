@@ -210,8 +210,8 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
     }
 
     final settingModel = context.read<SettingModel>();
-    settingModel.setSourceCurrencyCode(_selectedSourceCurrencyCode);
-    settingModel.setTargetCurrencyCode(_selectedTargetCurrencyCode);
+    settingModel.updateSelectedSourceCurrencyCode(_selectedSourceCurrencyCode);
+    settingModel.updateSelectedTargetCurrencyCode(_selectedTargetCurrencyCode);
 
     setState(() {
       _isLoading = true;

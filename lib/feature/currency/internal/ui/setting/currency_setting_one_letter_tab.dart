@@ -1,22 +1,21 @@
 import 'package:currency_calc/feature/currency/internal/app/load/currency_loader.dart';
-import 'package:currency_calc/feature/currency/internal/infra/repository/currency_repository.dart';
+import 'package:currency_calc/feature/currency/internal/app/update/currency_visibility_updater.dart';
 import 'package:currency_calc/feature/currency/internal/ui/setting/currency_checkbox.dart';
 import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
 
 class CurrencySettingOneLetterTab extends StatelessWidget {
   CurrencySettingOneLetterTab(
       String this._letter,
       CurrencyLoader this._currencyLoader,
-      CurrencyRepository this._currencyRepository,
+      CurrencyVisibilityUpdater this._currencyVisibilityUpdater,
       {Key? key})
       : super(key: key);
 
   final String _letter;
   final CurrencyLoader _currencyLoader;
-  final CurrencyRepository _currencyRepository;
+  final CurrencyVisibilityUpdater _currencyVisibilityUpdater;
 
   @override
   Widget build(BuildContext context) {
@@ -100,11 +99,11 @@ class CurrencySettingOneLetterTab extends StatelessWidget {
                         ),
                         TableCell(
                           child: CurrencyCheckbox(
-                              currency, true, _currencyRepository),
+                              currency, true, _currencyVisibilityUpdater),
                         ),
                         TableCell(
                           child: CurrencyCheckbox(
-                              currency, false, _currencyRepository),
+                              currency, false, _currencyVisibilityUpdater),
                         ),
                       ],
                     ),

@@ -43,7 +43,7 @@ class ThemeSettingTableRow extends TableRow {
         child: RadioListTile(
           value: options['value'],
           groupValue: settingModel.themeType,
-          onChanged: (themeType) => settingModel.setThemeType(themeType),
+          onChanged: (themeType) => settingModel.updateThemeType(themeType),
           secondary: Container(
             width: 16,
             height: 16,

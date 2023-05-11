@@ -22,15 +22,8 @@ class CurrencyFeatureFacade {
     return _dic.currencyLoader.loadVisibleTargetCurrencyCodes();
   }
 
-  // Future<List<Currency>> loadCurrenciesByCodeFirstLetter(String letter) async {
-  //   return _dic.currencyLoader.loadCurrenciesByCodeFirstLetter(letter);
-  // }
-
-  Future<List<String>> loadCurrencyCodeFirstLetters() async {
-    return _dic.currencyLoader.loadCurrencyCodeFirstLetters();
-  }
-
   CurrencySettingWidget createCurrencySettingWidget() {
-    return CurrencySettingWidget(_dic.currencyLoader, _dic.currencyRepository);
+    return CurrencySettingWidget(
+        _dic.currencyLoader, _dic.currencyVisibilityUpdater);
   }
 }

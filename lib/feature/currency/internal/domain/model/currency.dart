@@ -17,4 +17,18 @@ class Currency {
 
   Currency(this.code, this.name,
       [this.isVisibleForSource = false, this.isVisibleForTarget = false]);
+
+  Currency copyWith({
+    String? code,
+    String? name,
+    bool? isVisibleForSource,
+    bool? isVisibleForTarget,
+  }) {
+    return Currency(
+      code ?? this.code,
+      name ?? this.name,
+      isVisibleForSource ?? this.isVisibleForSource,
+      isVisibleForTarget ?? this.isVisibleForTarget,
+    );
+  }
 }

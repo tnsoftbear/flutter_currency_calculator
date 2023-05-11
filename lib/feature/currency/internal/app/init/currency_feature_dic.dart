@@ -6,24 +6,21 @@ import 'package:currency_calc/feature/currency/internal/infra/repository/currenc
 
 class CurrencyFeatureDic {
   CurrencyFeatureDic() {
-    _currencyRepository = CurrencyRepository();
+    final currencyRepository = CurrencyRepository();
     final currencyFetcher = FawazAhmedAvailableCurrencyFetcher();
     _currencyPopulator =
-        CurrencyPopulator(_currencyRepository, currencyFetcher);
-    _currencyLoader = CurrencyLoader(_currencyRepository, _currencyPopulator);
-    _currencyVisibilityUpdater = CurrencyVisibilityUpdater(_currencyRepository);
+        CurrencyPopulator(currencyRepository, currencyFetcher);
+    _currencyLoader = CurrencyLoader(currencyRepository, _currencyPopulator);
+    _currencyVisibilityUpdater = CurrencyVisibilityUpdater(currencyRepository);
   }
 
   late CurrencyLoader _currencyLoader;
   late CurrencyPopulator _currencyPopulator;
-  late CurrencyRepository _currencyRepository;
   late CurrencyVisibilityUpdater _currencyVisibilityUpdater;
 
   CurrencyPopulator get currencyPopulator => _currencyPopulator;
 
   CurrencyLoader get currencyLoader => _currencyLoader;
-
-  CurrencyRepository get currencyRepository => _currencyRepository;
 
   CurrencyVisibilityUpdater get currencyVisibilityUpdater =>
       _currencyVisibilityUpdater;

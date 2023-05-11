@@ -43,7 +43,7 @@ class LocaleSettingTableRow extends TableRow {
                 semanticsLabel: language['title']),
             value: language['value'],
             groupValue: settingModel.languageCode,
-            onChanged: (languageCode) => settingModel.setLanguageCode(languageCode),
+            onChanged: (languageCode) => settingModel.updateLanguageCode(languageCode),
           ));
     }).toList();
 

@@ -22,6 +22,6 @@ class FontFamilySettingTableRow extends TableRow {
     return DropdownButton(
         value: settingModel.fontFamily,
         items: menuItemList,
-        onChanged: (fontFamily) => settingModel.setFontFamily(fontFamily));
+        onChanged: (fontFamily) => settingModel.updateFontFamily(fontFamily));
   }
 }

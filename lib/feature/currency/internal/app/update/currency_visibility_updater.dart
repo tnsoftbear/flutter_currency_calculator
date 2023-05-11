@@ -25,7 +25,7 @@ class CurrencyVisibilityUpdater {
       await _currencyRepository.save(currency);
     }
 
-    settingModel.setVisibleSourceCurrencyCodes(
+    settingModel.updateVisibleSourceCurrencyCodes(
         await _currencyRepository.loadVisibleSourceCurrencyCodes());
 
     await _correctSelectedSourceCurrency(currency, settingModel);
@@ -54,7 +54,7 @@ class CurrencyVisibilityUpdater {
       }
 
       if (newSelectedSourceCurrencyCode != "") {
-        settingModel.setSourceCurrencyCode(newSelectedSourceCurrencyCode);
+        settingModel.updateSelectedSourceCurrencyCode(newSelectedSourceCurrencyCode);
         log('Selected source currency is changed from ${currency.code} to $newSelectedSourceCurrencyCode (target is ${settingModel.selectedTargetCurrencyCode})');
       }
     }
@@ -77,7 +77,7 @@ class CurrencyVisibilityUpdater {
       await _currencyRepository.save(currency);
     }
 
-    settingModel.setVisibleTargetCurrencyCodes(
+    settingModel.updateVisibleTargetCurrencyCodes(
         await _currencyRepository.loadVisibleTargetCurrencyCodes());
 
     await _correctSelectedTargetCurrency(currency, settingModel);
@@ -106,7 +106,7 @@ class CurrencyVisibilityUpdater {
       }
 
       if (newSelectedTargetCurrencyCode != "") {
-        settingModel.setTargetCurrencyCode(newSelectedTargetCurrencyCode);
+        settingModel.updateSelectedTargetCurrencyCode(newSelectedTargetCurrencyCode);
         log('Selected target currency is changed from ${currency.code} to $newSelectedTargetCurrencyCode (source is ${settingModel.selectedSourceCurrencyCode})');
       }
     }
