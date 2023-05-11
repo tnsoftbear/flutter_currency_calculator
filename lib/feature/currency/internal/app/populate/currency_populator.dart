@@ -6,12 +6,12 @@ import 'package:currency_calc/feature/currency/internal/domain/model/currency.da
 import 'package:currency_calc/feature/currency/internal/infra/repository/currency_repository.dart';
 
 class CurrencyPopulator {
-  static const POPULATION_INTERVAL_IN_DAYS = 7;
-
-  CurrencyRepository _currencyRepository;
-  CurrencyFetcher _currencyFetcher;
-
   CurrencyPopulator(this._currencyRepository, this._currencyFetcher);
+
+  static const int _populationIntervalInDays = 7;
+
+  final CurrencyRepository _currencyRepository;
+  final CurrencyFetcher _currencyFetcher;
 
   Future<void> populateIfNeeded() async {
     if (await mustPopulate()) {
@@ -26,7 +26,7 @@ class CurrencyPopulator {
     }
 
     final differenceInSec = DateTime.now().difference(lastUpdateDate).inSeconds;
-    return differenceInSec > POPULATION_INTERVAL_IN_DAYS * 24 * 60 * 60;
+    return differenceInSec > _populationIntervalInDays * 24 * 60 * 60;
   }
 
   Future<void> populate() async {

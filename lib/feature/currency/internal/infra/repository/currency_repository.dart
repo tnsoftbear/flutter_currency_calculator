@@ -55,19 +55,13 @@ class CurrencyRepository {
     return box!.values.toList();
   }
 
-  Future<List<Currency>> loadOneLetterCurrencies(String letter) async {
+  Future<List<Currency>> loadCurrenciesByCodeFirstLetter(String letter) async {
     await init();
     return box!.values.where((currency) => currency.code.startsWith(letter)).toList();
   }
 
-  Future<List<String>> loadCurrencyLetters() async {
+  Future<List<String>> loadCurrencyCodeFirstLetters() async {
     await init();
-    // final codes = <String>{};
-    // for (var i = 0; i < box!.length; i++) {
-    //   final currency = box!.getAt(i) as Currency;
-    //   codes.add(currency.code.substring(0, 1));
-    // }
-    // return codes.toList();
     return box!.values.map((currency) => currency.code.substring(0, 1)).toSet().toList();
   }
 

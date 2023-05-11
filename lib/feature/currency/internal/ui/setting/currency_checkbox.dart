@@ -7,11 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CurrencyCheckbox extends StatefulWidget {
+  const CurrencyCheckbox(
+      this.currency, this.isSourceCurrency, this.currencyRepository,
+      {Key? key})
+      : super(key: key);
+
   final Currency currency;
   final bool isSourceCurrency;
-
-  const CurrencyCheckbox(this.currency, this.isSourceCurrency, {Key? key})
-      : super(key: key);
+  final CurrencyRepository currencyRepository;
 
   @override
   _CurrencyCheckboxState createState() => _CurrencyCheckboxState();
@@ -46,23 +49,22 @@ class _CurrencyCheckboxState extends State<CurrencyCheckbox> {
       Currency updatingCurrency, bool? visible, BuildContext context) async {
     visible ??= false;
     final settingModel = context.read<SettingModel>();
-    final currencyRepository = CurrencyRepository();
 
     if (visible) {
       updatingCurrency.isVisibleForSource = true;
-      await currencyRepository.save(updatingCurrency);
+      await widget.currencyRepository.save(updatingCurrency);
     } else {
       // Reject to remove last currency.
-      if (await currencyRepository.countVisibleSourceCurrencies() == 1) {
+      if (await widget.currencyRepository.countVisibleSourceCurrencies() == 1) {
         return;
       }
 
       updatingCurrency.isVisibleForSource = false;
-      await currencyRepository.save(updatingCurrency);
+      await widget.currencyRepository.save(updatingCurrency);
     }
 
     settingModel.setVisibleSourceCurrencyCodes(
-        await currencyRepository.loadVisibleSourceCurrencyCodes());
+        await widget.currencyRepository.loadVisibleSourceCurrencyCodes());
 
     setState(() {
       _currency = updatingCurrency;
@@ -73,16 +75,15 @@ class _CurrencyCheckboxState extends State<CurrencyCheckbox> {
 
   Future<void> _correctSelectedSourceCurrency() async {
     final settingModel = context.read<SettingModel>();
-    final currencyRepository = CurrencyRepository();
 
     // Replace selected source currency, if it is absent in drop-down list
-    final selectedSourceCurrency = await currencyRepository
+    final selectedSourceCurrency = await widget.currencyRepository
         .loadByCode(settingModel.selectedSourceCurrencyCode);
     if (!selectedSourceCurrency!.isVisibleForSource) {
       final visibleSourceCurrencies =
-          await currencyRepository.loadVisibleSourceCurrencies();
+          await widget.currencyRepository.loadVisibleSourceCurrencies();
       String newSelectedSourceCurrencyCode = "";
-      if (await currencyRepository.countVisibleSourceCurrencies() > 1 &&
+      if (await widget.currencyRepository.countVisibleSourceCurrencies() > 1 &&
           settingModel.selectedTargetCurrencyCode ==
               visibleSourceCurrencies.first.code) {
         // Replace with the second currency from the visible currency list,
@@ -104,23 +105,22 @@ class _CurrencyCheckboxState extends State<CurrencyCheckbox> {
       Currency updatingCurrency, bool? visible, BuildContext context) async {
     visible ??= false;
     final settingModel = context.read<SettingModel>();
-    final currencyRepository = CurrencyRepository();
 
     if (visible) {
       updatingCurrency.isVisibleForTarget = true;
-      await currencyRepository.save(updatingCurrency);
+      await widget.currencyRepository.save(updatingCurrency);
     } else {
       // Reject to remove last currency.
-      if (await currencyRepository.countVisibleTargetCurrencies() == 1) {
+      if (await widget.currencyRepository.countVisibleTargetCurrencies() == 1) {
         return;
       }
 
       updatingCurrency.isVisibleForTarget = false;
-      await currencyRepository.save(updatingCurrency);
+      await widget.currencyRepository.save(updatingCurrency);
     }
 
     settingModel.setVisibleTargetCurrencyCodes(
-        await currencyRepository.loadVisibleTargetCurrencyCodes());
+        await widget.currencyRepository.loadVisibleTargetCurrencyCodes());
 
     setState(() {
       _currency = updatingCurrency;
@@ -131,16 +131,15 @@ class _CurrencyCheckboxState extends State<CurrencyCheckbox> {
 
   Future<void> _correctSelectedTargetCurrency() async {
     final settingModel = context.read<SettingModel>();
-    final currencyRepository = CurrencyRepository();
 
     // Replace selected target currency, if it is absent in drop-down list
-    final selectedTargetCurrency = await currencyRepository
+    final selectedTargetCurrency = await widget.currencyRepository
         .loadByCode(settingModel.selectedTargetCurrencyCode);
     if (!selectedTargetCurrency!.isVisibleForTarget) {
       final visibleTargetCurrencies =
-          await currencyRepository.loadVisibleTargetCurrencies();
+          await widget.currencyRepository.loadVisibleTargetCurrencies();
       String newSelectedTargetCurrencyCode = "";
-      if (await currencyRepository.countVisibleTargetCurrencies() > 1 &&
+      if (await widget.currencyRepository.countVisibleTargetCurrencies() > 1 &&
           settingModel.selectedSourceCurrencyCode ==
               visibleTargetCurrencies.first.code) {
         // Replace with the second currency in the visible currency list,

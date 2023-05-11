@@ -3,33 +3,33 @@ import 'package:currency_calc/feature/currency/internal/domain/model/currency.da
 import 'package:currency_calc/feature/currency/internal/infra/repository/currency_repository.dart';
 
 class CurrencyLoader {
-  final CurrencyRepository currencyRepository;
-  final CurrencyPopulator currencyPopulator;
+  CurrencyLoader(this._currencyRepository, this._currencyPopulator);
 
-  CurrencyLoader(this.currencyRepository, this.currencyPopulator);
+  final CurrencyRepository _currencyRepository;
+  final CurrencyPopulator _currencyPopulator;
 
   Future<List<String>> loadVisibleSourceCurrencyCodes() async {
-    await currencyPopulator.populateIfNeeded();
-    return await currencyRepository.loadVisibleSourceCurrencyCodes();
+    await _currencyPopulator.populateIfNeeded();
+    return await _currencyRepository.loadVisibleSourceCurrencyCodes();
   }
 
   Future<List<String>> loadVisibleTargetCurrencyCodes() async {
-    await currencyPopulator.populateIfNeeded();
-    return await currencyRepository.loadVisibleTargetCurrencyCodes();
+    await _currencyPopulator.populateIfNeeded();
+    return await _currencyRepository.loadVisibleTargetCurrencyCodes();
   }
 
   Future<List<Currency>> loadAllCurrencies() async {
-    await currencyPopulator.populateIfNeeded();
-    return await currencyRepository.loadAllCurrencies();
+    await _currencyPopulator.populateIfNeeded();
+    return await _currencyRepository.loadAllCurrencies();
   }
 
-  Future<List<Currency>> loadOneLetterCurrencies(String letter) async {
-    await currencyPopulator.populateIfNeeded();
-    return await currencyRepository.loadOneLetterCurrencies(letter);
+  Future<List<Currency>> loadCurrenciesByCodeFirstLetter(String letter) async {
+    await _currencyPopulator.populateIfNeeded();
+    return await _currencyRepository.loadCurrenciesByCodeFirstLetter(letter);
   }
 
-  Future<List<String>> loadCurrencyLetters() async {
-    await currencyPopulator.populateIfNeeded();
-    return await currencyRepository.loadCurrencyLetters();
+  Future<List<String>> loadCurrencyCodeFirstLetters() async {
+    await _currencyPopulator.populateIfNeeded();
+    return await _currencyRepository.loadCurrencyCodeFirstLetters();
   }
 }

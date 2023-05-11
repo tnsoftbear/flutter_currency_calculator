@@ -1,3 +1,5 @@
+import 'package:currency_calc/feature/currency/internal/app/load/currency_loader.dart';
+import 'package:currency_calc/feature/currency/internal/infra/repository/currency_repository.dart';
 import 'package:currency_calc/feature/currency/internal/ui/setting/currency_checkbox.dart';
 import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
 import 'package:flutter/material.dart';
@@ -5,17 +7,23 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class CurrencySettingOneLetterTab extends StatelessWidget {
-  final String letter;
+  CurrencySettingOneLetterTab(
+      String this.letter,
+      CurrencyLoader this._currencyLoader,
+      CurrencyRepository this._currencyRepository,
+      {Key? key})
+      : super(key: key);
 
-  CurrencySettingOneLetterTab(String this.letter, {Key? key}) : super(key: key);
+  final String letter;
+  final CurrencyLoader _currencyLoader;
+  final CurrencyRepository _currencyRepository;
 
   @override
   Widget build(BuildContext context) {
     final tr = AppLocalizations.of(context);
     final theme = Theme.of(context);
-    final currencyFeatureFacade = context.read<CurrencyFeatureFacade>();
     return FutureBuilder(
-        future: currencyFeatureFacade.loadOneLetterCurrencies(letter),
+        future: _currencyLoader.loadCurrenciesByCodeFirstLetter(letter),
         builder: (context, snap) {
           if (snap.hasError) {
             return Center(child: Text(snap.error.toString()));
@@ -91,10 +99,12 @@ class CurrencySettingOneLetterTab extends StatelessWidget {
                           ),
                         ),
                         TableCell(
-                          child: CurrencyCheckbox(currency, true),
+                          child: CurrencyCheckbox(
+                              currency, true, _currencyRepository),
                         ),
                         TableCell(
-                          child: CurrencyCheckbox(currency, false),
+                          child: CurrencyCheckbox(
+                              currency, false, _currencyRepository),
                         ),
                       ],
                     ),

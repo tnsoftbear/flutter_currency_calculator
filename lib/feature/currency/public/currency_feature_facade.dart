@@ -1,51 +1,36 @@
-import 'dart:developer';
-
+import 'package:currency_calc/feature/currency/internal/app/init/currency_feature_dic.dart';
 import 'package:currency_calc/feature/currency/internal/app/init/currency_feature_initializer.dart';
-import 'package:currency_calc/feature/currency/internal/app/load/currency_loader.dart';
-import 'package:currency_calc/feature/currency/internal/app/populate/currency_populator.dart';
-import 'package:currency_calc/feature/currency/internal/domain/model/currency.dart';
-import 'package:currency_calc/feature/currency/internal/infra/fetch/load/fawaz_ahmed/fawaz_ahmed_available_currency_fetcher.dart';
-import 'package:currency_calc/feature/currency/internal/infra/repository/currency_repository.dart';
 import 'package:currency_calc/feature/currency/internal/ui/setting/currency_setting_widget.dart';
 export "package:currency_calc/feature/currency/internal/domain/model/currency.dart";
 
 class CurrencyFeatureFacade {
-  late CurrencyLoader _currencyLoader;
-  late CurrencyPopulator _currencyPopulator;
+  late CurrencyFeatureDic _dic;
 
-  CurrencyFeatureFacade() {
+  CurrencyFeatureFacade(CurrencyFeatureDic this._dic) {
     CurrencyFeatureInitializer();
-    final currencyRepo = CurrencyRepository();
-    final currencyFetcher = FawazAhmedAvailableCurrencyFetcher();
-    _currencyPopulator = CurrencyPopulator(currencyRepo, currencyFetcher);
-    _currencyLoader = CurrencyLoader(currencyRepo, _currencyPopulator);
   }
 
   Future<void> populateIfNeeded() async {
-    await _currencyPopulator.populateIfNeeded();
+    await _dic.currencyPopulator.populateIfNeeded();
   }
 
   Future<List<String>> loadVisibleSourceCurrencyCodes() async {
-    return _currencyLoader.loadVisibleSourceCurrencyCodes();
+    return _dic.currencyLoader.loadVisibleSourceCurrencyCodes();
   }
 
   Future<List<String>> loadVisibleTargetCurrencyCodes() async {
-    return _currencyLoader.loadVisibleTargetCurrencyCodes();
+    return _dic.currencyLoader.loadVisibleTargetCurrencyCodes();
   }
 
-  Future<List<Currency>> loadAllCurrencies() async {
-    return _currencyLoader.loadAllCurrencies();
-  }
+  // Future<List<Currency>> loadCurrenciesByCodeFirstLetter(String letter) async {
+  //   return _dic.currencyLoader.loadCurrenciesByCodeFirstLetter(letter);
+  // }
 
-  Future<List<Currency>> loadOneLetterCurrencies(String letter) async {
-    return _currencyLoader.loadOneLetterCurrencies(letter);
-  }
-
-  Future<List<String>> loadCurrencyLetters() async {
-    return _currencyLoader.loadCurrencyLetters();
+  Future<List<String>> loadCurrencyCodeFirstLetters() async {
+    return _dic.currencyLoader.loadCurrencyCodeFirstLetters();
   }
 
   CurrencySettingWidget createCurrencySettingWidget() {
-    return CurrencySettingWidget();
+    return CurrencySettingWidget(_dic.currencyLoader, _dic.currencyRepository);
   }
 }

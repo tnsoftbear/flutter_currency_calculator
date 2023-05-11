@@ -1,5 +1,6 @@
 import 'package:currency_calc/feature/about/public/about_feature_facade.dart';
 import 'package:currency_calc/feature/conversion/public/conversion_feature_facade.dart';
+import 'package:currency_calc/feature/currency/internal/app/init/currency_feature_dic.dart';
 import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
 import 'package:currency_calc/front/ui/widget/front_material_app.dart';
 import 'package:currency_calc/feature/history/public/history_feature_facade.dart';
@@ -15,7 +16,8 @@ class Bootstrapper {
   static Future<MultiProvider> setup() async {
     Bootstrapper._init();
 
-    final currencyFeatureFacade = CurrencyFeatureFacade();
+    final currencyFeatureDic = CurrencyFeatureDic();
+    final currencyFeatureFacade = CurrencyFeatureFacade(currencyFeatureDic);
     await currencyFeatureFacade.populateIfNeeded();
 
     final settingModelManager = SettingModelManager(currencyFeatureFacade);

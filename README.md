@@ -131,9 +131,13 @@ echo ```sh > ./doc/lib_tree.md & echo lib >> ./doc/lib_tree.md & tree /F /A lib 
 
 #### TODO
 
-* [ ] JSON model for rate fetching
-* [ ] Riverpod
-* [ ] Swipe screens
+* [ ] Riverpod(?)
+* [ ] More DI
+* [ ] Swipe screens (History <- Calculator -> Settings)
+* [ ] Tests
+* [ ] Compare exchange rate with past dates
+* [ ] App icon
+* [ ] Notes
 
 ## Screens
 
