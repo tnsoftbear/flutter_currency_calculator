@@ -1,3 +1,4 @@
+import 'package:currency_calc/feature/history/internal/infra/repository/conversion_history_record_repository.dart';
 import 'package:currency_calc/front/app/constant/appearance_constant.dart';
 import 'package:currency_calc/front/ui/widget/front_header_bar.dart';
 import 'package:currency_calc/front/ui/widget/front_main_menu.dart';
@@ -6,7 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AllHistoryScreen extends StatelessWidget {
-  const AllHistoryScreen({Key? key}) : super(key: key);
+  AllHistoryScreen(this._conversionHistoryRecordRepository, {Key? key})
+      : super(key: key);
+
+  final ConversionHistoryRecordRepository _conversionHistoryRecordRepository;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +27,9 @@ class AllHistoryScreen extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          child: Center(child: AllHistoryDataTableWidget()),
+          child: Center(
+              child: AllHistoryDataTableWidget(
+                  _conversionHistoryRecordRepository)),
         ));
   }
 }

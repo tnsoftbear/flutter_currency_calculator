@@ -8,6 +8,11 @@ import 'package:intl/intl.dart';
 import 'all_history_data_table_source.dart';
 
 class AllHistoryDataTableWidget extends StatefulWidget {
+  AllHistoryDataTableWidget(this._conversionHistoryRecordRepository, {Key? key})
+      : super(key: key);
+
+  final ConversionHistoryRecordRepository _conversionHistoryRecordRepository;
+
   @override
   _HistoryDataTableWidget createState() => _HistoryDataTableWidget();
 }
@@ -75,8 +80,7 @@ class _HistoryDataTableWidget extends State<AllHistoryDataTableWidget> {
     final df = DateFormat.yMMMd(localeName);
     final tf = DateFormat.Hms(localeName);
     final nf = NumberFormat.decimalPattern(localeName);
-    final repo = ConversionHistoryRecordRepository();
-    final allRecords = await repo.loadAll();
+    final allRecords = await widget._conversionHistoryRecordRepository.loadAll();
     final historyRecords = allRecords
         .map((e) => HistoryOutputDto(
             df.format(e.date) + "\n" + tf.format(e.date),

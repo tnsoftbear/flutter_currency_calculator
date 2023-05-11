@@ -14,6 +14,10 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class CalculatorWidget extends StatefulWidget {
+  CalculatorWidget(this.conversionValidationTranslator, {Key? key}) : super(key: key);
+
+  final ConversionValidationTranslator conversionValidationTranslator;
+
   @override
   _CalculatorWidgetState createState() => _CalculatorWidgetState();
 }
@@ -201,7 +205,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
     if (!validationResult.isSuccess()) {
       setState(() {
         _resultMessage =
-            ConversionValidationTranslator.translateConcatenatedErrorMessage(
+            widget.conversionValidationTranslator.translateConcatenatedErrorMessage(
                 context: context, validationResult: validationResult);
         _rateMessage = '';
         _areActionButtonsVisible = false;
@@ -250,17 +254,10 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
   void _onSavePressed() async {
     context.read<LastHistoryModel>().add(
         _selectedSourceCurrencyCode,
-        _selectedTargetCurrencyCode,
         _sourceAmount,
+        _selectedTargetCurrencyCode,
         _targetAmount,
         _rate);
-
-    // context.read<HistoryFeatureFacade>().addConversionHistoryRecord(
-    //     _selectedSourceCurrencyCode,
-    //     _selectedTargetCurrencyCode,
-    //     _sourceAmount,
-    //     _targetAmount,
-    //     _rate);
     FocusScope.of(context).requestFocus(_sourceAmountTextFieldFocusNode);
     _resetInputs();
     log(

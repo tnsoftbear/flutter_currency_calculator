@@ -12,7 +12,7 @@ class HistoryFeatureFacade {
   late final HistoryFeatureDic _dic;
 
   LastHistoryModel createLastHistoryModel() {
-    return LastHistoryModel(_dic.conversionHistoryRecordRepository);
+    return LastHistoryModel(_dic.clock, _dic.conversionHistoryRecordRepository);
   }
 
   // --- Widgets ---
@@ -22,6 +22,6 @@ class HistoryFeatureFacade {
   }
 
   AllHistoryScreen createAllHistoryScreen() {
-    return const AllHistoryScreen();
+    return AllHistoryScreen(_dic.conversionHistoryRecordRepository);
   }
 }

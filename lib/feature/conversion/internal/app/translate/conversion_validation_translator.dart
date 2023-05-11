@@ -3,7 +3,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ConversionValidationTranslator {
-  static List<String> translateErrorMessages(
+  ConversionValidationTranslator();
+
+  String translateConcatenatedErrorMessage(
+      {required BuildContext context,
+      required ConversionValidationResult validationResult,
+      String separator = "\n"}) {
+    final List<String> errorMessages = _translateErrorMessages(
+        context: context, errors: validationResult.errors);
+    return errorMessages.join(separator);
+  }
+
+  List<String> _translateErrorMessages(
       {required BuildContext context, required List<int> errors}) {
     final tr = AppLocalizations.of(context);
     final Map<int, String> _translations = {
@@ -18,20 +29,10 @@ class ConversionValidationTranslator {
       ConversionValidationResult.ERR_SOURCE_AMOUNT_NOT_POSITIVE:
           tr.conversionValidationErrSourceAmountNotPositive
     };
-
     final List<String> errorMessages = [];
     errors.forEach((error) {
       errorMessages.add(_translations[error] ?? '');
     });
     return errorMessages;
-  }
-
-  static String translateConcatenatedErrorMessage(
-      {required BuildContext context,
-      required ConversionValidationResult validationResult,
-      String separator = "\n"}) {
-    final List<String> errorMessages = translateErrorMessages(
-        context: context, errors: validationResult.errors);
-    return errorMessages.join(separator);
   }
 }

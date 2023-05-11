@@ -1,4 +1,5 @@
 import 'package:currency_calc/feature/about/public/about_feature_facade.dart';
+import 'package:currency_calc/feature/conversion/internal/app/init/conversion_feature_dic.dart';
 import 'package:currency_calc/feature/conversion/public/conversion_feature_facade.dart';
 import 'package:currency_calc/feature/currency/internal/app/init/currency_feature_dic.dart';
 import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
@@ -25,7 +26,9 @@ class Bootstrapper {
     final settingModel = await SettingModel(settingModelManager).init();
 
     final aboutFeatureFacade = AboutFeatureFacade();
-    final conversionFeatureFacade = ConversionFeatureFacade();
+
+    final conversionFeatureDic = ConversionFeatureDic();
+    final conversionFeatureFacade = ConversionFeatureFacade(conversionFeatureDic);
 
     final historyFeatureDic = HistoryFeatureDic();
     final historyFeatureFacade = HistoryFeatureFacade(historyFeatureDic);

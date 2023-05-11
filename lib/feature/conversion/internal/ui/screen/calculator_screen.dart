@@ -1,3 +1,4 @@
+import 'package:currency_calc/feature/conversion/internal/app/translate/conversion_validation_translator.dart';
 import 'package:currency_calc/front/app/constant/appearance_constant.dart';
 import 'package:currency_calc/front/ui/widget/front_header_bar.dart';
 import 'package:currency_calc/front/ui/widget/front_main_menu.dart';
@@ -8,7 +9,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class CalculatorScreen extends StatelessWidget {
-  const CalculatorScreen({Key? key}) : super(key: key);
+  const CalculatorScreen(
+      ConversionValidationTranslator this._conversionValidationTranslator,
+      {Key? key})
+      : super(key: key);
+
+  final ConversionValidationTranslator _conversionValidationTranslator;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +40,7 @@ class CalculatorScreen extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                child: CalculatorWidget(),
+                child: CalculatorWidget(_conversionValidationTranslator),
               ),
               Container(height: 300, child: lastHistoryWidget),
             ],
