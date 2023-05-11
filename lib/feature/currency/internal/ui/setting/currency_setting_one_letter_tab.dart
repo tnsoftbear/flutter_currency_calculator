@@ -8,13 +8,13 @@ import 'package:provider/provider.dart';
 
 class CurrencySettingOneLetterTab extends StatelessWidget {
   CurrencySettingOneLetterTab(
-      String this.letter,
+      String this._letter,
       CurrencyLoader this._currencyLoader,
       CurrencyRepository this._currencyRepository,
       {Key? key})
       : super(key: key);
 
-  final String letter;
+  final String _letter;
   final CurrencyLoader _currencyLoader;
   final CurrencyRepository _currencyRepository;
 
@@ -23,7 +23,7 @@ class CurrencySettingOneLetterTab extends StatelessWidget {
     final tr = AppLocalizations.of(context);
     final theme = Theme.of(context);
     return FutureBuilder(
-        future: _currencyLoader.loadCurrenciesByCodeFirstLetter(letter),
+        future: _currencyLoader.loadCurrenciesByCodeFirstLetter(_letter),
         builder: (context, snap) {
           if (snap.hasError) {
             return Center(child: Text(snap.error.toString()));

@@ -1,15 +1,15 @@
 import 'package:currency_calc/feature/currency/internal/app/load/currency_loader.dart';
 import 'package:currency_calc/feature/currency/internal/infra/repository/currency_repository.dart';
 import 'package:currency_calc/feature/currency/internal/ui/setting/currency_setting_one_letter_tab.dart';
-import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
 import 'package:currency_calc/front/ui/widget/standard_error_label.dart';
 import 'package:currency_calc/front/ui/widget/standard_progress_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:vertical_tabs_flutter/vertical_tabs.dart';
 
 class CurrencySettingWidget extends StatelessWidget {
-  const CurrencySettingWidget(CurrencyLoader this._currencyLoader, CurrencyRepository this._currencyRepository, {Key? key})
+  const CurrencySettingWidget(CurrencyLoader this._currencyLoader,
+      CurrencyRepository this._currencyRepository,
+      {Key? key})
       : super(key: key);
 
   final CurrencyLoader _currencyLoader;
@@ -17,9 +17,8 @@ class CurrencySettingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currencyFeatureFacade = context.read<CurrencyFeatureFacade>();
     return FutureBuilder(
-        future: currencyFeatureFacade.loadCurrencyCodeFirstLetters(),
+        future: _currencyLoader.loadCurrencyCodeFirstLetters(),
         builder: (context, letters) {
           if (letters.hasError) {
             return StandardErrorLabel(letters.error.toString());
@@ -30,8 +29,8 @@ class CurrencySettingWidget extends StatelessWidget {
           final tabs =
               letters.data!.map((letter) => Tab(text: letter)).toList();
           final tabViews = letters.data!
-              .map((letter) =>
-                  CurrencySettingOneLetterTab(letter, _currencyLoader, _currencyRepository))
+              .map((letter) => CurrencySettingOneLetterTab(
+                  letter, _currencyLoader, _currencyRepository))
               .toList();
           final theme = Theme.of(context);
 
