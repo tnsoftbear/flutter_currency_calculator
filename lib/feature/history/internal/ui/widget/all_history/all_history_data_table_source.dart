@@ -39,7 +39,6 @@ class AllHistoryDataTableSource extends DataTableSource {
 
   _onDeletePressed(int index) async {
     final repo = ConversionHistoryRecordRepository();
-    await repo.init();
     repo.deleteByIndex(index);
   }
 }

@@ -76,9 +76,8 @@ class _HistoryDataTableWidget extends State<AllHistoryDataTableWidget> {
     final tf = DateFormat.Hms(localeName);
     final nf = NumberFormat.decimalPattern(localeName);
     final repo = ConversionHistoryRecordRepository();
-    await repo.init();
-    final historyRecords = repo
-        .loadAll()
+    final allRecords = await repo.loadAll();
+    final historyRecords = allRecords
         .map((e) => HistoryOutputDto(
             df.format(e.date) + "\n" + tf.format(e.date),
             _formatCurrency(e.sourceAmount, e.sourceCurrency),

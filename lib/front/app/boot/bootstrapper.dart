@@ -2,6 +2,7 @@ import 'package:currency_calc/feature/about/public/about_feature_facade.dart';
 import 'package:currency_calc/feature/conversion/public/conversion_feature_facade.dart';
 import 'package:currency_calc/feature/currency/internal/app/init/currency_feature_dic.dart';
 import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
+import 'package:currency_calc/feature/history/internal/app/init/history_feature_dic.dart';
 import 'package:currency_calc/front/ui/widget/front_material_app.dart';
 import 'package:currency_calc/feature/history/public/history_feature_facade.dart';
 import 'package:currency_calc/feature/setting/internal/app/model/setting_model.dart';
@@ -25,7 +26,10 @@ class Bootstrapper {
 
     final aboutFeatureFacade = AboutFeatureFacade();
     final conversionFeatureFacade = ConversionFeatureFacade();
-    final historyFeatureFacade = HistoryFeatureFacade();
+
+    final historyFeatureDic = HistoryFeatureDic();
+    final historyFeatureFacade = HistoryFeatureFacade(historyFeatureDic);
+
     final settingFeatureFacade = SettingFeatureFacade();
 
     return MultiProvider(providers: [

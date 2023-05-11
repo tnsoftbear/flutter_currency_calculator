@@ -13,20 +13,24 @@ class ConversionHistoryRecordRepository {
     return this;
   }
 
-  List<ConversionHistoryRecord> loadAll() {
+  Future<List<ConversionHistoryRecord>> loadAll() async {
+    await init();
     return box!.values.toList();
   }
 
-  int countAll() {
+  Future<int> countAll() async {
+    await init();
     return box!.length;
   }
 
   Future<void> save(ConversionHistoryRecord record) async {
+    await init();
     await box!.add(record);
     await box!.close();
   }
 
   Future<void> deleteByIndex(int index) async {
+    await init();
     await box!.deleteAt(index);
     await box!.close();
   }

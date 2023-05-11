@@ -4,11 +4,11 @@ import 'package:currency_calc/feature/currency/internal/ui/setting/currency_sett
 export "package:currency_calc/feature/currency/internal/domain/model/currency.dart";
 
 class CurrencyFeatureFacade {
-  late CurrencyFeatureDic _dic;
-
   CurrencyFeatureFacade(CurrencyFeatureDic this._dic) {
     CurrencyFeatureInitializer();
   }
+
+  late final CurrencyFeatureDic _dic;
 
   Future<void> populateIfNeeded() async {
     await _dic.currencyPopulator.populateIfNeeded();

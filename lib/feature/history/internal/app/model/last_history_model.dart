@@ -17,13 +17,12 @@ class LastHistoryModel with ChangeNotifier {
    * Arrange them in reverse order, so the last record will be the first in the list.
    */
   Future<List<ConversionHistoryRecord>> load() async {
-    await _repo.init();
-    final totalCount = _repo.countAll();
+    final totalCount = await _repo.countAll();
     final skipCount = totalCount > LAST_HISTORY_RECORD_COUNT
         ? totalCount - LAST_HISTORY_RECORD_COUNT
         : 0;
-    _records = await _repo
-        .loadAll() // box.values
+    final allRecords = await _repo.loadAll();
+    _records = allRecords
         .skip(skipCount)
         .toList()
         .reversed
@@ -41,7 +40,6 @@ class LastHistoryModel with ChangeNotifier {
       ..targetAmount = targetAmount
       ..rate = rate
       ..date = DateTime.now();
-    await _repo.init();
     await _repo.save(historyRecord);
     notifyListeners();
   }
@@ -53,7 +51,6 @@ class LastHistoryModel with ChangeNotifier {
    */
   Future<void> deleteRecordByTableIndex(int tableIndex) async {
     final deleteIndex = await _detectActualIndex(tableIndex);
-    await _repo.init();
     await _repo.deleteByIndex(deleteIndex);
     notifyListeners();
   }
@@ -62,7 +59,6 @@ class LastHistoryModel with ChangeNotifier {
    * Detect actual index of record in DB by the index value defined in rendered table.
    */
   Future<int> _detectActualIndex(int tableIndex) async {
-    await _repo.init();
-    return _repo.countAll() - tableIndex - 1;
+    return await _repo.countAll() - tableIndex - 1;
   }
 }
