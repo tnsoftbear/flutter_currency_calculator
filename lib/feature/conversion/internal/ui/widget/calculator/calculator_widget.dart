@@ -14,7 +14,8 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class CalculatorWidget extends StatefulWidget {
-  CalculatorWidget(Clock this.clock,
+  CalculatorWidget(
+      Clock this.clock,
       ConversionValidationTranslator this.conversionValidationTranslator,
       RateFetcher this.rateFetcher,
       {Key? key})
@@ -230,17 +231,17 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
         .fetchExchangeRate(
             _selectedSourceCurrencyCode, _selectedTargetCurrencyCode)
         .then((rate) {
+      _rate = rate;
+      _sourceAmount = double.parse(_sourceAmountInput);
+      _targetAmount = CurrencyConverter.convert(_sourceAmount, _rate);
       final localeName = Localizations.localeOf(context).toString();
       final currencyFormatter = NumberFormat.simpleCurrency(
           locale: localeName, name: _selectedTargetCurrencyCode);
       final numberFormatter = NumberFormat.decimalPattern(localeName);
+      final rateFormatted = numberFormatter.format(_rate);
       setState(() {
-        _rate = rate;
-        _sourceAmount = double.parse(_sourceAmountInput);
-        _targetAmount = CurrencyConverter.convert(_sourceAmount, rate);
         _resultMessage = tr.conversionCalculationResult(
             currencyFormatter.format(_targetAmount));
-        final rateFormatted = numberFormatter.format(_rate);
         _rateMessage = tr.conversionRateResult(rateFormatted,
             _selectedSourceCurrencyCode, _selectedTargetCurrencyCode);
         _isLoading = false;
@@ -273,11 +274,11 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
   }
 
   void _resetInputs() {
+    _sourceAmountController.clear();
     setState(() {
       _areActionButtonsVisible = false;
       _rateMessage = '';
       _resultMessage = '';
-      _sourceAmountController.clear();
       _sourceAmountInput = '';
     });
   }

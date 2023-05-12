@@ -2,8 +2,8 @@ import 'package:currency_calc/front/ui/theme/additional_colors.dart';
 import 'package:currency_calc/front/ui/widget/standard_error_label.dart';
 import 'package:currency_calc/front/ui/widget/standard_progress_indicator.dart';
 import 'package:currency_calc/feature/history/internal/app/model/last_history_model.dart';
-import 'package:currency_calc/feature/history/internal/ui/widget/dto/history_output_dto.dart';
-import 'package:currency_calc/feature/history/internal/ui/widget/last_history/last_history_output_dto_producer.dart';
+import 'package:currency_calc/feature/history/internal/ui/widget/history_output/history_output_dto.dart';
+import 'package:currency_calc/feature/history/internal/ui/widget/history_output/history_output_dto_producer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -99,7 +99,7 @@ class LastHistoryWidget extends StatelessWidget {
     final localeName = Localizations.localeOf(context).toString();
     final records = await context.watch<LastHistoryModel>().load();
     final historyOutputDtos =
-        LastHistoryOutputDtoProducer.produce(records, localeName);
+        HistoryOutputDtoProducer.produce(records, localeName);
     return historyOutputDtos;
   }
 }

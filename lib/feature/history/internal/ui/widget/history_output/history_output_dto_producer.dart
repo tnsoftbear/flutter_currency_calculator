@@ -1,8 +1,8 @@
 import 'package:currency_calc/feature/history/internal/domain/model/conversion_history_record.dart';
-import 'package:currency_calc/feature/history/internal/ui/widget/dto/history_output_dto.dart';
+import 'package:currency_calc/feature/history/internal/ui/widget/history_output/history_output_dto.dart';
 import 'package:intl/intl.dart';
 
-class LastHistoryOutputDtoProducer {
+class HistoryOutputDtoProducer {
   static List<HistoryOutputDto> produce(
       List<ConversionHistoryRecord> records, String localeName) {
     final df = DateFormat.yMMMd(localeName);
@@ -20,7 +20,7 @@ class LastHistoryOutputDtoProducer {
 
   static String _formatCurrency(
       double amount, String currencyCode, String localeName) {
-    final format = NumberFormat.simpleCurrency(
+    final format = NumberFormat.currency(
       locale: localeName,
       name: currencyCode,
     );

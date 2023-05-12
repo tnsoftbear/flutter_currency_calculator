@@ -1,17 +1,15 @@
-import 'package:currency_calc/feature/history/internal/infra/repository/conversion_history_record_repository.dart';
-import 'package:currency_calc/feature/history/internal/ui/widget/dto/history_output_dto.dart';
+import 'package:currency_calc/feature/history/internal/ui/widget/history_output/history_output_dto.dart';
 import 'package:flutter/material.dart';
 
 class AllHistoryDataTableSource extends DataTableSource {
   AllHistoryDataTableSource(
       BuildContext this._context,
-      this._historyRecords,
-      ConversionHistoryRecordRepository
-          this._conversionHistoryRecordRepository);
+      List<HistoryOutputDto> this._historyRecords,
+      Function this._deleteRecord);
 
   BuildContext _context;
   List<HistoryOutputDto> _historyRecords;
-  ConversionHistoryRecordRepository _conversionHistoryRecordRepository;
+  Function _deleteRecord;
 
   @override
   bool get isRowCountApproximate => false;
@@ -35,8 +33,7 @@ class AllHistoryDataTableSource extends DataTableSource {
           IconButton(
             icon: Icon(Icons.delete,
                 size: 20, color: Theme.of(_context).colorScheme.primary),
-            onPressed: () =>
-                _conversionHistoryRecordRepository.deleteByIndex(index),
+            onPressed: () => _deleteRecord(index),
           ),
         ),
       ],

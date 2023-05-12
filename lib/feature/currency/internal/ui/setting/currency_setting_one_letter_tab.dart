@@ -23,10 +23,10 @@ class CurrencySettingOneLetterTab extends StatelessWidget {
     final theme = Theme.of(context);
     return FutureBuilder(
         future: _currencyLoader.loadCurrenciesByCodeFirstLetter(_letter),
-        builder: (context, snap) {
-          if (snap.hasError) {
-            return Center(child: Text(snap.error.toString()));
-          } else if (!snap.hasData) {
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(child: Text(snapshot.error.toString()));
+          } else if (!snapshot.hasData) {
             return Center(child: CircularProgressIndicator());
           }
 
@@ -82,7 +82,7 @@ class CurrencySettingOneLetterTab extends StatelessWidget {
                       ),
                     ],
                   ),
-                  for (var currency in snap.data as List<Currency>)
+                  for (var currency in snapshot.data as List<Currency>)
                     TableRow(
                       children: [
                         TableCell(
