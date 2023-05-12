@@ -10,6 +10,7 @@ class ConversionFeatureFacade {
   late final ConversionFeatureDic _dic;
 
   CalculatorScreen createCalculatorScreen() {
-    return CalculatorScreen(_dic.conversionValidationTranslator);
+    return CalculatorScreen(
+        _dic.clock, _dic.conversionValidationTranslator, _dic.rateFetcher);
   }
 }

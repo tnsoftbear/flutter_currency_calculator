@@ -2,6 +2,8 @@ import 'package:currency_calc/feature/history/internal/domain/model/conversion_h
 import 'package:hive_flutter/hive_flutter.dart';
 
 class ConversionHistoryRecordRepository {
+  ConversionHistoryRecordRepository();
+
   static const BOX_NAME = 'CurrencyConversionHistoryRecord';
 
   Box<ConversionHistoryRecord>? box;
@@ -13,14 +15,14 @@ class ConversionHistoryRecordRepository {
     return this;
   }
 
-  Future<List<ConversionHistoryRecord>> loadAll() async {
-    await init();
-    return box!.values.toList();
-  }
-
   Future<int> countAll() async {
     await init();
     return box!.length;
+  }
+
+  Future<List<ConversionHistoryRecord>> loadAll() async {
+    await init();
+    return box!.values.toList();
   }
 
   Future<void> save(ConversionHistoryRecord record) async {

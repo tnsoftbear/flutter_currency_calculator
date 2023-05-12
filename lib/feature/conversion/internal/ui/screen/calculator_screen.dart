@@ -1,4 +1,6 @@
+import 'package:currency_calc/common/clock/clock.dart';
 import 'package:currency_calc/feature/conversion/internal/app/translate/conversion_validation_translator.dart';
+import 'package:currency_calc/feature/conversion/internal/domain/fetch/load/rate_fetcher.dart';
 import 'package:currency_calc/front/app/constant/appearance_constant.dart';
 import 'package:currency_calc/front/ui/widget/front_header_bar.dart';
 import 'package:currency_calc/front/ui/widget/front_main_menu.dart';
@@ -10,18 +12,21 @@ import 'package:provider/provider.dart';
 
 class CalculatorScreen extends StatelessWidget {
   const CalculatorScreen(
+      Clock this._clock,
       ConversionValidationTranslator this._conversionValidationTranslator,
+      RateFetcher this._rateFetcher,
       {Key? key})
       : super(key: key);
 
+  final Clock _clock;
   final ConversionValidationTranslator _conversionValidationTranslator;
+  final RateFetcher _rateFetcher;
 
   @override
   Widget build(BuildContext context) {
-    final lastHistoryWidget =
-        context.read<HistoryFeatureFacade>().createLastHistoryWidget();
-    final lastHistoryModel =
-        context.read<HistoryFeatureFacade>().createLastHistoryModel();
+    final historyFeatureFacade = context.read<HistoryFeatureFacade>();
+    final lastHistoryWidget = historyFeatureFacade.createLastHistoryWidget();
+    final lastHistoryModel = historyFeatureFacade.createLastHistoryModel();
     return Scaffold(
       appBar: FrontHeaderBar(
           titleText: AppLocalizations.of(context).conversionTitle),
@@ -40,7 +45,8 @@ class CalculatorScreen extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                child: CalculatorWidget(_conversionValidationTranslator),
+                child: CalculatorWidget(
+                    _clock, _conversionValidationTranslator, _rateFetcher),
               ),
               Container(height: 300, child: lastHistoryWidget),
             ],

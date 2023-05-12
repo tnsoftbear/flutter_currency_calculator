@@ -3,10 +3,15 @@ import 'package:currency_calc/feature/history/internal/ui/widget/dto/history_out
 import 'package:flutter/material.dart';
 
 class AllHistoryDataTableSource extends DataTableSource {
-  List<HistoryOutputDto> _historyRecords;
-  BuildContext _context;
+  AllHistoryDataTableSource(
+      BuildContext this._context,
+      this._historyRecords,
+      ConversionHistoryRecordRepository
+          this._conversionHistoryRecordRepository);
 
-  AllHistoryDataTableSource(BuildContext this._context, this._historyRecords);
+  BuildContext _context;
+  List<HistoryOutputDto> _historyRecords;
+  ConversionHistoryRecordRepository _conversionHistoryRecordRepository;
 
   @override
   bool get isRowCountApproximate => false;
@@ -30,15 +35,11 @@ class AllHistoryDataTableSource extends DataTableSource {
           IconButton(
             icon: Icon(Icons.delete,
                 size: 20, color: Theme.of(_context).colorScheme.primary),
-            onPressed: () => _onDeletePressed(index),
+            onPressed: () =>
+                _conversionHistoryRecordRepository.deleteByIndex(index),
           ),
         ),
       ],
     );
-  }
-
-  _onDeletePressed(int index) async {
-    final repo = ConversionHistoryRecordRepository();
-    repo.deleteByIndex(index);
   }
 }

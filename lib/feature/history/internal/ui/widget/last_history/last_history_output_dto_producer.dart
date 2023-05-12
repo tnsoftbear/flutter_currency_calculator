@@ -10,7 +10,7 @@ class LastHistoryOutputDtoProducer {
     final nf = NumberFormat.decimalPattern(localeName);
     final historyOutputDtos = records
         .map((e) => HistoryOutputDto(
-            df.format(e.date) + "\n" + tf.format(e.date),
+            df.format(e.date.toLocal()) + "\n" + tf.format(e.date.toLocal()),
             _formatCurrency(e.sourceAmount, e.sourceCurrency, localeName),
             _formatCurrency(e.targetAmount, e.targetCurrency, localeName),
             nf.format(e.rate)))

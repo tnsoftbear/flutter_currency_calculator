@@ -1,8 +1,8 @@
 import 'dart:developer';
+import 'package:currency_calc/common/clock/clock.dart';
+import 'package:currency_calc/feature/conversion/internal/domain/fetch/load/rate_fetcher.dart';
 import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
 import 'package:currency_calc/front/ui/theme/additional_colors.dart';
-import 'package:currency_calc/feature/conversion/internal/app/config/conversion_config.dart';
-import 'package:currency_calc/feature/conversion/internal/app/fetch/rate_fetcher_factory.dart';
 import 'package:currency_calc/feature/conversion/internal/app/translate/conversion_validation_translator.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/calculate/currency_converter.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/validate/conversion_validator.dart';
@@ -14,9 +14,15 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class CalculatorWidget extends StatefulWidget {
-  CalculatorWidget(this.conversionValidationTranslator, {Key? key}) : super(key: key);
+  CalculatorWidget(Clock this.clock,
+      ConversionValidationTranslator this.conversionValidationTranslator,
+      RateFetcher this.rateFetcher,
+      {Key? key})
+      : super(key: key);
 
+  final Clock clock;
   final ConversionValidationTranslator conversionValidationTranslator;
+  final RateFetcher rateFetcher;
 
   @override
   _CalculatorWidgetState createState() => _CalculatorWidgetState();
@@ -33,7 +39,6 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
   late String _sourceAmountInput;
   late String _selectedSourceCurrencyCode;
   late String _selectedTargetCurrencyCode;
-  late CurrencyFeatureFacade _currencyFeatureFacade;
 
   final _sourceAmountController = TextEditingController();
   final _sourceAmountTextFieldFocusNode = FocusNode();
@@ -51,7 +56,6 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
     final settingModel = context.read<SettingModel>();
     _selectedSourceCurrencyCode = settingModel.selectedSourceCurrencyCode;
     _selectedTargetCurrencyCode = settingModel.selectedTargetCurrencyCode;
-    _currencyFeatureFacade = context.read<CurrencyFeatureFacade>();
     super.initState();
   }
 
@@ -194,18 +198,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
     }
 
     final tr = AppLocalizations.of(context);
+    final currencyFeatureFacade = context.read<CurrencyFeatureFacade>();
     final validationResult = ConversionValidator.validate(
         sourceCurrency: _selectedSourceCurrencyCode,
         targetCurrency: _selectedTargetCurrencyCode,
         amount: _sourceAmountInput,
         visibleSourceCurrencyCodes:
-            await _currencyFeatureFacade.loadVisibleSourceCurrencyCodes(),
+            await currencyFeatureFacade.loadVisibleSourceCurrencyCodes(),
         visibleTargetCurrencyCodes:
-            await _currencyFeatureFacade.loadVisibleTargetCurrencyCodes());
+            await currencyFeatureFacade.loadVisibleTargetCurrencyCodes());
     if (!validationResult.isSuccess()) {
       setState(() {
-        _resultMessage =
-            widget.conversionValidationTranslator.translateConcatenatedErrorMessage(
+        _resultMessage = widget.conversionValidationTranslator
+            .translateConcatenatedErrorMessage(
                 context: context, validationResult: validationResult);
         _rateMessage = '';
         _areActionButtonsVisible = false;
@@ -221,8 +226,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
       _isLoading = true;
     });
 
-    final rateFetcher = RateFetcherFactory.create(ConversionConfig());
-    rateFetcher
+    widget.rateFetcher
         .fetchExchangeRate(
             _selectedSourceCurrencyCode, _selectedTargetCurrencyCode)
         .then((rate) {
@@ -252,12 +256,8 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
   }
 
   void _onSavePressed() async {
-    context.read<LastHistoryModel>().add(
-        _selectedSourceCurrencyCode,
-        _sourceAmount,
-        _selectedTargetCurrencyCode,
-        _targetAmount,
-        _rate);
+    context.read<LastHistoryModel>().add(_selectedSourceCurrencyCode,
+        _sourceAmount, _selectedTargetCurrencyCode, _targetAmount, _rate);
     FocusScope.of(context).requestFocus(_sourceAmountTextFieldFocusNode);
     _resetInputs();
     log(
