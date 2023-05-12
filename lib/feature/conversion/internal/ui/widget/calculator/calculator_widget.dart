@@ -263,7 +263,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
     log(
         'Saved currency conversion record (Source: $_selectedSourceCurrencyCode $_sourceAmount, ' +
             'Target: $_selectedTargetCurrencyCode $_targetAmount, Rate: $_rate)',
-        time: DateTime.now(),
+        time: widget.clock.getCurrentDateSys(),
         name: 'CurrencyConversionScreen');
   }
 

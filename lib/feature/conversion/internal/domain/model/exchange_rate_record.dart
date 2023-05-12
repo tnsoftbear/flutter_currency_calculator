@@ -14,7 +14,7 @@ class ExchangeRateRecord {
   double exchangeRate = 0.0;
 
   @HiveField(3)
-  DateTime createdAt = DateTime.now();
+  DateTime createdAt = DateTime.now().toUtc();
 
   ExchangeRateRecord({
     required this.sourceCurrency,

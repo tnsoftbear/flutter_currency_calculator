@@ -20,7 +20,7 @@ class ConversionHistoryRecord extends HiveObject {
   double rate = 0.0;
 
   @HiveField(5)
-  DateTime date = DateTime.now();
+  DateTime date = DateTime.now().toUtc();
 
   toList() {
     return [

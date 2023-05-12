@@ -2,6 +2,11 @@
 lib  
 |   main.dart
 |   
++---common
+|   \---clock
+|           clock.dart
+|           date_time_clock.dart
+|           
 +---feature
 |   +---about
 |   |   +---internal
@@ -22,6 +27,7 @@ lib
 |   |   |   |   |       rate_fetcher_factory.dart
 |   |   |   |   |       
 |   |   |   |   +---init
+|   |   |   |   |       conversion_feature_dic.dart
 |   |   |   |   |       conversion_feature_initializer.dart
 |   |   |   |   |       
 |   |   |   |   \---translate
@@ -83,13 +89,17 @@ lib
 |   |   +---internal
 |   |   |   +---app
 |   |   |   |   +---init
+|   |   |   |   |       currency_feature_dic.dart
 |   |   |   |   |       currency_feature_initializer.dart
 |   |   |   |   |       
 |   |   |   |   +---load
 |   |   |   |   |       currency_loader.dart
 |   |   |   |   |       
-|   |   |   |   \---populate
-|   |   |   |           currency_populator.dart
+|   |   |   |   +---populate
+|   |   |   |   |       currency_populator.dart
+|   |   |   |   |       
+|   |   |   |   \---update
+|   |   |   |           currency_visibility_updater.dart
 |   |   |   |           
 |   |   |   +---domain
 |   |   |   |   +---collect
@@ -115,6 +125,7 @@ lib
 |   |   |   \---ui
 |   |   |       \---setting
 |   |   |               currency_checkbox.dart
+|   |   |               currency_setting_one_letter_tab.dart
 |   |   |               currency_setting_widget.dart
 |   |   |               
 |   |   \---public
@@ -124,6 +135,7 @@ lib
 |   |   +---internal
 |   |   |   +---app
 |   |   |   |   +---init
+|   |   |   |   |       history_feature_dic.dart
 |   |   |   |   |       history_feature_initializer.dart
 |   |   |   |   |       
 |   |   |   |   \---model

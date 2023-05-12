@@ -1,19 +1,21 @@
+import 'package:currency_calc/common/clock/clock.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/fetch/cache/rate_cacher.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/model/exchange_rate_record.dart';
 
 class RateMemoryCacher extends RateCacher {
-  int ttl = 0;
-  static Map<String, ExchangeRateRecord> _cache = {};
+  RateMemoryCacher(int this._ttl, Clock this._clock);
 
-  RateMemoryCacher(this.ttl);
+  int _ttl = 0;
+  Clock _clock;
+  static Map<String, ExchangeRateRecord> _cache = {};
 
   Future<double?> get(String sourceCurrency, String targetCurrency) {
     final key = _makeKey(sourceCurrency, targetCurrency);
     if (_cache.containsKey(key)) {
       final record = _cache[key];
       if (record != null) {
-        DateTime expiredAt = record.createdAt.add(Duration(seconds: ttl));
-        if (DateTime.now().isBefore(expiredAt)) {
+        DateTime expiredAt = record.createdAt.add(Duration(seconds: _ttl));
+        if (_clock.getCurrentDateUtc().isBefore(expiredAt)) {
           return Future.value(record.exchangeRate);
         }
       }
@@ -31,7 +33,7 @@ class RateMemoryCacher extends RateCacher {
       sourceCurrency: sourceCurrency,
       targetCurrency: targetCurrency,
       exchangeRate: rate,
-      createdAt: DateTime.now(),
+      createdAt: _clock.getCurrentDateUtc(),
     );
     _cache[key] = record;
   }
