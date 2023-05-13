@@ -11,8 +11,8 @@ void main() {
     ];
     test('validate should return no errors for valid inputs', () {
       final result = ConversionValidator.validate(
-          sourceCurrency: CURRENCY_CODES[0],
-          targetCurrency: CURRENCY_CODES[1],
+          sourceCurrencyCode: CURRENCY_CODES[0],
+          targetCurrencyCode: CURRENCY_CODES[1],
           amount: '100.00',
           visibleSourceCurrencyCodes: CURRENCY_CODES,
           visibleTargetCurrencyCodes: CURRENCY_CODES);
@@ -23,8 +23,8 @@ void main() {
         'validate should return an error when source currency is invalid and others are valid',
         () {
       final result = ConversionValidator.validate(
-          sourceCurrency: 'XYZ',
-          targetCurrency: CURRENCY_CODES[1],
+          sourceCurrencyCode: 'XYZ',
+          targetCurrencyCode: CURRENCY_CODES[1],
           amount: '100.00',
           visibleSourceCurrencyCodes: CURRENCY_CODES,
           visibleTargetCurrencyCodes: CURRENCY_CODES);
@@ -37,8 +37,8 @@ void main() {
         'validate should return an error when target currency is invalid and others are valid',
         () {
       final result = ConversionValidator.validate(
-          sourceCurrency: CURRENCY_CODES[0],
-          targetCurrency: 'XYZ',
+          sourceCurrencyCode: CURRENCY_CODES[0],
+          targetCurrencyCode: 'XYZ',
           amount: '100.00',
           visibleSourceCurrencyCodes: CURRENCY_CODES,
           visibleTargetCurrencyCodes: CURRENCY_CODES);
@@ -51,8 +51,8 @@ void main() {
         'validate should return an error when source and target currencies are same and others are valid',
         () {
       final result = ConversionValidator.validate(
-          sourceCurrency: CURRENCY_CODES[0],
-          targetCurrency: CURRENCY_CODES[0],
+          sourceCurrencyCode: CURRENCY_CODES[0],
+          targetCurrencyCode: CURRENCY_CODES[0],
           amount: '100.00',
           visibleSourceCurrencyCodes: CURRENCY_CODES,
           visibleTargetCurrencyCodes: CURRENCY_CODES);
@@ -63,8 +63,8 @@ void main() {
 
     test('validate should return an error when amount is not numeric', () {
       final result = ConversionValidator.validate(
-          sourceCurrency: CURRENCY_CODES[0],
-          targetCurrency: CURRENCY_CODES[1],
+          sourceCurrencyCode: CURRENCY_CODES[0],
+          targetCurrencyCode: CURRENCY_CODES[1],
           amount: 'not a number',
           visibleSourceCurrencyCodes: CURRENCY_CODES,
           visibleTargetCurrencyCodes: CURRENCY_CODES);
@@ -75,8 +75,8 @@ void main() {
 
     test('validate should return an error when amount is not positive', () {
       final result = ConversionValidator.validate(
-          sourceCurrency: CURRENCY_CODES[0],
-          targetCurrency: CURRENCY_CODES[1],
+          sourceCurrencyCode: CURRENCY_CODES[0],
+          targetCurrencyCode: CURRENCY_CODES[1],
           amount: '0.00',
           visibleSourceCurrencyCodes: CURRENCY_CODES,
           visibleTargetCurrencyCodes: CURRENCY_CODES);
@@ -87,8 +87,8 @@ void main() {
 
     test('validate should return errors because all inputs are wrong', () {
       final result = ConversionValidator.validate(
-          sourceCurrency: 'XXX',
-          targetCurrency: 'XXX',
+          sourceCurrencyCode: 'XXX',
+          targetCurrencyCode: 'XXX',
           amount: 'XXX',
           visibleSourceCurrencyCodes: CURRENCY_CODES,
           visibleTargetCurrencyCodes: CURRENCY_CODES);

@@ -17,8 +17,8 @@ class ExchangeRateRecordAdapter extends TypeAdapter<ExchangeRateRecord> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ExchangeRateRecord(
-      sourceCurrency: fields[0] as String,
-      targetCurrency: fields[1] as String,
+      sourceCurrencyCode: fields[0] as String,
+      targetCurrencyCode: fields[1] as String,
       exchangeRate: fields[2] as double,
       createdAt: fields[3] as DateTime,
     );
@@ -29,9 +29,9 @@ class ExchangeRateRecordAdapter extends TypeAdapter<ExchangeRateRecord> {
     writer
       ..writeByte(4)
       ..writeByte(0)
-      ..write(obj.sourceCurrency)
+      ..write(obj.sourceCurrencyCode)
       ..writeByte(1)
-      ..write(obj.targetCurrency)
+      ..write(obj.targetCurrencyCode)
       ..writeByte(2)
       ..write(obj.exchangeRate)
       ..writeByte(3)

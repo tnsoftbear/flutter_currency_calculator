@@ -28,13 +28,13 @@ class CurrencyCheckbox extends HookWidget {
     return Checkbox(
         key: Key(key),
         value: _isSourceCurrency
-            ? _currency.isVisibleForSource
-            : _currency.isVisibleForTarget,
+            ? currencyNotifier.value.isVisibleForSource
+            : currencyNotifier.value.isVisibleForTarget,
         onChanged: (bool? visible) async {
           Currency? updatedCurrency =
-              await onChange(_currency, visible, settingModel);
+              await onChange(currencyNotifier.value, visible, settingModel);
           if (updatedCurrency != null) {
-            currencyNotifier.value = updatedCurrency.copyWith();
+            currencyNotifier.value = updatedCurrency;
           }
         });
   }

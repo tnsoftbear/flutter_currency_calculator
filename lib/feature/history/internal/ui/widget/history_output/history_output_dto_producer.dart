@@ -11,8 +11,8 @@ class HistoryOutputDtoProducer {
     final historyOutputDtos = records
         .map((e) => HistoryOutputDto(
             df.format(e.date.toLocal()) + "\n" + tf.format(e.date.toLocal()),
-            _formatCurrency(e.sourceAmount, e.sourceCurrency, localeName),
-            _formatCurrency(e.targetAmount, e.targetCurrency, localeName),
+            _formatCurrency(e.sourceAmount, e.sourceCurrencyCode, localeName),
+            _formatCurrency(e.targetAmount, e.targetCurrencyCode, localeName),
             nf.format(e.rate)))
         .toList();
     return historyOutputDtos;

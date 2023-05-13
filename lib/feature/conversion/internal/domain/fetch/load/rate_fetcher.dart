@@ -1,4 +1,4 @@
 abstract class RateFetcher {
   Future<double> fetchExchangeRate(
-      String sourceCurrency, String targetCurrency);
+      String sourceCurrencyCode, String targetCurrencyCode);
 }

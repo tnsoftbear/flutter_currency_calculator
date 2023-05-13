@@ -15,10 +15,10 @@ class CurrencyCollector {
   }
 
   static void applyVisibility(CurrencyMap currencies) {
-    currencies.forEach((currencyCode, currency) {
-      if (VISIBLE_CURRENCY_CODES.contains(currencyCode)) {
-        currency.isVisibleForSource = true;
-        currency.isVisibleForTarget = true;
+    VISIBLE_CURRENCY_CODES.forEach((currencyCode) {
+      if (currencies.containsKey(currencyCode)) {
+        currencies[currencyCode] = currencies[currencyCode]!.copyWith(
+            isVisibleForSource: true, isVisibleForTarget: true);
       }
     });
   }

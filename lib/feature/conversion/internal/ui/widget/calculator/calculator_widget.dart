@@ -201,8 +201,8 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
     final tr = AppLocalizations.of(context);
     final currencyFeatureFacade = context.read<CurrencyFeatureFacade>();
     final validationResult = ConversionValidator.validate(
-        sourceCurrency: _selectedSourceCurrencyCode,
-        targetCurrency: _selectedTargetCurrencyCode,
+        sourceCurrencyCode: _selectedSourceCurrencyCode,
+        targetCurrencyCode: _selectedTargetCurrencyCode,
         amount: _sourceAmountInput,
         visibleSourceCurrencyCodes:
             await currencyFeatureFacade.loadVisibleSourceCurrencyCodes(),

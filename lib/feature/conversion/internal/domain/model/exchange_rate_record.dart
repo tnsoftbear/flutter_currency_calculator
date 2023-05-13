@@ -5,10 +5,10 @@ part 'exchange_rate_record.g.dart';
 @HiveType(typeId: 1)
 class ExchangeRateRecord {
   @HiveField(0)
-  String sourceCurrency = '';
+  String sourceCurrencyCode = '';
 
   @HiveField(1)
-  String targetCurrency = '';
+  String targetCurrencyCode = '';
 
   @HiveField(2)
   double exchangeRate = 0.0;
@@ -17,8 +17,8 @@ class ExchangeRateRecord {
   DateTime createdAt = DateTime.now().toUtc();
 
   ExchangeRateRecord({
-    required this.sourceCurrency,
-    required this.targetCurrency,
+    required this.sourceCurrencyCode,
+    required this.targetCurrencyCode,
     required this.exchangeRate,
     required this.createdAt,
   });

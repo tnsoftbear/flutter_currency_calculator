@@ -11,36 +11,37 @@ class RateHiveCacher extends RateCacher {
   final Clock _clock;
   final ExchangeRateRecordRepository _exchangeRateRecordRepository;
 
-  Future<double?> get(String sourceCurrency, String targetCurrency) async {
-    final key = _makeKey(sourceCurrency, targetCurrency);
+  Future<double?> get(
+      String sourceCurrencyCode, String targetCurrencyCode) async {
+    final key = _makeKey(sourceCurrencyCode, targetCurrencyCode);
     ExchangeRateRecord? record =
         await _exchangeRateRecordRepository.loadByKey(key);
     if (record != null) {
       DateTime expiredAt = record.createdAt.add(Duration(seconds: _ttl));
       if (_clock.getCurrentDateUtc().isBefore(expiredAt)) {
-        return Future.value(record.exchangeRate);
+        return record.exchangeRate;
       }
 
       await _exchangeRateRecordRepository.deleteByKey(key);
-      return Future.value(null);
+      return null;
     }
 
-    return Future.value(null);
+    return null;
   }
 
   Future<void> set(
-      String sourceCurrency, String targetCurrency, double rate) async {
-    final key = _makeKey(sourceCurrency, targetCurrency);
+      String sourceCurrencyCode, String targetCurrencyCode, double rate) async {
+    final key = _makeKey(sourceCurrencyCode, targetCurrencyCode);
     final record = ExchangeRateRecord(
-      sourceCurrency: sourceCurrency,
-      targetCurrency: targetCurrency,
+      sourceCurrencyCode: sourceCurrencyCode,
+      targetCurrencyCode: targetCurrencyCode,
       exchangeRate: rate,
       createdAt: _clock.getCurrentDateUtc(),
     );
     await _exchangeRateRecordRepository.saveByKey(key, record);
   }
 
-  String _makeKey(String sourceCurrency, String targetCurrency) {
-    return sourceCurrency + targetCurrency;
+  String _makeKey(String sourceCurrencyCode, String targetCurrencyCode) {
+    return sourceCurrencyCode + "_" + targetCurrencyCode;
   }
 }

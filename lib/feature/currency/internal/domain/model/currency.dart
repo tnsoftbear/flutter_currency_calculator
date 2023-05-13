@@ -1,22 +1,29 @@
+import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
 
 part 'currency.g.dart';
 
 typedef CurrencyMap = Map<String, Currency>;
 
+@immutable
 @HiveType(typeId: 2)
-class Currency {
+class Currency extends Equatable {
   @HiveField(0)
   final String code;
   @HiveField(1)
   final String name;
   @HiveField(2)
-  bool isVisibleForSource;
+  final bool isVisibleForSource;
   @HiveField(3)
-  bool isVisibleForTarget;
+  final bool isVisibleForTarget;
 
   Currency(this.code, this.name,
       [this.isVisibleForSource = false, this.isVisibleForTarget = false]);
+
+  @override
+  List<Object> get props =>
+      [code, name, isVisibleForSource, isVisibleForTarget];
 
   Currency copyWith({
     String? code,

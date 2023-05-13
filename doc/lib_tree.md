@@ -159,11 +159,11 @@ lib
 |   |   |           |       all_history_data_table_source.dart
 |   |   |           |       all_history_data_table_widget.dart
 |   |   |           |       
-|   |   |           +---dto
+|   |   |           +---history_output
 |   |   |           |       history_output_dto.dart
+|   |   |           |       history_output_dto_producer.dart
 |   |   |           |       
 |   |   |           \---last_history
-|   |   |                   last_history_output_dto_producer.dart
 |   |   |                   last_history_widget.dart
 |   |   |                   
 |   |   \---public

@@ -5,13 +5,13 @@ part 'conversion_history_record.g.dart';
 @HiveType(typeId: 0)
 class ConversionHistoryRecord extends HiveObject {
   @HiveField(0)
-  String sourceCurrency = '';
+  String sourceCurrencyCode = '';
 
   @HiveField(1)
   double sourceAmount = 0.0;
 
   @HiveField(2)
-  String targetCurrency = '';
+  String targetCurrencyCode = '';
 
   @HiveField(3)
   double targetAmount = 0.0;
@@ -24,9 +24,9 @@ class ConversionHistoryRecord extends HiveObject {
 
   toList() {
     return [
-      sourceCurrency,
+      sourceCurrencyCode,
       sourceAmount,
-      targetCurrency,
+      targetCurrencyCode,
       targetAmount,
       rate,
       date

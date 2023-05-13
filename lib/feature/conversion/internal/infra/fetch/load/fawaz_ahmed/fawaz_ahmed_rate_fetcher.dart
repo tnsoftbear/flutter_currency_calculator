@@ -8,13 +8,15 @@ class FawazAhmedExchangeRateFetcher extends RateFetcher {
   FawazAhmedExchangeRateFetcher({required this.url});
 
   Future<double> fetchExchangeRate(
-      String sourceCurrency, String targetCurrency) async {
-    targetCurrency = targetCurrency.toLowerCase();
-    sourceCurrency = sourceCurrency.toLowerCase();
-    final url = this.url + '/currencies/$sourceCurrency/$targetCurrency.json';
+      String sourceCurrencyCode, String targetCurrencyCode) async {
+    targetCurrencyCode = targetCurrencyCode.toLowerCase();
+    sourceCurrencyCode = sourceCurrencyCode.toLowerCase();
+    final url =
+        this.url + '/currencies/$sourceCurrencyCode/$targetCurrencyCode.json';
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
-      final data = FawazAhmedRateData.fromJson(response.body, targetCurrency);
+      final data =
+          FawazAhmedRateData.fromJson(response.body, targetCurrencyCode);
       return data.rate;
     } else {
       throw Exception('Failed to load exchange rate');

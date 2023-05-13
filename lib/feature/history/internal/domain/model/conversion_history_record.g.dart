@@ -18,9 +18,9 @@ class ConversionHistoryRecordAdapter
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ConversionHistoryRecord()
-      ..sourceCurrency = fields[0] as String
+      ..sourceCurrencyCode = fields[0] as String
       ..sourceAmount = fields[1] as double
-      ..targetCurrency = fields[2] as String
+      ..targetCurrencyCode = fields[2] as String
       ..targetAmount = fields[3] as double
       ..rate = fields[4] as double
       ..date = fields[5] as DateTime;
@@ -31,11 +31,11 @@ class ConversionHistoryRecordAdapter
     writer
       ..writeByte(6)
       ..writeByte(0)
-      ..write(obj.sourceCurrency)
+      ..write(obj.sourceCurrencyCode)
       ..writeByte(1)
       ..write(obj.sourceAmount)
       ..writeByte(2)
-      ..write(obj.targetCurrency)
+      ..write(obj.targetCurrencyCode)
       ..writeByte(3)
       ..write(obj.targetAmount)
       ..writeByte(4)

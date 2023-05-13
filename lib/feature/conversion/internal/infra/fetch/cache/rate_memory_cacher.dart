@@ -9,8 +9,8 @@ class RateMemoryCacher extends RateCacher {
   Clock _clock;
   static Map<String, ExchangeRateRecord> _cache = {};
 
-  Future<double?> get(String sourceCurrency, String targetCurrency) {
-    final key = _makeKey(sourceCurrency, targetCurrency);
+  Future<double?> get(String sourceCurrencyCode, String targetCurrencyCode) {
+    final key = _makeKey(sourceCurrencyCode, targetCurrencyCode);
     if (_cache.containsKey(key)) {
       final record = _cache[key];
       if (record != null) {
@@ -27,18 +27,19 @@ class RateMemoryCacher extends RateCacher {
     return Future.value(null);
   }
 
-  Future<void> set(String sourceCurrency, String targetCurrency, double rate) async {
+  Future<void> set(
+      String sourceCurrency, String targetCurrency, double rate) async {
     final key = _makeKey(sourceCurrency, targetCurrency);
     final record = ExchangeRateRecord(
-      sourceCurrency: sourceCurrency,
-      targetCurrency: targetCurrency,
+      sourceCurrencyCode: sourceCurrency,
+      targetCurrencyCode: targetCurrency,
       exchangeRate: rate,
       createdAt: _clock.getCurrentDateUtc(),
     );
     _cache[key] = record;
   }
 
-  String _makeKey(String sourceCurrency, String targetCurrency) {
-    return sourceCurrency + targetCurrency;
+  String _makeKey(String sourceCurrencyCode, String targetCurrencyCode) {
+    return sourceCurrencyCode + "_" + targetCurrencyCode;
   }
 }

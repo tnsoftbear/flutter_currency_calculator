@@ -12,25 +12,24 @@ class CurrencyVisibilityUpdater {
   Future<Currency?> changeVisibleSourceCurrency(
       Currency currency, bool? isVisible, SettingModel settingModel) async {
     isVisible ??= false;
+    Currency newCurrency;
     if (isVisible) {
-      currency.isVisibleForSource = true;
-      await _currencyRepository.save(currency);
+      newCurrency = currency.copyWith(isVisibleForSource: true);
+      await _currencyRepository.save(newCurrency);
     } else {
       // Reject to remove last currency.
       if (await _currencyRepository.countVisibleSourceCurrencies() == 1) {
         return null;
       }
 
-      currency.isVisibleForSource = false;
-      await _currencyRepository.save(currency);
+      newCurrency = currency.copyWith(isVisibleForSource: false);
+      await _currencyRepository.save(newCurrency);
     }
 
     settingModel.updateVisibleSourceCurrencyCodes(
         await _currencyRepository.loadVisibleSourceCurrencyCodes());
-
-    await _correctSelectedSourceCurrency(currency, settingModel);
-
-    return currency;
+    await _correctSelectedSourceCurrency(newCurrency, settingModel);
+    return newCurrency;
   }
 
   Future<void> _correctSelectedSourceCurrency(
@@ -54,8 +53,10 @@ class CurrencyVisibilityUpdater {
       }
 
       if (newSelectedSourceCurrencyCode != "") {
-        settingModel.updateSelectedSourceCurrencyCode(newSelectedSourceCurrencyCode);
-        log('Selected source currency is changed from ${currency.code} to $newSelectedSourceCurrencyCode (target is ${settingModel.selectedTargetCurrencyCode})');
+        settingModel
+            .updateSelectedSourceCurrencyCode(newSelectedSourceCurrencyCode);
+        log('Selected source currency is changed from ${currency.code}' +
+            ' to $newSelectedSourceCurrencyCode (target is ${settingModel.selectedTargetCurrencyCode})');
       }
     }
   }
@@ -63,26 +64,24 @@ class CurrencyVisibilityUpdater {
   Future<Currency?> changeVisibleTargetCurrency(
       Currency currency, bool? isVisible, SettingModel settingModel) async {
     isVisible ??= false;
-
+    Currency newCurrency;
     if (isVisible) {
-      currency.isVisibleForTarget = true;
-      await _currencyRepository.save(currency);
+      newCurrency = currency.copyWith(isVisibleForTarget: true);
+      await _currencyRepository.save(newCurrency);
     } else {
       // Reject to remove last currency.
       if (await _currencyRepository.countVisibleTargetCurrencies() == 1) {
         return null;
       }
 
-      currency.isVisibleForTarget = false;
-      await _currencyRepository.save(currency);
+      newCurrency = currency.copyWith(isVisibleForTarget: false);
+      await _currencyRepository.save(newCurrency);
     }
 
     settingModel.updateVisibleTargetCurrencyCodes(
         await _currencyRepository.loadVisibleTargetCurrencyCodes());
-
-    await _correctSelectedTargetCurrency(currency, settingModel);
-
-    return currency;
+    await _correctSelectedTargetCurrency(newCurrency, settingModel);
+    return newCurrency;
   }
 
   Future<void> _correctSelectedTargetCurrency(
@@ -106,8 +105,10 @@ class CurrencyVisibilityUpdater {
       }
 
       if (newSelectedTargetCurrencyCode != "") {
-        settingModel.updateSelectedTargetCurrencyCode(newSelectedTargetCurrencyCode);
-        log('Selected target currency is changed from ${currency.code} to $newSelectedTargetCurrencyCode (source is ${settingModel.selectedSourceCurrencyCode})');
+        settingModel
+            .updateSelectedTargetCurrencyCode(newSelectedTargetCurrencyCode);
+        log('Selected target currency is changed from ${currency.code} ' +
+            ' to $newSelectedTargetCurrencyCode (source is ${settingModel.selectedSourceCurrencyCode})');
       }
     }
   }
