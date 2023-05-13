@@ -9,11 +9,11 @@ class HistoryOutputDtoProducer {
     final tf = DateFormat.Hms(localeName);
     final nf = NumberFormat.decimalPattern(localeName);
     final historyOutputDtos = records
-        .map((e) => HistoryOutputDto(
-            df.format(e.date.toLocal()) + "\n" + tf.format(e.date.toLocal()),
-            _formatCurrency(e.sourceAmount, e.sourceCurrencyCode, localeName),
-            _formatCurrency(e.targetAmount, e.targetCurrencyCode, localeName),
-            nf.format(e.rate)))
+        .map((r) => HistoryOutputDto(
+            df.format(r.date.toLocal()) + "\n" + tf.format(r.date.toLocal()),
+            _formatCurrency(r.sourceAmount, r.sourceCurrencyCode, localeName),
+            _formatCurrency(r.targetAmount, r.targetCurrencyCode, localeName),
+            nf.format(r.rate)))
         .toList();
     return historyOutputDtos;
   }

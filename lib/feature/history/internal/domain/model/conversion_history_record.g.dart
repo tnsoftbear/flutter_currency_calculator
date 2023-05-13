@@ -17,13 +17,13 @@ class ConversionHistoryRecordAdapter
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return ConversionHistoryRecord()
-      ..sourceCurrencyCode = fields[0] as String
-      ..sourceAmount = fields[1] as double
-      ..targetCurrencyCode = fields[2] as String
-      ..targetAmount = fields[3] as double
-      ..rate = fields[4] as double
-      ..date = fields[5] as DateTime;
+    return ConversionHistoryRecord(
+        sourceCurrencyCode: fields[0] as String,
+        sourceAmount: fields[1] as double,
+        targetCurrencyCode: fields[2] as String,
+        targetAmount: fields[3] as double,
+        rate: fields[4] as double,
+        date: fields[5] as DateTime);
   }
 
   @override

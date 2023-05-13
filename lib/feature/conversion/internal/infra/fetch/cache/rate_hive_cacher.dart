@@ -29,8 +29,8 @@ class RateHiveCacher extends RateCacher {
     return null;
   }
 
-  Future<void> set(
-      String sourceCurrencyCode, String targetCurrencyCode, double rate) async {
+  Future<void> set(final String sourceCurrencyCode,
+      final String targetCurrencyCode, final double rate) async {
     final key = _makeKey(sourceCurrencyCode, targetCurrencyCode);
     final record = ExchangeRateRecord(
       sourceCurrencyCode: sourceCurrencyCode,
@@ -41,7 +41,8 @@ class RateHiveCacher extends RateCacher {
     await _exchangeRateRecordRepository.saveByKey(key, record);
   }
 
-  String _makeKey(String sourceCurrencyCode, String targetCurrencyCode) {
+  String _makeKey(
+      final String sourceCurrencyCode, final String targetCurrencyCode) {
     return sourceCurrencyCode + "_" + targetCurrencyCode;
   }
 }

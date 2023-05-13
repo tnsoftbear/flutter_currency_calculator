@@ -1,35 +1,61 @@
+import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
 part 'conversion_history_record.g.dart';
 
 @HiveType(typeId: 0)
-class ConversionHistoryRecord extends HiveObject {
+class ConversionHistoryRecord extends Equatable {
+  const ConversionHistoryRecord(
+      {required this.sourceCurrencyCode,
+      required this.sourceAmount,
+      required this.targetCurrencyCode,
+      required this.targetAmount,
+      required this.rate,
+      required this.date});
+
   @HiveField(0)
-  String sourceCurrencyCode = '';
+  final String sourceCurrencyCode;
 
   @HiveField(1)
-  double sourceAmount = 0.0;
+  final double sourceAmount;
 
   @HiveField(2)
-  String targetCurrencyCode = '';
+  final String targetCurrencyCode;
 
   @HiveField(3)
-  double targetAmount = 0.0;
+  final double targetAmount;
 
   @HiveField(4)
-  double rate = 0.0;
+  final double rate;
 
   @HiveField(5)
-  DateTime date = DateTime.now().toUtc();
+  final DateTime date;
 
-  toList() {
-    return [
-      sourceCurrencyCode,
-      sourceAmount,
-      targetCurrencyCode,
-      targetAmount,
-      rate,
-      date
-    ];
+  ConversionHistoryRecord copyWith({
+    String? sourceCurrencyCode,
+    double? sourceAmount,
+    String? targetCurrencyCode,
+    double? targetAmount,
+    double? rate,
+    DateTime? date,
+  }) {
+    return ConversionHistoryRecord(
+      sourceCurrencyCode: sourceCurrencyCode ?? this.sourceCurrencyCode,
+      sourceAmount: sourceAmount ?? this.sourceAmount,
+      targetCurrencyCode: targetCurrencyCode ?? this.targetCurrencyCode,
+      targetAmount: targetAmount ?? this.targetAmount,
+      rate: rate ?? this.rate,
+      date: date ?? this.date,
+    );
   }
+
+  @override
+  List<Object> get props => [
+    sourceCurrencyCode,
+    sourceAmount,
+    targetCurrencyCode,
+    targetAmount,
+    rate,
+    date
+  ];
 }
