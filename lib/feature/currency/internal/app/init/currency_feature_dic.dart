@@ -1,5 +1,5 @@
-import 'package:currency_calc/common/clock/clock.dart';
-import 'package:currency_calc/common/clock/date_time_clock.dart';
+import 'package:currency_calc/core/clock/clock.dart';
+import 'package:currency_calc/core/clock/date_time_clock.dart';
 import 'package:currency_calc/feature/currency/internal/app/load/currency_loader.dart';
 import 'package:currency_calc/feature/currency/internal/app/populate/currency_populator.dart';
 import 'package:currency_calc/feature/currency/internal/app/update/currency_visibility_updater.dart';

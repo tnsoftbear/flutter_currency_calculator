@@ -1,5 +1,5 @@
-import 'package:currency_calc/common/clock/clock.dart';
-import 'package:currency_calc/common/clock/date_time_clock.dart';
+import 'package:currency_calc/core/clock/clock.dart';
+import 'package:currency_calc/core/clock/date_time_clock.dart';
 import 'package:currency_calc/feature/history/internal/infra/repository/conversion_history_record_repository.dart';
 
 class HistoryFeatureDic {

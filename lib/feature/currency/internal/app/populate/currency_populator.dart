@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:currency_calc/common/clock/clock.dart';
+import 'package:currency_calc/core/clock/clock.dart';
 import 'package:currency_calc/feature/currency/internal/domain/collect/currency_collector.dart';
 import 'package:currency_calc/feature/currency/internal/domain/fetch/load/currency_fetcher.dart';
 import 'package:currency_calc/feature/currency/internal/domain/model/currency.dart';

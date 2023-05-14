@@ -85,7 +85,14 @@ Settings are stored with help of the [Shared preferences](https://pub.dev/packag
 
 Currency feature provides the list of available currencies that are fetched from the public API.
 Big thanks to the [fawazahmed0/currency-api](https://github.com/fawazahmed0/currency-api) repository
-for providing the currency list and the actual exchange rate. 
+for providing the currency list and the actual exchange rate.
+
+To understand idea how features share data between each other, you can look to [CurrencyFeatureFacade](https://github.com/tnsoftbear/flutter_currency_calculator/blob/main/lib/feature/currency/public/currency_feature_facade.dart) class.
+Here you can find some data query methods, that provide information about available currencies from DB source internal to the Currency feature.
+Other feature do not access Currency feature DB directly, but call these public API methods instead.  
+This facade class also provides a command method for initiating currency database updates.  
+It also provides the method for accessing one widget component from UI layer.
+The Settings feature calls it to display the list of available currencies in the Settings screen. 
 
 ## Tests
 

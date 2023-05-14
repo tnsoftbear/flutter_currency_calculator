@@ -1,4 +1,4 @@
-import 'package:currency_calc/common/clock/clock.dart';
+import 'package:currency_calc/core/clock/clock.dart';
 import 'package:currency_calc/feature/conversion/internal/app/translate/conversion_validation_translator.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/fetch/load/rate_fetcher.dart';
 import 'package:currency_calc/front/app/constant/appearance_constant.dart';

@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:currency_calc/common/clock/clock.dart';
+import 'package:currency_calc/core/clock/clock.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/fetch/load/rate_fetcher.dart';
 import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
 import 'package:currency_calc/front/ui/theme/additional_colors.dart';

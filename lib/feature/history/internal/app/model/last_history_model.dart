@@ -1,4 +1,4 @@
-import 'package:currency_calc/common/clock/clock.dart';
+import 'package:currency_calc/core/clock/clock.dart';
 import 'package:currency_calc/feature/history/internal/domain/model/conversion_history_record.dart';
 import 'package:currency_calc/feature/history/internal/infra/repository/conversion_history_record_repository.dart';
 import 'package:flutter/foundation.dart';
