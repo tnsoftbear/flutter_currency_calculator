@@ -51,14 +51,14 @@ You can find there the next features:
 
 * **Conversion** - calculates currency conversion according to the exchange rate.
 * **History** - displays the history of currency conversions.
-* **Currency** - provides the list of available currencies.
-* **Settings** - allows to configure application appearance and available currencies.
+* **Currency** - provides the list of available currencies and its configuration.
+* **Settings** - allows to configure application appearance.
 * **About** - displays information about the application.
 
 ### Currency Conversion feature
 
-Most important business logic is located in the "Conversion" feature.
-It handles the currency exchange rate calculation at the main Calculator screen.
+Most important business logic is located in the Conversion feature.
+It handles the currency exchange rate calculation at the [Calculator screen](https://github.com/tnsoftbear/flutter_currency_calculator/blob/main/lib/feature/conversion/internal/ui/screen/calculator_screen.dart).
 
 **Infrastructure layer** is responsible for the currency exchange rate loading by API.
 It caches retrieved exchange rate in the [Hive](https://docs.hivedb.dev/) DB.
@@ -74,14 +74,16 @@ and exchange rate numbers with help of the [Intl](https://pub.dev/packages/intl)
 
 ### History feature
 
-Application allows you to save currency conversion to the history and display it in the History screen.
+Application allows you to save currency conversion to the history and display it in the [History screen](https://github.com/tnsoftbear/flutter_currency_calculator/blob/main/lib/feature/history/internal/ui/screen/all_history_screen.dart).
 
 Additionally, it displays the last 5 conversions at the Calculator screen in the bottom the Last History widget.
-This history widget is constructed with help of FutureBuilder, because it depends on data loaded by async call.
+This history widget is constructed with help of [FutureBuilder](https://api.flutter.dev/flutter/widgets/FutureBuilder-class.html),
+because it depends on data loaded by async call.
 Since the history widget is updated after the saving of currency conversion, 
 it is notified about the change with help of the [Provider](https://pub.dev/packages/provider) package.
 The Last History widget is a part of the History feature and it is exposed 
-by the respective Facade class, so it can be called by the Conversion feature.
+by the respective facade class [HistoryFeatureFacade](https://github.com/tnsoftbear/flutter_currency_calculator/blob/main/lib/feature/history/public/history_feature_facade.dart),
+so it can be called by the Conversion feature.
 
 ### Settings feature
 
