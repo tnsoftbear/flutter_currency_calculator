@@ -170,8 +170,9 @@ echo ```sh > ./doc/lib_tree.md & echo lib >> ./doc/lib_tree.md & tree /F /A lib 
 ## Screens
 
 ![Currency calculator screen](./doc/pic/scr-1.png)
-![Settings screen](./doc/pic/scr-2.png)
-![History screen](./doc/pic/scr-3.png)
+![History screen](./doc/pic/scr-2.png)
+![Settings screen - Appearance](./doc/pic/scr-3.png)
+![Settings screen - Currency](./doc/pic/scr-4.jpg)
 
 ## Links
 
