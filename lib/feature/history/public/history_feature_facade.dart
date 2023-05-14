@@ -5,8 +5,9 @@ import 'package:currency_calc/feature/history/internal/ui/screen/all_history_scr
 import 'package:currency_calc/feature/history/internal/ui/widget/last_history/last_history_widget.dart';
 
 class HistoryFeatureFacade {
-  HistoryFeatureFacade(HistoryFeatureDic this._dic) {
+  HistoryFeatureFacade() {
     HistoryFeatureInitializer();
+    this._dic = HistoryFeatureDic();
   }
 
   late final HistoryFeatureDic _dic;

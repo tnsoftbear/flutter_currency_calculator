@@ -7,10 +7,6 @@ This is a simple demo app for currency conversion.
 
 Project structure is organized by the the ["feature first"](https://codewithandrea.com/articles/flutter-project-structure/) style.
 
-Each feature defines published API for inter-feature communication.
-It can be found in the facade class in `/lib/feature/<feature_name>/public/` folder.
-Features should not call each other directly, but only through the public API.
-
 Feature internal logic is located in the `/lib/feature/<feature_name>/internal/` folder.
 It is separated to ui, application, infrastructure and domain layers.
 See namespaces structure in folder tree view in the [lib/ tree](doc/lib_tree.md) document.
@@ -25,11 +21,29 @@ It contains logic that accesses external resources, such as API, database, etc.
 **Domain layer** operates only in bounds of its own space.
 It is pure functional core with business logic, entities and data models.
 
+### Feature communication and dependency injection
+
+Each feature defines published API for inter-feature communication.
+It can be found in the facade class in `/lib/feature/<feature_name>/public/<feature_name>_facade.dart` class.
+Features should not call each other directly, but only through the public API.
+
+Each feature has its own dependency injection container, 
+that is located in the `/lib/feature/<feature_name>/internal/app/init/<feature_name>_feature_dic.dart` class.
+It doesn't use any DI package, but it assembles dependencies manually and explicitly.
+
+In case, if feature needs some kind of its out-of-process services initialization, like DB,
+this task is handled by the class located in `/lib/feature/<feature_name>/internal/app/init/<feature_name>_feature_initializer.dart`.
+
+Dependency injection container and feature initializer are started by the feature facade.
+Feature facades are injected into the application logic with help of [Provider](https://pub.dev/packages/provider) package.
+
 ### Shared code
 
 Features can call widgets located in the `/lib/front` namespace, where we define common widgets,
 the application entry point and general configuration of UI appearance.
 Application bootstrapping logic is in the `/lib/front/app/boot/` folder.
+
+There is also `/lib/core` namespace for the shared logic, like Clock abstraction.
 
 ## Features
 

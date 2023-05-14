@@ -3,8 +3,9 @@ import 'package:currency_calc/feature/conversion/internal/app/init/conversion_fe
 import 'package:currency_calc/feature/conversion/internal/ui/screen/calculator_screen.dart';
 
 class ConversionFeatureFacade {
-  ConversionFeatureFacade(ConversionFeatureDic this._dic) {
+  ConversionFeatureFacade() {
     ConversionFeatureInitializer();
+    this._dic = ConversionFeatureDic();
   }
 
   late final ConversionFeatureDic _dic;

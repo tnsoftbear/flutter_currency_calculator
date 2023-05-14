@@ -4,8 +4,9 @@ import 'package:currency_calc/feature/currency/internal/ui/setting/currency_sett
 export "package:currency_calc/feature/currency/internal/domain/model/currency.dart";
 
 class CurrencyFeatureFacade {
-  CurrencyFeatureFacade(CurrencyFeatureDic this._dic) {
+  CurrencyFeatureFacade() {
     CurrencyFeatureInitializer();
+    this._dic = CurrencyFeatureDic();
   }
 
   late final CurrencyFeatureDic _dic;
