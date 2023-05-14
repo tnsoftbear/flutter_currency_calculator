@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 
 class Bootstrapper {
   static Future<MultiProvider> setup() async {
-    Bootstrapper._init();
+    _init();
 
     final currencyFeatureFacade = CurrencyFeatureFacade();
     await currencyFeatureFacade.populateIfNeeded();

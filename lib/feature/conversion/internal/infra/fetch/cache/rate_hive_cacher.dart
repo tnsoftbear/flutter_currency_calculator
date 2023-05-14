@@ -1,4 +1,4 @@
-import 'package:currency_calc/core/clock/clock.dart';
+import 'package:clock/clock.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/fetch/cache/rate_cacher.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/model/exchange_rate_record.dart';
 import 'package:currency_calc/feature/conversion/internal/infra/repository/exchange_rate_record_repository.dart';
@@ -18,7 +18,7 @@ class RateHiveCacher extends RateCacher {
         await _exchangeRateRecordRepository.loadByKey(key);
     if (record != null) {
       DateTime expiredAt = record.createdAt.add(Duration(seconds: _ttl));
-      if (_clock.getCurrentDateUtc().isBefore(expiredAt)) {
+      if (_clock.now().toUtc().isBefore(expiredAt)) {
         return record.exchangeRate;
       }
 
@@ -36,7 +36,7 @@ class RateHiveCacher extends RateCacher {
       sourceCurrencyCode: sourceCurrencyCode,
       targetCurrencyCode: targetCurrencyCode,
       exchangeRate: rate,
-      createdAt: _clock.getCurrentDateUtc(),
+      createdAt: _clock.now().toUtc(),
     );
     await _exchangeRateRecordRepository.saveByKey(key, record);
   }

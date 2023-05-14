@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'package:currency_calc/core/clock/clock.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/fetch/load/rate_fetcher.dart';
 import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
 import 'package:currency_calc/front/ui/theme/additional_colors.dart';
@@ -15,13 +14,11 @@ import 'package:provider/provider.dart';
 
 class CalculatorWidget extends StatefulWidget {
   CalculatorWidget(
-      Clock this.clock,
       ConversionValidationTranslator this.conversionValidationTranslator,
       RateFetcher this.rateFetcher,
       {Key? key})
       : super(key: key);
 
-  final Clock clock;
   final ConversionValidationTranslator conversionValidationTranslator;
   final RateFetcher rateFetcher;
 
@@ -264,7 +261,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
     log(
         'Saved currency conversion record (Source: $_selectedSourceCurrencyCode $_sourceAmount, ' +
             'Target: $_selectedTargetCurrencyCode $_targetAmount, Rate: $_rate)',
-        time: widget.clock.getCurrentDateSys(),
+        time: DateTime.now(), // don't mock time in log messages
         name: 'CurrencyConversionScreen');
   }
 

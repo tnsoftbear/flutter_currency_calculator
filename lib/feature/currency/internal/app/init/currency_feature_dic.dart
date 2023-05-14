@@ -1,5 +1,4 @@
-import 'package:currency_calc/core/clock/clock.dart';
-import 'package:currency_calc/core/clock/date_time_clock.dart';
+import 'package:clock/clock.dart';
 import 'package:currency_calc/feature/currency/internal/app/load/currency_loader.dart';
 import 'package:currency_calc/feature/currency/internal/app/populate/currency_populator.dart';
 import 'package:currency_calc/feature/currency/internal/app/update/currency_visibility_updater.dart';
@@ -8,21 +7,19 @@ import 'package:currency_calc/feature/currency/internal/infra/repository/currenc
 
 class CurrencyFeatureDic {
   CurrencyFeatureDic() {
-    _clock = DateTimeClock();
-    final currencyRepository = CurrencyRepository(_clock);
+    final currencyRepository = CurrencyRepository(clock);
     final currencyFetcher = FawazAhmedAvailableCurrencyFetcher();
     _currencyPopulator =
-        CurrencyPopulator(_clock, currencyFetcher, currencyRepository);
+        CurrencyPopulator(clock, currencyFetcher, currencyRepository);
     _currencyLoader = CurrencyLoader(currencyRepository, _currencyPopulator);
     _currencyVisibilityUpdater = CurrencyVisibilityUpdater(currencyRepository);
   }
 
-  late final Clock _clock;
   late final CurrencyLoader _currencyLoader;
   late final CurrencyPopulator _currencyPopulator;
   late final CurrencyVisibilityUpdater _currencyVisibilityUpdater;
 
-  Clock get clock => _clock;
+  Clock get clock => Clock();
 
   CurrencyLoader get currencyLoader => _currencyLoader;
 

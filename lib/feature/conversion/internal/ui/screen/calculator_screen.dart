@@ -1,4 +1,3 @@
-import 'package:currency_calc/core/clock/clock.dart';
 import 'package:currency_calc/feature/conversion/internal/app/translate/conversion_validation_translator.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/fetch/load/rate_fetcher.dart';
 import 'package:currency_calc/front/app/constant/appearance_constant.dart';
@@ -12,13 +11,11 @@ import 'package:provider/provider.dart';
 
 class CalculatorScreen extends StatelessWidget {
   const CalculatorScreen(
-      Clock this._clock,
       ConversionValidationTranslator this._conversionValidationTranslator,
       RateFetcher this._rateFetcher,
       {Key? key})
       : super(key: key);
 
-  final Clock _clock;
   final ConversionValidationTranslator _conversionValidationTranslator;
   final RateFetcher _rateFetcher;
 
@@ -46,7 +43,7 @@ class CalculatorScreen extends StatelessWidget {
             children: [
               Container(
                 child: CalculatorWidget(
-                    _clock, _conversionValidationTranslator, _rateFetcher),
+                    _conversionValidationTranslator, _rateFetcher),
               ),
               Container(height: 300, child: lastHistoryWidget),
             ],

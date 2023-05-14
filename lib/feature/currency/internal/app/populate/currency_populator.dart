@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:currency_calc/core/clock/clock.dart';
+import 'package:clock/clock.dart';
 import 'package:currency_calc/feature/currency/internal/domain/collect/currency_collector.dart';
 import 'package:currency_calc/feature/currency/internal/domain/fetch/load/currency_fetcher.dart';
 import 'package:currency_calc/feature/currency/internal/domain/model/currency.dart';
@@ -29,7 +29,7 @@ class CurrencyPopulator {
     }
 
     final differenceInSec =
-        _clock.getCurrentDateUtc().difference(lastUpdateDate).inSeconds;
+        _clock.now().toUtc().difference(lastUpdateDate).inSeconds;
     return differenceInSec > _populationIntervalInDays * 24 * 60 * 60;
   }
 

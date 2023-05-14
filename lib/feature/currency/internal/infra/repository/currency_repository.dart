@@ -1,4 +1,4 @@
-import 'package:currency_calc/core/clock/clock.dart';
+import 'package:clock/clock.dart';
 import 'package:currency_calc/feature/currency/internal/domain/model/currency.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -114,7 +114,7 @@ class CurrencyRepository {
 
   Future<void> saveLastUpdateDateToNow() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final currentDateUtcTs = _clock.getCurrentDateUtc().millisecondsSinceEpoch;
+    final currentDateUtcTs = _clock.now().toUtc().millisecondsSinceEpoch;
     await prefs.setInt('lastUpdateTimestamp', currentDateUtcTs);
   }
 }

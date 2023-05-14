@@ -43,8 +43,6 @@ Features can call widgets located in the `/lib/front` namespace, where we define
 the application entry point and general configuration of UI appearance.
 Application bootstrapping logic is in the `/lib/front/app/boot/` folder.
 
-There is also `/lib/core` namespace for the shared logic, like Clock abstraction.
-
 ## Features
 
 You can find there the next features:

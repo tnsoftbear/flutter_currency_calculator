@@ -12,6 +12,6 @@ class ConversionFeatureFacade {
 
   CalculatorScreen createCalculatorScreen() {
     return CalculatorScreen(
-        _dic.clock, _dic.conversionValidationTranslator, _dic.rateFetcher);
+        _dic.conversionValidationTranslator, _dic.rateFetcher);
   }
 }

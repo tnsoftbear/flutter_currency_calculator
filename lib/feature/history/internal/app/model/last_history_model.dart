@@ -1,4 +1,4 @@
-import 'package:currency_calc/core/clock/clock.dart';
+import 'package:clock/clock.dart';
 import 'package:currency_calc/feature/history/internal/domain/model/conversion_history_record.dart';
 import 'package:currency_calc/feature/history/internal/infra/repository/conversion_history_record_repository.dart';
 import 'package:flutter/foundation.dart';
@@ -36,7 +36,7 @@ class LastHistoryModel with ChangeNotifier {
         sourceAmount: sourceAmount,
         targetAmount: targetAmount,
         rate: rate,
-        date: _clock.getCurrentDateUtc());
+        date: clock.now().toUtc());
     await _conversionHistoryRecordRepository.save(historyRecord);
     notifyListeners();
   }
