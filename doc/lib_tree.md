@@ -2,7 +2,7 @@
 lib  
 |   main.dart
 |   
-+---common
++---core
 |   \---clock
 |           clock.dart
 |           date_time_clock.dart

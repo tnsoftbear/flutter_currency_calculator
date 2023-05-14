@@ -94,6 +94,11 @@ This facade class also provides a command method for initiating currency databas
 It also provides the method for accessing one widget component from UI layer.
 The Settings feature calls it to display the list of available currencies in the Settings screen. 
 
+You might be interested to review the way how do we prepare internal dependencies for the feature usage.
+Look to the [CurrencyFeatureDic](https://github.com/tnsoftbear/flutter_currency_calculator/blob/main/lib/feature/currency/internal/app/init/currency_feature_dic.dart) class.
+It build dependency graph and pass dependencies down to the internal layers.
+This dependency assembling logic is called once at top layer of application [Bootstrapper](https://github.com/tnsoftbear/flutter_currency_calculator/blob/main/lib/front/app/boot/bootstrapper.dart) and is used in the CurrencyFeatureFacade too.
+
 ## Tests
 
 There are few unit tests for conversion input validation and calculation logic.
