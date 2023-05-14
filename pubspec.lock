@@ -757,10 +757,11 @@ packages:
   vertical_tabs_flutter:
     dependency: "direct main"
     description:
-      name: vertical_tabs_flutter
-      sha256: d855257c7f042fb0429a1d1add679458a54692cf6aa46c6d0347fef7de5c4e27
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: fix_transparency
+      resolved-ref: eb78f5c1b5e07b5f918417301f8791f4e59ecb94
+      url: "https://github.com/tnsoftbear/vertical_tabs_flutter.git"
+    source: git
     version: "1.0.0"
   watcher:
     dependency: transitive

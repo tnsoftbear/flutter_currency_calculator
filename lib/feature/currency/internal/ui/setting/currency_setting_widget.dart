@@ -37,6 +37,7 @@ class CurrencySettingWidget extends StatelessWidget {
           return DefaultTabController(
             length: letters.data!.length,
             child: VerticalTabs(
+                materialType: MaterialType.transparency,
                 backgroundColor: Colors.transparent,
                 tabBackgroundColor: Colors.transparent,
                 selectedTabBackgroundColor: theme.primaryColor.withOpacity(0.2),
