@@ -101,7 +101,8 @@ class CurrencyRepository {
   Future<void> save(Currency currency) async {
     await init();
     await box!.put(currency.code, currency);
-    await box!.close();
+    print('saved ${currency.code} and ${currency.isVisibleForSource} isVisibleForSource and ${currency.isVisibleForTarget} isVisibleForTarget');
+    //await box!.close();
   }
 
   Future<void> saveAll(Map<String, Currency> currencies) async {
@@ -109,7 +110,6 @@ class CurrencyRepository {
     for (var currencyCode in currencies.keys) {
       await box!.put(currencyCode, currencies[currencyCode]!);
     }
-    await box!.close();
   }
 
   Future<void> saveLastUpdateDateToNow() async {

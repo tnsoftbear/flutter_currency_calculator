@@ -23,12 +23,10 @@ class ExchangeRateRecordRepository {
   Future<void> saveByKey(String key, ExchangeRateRecord record) async {
     await init();
     await box!.put(key, record);
-    await box!.close();
   }
 
   Future<void> deleteByKey(String key) async {
     await init();
     await box!.delete(key);
-    await box!.close();
   }
 }

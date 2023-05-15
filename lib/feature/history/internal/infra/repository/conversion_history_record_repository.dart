@@ -28,12 +28,10 @@ class ConversionHistoryRecordRepository {
   Future<void> save(ConversionHistoryRecord record) async {
     await init();
     await box!.add(record);
-    await box!.close();
   }
 
   Future<void> deleteByIndex(int index) async {
     await init();
     await box!.deleteAt(index);
-    await box!.close();
   }
 }

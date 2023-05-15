@@ -12,24 +12,23 @@ class CurrencyVisibilityUpdater {
   Future<Currency?> changeVisibleSourceCurrency(
       Currency currency, bool? isVisible, SettingModel settingModel) async {
     isVisible ??= false;
-    Currency newCurrency;
     if (isVisible) {
-      newCurrency = currency.copyWith(isVisibleForSource: true);
-      await _currencyRepository.save(newCurrency);
+      currency.isVisibleForSource = true;
+      await _currencyRepository.save(currency);
     } else {
       // Reject to remove last currency.
       if (await _currencyRepository.countVisibleSourceCurrencies() == 1) {
         return null;
       }
 
-      newCurrency = currency.copyWith(isVisibleForSource: false);
-      await _currencyRepository.save(newCurrency);
+      currency.isVisibleForSource = false;
+      await _currencyRepository.save(currency);
     }
 
     settingModel.updateVisibleSourceCurrencyCodes(
         await _currencyRepository.loadVisibleSourceCurrencyCodes());
-    await _correctSelectedSourceCurrency(newCurrency, settingModel);
-    return newCurrency;
+    await _correctSelectedSourceCurrency(currency, settingModel);
+    return currency;
   }
 
   Future<void> _correctSelectedSourceCurrency(
@@ -64,24 +63,23 @@ class CurrencyVisibilityUpdater {
   Future<Currency?> changeVisibleTargetCurrency(
       Currency currency, bool? isVisible, SettingModel settingModel) async {
     isVisible ??= false;
-    Currency newCurrency;
     if (isVisible) {
-      newCurrency = currency.copyWith(isVisibleForTarget: true);
-      await _currencyRepository.save(newCurrency);
+      currency.isVisibleForTarget = true;
+      await _currencyRepository.save(currency);
     } else {
       // Reject to remove last currency.
       if (await _currencyRepository.countVisibleTargetCurrencies() == 1) {
         return null;
       }
 
-      newCurrency = currency.copyWith(isVisibleForTarget: false);
-      await _currencyRepository.save(newCurrency);
+      currency.isVisibleForTarget = false;
+      await _currencyRepository.save(currency);
     }
 
     settingModel.updateVisibleTargetCurrencyCodes(
         await _currencyRepository.loadVisibleTargetCurrencyCodes());
-    await _correctSelectedTargetCurrency(newCurrency, settingModel);
-    return newCurrency;
+    await _correctSelectedTargetCurrency(currency, settingModel);
+    return currency;
   }
 
   Future<void> _correctSelectedTargetCurrency(

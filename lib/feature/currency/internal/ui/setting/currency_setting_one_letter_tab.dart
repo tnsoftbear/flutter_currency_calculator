@@ -19,8 +19,6 @@ class CurrencySettingOneLetterTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tr = AppLocalizations.of(context);
-    final theme = Theme.of(context);
     return FutureBuilder(
         future: _currencyLoader.loadCurrenciesByCodeFirstLetter(_letter),
         builder: (context, snapshot) {
@@ -45,72 +43,82 @@ class CurrencySettingOneLetterTab extends StatelessWidget {
                   3: FlexColumnWidth(1),
                 },
                 children: [
-                  TableRow(
-                    decoration: BoxDecoration(color: theme.primaryColor),
-                    children: [
-                      TableCell(
-                        child: Padding(
-                            padding: padding,
-                            child: Text(
-                              tr.settingCurrencyCode,
-                              style: theme.primaryTextTheme.titleSmall,
-                            )),
-                      ),
-                      TableCell(
-                        child: Padding(
-                            padding: padding,
-                            child: Text(
-                              tr.settingCurrencyName,
-                              style: theme.primaryTextTheme.titleSmall,
-                            )),
-                      ),
-                      TableCell(
-                        child: Padding(
-                            padding: padding,
-                            child: Text(
-                              tr.settingSourceCurrency,
-                              style: theme.primaryTextTheme.titleSmall,
-                            )),
-                      ),
-                      TableCell(
-                        child: Padding(
-                            padding: padding,
-                            child: Text(
-                              tr.settingTargetCurrency,
-                              style: theme.primaryTextTheme.titleSmall,
-                            )),
-                      ),
-                    ],
-                  ),
+                  headerRow(context, padding),
                   for (var currency in snapshot.data as List<Currency>)
-                    TableRow(
-                      children: [
-                        TableCell(
-                          child: Padding(
-                            padding: padding,
-                            child: Text(currency.code),
-                          ),
-                        ),
-                        TableCell(
-                          child: Padding(
-                            padding: padding,
-                            child: Text(currency.name),
-                          ),
-                        ),
-                        TableCell(
-                          child: CurrencyCheckbox(
-                              currency, true, _currencyVisibilityUpdater),
-                        ),
-                        TableCell(
-                          child: CurrencyCheckbox(
-                              currency, false, _currencyVisibilityUpdater),
-                        ),
-                      ],
-                    ),
+                    dataRow(currency, padding),
                 ],
               ),
             ),
           );
         });
+  }
+
+  TableRow headerRow(BuildContext context, EdgeInsets padding) {
+    final tr = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    return TableRow(
+      decoration: BoxDecoration(color: theme.primaryColor),
+      children: [
+        TableCell(
+          child: Padding(
+              padding: padding,
+              child: Text(
+                tr.settingCurrencyCode,
+                style: theme.primaryTextTheme.titleSmall,
+              )),
+        ),
+        TableCell(
+          child: Padding(
+              padding: padding,
+              child: Text(
+                tr.settingCurrencyName,
+                style: theme.primaryTextTheme.titleSmall,
+              )),
+        ),
+        TableCell(
+          child: Padding(
+              padding: padding,
+              child: Text(
+                tr.settingSourceCurrency,
+                style: theme.primaryTextTheme.titleSmall,
+              )),
+        ),
+        TableCell(
+          child: Padding(
+              padding: padding,
+              child: Text(
+                tr.settingTargetCurrency,
+                style: theme.primaryTextTheme.titleSmall,
+              )),
+        ),
+      ],
+    );
+  }
+
+  TableRow dataRow(Currency currency, EdgeInsets padding) {
+    return TableRow(
+      children: [
+        TableCell(
+          child: Padding(
+            padding: padding,
+            child: Text(currency.code),
+          ),
+        ),
+        TableCell(
+          child: Padding(
+            padding: padding,
+            child: Text(currency.name),
+          ),
+        ),
+        TableCell(
+          child: CurrencyCheckbox(
+              currency, true, _currencyVisibilityUpdater),
+        ),
+        TableCell(
+          child: CurrencyCheckbox(
+              currency, false, _currencyVisibilityUpdater),
+        ),
+      ],
+    );
   }
 }
