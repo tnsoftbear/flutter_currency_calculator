@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer' as dev;
 import 'package:currency_calc/feature/currency/internal/domain/fetch/load/currency_fetcher.dart';
 import 'package:currency_calc/feature/currency/internal/domain/model/currency.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 class FawazAhmedAvailableCurrencyFetcher implements CurrencyFetcher {
   final String url =
@@ -11,15 +11,15 @@ class FawazAhmedAvailableCurrencyFetcher implements CurrencyFetcher {
   //FawazAhmedAvailableCurrencyFetcher({required this.url});
 
   Future<Map<String, Currency>> fetchAvailableCurrencies() async {
-    final response = await http.get(Uri.parse(url));
+    final response = await Dio().get(url);
     if (response.statusCode == 200) {
-      final fetchedCurrencies = json.decode(response.body);
+      print(await response.data.toString());
+      final fetchedCurrencies = json.decode(response.data!);
       dev.log("Available currencies fetched from API. Count: ${fetchedCurrencies.length}");
       final Map<String, Currency> resultCurrencies = {};
       for (var key in fetchedCurrencies.keys) {
-        var name = fetchedCurrencies[key]!;
-        final code = key.toUpperCase();
-        resultCurrencies[code] = Currency(code, name);
+        Currency currency = Currency(key, fetchedCurrencies[key]!);
+        resultCurrencies[currency.code] = currency;
       }
       return resultCurrencies;
 

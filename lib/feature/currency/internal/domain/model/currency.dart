@@ -7,7 +7,9 @@ typedef CurrencyMap = Map<String, Currency>;
 @HiveType(typeId: 2)
 class Currency {
   Currency(this.code, this.name,
-      [this.isVisibleForSource = false, this.isVisibleForTarget = false]);
+      [this.isVisibleForSource = false, this.isVisibleForTarget = false]) {
+    code = code.toUpperCase();
+  }
 
   @HiveField(0)
   String code;
