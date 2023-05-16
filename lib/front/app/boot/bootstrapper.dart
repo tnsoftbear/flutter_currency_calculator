@@ -8,6 +8,7 @@ import 'package:currency_calc/feature/setting/public/setting_feature_facade.dart
 import 'package:currency_calc/front/ui/widget/front_material_app.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +22,8 @@ class Bootstrapper {
     final settingModelManager = SettingModelManager(currencyFeatureFacade);
     final settingModel = await SettingModel(settingModelManager).init();
 
+    FlutterNativeSplash.remove();
+
     return MultiProvider(providers: [
       ChangeNotifierProvider(create: (_) => settingModel),
       Provider(create: (_) => AboutFeatureFacade()),
@@ -32,7 +35,8 @@ class Bootstrapper {
   }
 
   static Future<void> _init() async {
-    WidgetsFlutterBinding.ensureInitialized();
+    WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
     await Hive.initFlutter();
     await SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);

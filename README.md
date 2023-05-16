@@ -146,6 +146,8 @@ Few reminders for myself:
 flutter pub run build_runner build --delete-conflicting-outputs
 # Generate translation classes
 flutter gen-l10n
+# Generate splash screens
+flutter pub run flutter_native_splash:create
 ```
 
 #### Document

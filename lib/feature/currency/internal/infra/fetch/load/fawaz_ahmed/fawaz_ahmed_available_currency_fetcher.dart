@@ -11,7 +11,7 @@ class FawazAhmedAvailableCurrencyFetcher implements CurrencyFetcher {
   //FawazAhmedAvailableCurrencyFetcher({required this.url});
 
   Future<Map<String, Currency>> fetchAvailableCurrencies() async {
-    final response = await Dio().get(url);
+    final response = await Dio().get<String>(url);
     if (response.statusCode == 200) {
       print(await response.data.toString());
       final fetchedCurrencies = json.decode(response.data!);
