@@ -5,7 +5,7 @@ import 'package:currency_calc/feature/currency/internal/app/update/currency_visi
 import 'package:currency_calc/feature/currency/internal/infra/fetch/load/fawaz_ahmed/fawaz_ahmed_available_currency_fetcher.dart';
 import 'package:currency_calc/feature/currency/internal/infra/repository/currency_repository.dart';
 
-class CurrencyFeatureDic {
+final class CurrencyFeatureDic {
   CurrencyFeatureDic() {
     final currencyRepository = CurrencyRepository(clock);
     final currencyFetcher = FawazAhmedAvailableCurrencyFetcher();

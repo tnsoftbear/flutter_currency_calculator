@@ -2,11 +2,6 @@
 lib  
 |   main.dart
 |   
-+---core
-|   \---clock
-|           clock.dart
-|           date_time_clock.dart
-|           
 +---feature
 |   +---about
 |   |   +---internal
@@ -55,15 +50,15 @@ lib
 |   |   |   |           conversion_validator.dart
 |   |   |   |           
 |   |   |   +---infra
-|   |   |   |   +---constant
-|   |   |   |   |       rate_fetching_constant.dart
-|   |   |   |   |       
 |   |   |   |   +---fetch
 |   |   |   |   |   +---cache
+|   |   |   |   |   |       caching_type.dart
 |   |   |   |   |   |       rate_hive_cacher.dart
 |   |   |   |   |   |       rate_memory_cacher.dart
 |   |   |   |   |   |       
 |   |   |   |   |   \---load
+|   |   |   |   |       |   fetching_type.dart
+|   |   |   |   |       |   
 |   |   |   |   |       +---fawaz_ahmed
 |   |   |   |   |       |       fawaz_ahmed_rate_data.dart
 |   |   |   |   |       |       fawaz_ahmed_rate_fetcher.dart

@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SettingRepository {
+final class SettingRepository {
   static Future<String?> loadString(String key) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     return await prefs.getString(key);

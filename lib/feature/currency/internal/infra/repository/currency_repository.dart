@@ -3,7 +3,7 @@ import 'package:currency_calc/feature/currency/internal/domain/model/currency.da
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CurrencyRepository {
+final class CurrencyRepository {
   CurrencyRepository(this._clock);
 
   static const BOX_NAME = 'Currency';

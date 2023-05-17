@@ -5,7 +5,7 @@ part 'currency.g.dart';
 typedef CurrencyMap = Map<String, Currency>;
 
 @HiveType(typeId: 2)
-class Currency {
+final class Currency {
   Currency(this.code, this.name,
       [this.isVisibleForSource = false, this.isVisibleForTarget = false]) {
     code = code.toUpperCase();

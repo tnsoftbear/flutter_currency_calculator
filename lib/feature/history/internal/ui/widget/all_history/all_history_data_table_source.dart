@@ -1,7 +1,7 @@
 import 'package:currency_calc/feature/history/internal/ui/widget/history_output/history_output_dto.dart';
 import 'package:flutter/material.dart';
 
-class AllHistoryDataTableSource extends DataTableSource {
+final class AllHistoryDataTableSource extends DataTableSource {
   AllHistoryDataTableSource(
       BuildContext this._context,
       List<HistoryOutputDto> this._historyRecords,

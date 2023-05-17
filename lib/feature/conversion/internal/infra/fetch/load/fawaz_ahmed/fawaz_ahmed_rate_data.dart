@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class FawazAhmedRateData {
+final class FawazAhmedRateData {
   final String date;
   final double rate;
 

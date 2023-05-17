@@ -12,7 +12,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class CalculatorWidget extends StatefulWidget {
+final class CalculatorWidget extends StatefulWidget {
   CalculatorWidget(
       ConversionValidationTranslator this.conversionValidationTranslator,
       RateFetcher this.rateFetcher,
@@ -26,7 +26,7 @@ class CalculatorWidget extends StatefulWidget {
   _CalculatorWidgetState createState() => _CalculatorWidgetState();
 }
 
-class _CalculatorWidgetState extends State<CalculatorWidget> {
+final class _CalculatorWidgetState extends State<CalculatorWidget> {
   late bool _isLoading;
   late bool _areActionButtonsVisible;
   late double _rate;

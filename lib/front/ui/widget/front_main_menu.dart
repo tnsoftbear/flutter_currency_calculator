@@ -4,7 +4,7 @@ import 'package:currency_calc/front/ui/theme/additional_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class FrontMainMenu extends StatelessWidget {
+final class FrontMainMenu extends StatelessWidget {
   const FrontMainMenu({Key? key}) : super(key: key);
 
   @override

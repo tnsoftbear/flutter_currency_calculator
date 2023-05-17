@@ -160,11 +160,9 @@ echo ```sh > ./doc/lib_tree.md & echo lib >> ./doc/lib_tree.md & tree /F /A lib 
 #### TODO
 
 * [ ] Riverpod(?)
-* [ ] More DI
 * [ ] Swipe screens (History <- Calculator -> Settings)
 * [ ] Tests
 * [ ] Compare exchange rate with past dates
-* [ ] App icon
 * [ ] Notes
 
 ## Screens
@@ -181,6 +179,8 @@ echo ```sh > ./doc/lib_tree.md & echo lib >> ./doc/lib_tree.md & tree /F /A lib 
 * [Style guide for Flutter repo](https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo)
 * [Internationalizing Flutter apps](https://docs.flutter.dev/development/accessibility-and-localization/internationalization)
 * [Flutter 3: How to extend ThemeData](https://medium.com/geekculture/flutter-3-how-to-extend-themedata-56b8923bf1aa)
+* [Adding a splash screen to your Android app](https://docs.flutter.dev/platform-integration/android/splash-screen)
+* [Change Flutter App Launcher Icon](https://medium.com/flutter-community/change-flutter-app-launcher-icon-59c31bcd7554)
 
 ---
 

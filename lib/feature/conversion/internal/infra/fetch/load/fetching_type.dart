@@ -1,0 +1,4 @@
+enum FetchingType {
+  fixerIo,
+  fawazAhmed,
+}

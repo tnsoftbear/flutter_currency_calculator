@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class StandardProgressIndicator extends StatelessWidget {
+final class StandardProgressIndicator extends StatelessWidget {
   const StandardProgressIndicator({Key? key}) : super(key: key);
 
   @override

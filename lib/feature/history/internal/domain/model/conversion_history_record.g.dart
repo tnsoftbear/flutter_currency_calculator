@@ -6,7 +6,7 @@ part of 'conversion_history_record.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ConversionHistoryRecordAdapter
+final class ConversionHistoryRecordAdapter
     extends TypeAdapter<ConversionHistoryRecord> {
   @override
   final int typeId = 0;

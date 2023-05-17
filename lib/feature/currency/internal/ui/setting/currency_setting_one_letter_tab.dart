@@ -5,7 +5,7 @@ import 'package:currency_calc/feature/currency/public/currency_feature_facade.da
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class CurrencySettingOneLetterTab extends StatelessWidget {
+final class CurrencySettingOneLetterTab extends StatelessWidget {
   CurrencySettingOneLetterTab(
       String this._letter,
       CurrencyLoader this._currencyLoader,

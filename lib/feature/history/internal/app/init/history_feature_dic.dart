@@ -1,7 +1,7 @@
 import 'package:clock/clock.dart';
 import 'package:currency_calc/feature/history/internal/infra/repository/conversion_history_record_repository.dart';
 
-class HistoryFeatureDic {
+final class HistoryFeatureDic {
   HistoryFeatureDic() {
     _conversionHistoryRecordRepository = ConversionHistoryRecordRepository();
   }

@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 part 'conversion_history_record.g.dart';
 
 @HiveType(typeId: 0)
-class ConversionHistoryRecord extends Equatable {
+final class ConversionHistoryRecord extends Equatable {
   const ConversionHistoryRecord(
       {required this.sourceCurrencyCode,
       required this.sourceAmount,

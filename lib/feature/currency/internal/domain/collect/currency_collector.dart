@@ -1,6 +1,6 @@
 import 'package:currency_calc/feature/currency/internal/domain/model/currency.dart';
 
-class CurrencyCollector {
+final class CurrencyCollector {
   static const VISIBLE_CURRENCY_CODES = ['EUR', 'GBP', 'RUB', 'USD'];
 
   static CurrencyMap collectMissingCurrencies(

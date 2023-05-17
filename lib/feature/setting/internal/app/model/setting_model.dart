@@ -2,7 +2,7 @@ import 'package:currency_calc/front/app/constant/appearance_constant.dart';
 import 'package:currency_calc/feature/setting/internal/app/model/setting_model_manager.dart';
 import 'package:flutter/cupertino.dart';
 
-class SettingModel with ChangeNotifier {
+final class SettingModel with ChangeNotifier {
   SettingModel(this._settingModelManager);
 
   static const SOURCE_CURRENCY_CODE_DEFAULT = 'USD';

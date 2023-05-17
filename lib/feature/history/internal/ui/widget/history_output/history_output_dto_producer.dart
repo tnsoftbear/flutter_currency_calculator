@@ -2,7 +2,7 @@ import 'package:currency_calc/feature/history/internal/domain/model/conversion_h
 import 'package:currency_calc/feature/history/internal/ui/widget/history_output/history_output_dto.dart';
 import 'package:intl/intl.dart';
 
-class HistoryOutputDtoProducer {
+final class HistoryOutputDtoProducer {
   static List<HistoryOutputDto> produce(
       List<ConversionHistoryRecord> records, String localeName) {
     final df = DateFormat.yMMMd(localeName);

@@ -2,7 +2,7 @@ import 'package:currency_calc/feature/setting/public/setting_feature_facade.dart
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
-class FrontHeaderBar extends AppBar {
+final class FrontHeaderBar extends AppBar {
   final String titleText;
   final bool isSettingMenu;
   final PreferredSizeWidget? bottom;
@@ -14,7 +14,7 @@ class FrontHeaderBar extends AppBar {
   _HeaderBarState createState() => _HeaderBarState();
 }
 
-class _HeaderBarState extends State<FrontHeaderBar> {
+final class _HeaderBarState extends State<FrontHeaderBar> {
   @override
   Widget build(BuildContext context) {
     final actions = widget.isSettingMenu

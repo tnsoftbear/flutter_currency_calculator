@@ -4,7 +4,7 @@ import 'package:currency_calc/feature/setting/internal/app/model/setting_model.d
 import 'package:currency_calc/feature/setting/internal/infra/repository/setting_repository.dart';
 import 'package:flutter/material.dart';
 
-class SettingModelManager {
+final class SettingModelManager {
   CurrencyFeatureFacade _currencyFeatureFacade;
 
   SettingModelManager(this._currencyFeatureFacade);

@@ -2,7 +2,7 @@ import 'package:currency_calc/feature/conversion/internal/domain/validate/conver
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ConversionValidationTranslator {
+final class ConversionValidationTranslator {
   ConversionValidationTranslator();
 
   String translateConcatenatedErrorMessage(

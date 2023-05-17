@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-class ThemeSettingTableRow extends TableRow {
+final class ThemeSettingTableRow extends TableRow {
   final BuildContext context;
 
   ThemeSettingTableRow(

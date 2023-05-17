@@ -3,7 +3,7 @@ import 'package:currency_calc/feature/history/internal/domain/model/conversion_h
 import 'package:currency_calc/feature/history/internal/infra/repository/conversion_history_record_repository.dart';
 import 'package:flutter/foundation.dart';
 
-class LastHistoryModel with ChangeNotifier {
+final class LastHistoryModel with ChangeNotifier {
   LastHistoryModel(this._clock, this._conversionHistoryRecordRepository,
       {this.lastHistoryRecordCount = 5});
 

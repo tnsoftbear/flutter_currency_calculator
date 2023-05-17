@@ -5,7 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-class LocaleSettingTableRow extends TableRow {
+final class LocaleSettingTableRow extends TableRow {
   final BuildContext context;
 
   LocaleSettingTableRow(

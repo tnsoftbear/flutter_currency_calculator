@@ -12,7 +12,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
-class Bootstrapper {
+final class Bootstrapper {
   static Future<MultiProvider> setup() async {
     _init();
 

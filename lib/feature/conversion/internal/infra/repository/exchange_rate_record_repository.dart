@@ -1,7 +1,7 @@
 import 'package:currency_calc/feature/conversion/internal/domain/model/exchange_rate_record.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-class ExchangeRateRecordRepository {
+final class ExchangeRateRecordRepository {
   ExchangeRateRecordRepository();
 
   static const BOX_NAME = 'CurrencyConversionRateFetchRecord';

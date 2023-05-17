@@ -4,7 +4,7 @@ import 'package:currency_calc/feature/currency/internal/domain/model/currency.da
 import 'package:currency_calc/feature/currency/internal/infra/repository/currency_repository.dart';
 import 'package:currency_calc/feature/setting/internal/app/model/setting_model.dart';
 
-class CurrencyVisibilityUpdater {
+final class CurrencyVisibilityUpdater {
   CurrencyVisibilityUpdater(this._currencyRepository);
 
   final CurrencyRepository _currencyRepository;

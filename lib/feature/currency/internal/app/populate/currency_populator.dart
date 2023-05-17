@@ -6,7 +6,7 @@ import 'package:currency_calc/feature/currency/internal/domain/fetch/load/curren
 import 'package:currency_calc/feature/currency/internal/domain/model/currency.dart';
 import 'package:currency_calc/feature/currency/internal/infra/repository/currency_repository.dart';
 
-class CurrencyPopulator {
+final class CurrencyPopulator {
   CurrencyPopulator(
       this._clock, this._currencyFetcher, this._currencyRepository);
 

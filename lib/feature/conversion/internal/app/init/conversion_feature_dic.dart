@@ -5,7 +5,7 @@ import 'package:currency_calc/feature/conversion/internal/app/translate/conversi
 import 'package:currency_calc/feature/conversion/internal/domain/fetch/load/rate_fetcher.dart';
 import 'package:currency_calc/feature/conversion/internal/infra/repository/exchange_rate_record_repository.dart';
 
-class ConversionFeatureDic {
+final class ConversionFeatureDic {
   ConversionFeatureDic() {
     _conversionValidationTranslator = ConversionValidationTranslator();
     _rateFetcher = RateFetcherFactory(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 @immutable
-class AdditionalColors extends ThemeExtension<AdditionalColors> {
+final class AdditionalColors extends ThemeExtension<AdditionalColors> {
   const AdditionalColors({
     this.linenColor = const Color.fromRGBO(255, 255, 255, 0.5),
     this.linenTurbidColor = const Color.fromRGBO(255, 255, 255, 0.8),

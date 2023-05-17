@@ -2,7 +2,7 @@ import 'package:currency_calc/feature/currency/internal/app/populate/currency_po
 import 'package:currency_calc/feature/currency/internal/domain/model/currency.dart';
 import 'package:currency_calc/feature/currency/internal/infra/repository/currency_repository.dart';
 
-class CurrencyLoader {
+final class CurrencyLoader {
   CurrencyLoader(this._currencyRepository, this._currencyPopulator);
 
   final CurrencyRepository _currencyRepository;

@@ -1,7 +1,7 @@
 import 'package:currency_calc/feature/history/internal/domain/model/conversion_history_record.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-class ConversionHistoryRecordRepository {
+final class ConversionHistoryRecordRepository {
   ConversionHistoryRecordRepository();
 
   static const BOX_NAME = 'CurrencyConversionHistoryRecord';

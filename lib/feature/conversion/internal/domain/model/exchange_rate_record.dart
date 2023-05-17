@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 part 'exchange_rate_record.g.dart';
 
 @HiveType(typeId: 1)
-class ExchangeRateRecord extends Equatable {
+final class ExchangeRateRecord extends Equatable {
   ExchangeRateRecord({
     required this.sourceCurrencyCode,
     required this.targetCurrencyCode,

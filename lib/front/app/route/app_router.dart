@@ -5,7 +5,7 @@ import 'package:currency_calc/feature/setting/public/setting_feature_facade.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AppRouter {
+final class AppRouter {
   static String R_ABOUT = "/about";
   static String R_CALCULATE = "/calculate";
   static String R_HISTORY = "/history";

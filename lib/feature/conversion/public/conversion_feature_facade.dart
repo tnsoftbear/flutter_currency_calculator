@@ -2,7 +2,7 @@ import 'package:currency_calc/feature/conversion/internal/app/init/conversion_fe
 import 'package:currency_calc/feature/conversion/internal/app/init/conversion_feature_initializer.dart';
 import 'package:currency_calc/feature/conversion/internal/ui/screen/calculator_screen.dart';
 
-class ConversionFeatureFacade {
+final class ConversionFeatureFacade {
   ConversionFeatureFacade() {
     ConversionFeatureInitializer();
     this._dic = ConversionFeatureDic();

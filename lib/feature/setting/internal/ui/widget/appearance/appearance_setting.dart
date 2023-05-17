@@ -1,7 +1,7 @@
 import 'package:currency_calc/feature/setting/internal/ui/widget/appearance/option/appearance_setting_option_export.dart';
 import 'package:flutter/cupertino.dart';
 
-class AppearanceSetting extends StatelessWidget {
+final class AppearanceSetting extends StatelessWidget {
   const AppearanceSetting({Key? key}) : super(key: key);
 
   @override

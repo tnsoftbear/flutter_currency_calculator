@@ -1,7 +1,7 @@
 import 'package:currency_calc/feature/conversion/internal/domain/fetch/cache/rate_cacher.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/fetch/load/rate_fetcher.dart';
 
-class RateCachedFetcher implements RateFetcher {
+final class RateCachedFetcher implements RateFetcher {
   final RateFetcher _currencyRateFetcher;
   final RateCacher _currencyRateCacher;
 

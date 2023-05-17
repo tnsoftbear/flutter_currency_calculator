@@ -6,7 +6,7 @@ import 'package:currency_calc/feature/history/internal/ui/widget/all_history/all
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class AllHistoryScreen extends StatelessWidget {
+final class AllHistoryScreen extends StatelessWidget {
   AllHistoryScreen(this._conversionHistoryRecordRepository, {Key? key})
       : super(key: key);
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class StandardErrorLabel extends StatefulWidget {
+final class StandardErrorLabel extends StatefulWidget {
   final String errorText;
 
   const StandardErrorLabel(this.errorText, {Key? key})
@@ -12,7 +12,7 @@ class StandardErrorLabel extends StatefulWidget {
       _StandardErrorLabelState();
 }
 
-class _StandardErrorLabelState extends State<StandardErrorLabel> {
+final class _StandardErrorLabelState extends State<StandardErrorLabel> {
   @override
   Widget build(BuildContext context) {
     final tr = AppLocalizations.of(context);

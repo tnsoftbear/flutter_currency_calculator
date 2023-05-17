@@ -7,7 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'all_history_data_table_source.dart';
 
-class AllHistoryDataTableWidget extends StatefulWidget {
+final class AllHistoryDataTableWidget extends StatefulWidget {
   AllHistoryDataTableWidget(this.conversionHistoryRecordRepository, {Key? key})
       : super(key: key);
 
@@ -17,7 +17,7 @@ class AllHistoryDataTableWidget extends StatefulWidget {
   _HistoryDataTableWidget createState() => _HistoryDataTableWidget();
 }
 
-class _HistoryDataTableWidget extends State<AllHistoryDataTableWidget> {
+final class _HistoryDataTableWidget extends State<AllHistoryDataTableWidget> {
   @override
   Widget build(BuildContext context) {
     final tr = AppLocalizations.of(context);

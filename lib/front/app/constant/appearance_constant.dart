@@ -1,4 +1,4 @@
-class AppearanceConstant {
+final class AppearanceConstant {
   // Language Codes
   static const String LC_DEFAULT = LC_EN;
   static const String LC_EN = 'en';
@@ -26,7 +26,7 @@ class AppearanceConstant {
   static const String BG_IMAGE_FOR_CURRENCY_CONVERSION_ALL_HISTORY_SCREEN =
       'assets/images/cloudy-sky-portrait.jpg';
   static const String BG_IMAGE_FOR_MAIN_MENU_AVATAR =
-      'assets/images/portugal-sea.jpg';
+      'assets/images/rio.jpg';
 
   static const String THEME_BLUE = 'blue';
   static const String THEME_GREEN = 'green';

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:provider/provider.dart';
 
-class CurrencyCheckbox extends HookWidget {
+final class CurrencyCheckbox extends HookWidget {
   const CurrencyCheckbox(
       this._currency, this._isSourceCurrency, this._currencyVisibilityUpdater,
       {Key? key})

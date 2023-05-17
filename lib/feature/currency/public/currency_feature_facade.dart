@@ -3,7 +3,7 @@ import 'package:currency_calc/feature/currency/internal/app/init/currency_featur
 import 'package:currency_calc/feature/currency/internal/ui/setting/currency_setting_widget.dart';
 export "package:currency_calc/feature/currency/internal/domain/model/currency.dart";
 
-class CurrencyFeatureFacade {
+final class CurrencyFeatureFacade {
   CurrencyFeatureFacade() {
     CurrencyFeatureInitializer();
     this._dic = CurrencyFeatureDic();

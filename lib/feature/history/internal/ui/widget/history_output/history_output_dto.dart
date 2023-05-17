@@ -1,4 +1,4 @@
-class HistoryOutputDto {
+final class HistoryOutputDto {
   String date = '';
   String from = '';
   String to = '';
