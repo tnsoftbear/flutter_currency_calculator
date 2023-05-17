@@ -10,11 +10,11 @@ final class FawazAhmedRateData {
   });
 
   factory FawazAhmedRateData.fromJson(
-      String decodedJson, String targetCurrency) {
-    Map<String, dynamic> encoded = json.decode(decodedJson);
+      String encodedJson, String targetCurrency) {
+    Map<String, dynamic> encodedMap = json.decode(encodedJson);
     return FawazAhmedRateData(
-      date: encoded['date'] as String,
-      rate: encoded[targetCurrency.toLowerCase()] as double,
+      date: encodedMap['date'] as String,
+      rate: encodedMap[targetCurrency.toLowerCase()] as double,
     );
   }
 }

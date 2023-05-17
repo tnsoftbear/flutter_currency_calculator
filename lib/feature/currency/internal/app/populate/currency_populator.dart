@@ -17,12 +17,12 @@ final class CurrencyPopulator {
   final CurrencyRepository _currencyRepository;
 
   Future<void> populateIfNeeded() async {
-    if (await mustPopulate()) {
-      await populate();
+    if (await _mustPopulate()) {
+      await _populate();
     }
   }
 
-  Future<bool> mustPopulate() async {
+  Future<bool> _mustPopulate() async {
     final lastUpdateDate = await _currencyRepository.loadLastUpdateDate();
     if (lastUpdateDate == null) {
       return true;
@@ -33,7 +33,7 @@ final class CurrencyPopulator {
     return differenceInSec > _populationIntervalInDays * 24 * 60 * 60;
   }
 
-  Future<void> populate() async {
+  Future<void> _populate() async {
     final fetchedCurrencies = await _currencyFetcher.fetchAvailableCurrencies();
     final existingCurrencies = await _currencyRepository.loadAllIndexedByCode();
     final CurrencyMap newCurrencies =

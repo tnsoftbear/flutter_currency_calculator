@@ -1,4 +1,5 @@
 import 'package:clock/clock.dart';
+import 'package:currency_calc/core/network/http/http_client.dart';
 import 'package:currency_calc/feature/conversion/internal/app/config/conversion_config.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/fetch/cache/rate_cacher.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/fetch/load/rate_fetcher.dart';
@@ -12,19 +13,25 @@ import 'package:currency_calc/feature/conversion/internal/infra/fetch/load/fixer
 import 'package:currency_calc/feature/conversion/internal/infra/repository/exchange_rate_record_repository.dart';
 
 final class RateFetcherFactory {
-  RateFetcherFactory(ConversionConfig this._config, Clock this._clock,
-      ExchangeRateRecordRepository this._exchangeRateRecordRepository);
+  RateFetcherFactory(
+      ConversionConfig this._config,
+      Clock this._clock,
+      ExchangeRateRecordRepository this._exchangeRateRecordRepository,
+      HttpClient this._httpClient);
 
   final ConversionConfig _config;
   final ExchangeRateRecordRepository _exchangeRateRecordRepository;
   final Clock _clock;
+  final HttpClient _httpClient;
 
   RateFetcher create() {
     RateFetcher fetcher = switch (_config.currencyConversionRateFetcherType) {
       FetchingType.fixerIo => FixerIoRateFetcher(
-          url: _config.fixerIoApiBaseUrl, apiKey: _config.fixerIoApiKey),
+          url: _config.fixerIoApiBaseUrl,
+          apiKey: _config.fixerIoApiKey,
+          httpClient: _httpClient),
       FetchingType.fawazAhmed => FawazAhmedExchangeRateFetcher(
-          url: _config.fawazAhmedApiBaseUrl),
+          url: _config.fawazAhmedApiBaseUrl, httpClient: _httpClient),
     };
 
     RateCacher cacher = switch (_config.currencyConversionRateCacheType) {

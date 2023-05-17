@@ -1,4 +1,4 @@
-# Currency Calculator
+# ![icon](android/app/src/main/res/mipmap-hdpi/ic_launcher.png) Currency Calculator
 
 My 1st experiment with flutter and dart in April of 2023.  
 This is a simple demo app for currency conversion.

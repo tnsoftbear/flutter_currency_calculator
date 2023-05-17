@@ -1,4 +1,5 @@
 import 'package:clock/clock.dart';
+import 'package:currency_calc/core/network/http/dio_http_client.dart';
 import 'package:currency_calc/feature/conversion/internal/app/config/conversion_config.dart';
 import 'package:currency_calc/feature/conversion/internal/app/fetch/rate_fetcher_factory.dart';
 import 'package:currency_calc/feature/conversion/internal/app/translate/conversion_validation_translator.dart';
@@ -8,8 +9,8 @@ import 'package:currency_calc/feature/conversion/internal/infra/repository/excha
 final class ConversionFeatureDic {
   ConversionFeatureDic() {
     _conversionValidationTranslator = ConversionValidationTranslator();
-    _rateFetcher = RateFetcherFactory(
-            ConversionConfig(), clock, ExchangeRateRecordRepository())
+    _rateFetcher = RateFetcherFactory(ConversionConfig(), clock,
+            ExchangeRateRecordRepository(), DioHttpClient())
         .create();
   }
 

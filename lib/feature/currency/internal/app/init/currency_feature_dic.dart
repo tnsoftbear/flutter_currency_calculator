@@ -1,4 +1,6 @@
 import 'package:clock/clock.dart';
+import 'package:currency_calc/core/network/http/dio_http_client.dart';
+import 'package:currency_calc/core/network/http/http_http_client.dart';
 import 'package:currency_calc/feature/currency/internal/app/load/currency_loader.dart';
 import 'package:currency_calc/feature/currency/internal/app/populate/currency_populator.dart';
 import 'package:currency_calc/feature/currency/internal/app/update/currency_visibility_updater.dart';
@@ -8,7 +10,11 @@ import 'package:currency_calc/feature/currency/internal/infra/repository/currenc
 final class CurrencyFeatureDic {
   CurrencyFeatureDic() {
     final currencyRepository = CurrencyRepository(clock);
-    final currencyFetcher = FawazAhmedAvailableCurrencyFetcher();
+    final currencyFetcher = FawazAhmedAvailableCurrencyFetcher(
+        url:
+            "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.json",
+        httpClient: HttpHttpClient() // Used instead of DioHttpClient() for fun
+        );
     _currencyPopulator =
         CurrencyPopulator(clock, currencyFetcher, currencyRepository);
     _currencyLoader = CurrencyLoader(currencyRepository, _currencyPopulator);
