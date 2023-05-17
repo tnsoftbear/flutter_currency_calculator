@@ -4,7 +4,7 @@ import 'package:currency_calc/feature/currency/internal/domain/fetch/load/curren
 import 'package:currency_calc/feature/currency/internal/domain/model/currency.dart';
 import 'package:dio/dio.dart';
 
-class FawazAhmedAvailableCurrencyFetcher implements CurrencyFetcher {
+final class FawazAhmedAvailableCurrencyFetcher implements CurrencyFetcher {
   final String url =
       "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.json";
 

@@ -2,7 +2,7 @@ import 'package:currency_calc/feature/conversion/internal/domain/fetch/load/rate
 import 'package:currency_calc/feature/conversion/internal/infra/fetch/load/fawaz_ahmed/fawaz_ahmed_rate_data.dart';
 import 'package:dio/dio.dart';
 
-class FawazAhmedExchangeRateFetcher extends RateFetcher {
+final class FawazAhmedExchangeRateFetcher implements RateFetcher {
   final String url;
 
   FawazAhmedExchangeRateFetcher({required this.url});

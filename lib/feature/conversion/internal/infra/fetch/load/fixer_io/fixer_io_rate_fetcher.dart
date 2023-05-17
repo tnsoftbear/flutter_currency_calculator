@@ -2,7 +2,7 @@ import 'package:currency_calc/feature/conversion/internal/domain/fetch/load/rate
 import 'package:dio/dio.dart';
 import 'dart:convert';
 
-class FixerIoRateFetcher extends RateFetcher {
+final class FixerIoRateFetcher implements RateFetcher {
   final String url;
   final String apiKey;
 

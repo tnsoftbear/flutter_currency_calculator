@@ -2,9 +2,10 @@
     package="com.example.flutter_currency_calculator">
    <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="flutter_currency_calculator"
+        android:label="Currency Calculator"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:roundIcon="@mipmap/ic_launcher"
+        android:icon="@mipmap/currency_calculator_app_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"

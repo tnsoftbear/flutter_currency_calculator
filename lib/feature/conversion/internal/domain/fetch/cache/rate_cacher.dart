@@ -1,4 +1,4 @@
-abstract class RateCacher {
+abstract interface class RateCacher {
   Future<double?> get(String sourceCurrencyCode, String targetCurrencyCode);
 
   Future<void> set(
