@@ -4,7 +4,7 @@ import 'package:clock/clock.dart';
 import 'package:currency_calc/feature/currency/internal/domain/collect/currency_collector.dart';
 import 'package:currency_calc/feature/currency/internal/domain/fetch/load/currency_fetcher.dart';
 import 'package:currency_calc/feature/currency/internal/domain/model/currency.dart';
-import 'package:currency_calc/feature/currency/internal/infra/repository/currency_repository.dart';
+import 'package:currency_calc/feature/currency/internal/domain/repository/currency_repository.dart';
 
 final class CurrencyPopulator {
   CurrencyPopulator(

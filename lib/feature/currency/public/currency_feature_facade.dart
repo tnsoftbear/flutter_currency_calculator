@@ -22,14 +22,14 @@ final class CurrencyFeatureFacade {
    * Load currency codes of visible currencies for the source currency.
    */
   Future<List<String>> loadVisibleSourceCurrencyCodes() async {
-    return _dic.currencyLoader.loadVisibleSourceCurrencyCodes();
+    return _dic.currencyRepository.loadVisibleSourceCurrencyCodes();
   }
 
   /**
    * Load currency codes of visible currencies for the target currency.
    */
   Future<List<String>> loadVisibleTargetCurrencyCodes() async {
-    return _dic.currencyLoader.loadVisibleTargetCurrencyCodes();
+    return _dic.currencyRepository.loadVisibleTargetCurrencyCodes();
   }
 
   /**
@@ -37,6 +37,6 @@ final class CurrencyFeatureFacade {
    */
   CurrencySettingWidget createCurrencySettingWidget() {
     return CurrencySettingWidget(
-        _dic.currencyLoader, _dic.currencyVisibilityUpdater);
+        _dic.currencyRepository, _dic.currencyVisibilityUpdater);
   }
 }

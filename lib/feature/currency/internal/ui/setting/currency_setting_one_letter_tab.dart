@@ -1,5 +1,5 @@
-import 'package:currency_calc/feature/currency/internal/app/load/currency_loader.dart';
 import 'package:currency_calc/feature/currency/internal/app/update/currency_visibility_updater.dart';
+import 'package:currency_calc/feature/currency/internal/domain/repository/currency_repository.dart';
 import 'package:currency_calc/feature/currency/internal/ui/setting/currency_checkbox.dart';
 import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
 import 'package:flutter/material.dart';
@@ -8,19 +8,19 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 final class CurrencySettingOneLetterTab extends StatelessWidget {
   CurrencySettingOneLetterTab(
       String this._letter,
-      CurrencyLoader this._currencyLoader,
+      CurrencyRepository this._currencyRepository,
       CurrencyVisibilityUpdater this._currencyVisibilityUpdater,
       {Key? key})
       : super(key: key);
 
   final String _letter;
-  final CurrencyLoader _currencyLoader;
+  final CurrencyRepository _currencyRepository;
   final CurrencyVisibilityUpdater _currencyVisibilityUpdater;
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: _currencyLoader.loadCurrenciesByCodeFirstLetter(_letter),
+        future: _currencyRepository.loadCurrenciesByCodeFirstLetter(_letter),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Center(child: Text(snapshot.error.toString()));

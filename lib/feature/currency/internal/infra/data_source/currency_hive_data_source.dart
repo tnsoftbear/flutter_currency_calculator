@@ -1,17 +1,15 @@
-import 'package:clock/clock.dart';
 import 'package:currency_calc/feature/currency/internal/domain/model/currency.dart';
+import 'package:currency_calc/feature/currency/internal/domain/repository/currency_data_source.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-final class CurrencyRepository {
-  CurrencyRepository(this._clock);
+class CurrencyHiveDataSource implements CurrencyDataSource {
+  CurrencyHiveDataSource();
 
   static const BOX_NAME = 'Currency';
 
   Box<Currency>? box;
-  final Clock _clock;
 
-  Future<CurrencyRepository> init() async {
+  Future<CurrencyHiveDataSource> init() async {
     if (box == null || box!.isOpen == false) {
       box = await Hive.openBox<Currency>(BOX_NAME);
     }
@@ -88,21 +86,21 @@ final class CurrencyRepository {
         .toList();
   }
 
-  Future<DateTime?> loadLastUpdateDate() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (!prefs.containsKey('lastUpdateTimestamp')) {
-      return null;
-    }
-
-    final int lastUpdateTimestamp = prefs.getInt('lastUpdateTimestamp') ?? 0;
-    return DateTime.fromMillisecondsSinceEpoch(lastUpdateTimestamp);
-  }
+  // Future<DateTime?> loadLastUpdateDate() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   if (!prefs.containsKey('lastUpdateTimestamp')) {
+  //     return null;
+  //   }
+  //
+  //   final int lastUpdateTimestamp = prefs.getInt('lastUpdateTimestamp') ?? 0;
+  //   return DateTime.fromMillisecondsSinceEpoch(lastUpdateTimestamp);
+  // }
 
   Future<void> save(Currency currency) async {
     await init();
     await box!.put(currency.code, currency);
-    print('saved ${currency.code} and ${currency.isVisibleForSource} isVisibleForSource and ${currency.isVisibleForTarget} isVisibleForTarget');
-    //await box!.close();
+    print(
+        'saved ${currency.code} and ${currency.isVisibleForSource} isVisibleForSource and ${currency.isVisibleForTarget} isVisibleForTarget');
   }
 
   Future<void> saveAll(Map<String, Currency> currencies) async {
@@ -112,9 +110,9 @@ final class CurrencyRepository {
     }
   }
 
-  Future<void> saveLastUpdateDateToNow() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final currentDateUtcTs = _clock.now().toUtc().millisecondsSinceEpoch;
-    await prefs.setInt('lastUpdateTimestamp', currentDateUtcTs);
-  }
+// Future<void> saveLastUpdateDateToNow() async {
+//   final SharedPreferences prefs = await SharedPreferences.getInstance();
+//   final currentDateUtcTs = _clock.now().toUtc().millisecondsSinceEpoch;
+//   await prefs.setInt('lastUpdateTimestamp', currentDateUtcTs);
+// }
 }
