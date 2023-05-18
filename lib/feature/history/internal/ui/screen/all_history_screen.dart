@@ -1,4 +1,4 @@
-import 'package:currency_calc/feature/history/internal/infra/repository/conversion_history_record_repository.dart';
+import 'package:currency_calc/feature/history/internal/domain/repository/conversion_history_record_repository.dart';
 import 'package:currency_calc/front/app/constant/appearance_constant.dart';
 import 'package:currency_calc/front/ui/widget/front_header_bar.dart';
 import 'package:currency_calc/front/ui/widget/front_main_menu.dart';

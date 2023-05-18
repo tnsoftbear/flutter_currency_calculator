@@ -10,7 +10,7 @@ import 'package:currency_calc/feature/conversion/internal/infra/fetch/cache/rate
 import 'package:currency_calc/feature/conversion/internal/infra/fetch/cache/rate_memory_cacher.dart';
 import 'package:currency_calc/feature/conversion/internal/infra/fetch/load/fawaz_ahmed/fawaz_ahmed_rate_fetcher.dart';
 import 'package:currency_calc/feature/conversion/internal/infra/fetch/load/fixer_io/fixer_io_rate_fetcher.dart';
-import 'package:currency_calc/feature/conversion/internal/infra/repository/exchange_rate_record_repository.dart';
+import 'package:currency_calc/feature/conversion/internal/domain/repository/exchange_rate_record_repository.dart';
 
 final class RateFetcherFactory {
   RateFetcherFactory(

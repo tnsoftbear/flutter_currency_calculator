@@ -1,7 +1,7 @@
 import 'package:clock/clock.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/fetch/cache/rate_cacher.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/model/exchange_rate_record.dart';
-import 'package:currency_calc/feature/conversion/internal/infra/repository/exchange_rate_record_repository.dart';
+import 'package:currency_calc/feature/conversion/internal/domain/repository/exchange_rate_record_repository.dart';
 
 final class RateHiveCacher implements RateCacher {
   RateHiveCacher(int this._ttl, Clock this._clock,

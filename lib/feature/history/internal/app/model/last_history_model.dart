@@ -1,6 +1,6 @@
 import 'package:clock/clock.dart';
 import 'package:currency_calc/feature/history/internal/domain/model/conversion_history_record.dart';
-import 'package:currency_calc/feature/history/internal/infra/repository/conversion_history_record_repository.dart';
+import 'package:currency_calc/feature/history/internal/domain/repository/conversion_history_record_repository.dart';
 import 'package:flutter/foundation.dart';
 
 final class LastHistoryModel with ChangeNotifier {

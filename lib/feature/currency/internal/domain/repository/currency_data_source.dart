@@ -1,8 +1,6 @@
 import 'package:currency_calc/feature/currency/internal/domain/model/currency.dart';
 
 abstract interface class CurrencyDataSource {
-  Future<CurrencyDataSource> init();
-
   Future<int> countVisibleSourceCurrencies();
 
   Future<int> countVisibleTargetCurrencies();

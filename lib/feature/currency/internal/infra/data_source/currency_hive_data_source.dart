@@ -9,110 +9,107 @@ class CurrencyHiveDataSource implements CurrencyDataSource {
 
   Box<Currency>? box;
 
-  Future<CurrencyHiveDataSource> init() async {
+  Future<CurrencyHiveDataSource> _init() async {
     if (box == null || box!.isOpen == false) {
       box = await Hive.openBox<Currency>(BOX_NAME);
     }
     return this;
   }
 
+  @override
   Future<int> countVisibleSourceCurrencies() async {
-    await init();
+    await _init();
     return box!.values.where((currency) => currency.isVisibleForSource).length;
   }
 
+  @override
   Future<int> countVisibleTargetCurrencies() async {
-    await init();
+    await _init();
     return box!.values.where((currency) => currency.isVisibleForTarget).length;
   }
 
+  @override
   Future<Currency?> loadByCode(String code) async {
-    await init();
+    await _init();
     return await box!.get(code);
   }
 
+  @override
   Future<List<Currency>> loadAllCurrencies() async {
-    await init();
+    await _init();
     return box!.values.toList();
   }
 
+  @override
   Future<List<Currency>> loadCurrenciesByCodeFirstLetter(String letter) async {
-    await init();
+    await _init();
     return box!.values
         .where((currency) => currency.code.startsWith(letter))
         .toList();
   }
 
+  @override
   Future<List<String>> loadCurrencyCodeFirstLetters() async {
-    await init();
+    await _init();
     return box!.values
         .map((currency) => currency.code.substring(0, 1))
         .toSet()
         .toList();
   }
 
+  @override
   Future<Map<String, Currency>> loadAllIndexedByCode() async {
-    await init();
+    await _init();
     return {for (var currency in box!.values) currency.code: currency};
   }
 
+  @override
   Future<List<Currency>> loadVisibleSourceCurrencies() async {
-    await init();
+    await _init();
     return box!.values
         .where((currency) => currency.isVisibleForSource)
         .toList();
   }
 
+  @override
   Future<List<String>> loadVisibleSourceCurrencyCodes() async {
-    await init();
+    await _init();
     return box!.values
         .where((currency) => currency.isVisibleForSource)
         .map((currency) => currency.code)
         .toList();
   }
 
+  @override
   Future<List<Currency>> loadVisibleTargetCurrencies() async {
-    await init();
+    await _init();
     return box!.values
         .where((currency) => currency.isVisibleForTarget)
         .toList();
   }
 
+  @override
   Future<List<String>> loadVisibleTargetCurrencyCodes() async {
-    await init();
+    await _init();
     return box!.values
         .where((currency) => currency.isVisibleForTarget)
         .map((currency) => currency.code)
         .toList();
   }
 
-  // Future<DateTime?> loadLastUpdateDate() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   if (!prefs.containsKey('lastUpdateTimestamp')) {
-  //     return null;
-  //   }
-  //
-  //   final int lastUpdateTimestamp = prefs.getInt('lastUpdateTimestamp') ?? 0;
-  //   return DateTime.fromMillisecondsSinceEpoch(lastUpdateTimestamp);
-  // }
-
+  @override
   Future<void> save(Currency currency) async {
-    await init();
+    await _init();
     await box!.put(currency.code, currency);
     print(
         'saved ${currency.code} and ${currency.isVisibleForSource} isVisibleForSource and ${currency.isVisibleForTarget} isVisibleForTarget');
   }
 
+  @override
   Future<void> saveAll(Map<String, Currency> currencies) async {
-    await init();
+    await _init();
     for (var currencyCode in currencies.keys) {
       await box!.put(currencyCode, currencies[currencyCode]!);
     }
   }
-
-// Future<void> saveLastUpdateDateToNow() async {
-//   final SharedPreferences prefs = await SharedPreferences.getInstance();
-//   final currentDateUtcTs = _clock.now().toUtc().millisecondsSinceEpoch;
-//   await prefs.setInt('lastUpdateTimestamp', currentDateUtcTs);
-// }
 }
