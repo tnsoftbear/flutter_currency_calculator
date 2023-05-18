@@ -23,23 +23,7 @@ abstract interface class CurrencyDataSource {
 
   Future<List<String>> loadVisibleTargetCurrencyCodes();
 
-  // Future<DateTime?> loadLastUpdateDate() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   if (!prefs.containsKey('lastUpdateTimestamp')) {
-  //     return null;
-  //   }
-  //
-  //   final int lastUpdateTimestamp = prefs.getInt('lastUpdateTimestamp') ?? 0;
-  //   return DateTime.fromMillisecondsSinceEpoch(lastUpdateTimestamp);
-  // }
-
   Future<void> save(Currency currency);
 
   Future<void> saveAll(Map<String, Currency> currencies);
-
-  // Future<void> saveLastUpdateDateToNow() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   final currentDateUtcTs = _clock.now().toUtc().millisecondsSinceEpoch;
-  //   await prefs.setInt('lastUpdateTimestamp', currentDateUtcTs);
-  // }
 }

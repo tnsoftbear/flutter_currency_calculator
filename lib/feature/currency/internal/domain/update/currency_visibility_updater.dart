@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:currency_calc/feature/currency/internal/domain/model/currency.dart';
 import 'package:currency_calc/feature/currency/internal/domain/repository/currency_repository.dart';
-import 'package:currency_calc/feature/setting/internal/app/model/setting_model.dart';
+import 'package:currency_calc/feature/setting/internal/domain/model/setting_model.dart';
 
 final class CurrencyVisibilityUpdater {
   CurrencyVisibilityUpdater(this._currencyRepository);

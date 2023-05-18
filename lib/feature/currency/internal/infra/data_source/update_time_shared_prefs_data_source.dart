@@ -2,8 +2,8 @@ import 'package:clock/clock.dart';
 import 'package:currency_calc/feature/currency/internal/domain/repository/update_time_data_source.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final class UpdateTimeSharedPreferencesDataSource implements UpdateTimeDataSource {
-  UpdateTimeSharedPreferencesDataSource(this._clock);
+final class UpdateTimeSharedPrefsDataSource implements UpdateTimeDataSource {
+  UpdateTimeSharedPrefsDataSource(this._clock);
 
   static const lastUpdateTimestampKey = 'lastUpdateTimestamp';
 

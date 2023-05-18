@@ -2,6 +2,13 @@
 lib  
 |   main.dart
 |   
++---core
+|   \---network
+|       \---http
+|               dio_http_client.dart
+|               http_client.dart
+|               http_http_client.dart
+|               
 +---feature
 |   +---about
 |   |   +---internal
@@ -15,12 +22,6 @@ lib
 |   +---conversion
 |   |   +---internal
 |   |   |   +---app
-|   |   |   |   +---config
-|   |   |   |   |       conversion_config.dart
-|   |   |   |   |       
-|   |   |   |   +---fetch
-|   |   |   |   |       rate_fetcher_factory.dart
-|   |   |   |   |       
 |   |   |   |   +---init
 |   |   |   |   |       conversion_feature_dic.dart
 |   |   |   |   |       conversion_feature_initializer.dart
@@ -32,32 +33,22 @@ lib
 |   |   |   |   +---calculate
 |   |   |   |   |       currency_converter.dart
 |   |   |   |   |       
+|   |   |   |   +---config
+|   |   |   |   |       conversion_config.dart
+|   |   |   |   |       
 |   |   |   |   +---fetch
 |   |   |   |   |   |   rate_cached_fetcher.dart
+|   |   |   |   |   |   rate_fetcher_factory.dart
 |   |   |   |   |   |   
 |   |   |   |   |   +---cache
-|   |   |   |   |   |       rate_cacher.dart
-|   |   |   |   |   |       
-|   |   |   |   |   \---load
-|   |   |   |   |           rate_fetcher.dart
-|   |   |   |   |           
-|   |   |   |   +---model
-|   |   |   |   |       exchange_rate_record.dart
-|   |   |   |   |       exchange_rate_record.g.dart
-|   |   |   |   |       
-|   |   |   |   \---validate
-|   |   |   |           conversion_validation_result.dart
-|   |   |   |           conversion_validator.dart
-|   |   |   |           
-|   |   |   +---infra
-|   |   |   |   +---fetch
-|   |   |   |   |   +---cache
 |   |   |   |   |   |       caching_type.dart
-|   |   |   |   |   |       rate_hive_cacher.dart
+|   |   |   |   |   |       rate_cacher.dart
+|   |   |   |   |   |       rate_cacher_impl.dart
 |   |   |   |   |   |       rate_memory_cacher.dart
 |   |   |   |   |   |       
 |   |   |   |   |   \---load
 |   |   |   |   |       |   fetching_type.dart
+|   |   |   |   |       |   rate_fetcher.dart
 |   |   |   |   |       |   
 |   |   |   |   |       +---fawaz_ahmed
 |   |   |   |   |       |       fawaz_ahmed_rate_data.dart
@@ -66,8 +57,22 @@ lib
 |   |   |   |   |       \---fixer_io
 |   |   |   |   |               fixer_io_rate_fetcher.dart
 |   |   |   |   |               
-|   |   |   |   \---repository
-|   |   |   |           exchange_rate_record_repository.dart
+|   |   |   |   +---model
+|   |   |   |   |       exchange_rate_record.dart
+|   |   |   |   |       exchange_rate_record.g.dart
+|   |   |   |   |       
+|   |   |   |   +---repository
+|   |   |   |   |       exchange_rate_record_data_source.dart
+|   |   |   |   |       exchange_rate_record_repository.dart
+|   |   |   |   |       exchange_rate_record_repository_impl.dart
+|   |   |   |   |       
+|   |   |   |   \---validate
+|   |   |   |           conversion_validation_result.dart
+|   |   |   |           conversion_validator.dart
+|   |   |   |           
+|   |   |   +---infra
+|   |   |   |   \---data_source
+|   |   |   |           exchange_rate_record_hive_data_source.dart
 |   |   |   |           
 |   |   |   \---ui
 |   |   |       +---screen
@@ -83,18 +88,9 @@ lib
 |   +---currency
 |   |   +---internal
 |   |   |   +---app
-|   |   |   |   +---init
-|   |   |   |   |       currency_feature_dic.dart
-|   |   |   |   |       currency_feature_initializer.dart
-|   |   |   |   |       
-|   |   |   |   +---load
-|   |   |   |   |       currency_loader.dart
-|   |   |   |   |       
-|   |   |   |   +---populate
-|   |   |   |   |       currency_populator.dart
-|   |   |   |   |       
-|   |   |   |   \---update
-|   |   |   |           currency_visibility_updater.dart
+|   |   |   |   \---init
+|   |   |   |           currency_feature_dic.dart
+|   |   |   |           currency_feature_initializer.dart
 |   |   |   |           
 |   |   |   +---domain
 |   |   |   |   +---collect
@@ -102,20 +98,31 @@ lib
 |   |   |   |   |       
 |   |   |   |   +---fetch
 |   |   |   |   |   \---load
-|   |   |   |   |           currency_fetcher.dart
-|   |   |   |   |           
-|   |   |   |   \---model
-|   |   |   |           currency.dart
-|   |   |   |           currency.g.dart
-|   |   |   |           
-|   |   |   +---infra
-|   |   |   |   +---fetch
-|   |   |   |   |   \---load
+|   |   |   |   |       |   currency_fetcher.dart
+|   |   |   |   |       |   
 |   |   |   |   |       \---fawaz_ahmed
 |   |   |   |   |               fawaz_ahmed_available_currency_fetcher.dart
 |   |   |   |   |               
-|   |   |   |   \---repository
-|   |   |   |           currency_repository.dart
+|   |   |   |   +---model
+|   |   |   |   |       currency.dart
+|   |   |   |   |       currency.g.dart
+|   |   |   |   |       
+|   |   |   |   +---populate
+|   |   |   |   |       currency_populator.dart
+|   |   |   |   |       
+|   |   |   |   +---repository
+|   |   |   |   |       currency_data_source.dart
+|   |   |   |   |       currency_repository.dart
+|   |   |   |   |       currency_repository_impl.dart
+|   |   |   |   |       update_time_data_source.dart
+|   |   |   |   |       
+|   |   |   |   \---update
+|   |   |   |           currency_visibility_updater.dart
+|   |   |   |           
+|   |   |   +---infra
+|   |   |   |   \---data_source
+|   |   |   |           currency_hive_data_source.dart
+|   |   |   |           update_time_shared_prefs_data_source.dart
 |   |   |   |           
 |   |   |   \---ui
 |   |   |       \---setting
@@ -129,21 +136,27 @@ lib
 |   +---history
 |   |   +---internal
 |   |   |   +---app
-|   |   |   |   +---init
-|   |   |   |   |       history_feature_dic.dart
-|   |   |   |   |       history_feature_initializer.dart
-|   |   |   |   |       
-|   |   |   |   \---model
-|   |   |   |           last_history_model.dart
+|   |   |   |   \---init
+|   |   |   |           history_feature_dic.dart
+|   |   |   |           history_feature_initializer.dart
 |   |   |   |           
 |   |   |   +---domain
-|   |   |   |   \---model
-|   |   |   |           conversion_history_record.dart
-|   |   |   |           conversion_history_record.g.dart
+|   |   |   |   +---last_history
+|   |   |   |   |   \---model
+|   |   |   |   |           last_history_model.dart
+|   |   |   |   |           
+|   |   |   |   +---model
+|   |   |   |   |       conversion_history_record.dart
+|   |   |   |   |       conversion_history_record.g.dart
+|   |   |   |   |       
+|   |   |   |   \---repository
+|   |   |   |           conversion_history_record_data_source.dart
+|   |   |   |           conversion_history_record_repository.dart
+|   |   |   |           conversion_history_record_repository_impl.dart
 |   |   |   |           
 |   |   |   +---infra
 |   |   |   |   \---repository
-|   |   |   |           conversion_history_record_repository.dart
+|   |   |   |           conversion_history_record_hive_data_source.dart
 |   |   |   |           
 |   |   |   \---ui
 |   |   |       +---screen
@@ -167,13 +180,22 @@ lib
 |   \---setting
 |       +---internal
 |       |   +---app
-|       |   |   \---model
-|       |   |           setting_model.dart
-|       |   |           setting_model_manager.dart
+|       |   |   \---init
+|       |   |           setting_feature_dic.dart
+|       |   |           
+|       |   +---domain
+|       |   |   +---model
+|       |   |   |       setting_model.dart
+|       |   |   |       setting_model_manager.dart
+|       |   |   |       
+|       |   |   \---repository
+|       |   |           setting_data_source.dart
+|       |   |           setting_repository.dart
+|       |   |           setting_repository_impl.dart
 |       |   |           
 |       |   +---infra
-|       |   |   \---repository
-|       |   |           setting_repository.dart
+|       |   |   \---data_source
+|       |   |           setting_shared_prefs_data_source.dart
 |       |   |           
 |       |   \---ui
 |       |       +---screen

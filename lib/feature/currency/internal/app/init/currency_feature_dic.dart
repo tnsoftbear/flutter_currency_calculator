@@ -1,18 +1,18 @@
 import 'package:clock/clock.dart';
 import 'package:currency_calc/core/network/http/http_http_client.dart';
-import 'package:currency_calc/feature/currency/internal/app/populate/currency_populator.dart';
-import 'package:currency_calc/feature/currency/internal/app/update/currency_visibility_updater.dart';
 import 'package:currency_calc/feature/currency/internal/domain/fetch/load/fawaz_ahmed/fawaz_ahmed_available_currency_fetcher.dart';
+import 'package:currency_calc/feature/currency/internal/domain/populate/currency_populator.dart';
 import 'package:currency_calc/feature/currency/internal/domain/repository/currency_repository.dart';
 import 'package:currency_calc/feature/currency/internal/domain/repository/currency_repository_impl.dart';
+import 'package:currency_calc/feature/currency/internal/domain/update/currency_visibility_updater.dart';
 import 'package:currency_calc/feature/currency/internal/infra/data_source/currency_hive_data_source.dart';
-import 'package:currency_calc/feature/currency/internal/infra/data_source/update_time_shared_preferences_data_source.dart';
+import 'package:currency_calc/feature/currency/internal/infra/data_source/update_time_shared_prefs_data_source.dart';
 
 final class CurrencyFeatureDic {
   CurrencyFeatureDic() {
     _currencyRepository = CurrencyRepositoryImpl(
       CurrencyHiveDataSource(),
-      UpdateTimeSharedPreferencesDataSource(clock),
+      UpdateTimeSharedPrefsDataSource(clock),
     );
     final currencyFetcher = FawazAhmedAvailableCurrencyFetcher(
         url:

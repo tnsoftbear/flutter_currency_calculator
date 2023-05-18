@@ -1,5 +1,5 @@
-import 'package:currency_calc/feature/currency/internal/app/update/currency_visibility_updater.dart';
 import 'package:currency_calc/feature/currency/internal/domain/repository/currency_repository.dart';
+import 'package:currency_calc/feature/currency/internal/domain/update/currency_visibility_updater.dart';
 import 'package:currency_calc/feature/currency/internal/ui/setting/currency_setting_one_letter_tab.dart';
 import 'package:currency_calc/front/ui/widget/standard_error_label.dart';
 import 'package:currency_calc/front/ui/widget/standard_progress_indicator.dart';

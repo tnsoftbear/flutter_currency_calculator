@@ -6,7 +6,7 @@ import 'package:currency_calc/front/ui/theme/additional_colors.dart';
 import 'package:currency_calc/feature/conversion/internal/app/translate/conversion_validation_translator.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/calculate/currency_converter.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/validate/conversion_validator.dart';
-import 'package:currency_calc/feature/setting/internal/app/model/setting_model.dart';
+import 'package:currency_calc/feature/setting/internal/domain/model/setting_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
