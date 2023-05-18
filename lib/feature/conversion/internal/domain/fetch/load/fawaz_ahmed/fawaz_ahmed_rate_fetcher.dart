@@ -1,6 +1,6 @@
 import 'package:currency_calc/core/network/http/http_client.dart';
+import 'package:currency_calc/feature/conversion/internal/domain/fetch/load/fawaz_ahmed/fawaz_ahmed_rate_data.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/fetch/load/rate_fetcher.dart';
-import 'package:currency_calc/feature/conversion/internal/infra/fetch/load/fawaz_ahmed/fawaz_ahmed_rate_data.dart';
 
 final class FawazAhmedExchangeRateFetcher implements RateFetcher {
   String _baseUrl;

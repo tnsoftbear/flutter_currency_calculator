@@ -2,6 +2,9 @@ import 'package:clock/clock.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/fetch/cache/rate_cacher.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/model/exchange_rate_record.dart';
 
+/**
+ * Alternative implementation of RateCacher interface using memory.
+ */
 final class RateMemoryCacher implements RateCacher {
   RateMemoryCacher(int this._ttl, Clock this._clock);
 

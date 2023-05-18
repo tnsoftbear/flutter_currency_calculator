@@ -1,7 +1,7 @@
 import 'package:clock/clock.dart';
 import 'package:currency_calc/core/network/http/dio_http_client.dart';
-import 'package:currency_calc/feature/conversion/internal/app/config/conversion_config.dart';
-import 'package:currency_calc/feature/conversion/internal/app/fetch/rate_fetcher_factory.dart';
+import 'package:currency_calc/feature/conversion/internal/domain/config/conversion_config.dart';
+import 'package:currency_calc/feature/conversion/internal/domain/fetch/rate_fetcher_factory.dart';
 import 'package:currency_calc/feature/conversion/internal/app/translate/conversion_validation_translator.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/fetch/load/rate_fetcher.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/repository/exchange_rate_record_repository_impl.dart';

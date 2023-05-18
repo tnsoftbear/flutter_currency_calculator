@@ -1,5 +1,5 @@
-import 'package:currency_calc/feature/conversion/internal/infra/fetch/cache/caching_type.dart';
-import 'package:currency_calc/feature/conversion/internal/infra/fetch/load/fetching_type.dart';
+import 'package:currency_calc/feature/conversion/internal/domain/fetch/cache/caching_type.dart';
+import 'package:currency_calc/feature/conversion/internal/domain/fetch/load/fetching_type.dart';
 
 final class ConversionConfig {
   final int currencyConversionRateCacheExpiryInSeconds = 24 * 60 * 60; // 1 day

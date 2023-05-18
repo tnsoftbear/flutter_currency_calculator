@@ -1,11 +1,11 @@
 import 'dart:developer';
 import 'package:currency_calc/feature/conversion/internal/domain/fetch/load/rate_fetcher.dart';
 import 'package:currency_calc/feature/currency/public/currency_feature_facade.dart';
+import 'package:currency_calc/feature/history/internal/domain/last_history/model/last_history_model.dart';
 import 'package:currency_calc/front/ui/theme/additional_colors.dart';
 import 'package:currency_calc/feature/conversion/internal/app/translate/conversion_validation_translator.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/calculate/currency_converter.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/validate/conversion_validator.dart';
-import 'package:currency_calc/feature/history/internal/app/model/last_history_model.dart';
 import 'package:currency_calc/feature/setting/internal/app/model/setting_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

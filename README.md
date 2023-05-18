@@ -19,7 +19,7 @@ See namespaces structure in folder tree view in the [lib/ tree](doc/lib_tree.md)
 It contains logic that accesses external resources, such as API, database, etc.
 
 **Domain layer** operates only in bounds of its own space.
-It is pure functional core with business logic, entities and data models.
+It is pure functional core with business logic, entities, data models and interfaces.
 
 ### Feature communication and dependency injection
 
@@ -58,17 +58,15 @@ You can find there the next features:
 Most important business logic is located in the Conversion feature.
 It handles the currency exchange rate calculation at the [Calculator screen](https://github.com/tnsoftbear/flutter_currency_calculator/blob/main/lib/feature/conversion/internal/ui/screen/calculator_screen.dart).
 
-**Infrastructure layer** is responsible for the currency exchange rate loading by API.
-It caches retrieved exchange rate in the [Hive](https://docs.hivedb.dev/) DB.
-The lifetime of cached data is set to 1 day in configuration object. 
-DB access methods are encapsulated in the repository classes.
+**Infrastructure layer** provides data source on the base of the [Hive](https://docs.hivedb.dev/) DB storage.
 
-Rate fetchers implement common interface and are provided by factory.
-**Application layer** operates by this interface and provides the currency exchange rate to the UI.
-It translates with help of localization package, and format currency amounts 
-and exchange rate numbers with help of the [Intl](https://pub.dev/packages/intl) package.  
+**Application layer** initializes and assembles feature dependencies.
+It translates text messages with help of the [Intl](https://pub.dev/packages/intl) localization package.
 
-**Domain layer** validates input values and calculates the currency conversion.
+**Domain layer** provides business logic of the currency conversion task, 
+like input values validation, exchange rate detection and target currency calculation.  
+It doesn't depend on any external resources, because it operates with respective abstractions only,
+like rate fetching by http client and caching in repository. The lifetime of cached data is set to 1 day in configuration object.
 
 ### History feature
 
@@ -102,16 +100,17 @@ Big thanks to the [fawazahmed0/currency-api](https://github.com/fawazahmed0/curr
 for providing the currency list and the actual exchange rate.
 
 To understand idea how features share data between each other, you can look to [CurrencyFeatureFacade](https://github.com/tnsoftbear/flutter_currency_calculator/blob/main/lib/feature/currency/public/currency_feature_facade.dart) class.
-Here you can find some data query methods, that provide information about available currencies from DB source internal to the Currency feature.
+Here you can find some data _query_ methods, that provide information about available currencies from DB source internal to the Currency feature.
 Other feature do not access Currency feature DB directly, but call these public API methods instead.  
-This facade class also provides a command method for initiating currency database updates.  
+This facade class also provides a _command_ method for initiating currency database updates.  
 It also provides the method for accessing one widget component from UI layer.
 The Settings feature calls it to display the list of available currencies in the Settings screen. 
 
 You might be interested to review the way how do we prepare internal dependencies for the feature usage.
 Look to the [CurrencyFeatureDic](https://github.com/tnsoftbear/flutter_currency_calculator/blob/main/lib/feature/currency/internal/app/init/currency_feature_dic.dart) class.
 It build dependency graph and pass dependencies down to the internal layers.
-This dependency assembling logic is called once at top layer of application [Bootstrapper](https://github.com/tnsoftbear/flutter_currency_calculator/blob/main/lib/front/app/boot/bootstrapper.dart) and is used in the CurrencyFeatureFacade too.
+This dependency assembling logic is called once at top layer of application [Bootstrapper](https://github.com/tnsoftbear/flutter_currency_calculator/blob/main/lib/front/app/boot/bootstrapper.dart)
+and is used in the CurrencyFeatureFacade too.
 
 ## Tests
 

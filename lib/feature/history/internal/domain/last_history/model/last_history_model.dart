@@ -36,7 +36,7 @@ final class LastHistoryModel with ChangeNotifier {
         sourceAmount: sourceAmount,
         targetAmount: targetAmount,
         rate: rate,
-        date: clock.now().toUtc());
+        date: _clock.now().toUtc());
     await _conversionHistoryRecordRepository.save(historyRecord);
     notifyListeners();
   }
