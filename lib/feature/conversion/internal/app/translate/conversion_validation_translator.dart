@@ -1,22 +1,19 @@
 import 'package:currency_calc/feature/conversion/internal/domain/validate/conversion_validation_result.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 final class ConversionValidationTranslator {
   ConversionValidationTranslator();
 
   String translateConcatenatedErrorMessage(
-      {required BuildContext context,
-      required ConversionValidationResult validationResult,
-      String separator = "\n"}) {
-    final List<String> errorMessages = _translateErrorMessages(
-        context: context, errors: validationResult.errors);
+      AppLocalizations tr,
+      ConversionValidationResult validationResult,
+      [String separator = "\n"]) {
+    final List<String> errorMessages =
+        _translateErrorMessages(tr, validationResult.errors);
     return errorMessages.join(separator);
   }
 
-  List<String> _translateErrorMessages(
-      {required BuildContext context, required List<int> errors}) {
-    final tr = AppLocalizations.of(context);
+  List<String> _translateErrorMessages(AppLocalizations tr, List<int> errors) {
     final Map<int, String> _translations = {
       ConversionValidationResult.ERR_SOURCE_CURRENCY_INVALID:
           tr.conversionValidationErrSourceCurrencyInvalid,

@@ -28,8 +28,8 @@ void main() {
           await sut.fetchExchangeRate(sourceCurrencyCode, targetCurrencyCode);
       // Assert
       expect(exchangeRate, cachedRate);
-      verifyNever(rateFetcher.fetchExchangeRate(
-          sourceCurrencyCode, targetCurrencyCode));
+      verifyNever(rateFetcher.fetchExchangeRate(any, any));
+      verifyNever(rateCacher.set(any, any, any));
     });
 
     test(

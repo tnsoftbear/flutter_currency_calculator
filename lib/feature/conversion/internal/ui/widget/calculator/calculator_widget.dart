@@ -208,8 +208,7 @@ final class _CalculatorWidgetState extends State<CalculatorWidget> {
     if (!validationResult.isSuccess()) {
       setState(() {
         _resultMessage = widget.conversionValidationTranslator
-            .translateConcatenatedErrorMessage(
-                context: context, validationResult: validationResult);
+            .translateConcatenatedErrorMessage(tr, validationResult);
         _rateMessage = '';
         _areActionButtonsVisible = false;
       });
