@@ -10,7 +10,7 @@ import 'http_http_client_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<http.Client>()])
 void main() {
-  group('get', () {
+  group('HttpHttpClient', () {
     const requestUrl = 'https://example.com/';
     const reasonPhrase = 'Reason phrase';
     const errorStatusCode = 404;

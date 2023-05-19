@@ -7,22 +7,25 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'rate_cacher_impl_test.mocks.dart';
+import 'rate_repository_cacher_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<ExchangeRateRecordRepository>()])
 void main() {
-  group('RateCacherImpl', () {
+  group('RateRepositoryCacher', () {
     final MockExchangeRateRecordRepository mockRepository =
         MockExchangeRateRecordRepository();
     final Clock clock = Clock.fixed(DateTime(2022, 1, 1));
 
-    final RateCacher rateCacher = RateRepositoryCacher(60, clock, mockRepository);
+    final RateCacher sut = RateRepositoryCacher(60, clock, mockRepository);
 
     test('get - returns null when record is null', () async {
-      await rateCacher.get('USD', 'EUR').then((rate) => expect(rate, null)); // USD_EUR record does not exist
+      await sut
+          .get('USD', 'EUR')
+          .then((rate) => expect(rate, null)); // USD_EUR record does not exist
     });
 
     test('get - returns null when record is expired', () async {
+      // Arrange
       final expiredRecord = ExchangeRateRecord(
           sourceCurrencyCode: 'USD',
           targetCurrencyCode: 'JPY',
@@ -31,16 +34,17 @@ void main() {
       when(mockRepository.loadByKey('USD_JPY')).thenAnswer((_) async {
         return expiredRecord;
       });
-
+      // Act
       final double? rate =
-          await rateCacher.get('USD', 'JPY'); // USD_JPY record is expired
-
+          await sut.get('USD', 'JPY'); // USD_JPY record is expired
+      // Assert
       expect(rate, null);
       verify(mockRepository.deleteByKey('USD_JPY')).called(1);
     });
 
     test('get - returns exchange rate when record exists and is valid',
         () async {
+      // Arrange
       when(mockRepository.loadByKey('EUR_GBP')).thenAnswer((_) async {
         final record = ExchangeRateRecord(
             sourceCurrencyCode: 'EUR',
@@ -49,20 +53,19 @@ void main() {
             createdAt: clock.now().subtract(Duration(seconds: 59)).toUtc());
         return record;
       });
-
-      final double? rate = await rateCacher.get('EUR', 'GBP');
-
+      // Act
+      final double? rate = await sut.get('EUR', 'GBP');
+      // Assert
       expect(rate, 0.87);
       verifyNever(mockRepository.deleteByKey('EUR_GBP'));
     });
 
     test('set - saves exchange rate record in repository', () async {
-      await rateCacher.set('EUR', 'JPY', 132);
+      await sut.set('EUR', 'JPY', 132);
 
-      final recordCaptor = verify(mockRepository.saveByKey(
-          captureAny, captureAny))
-          .captured
-          .last as ExchangeRateRecord;
+      final recordCaptor =
+          verify(mockRepository.saveByKey(captureAny, captureAny)).captured.last
+              as ExchangeRateRecord;
       expect(recordCaptor.sourceCurrencyCode, 'EUR');
       expect(recordCaptor.targetCurrencyCode, 'JPY');
       expect(recordCaptor.exchangeRate, 132);

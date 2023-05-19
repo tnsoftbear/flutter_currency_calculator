@@ -10,7 +10,7 @@ import 'dio_http_client_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<Dio>()])
 void main() {
-  group('get', () {
+  group('DioHttpClient', () {
     const requestUrl = 'https://example.com/';
     const reasonPhrase = 'Reason phrase';
     const errorStatusCode = 404;

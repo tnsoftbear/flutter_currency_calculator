@@ -1,6 +1,6 @@
 # ![icon](android/app/src/main/res/mipmap-hdpi/ic_launcher.png) Currency Calculator
 
-My 1st experiment with flutter and dart in April of 2023.  
+My 1st experiment with flutter and dart performed in April - May of 2023.  
 This is a simple demo app for currency conversion.
 
 ## Architecture
@@ -114,7 +114,8 @@ and is used in the CurrencyFeatureFacade too.
 
 ## Tests
 
-There are few unit tests for conversion input validation and calculation logic.
+There are several unit tests for different domain logic.
+Mocking needs are performed by the [mockito](https://pub.dev/packages/mockito) package.
 
 ## Run
 
