@@ -3,7 +3,7 @@ import 'package:currency_calc/core/network/http/exception/could_not_fetch_succes
 import 'package:currency_calc/core/network/http/http_client.dart';
 import 'package:dio/dio.dart';
 
-class DioHttpClient implements HttpClient {
+final class DioHttpClient implements HttpClient {
   DioHttpClient([Dio? dio]) {
     _dio = dio ?? Dio();
   }

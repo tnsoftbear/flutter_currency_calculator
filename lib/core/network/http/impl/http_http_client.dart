@@ -3,7 +3,7 @@ import 'package:currency_calc/core/network/http/exception/could_not_fetch_succes
 import 'package:currency_calc/core/network/http/http_client.dart';
 import 'package:http/http.dart' as http;
 
-class HttpHttpClient implements HttpClient {
+final class HttpHttpClient implements HttpClient {
   HttpHttpClient([http.Client? client]) {
     _client = client ?? http.Client();
   }

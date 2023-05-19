@@ -1,4 +1,4 @@
-class CouldNotFetchSuccessHttpResponse implements Exception {
+final class CouldNotFetchSuccessHttpResponse implements Exception {
   CouldNotFetchSuccessHttpResponse(
       {String this.message = 'Could not fetch success http response',
       String? this.reasonPhrase,

@@ -1,4 +1,4 @@
-class CouldNotFetchAnyHttpResponse implements Exception {
+final class CouldNotFetchAnyHttpResponse implements Exception {
   CouldNotFetchAnyHttpResponse(
       {String this.message = 'Could not fetch any http response',
       String this.reasonPhrase = ''});
