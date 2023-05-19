@@ -12,9 +12,9 @@ final class HttpHttpClient implements HttpClient {
 
   @override
   Future<T> get<T>(String url,
-      {QueryParams queryParams = const {},
-      HttpHeaders headers = const {}}) async {
-    if (queryParams.length > 0) {
+      {QueryParams? queryParams,
+      HttpHeaders? headers}) async {
+    if (queryParams != null && queryParams.length > 0) {
       url = url + '?' + Uri(queryParameters: queryParams).query;
     }
     Uri uri = Uri.parse(url);

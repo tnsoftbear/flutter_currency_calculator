@@ -1,6 +1,8 @@
 final class CouldNotFetchSuccessHttpResponse implements Exception {
+  static const messageDefault = 'Could not fetch success http response';
+
   CouldNotFetchSuccessHttpResponse(
-      {String this.message = 'Could not fetch success http response',
+      {String this.message = messageDefault,
       String? this.reasonPhrase,
       int? this.statusCode});
 

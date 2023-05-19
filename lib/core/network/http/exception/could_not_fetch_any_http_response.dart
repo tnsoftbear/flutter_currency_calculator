@@ -1,6 +1,8 @@
 final class CouldNotFetchAnyHttpResponse implements Exception {
+  static const messageDefault = 'Could not fetch any http response';
+
   CouldNotFetchAnyHttpResponse(
-      {String this.message = 'Could not fetch any http response',
+      {String this.message = messageDefault,
       String this.reasonPhrase = ''});
 
   late final String message;

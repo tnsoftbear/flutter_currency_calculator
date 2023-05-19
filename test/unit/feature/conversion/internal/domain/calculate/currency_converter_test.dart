@@ -67,7 +67,7 @@ void main() {
         final fn = () => CurrencyConverter.convert(amount, rate);
 
         // Assert
-        expect(fn, throwsArgumentError);
+        expect(fn, throwsAssertionError);
       });
     }
   });

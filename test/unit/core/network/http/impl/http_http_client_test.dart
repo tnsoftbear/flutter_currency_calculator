@@ -12,6 +12,8 @@ import 'http_http_client_test.mocks.dart';
 void main() {
   group('HttpHttpClient', () {
     const requestUrl = 'https://example.com/';
+    const queryParamsMap = {'key1': 'val1', 'key2': 'val2'};
+    const queryParamsString = '?key1=val1&key2=val2';
     const reasonPhrase = 'Reason phrase';
     const errorStatusCode = 404;
 
@@ -19,14 +21,17 @@ void main() {
         () async {
       // Arrange
       final clientMock = MockClient();
-      when(clientMock.get(Uri.parse(requestUrl), headers: {}))
+      final Uri uri = Uri.parse(requestUrl + queryParamsString);
+      when(clientMock.get(uri, headers: null))
           .thenAnswer((_) async => http.Response('{response}', 200));
       final sut = HttpHttpClient(clientMock);
       // Act
-      final actual = await sut.get<String>(requestUrl);
+      final actual =
+          await sut.get<String>(requestUrl, queryParams: queryParamsMap);
       // Assert
       expect(actual, isA<String>());
       expect(actual, '{response}');
+      verify(clientMock.get(uri)).called(1);
     });
 
     test(
@@ -34,7 +39,7 @@ void main() {
         () {
       // Arrange
       final clientMock = MockClient();
-      when(clientMock.get(Uri.parse(requestUrl), headers: {})).thenAnswer(
+      when(clientMock.get(Uri.parse(requestUrl), headers: null)).thenAnswer(
           (_) async => http.Response('body', errorStatusCode,
               reasonPhrase: reasonPhrase));
       final sut = HttpHttpClient(clientMock);
@@ -51,7 +56,7 @@ void main() {
         () async {
       // Arrange
       final clientMock = MockClient();
-      when(clientMock.get(Uri.parse(requestUrl), headers: {}))
+      when(clientMock.get(Uri.parse(requestUrl), headers: null))
           .thenThrow(Exception(reasonPhrase));
       final sut = HttpHttpClient(clientMock);
       // Act, Assert

@@ -24,7 +24,7 @@ final class RateFetcherFactory {
   final Clock _clock;
   final HttpClient _httpClient;
 
-  RateFetcher create() {
+  RateCachedFetcher create() {
     RateFetcher fetcher = switch (_config.currencyConversionRateFetcherType) {
       FetchingType.fixerIo => FixerIoRateFetcher(
           url: _config.fixerIoApiBaseUrl,
@@ -35,11 +35,11 @@ final class RateFetcherFactory {
     };
 
     RateCacher cacher = switch (_config.currencyConversionRateCacheType) {
-      CachingType.Repository => RateRepositoryCacher(
+      CachingType.repository => RateRepositoryCacher(
           _config.currencyConversionRateCacheExpiryInSeconds,
           _clock,
           _exchangeRateRecordRepository),
-      CachingType.Memory => RateMemoryCacher(
+      CachingType.memory => RateMemoryCacher(
           _config.currencyConversionRateCacheExpiryInSeconds, _clock),
     };
     return RateCachedFetcher(fetcher, cacher);

@@ -2,14 +2,21 @@ import 'package:currency_calc/feature/conversion/internal/domain/fetch/cache/cac
 import 'package:currency_calc/feature/conversion/internal/domain/fetch/load/fetching_type.dart';
 
 final class ConversionConfig {
-  final int currencyConversionRateCacheExpiryInSeconds = 24 * 60 * 60; // 1 day
-  final CachingType currencyConversionRateCacheType = CachingType.Repository;
-  final FetchingType currencyConversionRateFetcherType =
-      FetchingType.fawazAhmed;
+  ConversionConfig(
+      {int this.currencyConversionRateCacheExpiryInSeconds = 24 * 60 * 60,
+      CachingType this.currencyConversionRateCacheType = CachingType.repository,
+      FetchingType this.currencyConversionRateFetcherType = FetchingType.fawazAhmed,
+      String this.fixerIoApiBaseUrl = 'https://api.apilayer.com/fixer/convert',
+      String this.fixerIoApiKey = '1yUWc2Kb2Bzr13w7hryFnkKBCxGV38Ia',
+      String this.fawazAhmedApiBaseUrl = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest'}) {
+  }
 
-  final String fixerIoApiBaseUrl = 'https://api.apilayer.com/fixer/convert';
-  final String fixerIoApiKey = '1yUWc2Kb2Bzr13w7hryFnkKBCxGV38Ia';
+  late final int currencyConversionRateCacheExpiryInSeconds; // 1 day
+  late final CachingType currencyConversionRateCacheType;
+  late final FetchingType currencyConversionRateFetcherType;
 
-  final String fawazAhmedApiBaseUrl =
-      'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest';
+  late final String fixerIoApiBaseUrl;
+  late final String fixerIoApiKey;
+
+  late final String fawazAhmedApiBaseUrl;
 }

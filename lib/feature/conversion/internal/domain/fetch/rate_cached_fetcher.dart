@@ -2,10 +2,13 @@ import 'package:currency_calc/feature/conversion/internal/domain/fetch/cache/rat
 import 'package:currency_calc/feature/conversion/internal/domain/fetch/load/rate_fetcher.dart';
 
 final class RateCachedFetcher implements RateFetcher {
+  RateCachedFetcher(this._currencyRateFetcher, this._currencyRateCacher);
+
   final RateFetcher _currencyRateFetcher;
   final RateCacher _currencyRateCacher;
 
-  RateCachedFetcher(this._currencyRateFetcher, this._currencyRateCacher);
+  RateFetcher get apiClient => _currencyRateFetcher;
+  RateCacher get cacher => _currencyRateCacher;
 
   @override
   Future<double> fetchExchangeRate(

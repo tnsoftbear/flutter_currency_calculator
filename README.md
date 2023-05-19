@@ -117,6 +117,13 @@ and is used in the CurrencyFeatureFacade too.
 There are several unit tests for different domain logic.
 Mocking needs are performed by the [mockito](https://pub.dev/packages/mockito) package.
 
+```sh
+# Run tests
+flutter test
+# Run tests with coverage
+flutter test --coverage
+```
+
 ## Run
 
 ### Install
@@ -177,6 +184,7 @@ echo ```sh > ./doc/lib_tree.md & echo lib >> ./doc/lib_tree.md & tree /F /A lib 
 * [Flutter App Architecture with Riverpod](https://codewithandrea.com/articles/flutter-app-architecture-riverpod-introduction/)
 * [Folder structure for Flutter with clean architecture. How I do.](https://felipeemidio.medium.com/folder-structure-for-flutter-with-clean-architecture-how-i-do-bbe29225774f)
 * [Style guide for Flutter repo](https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo)
+* [Effective Dart: Style](https://dart.dev/guides/language/effective-dart/style)
 * [Internationalizing Flutter apps](https://docs.flutter.dev/development/accessibility-and-localization/internationalization)
 * [Flutter 3: How to extend ThemeData](https://medium.com/geekculture/flutter-3-how-to-extend-themedata-56b8923bf1aa)
 * [Adding a splash screen to your Android app](https://docs.flutter.dev/platform-integration/android/splash-screen)

@@ -12,6 +12,7 @@ import 'dio_http_client_test.mocks.dart';
 void main() {
   group('DioHttpClient', () {
     const requestUrl = 'https://example.com/';
+    const queryParams = {'int': 1111, 'str': 'string'};
     const reasonPhrase = 'Reason phrase';
     const errorStatusCode = 404;
 
@@ -19,14 +20,17 @@ void main() {
         () async {
       // Arrange
       final clientMock = MockDio();
-      when(clientMock.get<String>(requestUrl, options: anyNamed('options')))
+      when(clientMock.get<String>(requestUrl,
+              queryParameters: anyNamed('queryParameters'),
+              options: anyNamed('options')))
           .thenAnswer((_) async => Response(
               data: '{response}',
               statusCode: 200,
               requestOptions: RequestOptions(path: requestUrl)));
       final sut = DioHttpClient(clientMock);
       // Act
-      final actual = await sut.get<String>(requestUrl);
+      final actual =
+          await sut.get<String>(requestUrl, queryParams: queryParams);
       // Assert
       expect(actual, isA<String>());
       expect(actual, '{response}');
@@ -67,7 +71,10 @@ void main() {
           sut.get(requestUrl),
           throwsA(predicate((e) =>
               e is CouldNotFetchAnyHttpResponse &&
-              e.reasonPhrase == reasonPhrase)));
+              e.toString() ==
+                  CouldNotFetchAnyHttpResponse.messageDefault +
+                      ' - ' +
+                      reasonPhrase)));
 
       // Alternatives:
       // expect(sut.get(requestUrl), throwsA(isA<CouldNotFetchAnyHttpResponse>()));

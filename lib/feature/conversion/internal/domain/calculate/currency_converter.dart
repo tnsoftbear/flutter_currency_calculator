@@ -1,11 +1,7 @@
 final class CurrencyConverter {
   static double convert(double amount, double rate) {
-    if (amount < 0) {
-      throw ArgumentError('Amount cannot be negative');
-    }
-    if (rate < 0) {
-      throw ArgumentError('Rate cannot be negative');
-    }
+    assert(amount >= 0, 'Amount cannot be negative');
+    assert(rate >= 0, 'Rate cannot be negative');
     return amount * rate;
   }
 }

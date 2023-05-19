@@ -1,6 +1,8 @@
 final class CouldNotFetchExchangeRate implements Exception {
+  static const messageDefault = 'Could not fetch exchange rate';
+
   CouldNotFetchExchangeRate(
-      {String this.message = 'Could not fetch exchange rate',
+      {String this.message = messageDefault,
       String? this.reason});
 
   final String message;

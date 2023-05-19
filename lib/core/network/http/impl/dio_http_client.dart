@@ -12,15 +12,13 @@ final class DioHttpClient implements HttpClient {
 
   @override
   Future<T> get<T>(String url,
-      {QueryParams queryParams = const {},
-      HttpHeaders headers = const {}}) async {
-    if (queryParams.length > 0) {
-      url = url + '?' + Uri(queryParameters: queryParams).query;
-    }
+      {QueryParams? queryParams,
+      HttpHeaders? headers}) async {
     final Options options = Options(headers: headers);
     late final Response response;
     try {
-      response = await _dio.get<T>(url, options: options);
+      response = await _dio.get<T>(url,
+          queryParameters: queryParams, options: options);
     } on DioError catch (e) {
       throw CouldNotFetchAnyHttpResponse(reasonPhrase: e.message.toString());
     }
