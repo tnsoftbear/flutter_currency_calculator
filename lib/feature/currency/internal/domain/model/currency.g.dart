@@ -6,7 +6,7 @@ part of 'currency.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-final class CurrencyAdapter extends TypeAdapter<Currency> {
+class CurrencyAdapter extends TypeAdapter<Currency> {
   @override
   final int typeId = 2;
 

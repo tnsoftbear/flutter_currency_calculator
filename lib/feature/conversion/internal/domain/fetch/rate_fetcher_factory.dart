@@ -8,8 +8,8 @@ import 'package:currency_calc/feature/conversion/internal/domain/fetch/load/rate
 import 'package:currency_calc/feature/conversion/internal/domain/fetch/rate_cached_fetcher.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/fetch/cache/caching_type.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/fetch/load/fetching_type.dart';
-import 'package:currency_calc/feature/conversion/internal/domain/fetch/cache/rate_cacher_impl.dart';
-import 'package:currency_calc/feature/conversion/internal/domain/fetch/cache/rate_memory_cacher.dart';
+import 'package:currency_calc/feature/conversion/internal/domain/fetch/cache/impl/rate_repository_cacher.dart';
+import 'package:currency_calc/feature/conversion/internal/domain/fetch/cache/impl/rate_memory_cacher.dart';
 import 'package:currency_calc/feature/conversion/internal/domain/repository/exchange_rate_record_repository.dart';
 
 final class RateFetcherFactory {
@@ -35,7 +35,7 @@ final class RateFetcherFactory {
     };
 
     RateCacher cacher = switch (_config.currencyConversionRateCacheType) {
-      CachingType.Hive => RateCacherImpl(
+      CachingType.Repository => RateRepositoryCacher(
           _config.currencyConversionRateCacheExpiryInSeconds,
           _clock,
           _exchangeRateRecordRepository),

@@ -1,4 +1,4 @@
 enum CachingType {
-  Hive,
+  Repository,
   Memory,
 }

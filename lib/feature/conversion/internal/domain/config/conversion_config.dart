@@ -3,7 +3,7 @@ import 'package:currency_calc/feature/conversion/internal/domain/fetch/load/fetc
 
 final class ConversionConfig {
   final int currencyConversionRateCacheExpiryInSeconds = 24 * 60 * 60; // 1 day
-  final CachingType currencyConversionRateCacheType = CachingType.Hive;
+  final CachingType currencyConversionRateCacheType = CachingType.Repository;
   final FetchingType currencyConversionRateFetcherType =
       FetchingType.fawazAhmed;
 

@@ -6,7 +6,7 @@ part of 'conversion_history_record.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-final class ConversionHistoryRecordAdapter
+class ConversionHistoryRecordAdapter
     extends TypeAdapter<ConversionHistoryRecord> {
   @override
   final int typeId = 0;
@@ -18,12 +18,13 @@ final class ConversionHistoryRecordAdapter
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ConversionHistoryRecord(
-        sourceCurrencyCode: fields[0] as String,
-        sourceAmount: fields[1] as double,
-        targetCurrencyCode: fields[2] as String,
-        targetAmount: fields[3] as double,
-        rate: fields[4] as double,
-        date: fields[5] as DateTime);
+      sourceCurrencyCode: fields[0] as String,
+      sourceAmount: fields[1] as double,
+      targetCurrencyCode: fields[2] as String,
+      targetAmount: fields[3] as double,
+      rate: fields[4] as double,
+      date: fields[5] as DateTime,
+    );
   }
 
   @override

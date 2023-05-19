@@ -1,5 +1,5 @@
 import 'package:clock/clock.dart';
-import 'package:currency_calc/core/network/http/http_http_client.dart';
+import 'package:currency_calc/core/network/http/impl/http_http_client.dart';
 import 'package:currency_calc/feature/currency/internal/domain/fetch/load/fawaz_ahmed/fawaz_ahmed_available_currency_fetcher.dart';
 import 'package:currency_calc/feature/currency/internal/domain/populate/currency_populator.dart';
 import 'package:currency_calc/feature/currency/internal/domain/repository/currency_repository.dart';
