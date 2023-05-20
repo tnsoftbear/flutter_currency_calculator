@@ -3,7 +3,7 @@ import 'package:currency_calc/feature/conversion/internal/domain/validate/conver
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('CurrencyConversionValidator', () {
+  group('ConversionValidator', () {
     const CURRENCY_CODES = [
       'USD',
       'EUR',
