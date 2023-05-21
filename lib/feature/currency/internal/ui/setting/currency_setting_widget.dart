@@ -6,7 +6,7 @@ import 'package:currency_calc/front/ui/widget/standard_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:vertical_tabs_flutter/vertical_tabs.dart';
 
-final class CurrencySettingWidget extends StatelessWidget {
+class CurrencySettingWidget extends StatelessWidget {
   const CurrencySettingWidget(CurrencyRepository this._currencyRepository,
       CurrencyVisibilityUpdater this._currencyVisibilityUpdater,
       {Key? key})
