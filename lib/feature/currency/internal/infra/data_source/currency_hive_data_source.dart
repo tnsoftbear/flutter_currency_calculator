@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:currency_calc/feature/currency/internal/domain/model/currency.dart';
 import 'package:currency_calc/feature/currency/internal/domain/repository/currency_data_source.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -101,8 +103,8 @@ class CurrencyHiveDataSource implements CurrencyDataSource {
   Future<void> save(Currency currency) async {
     await _init();
     await box!.put(currency.code, currency);
-    print(
-        'saved ${currency.code} and ${currency.isVisibleForSource} isVisibleForSource and ${currency.isVisibleForTarget} isVisibleForTarget');
+    log('saved ${currency.code} and isVisibleForSource: ${currency.isVisibleForSource} ' +
+        ' and isVisibleForTarget: ${currency.isVisibleForTarget}');
   }
 
   @override

@@ -4,6 +4,7 @@ import 'package:currency_calc/feature/currency/internal/domain/fetch/load/fawaz_
 import 'package:currency_calc/feature/currency/internal/domain/populate/currency_populator.dart';
 import 'package:currency_calc/feature/currency/internal/domain/repository/currency_repository.dart';
 import 'package:currency_calc/feature/currency/internal/domain/repository/currency_repository_impl.dart';
+import 'package:currency_calc/feature/currency/internal/domain/update/internal/selection/currency_selection_corrector.dart';
 import 'package:currency_calc/feature/currency/internal/domain/update/currency_visibility_updater.dart';
 import 'package:currency_calc/feature/currency/internal/infra/data_source/currency_hive_data_source.dart';
 import 'package:currency_calc/feature/currency/internal/infra/data_source/update_time_shared_prefs_data_source.dart';
@@ -21,7 +22,10 @@ final class CurrencyFeatureDic {
         );
     _currencyPopulator =
         CurrencyPopulator(clock, currencyFetcher, currencyRepository);
-    _currencyVisibilityUpdater = CurrencyVisibilityUpdater(currencyRepository);
+    final currencySelectionCorrector =
+        CurrencySelectionCorrector(currencyRepository);
+    _currencyVisibilityUpdater = CurrencyVisibilityUpdater(
+        currencyRepository, currencySelectionCorrector);
   }
 
   late final CurrencyRepository _currencyRepository;
