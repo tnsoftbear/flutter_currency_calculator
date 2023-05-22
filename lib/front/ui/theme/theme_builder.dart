@@ -3,7 +3,7 @@ import 'package:currency_calc/front/ui/theme/additional_colors.dart';
 import 'package:flutter/material.dart';
 
 final class ThemeBuilder {
-  static ThemeData buildTheme(String? themeType, String? fontFamily) {
+  static ThemeData buildTheme([String? themeType, String? fontFamily]) {
     fontFamily ??= AppearanceConstant.FF_DEFAULT;
     final appBarTitleTextStyle = TextStyle(
       fontSize: 26,

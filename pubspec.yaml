@@ -17,7 +17,6 @@ dependencies:
   country_icons: ^2.0.2
   flutter_svg: ^2.0.5
   provider: ^6.0.5
-  flutter_hooks: ^0.18.6
   equatable: ^2.0.5
   # vertical_tabs_flutter: ^1.0.0
   vertical_tabs_flutter:

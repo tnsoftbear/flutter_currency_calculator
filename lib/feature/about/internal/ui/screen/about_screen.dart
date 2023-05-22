@@ -35,6 +35,7 @@ final class AboutScreen extends StatelessWidget {
             ),
             child: Text(
               tr.aboutContent,
+              key: const Key('wid_about_content'),
               style: const TextStyle(
                 fontSize: 20,
               ),
