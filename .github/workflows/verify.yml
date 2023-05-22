@@ -7,8 +7,7 @@ on:
     branches:
       - develop
       - main
-permissions:
-  contents: read-all
+permissions: read-all
 jobs:
     verify:
         name: Verify
