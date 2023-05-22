@@ -7,12 +7,19 @@ on:
     branches:
       - develop
       - main
-permissions:
-  contents: read-all
+permissions: read-all
 jobs:
     verify:
         name: Verify
         runs-on: ubuntu-latest
         steps:
-        - name: Echo text
-          run: echo "Hello, world!"
+        - name: Setup flutter
+          uses: subosito/flutter-action@v2
+          with:
+            channel: 'stable' # or: 'beta', 'dev' or 'master'
+        - run: flutter --disable-telemetry && flutter --version
+        - run: flutter doctor -v
+        - name: Checkout code
+          uses: actions/checkout@v2
+        - run: make get
+        - run: make test
