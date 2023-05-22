@@ -13,9 +13,13 @@ jobs:
         name: Verify
         runs-on: ubuntu-latest
         steps:
-        - name: Clone flutter repository from stable channel
+        - name: Setup flutter
           uses: subosito/flutter-action@v2
           with:
             channel: 'stable' # or: 'beta', 'dev' or 'master'
-        - run: flutter --disable-telemetry
-        - run: flutter --version
+        - run: flutter --disable-telemetry && flutter --version
+        - run: flutter doctor -v
+        - name: Checkout code
+          uses: actions/checkout@v2
+        - run: flutter pub get
+        - run: flutter test
