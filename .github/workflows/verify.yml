@@ -16,9 +16,8 @@ jobs:
         - name: Echo text
           run: echo "Hello, world!"
 
-        - name: Clone flutter repository with master channel
-        - uses: actions/checkout@v3
-        - uses: subosito/flutter-action@v2
+        - name: Clone flutter repository from stable channel
+          uses: subosito/flutter-action@v2
           with:
             channel: 'stable' # or: 'beta', 'dev' or 'master'
         - run: flutter --version
