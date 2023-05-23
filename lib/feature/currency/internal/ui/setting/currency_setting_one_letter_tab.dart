@@ -111,12 +111,10 @@ final class CurrencySettingOneLetterTab extends StatelessWidget {
           ),
         ),
         TableCell(
-          child: CurrencyCheckbox(
-              currency, true, _currencyVisibilityUpdater),
+          child: CurrencyCheckbox(currency, true, _currencyVisibilityUpdater),
         ),
         TableCell(
-          child: CurrencyCheckbox(
-              currency, false, _currencyVisibilityUpdater),
+          child: CurrencyCheckbox(currency, false, _currencyVisibilityUpdater),
         ),
       ],
     );

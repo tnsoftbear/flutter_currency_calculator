@@ -110,7 +110,7 @@ void main() {
   test(
     'correctSelectedTargetCurrency should update selected target currency USD to RUB,' +
         ' because USD currency is not visible and EUR currency is selected for source currency',
-        () async {
+    () async {
       // Arrange
       final selectedTargetCurrency = Currency('USD', 'US Dollar', true, false);
       final visibleTargetCurrencies = [
@@ -145,9 +145,10 @@ void main() {
   test(
     'correctSelectedTargetCurrency should update selected target currency GBP to EUR,' +
         ' because GBP currency is not visible and EUR currency is the first in the visible currency list',
-        () async {
+    () async {
       // Arrange
-      final selectedTargetCurrency = Currency('GBP', 'British Pound', true, false);
+      final selectedTargetCurrency =
+          Currency('GBP', 'British Pound', true, false);
       final visibleTargetCurrencies = [
         Currency('EUR', 'Euro', true, true),
         Currency('USD', 'US Dollar', true, true),
@@ -180,9 +181,10 @@ void main() {
   test(
     'correctSelectedTargetCurrency should not update selected target currency GBP,' +
         ' because GBP currency is already visible for target currency',
-        () async {
+    () async {
       // Arrange
-      final selectedTargetCurrency = Currency('GBP', 'British Pound', true, true);
+      final selectedTargetCurrency =
+          Currency('GBP', 'British Pound', true, true);
       final selectedTargetCurrencyCode = 'GBP';
 
       when(settingModel.selectedTargetCurrencyCode)
@@ -200,5 +202,4 @@ void main() {
       verifyNever(settingModel.updateSelectedTargetCurrencyCode(any));
     },
   );
-
 }

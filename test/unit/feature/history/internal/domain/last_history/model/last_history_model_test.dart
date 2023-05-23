@@ -11,7 +11,6 @@ import 'last_history_model_test.mocks.dart';
 class MockClock extends Mock implements Clock {}
 
 @GenerateNiceMocks([MockSpec<ConversionHistoryRecordRepository>()])
-
 void main() {
   late LastHistoryModel sut;
   late Clock clock;
@@ -27,12 +26,13 @@ void main() {
     );
   });
 
-  test('load should load the last N history records from the repository', () async {
+  test('load should load the last N history records from the repository',
+      () async {
     // Arrange
     final totalCount = 12;
     final records = List.generate(
       totalCount,
-          (index) => ConversionHistoryRecord(
+      (index) => ConversionHistoryRecord(
         sourceCurrencyCode: 'USD',
         targetCurrencyCode: 'EUR',
         sourceAmount: 100.0 + index,
@@ -87,19 +87,20 @@ void main() {
 
   test(
       'deleteRecordByTableIndex should delete the record from the repository by the table index',
-          () async {
-        // Arrange
-        final totalCount = 10;
-        final tableIndex = 3;
-        final actualIndex = 6;
-        when(conversionHistoryRecordRepository.countAll())
-            .thenAnswer((_) => Future.value(totalCount));
+      () async {
+    // Arrange
+    final totalCount = 10;
+    final tableIndex = 3;
+    final actualIndex = 6;
+    when(conversionHistoryRecordRepository.countAll())
+        .thenAnswer((_) => Future.value(totalCount));
 
-        // Act
-        await sut.deleteRecordByTableIndex(tableIndex);
+    // Act
+    await sut.deleteRecordByTableIndex(tableIndex);
 
-        // Assert
-        verify(conversionHistoryRecordRepository.deleteByIndex(actualIndex)).called(1);
-        expect(sut.records, isEmpty);
-      });
+    // Assert
+    verify(conversionHistoryRecordRepository.deleteByIndex(actualIndex))
+        .called(1);
+    expect(sut.records, isEmpty);
+  });
 }

@@ -4,7 +4,8 @@ final class CurrencyCollector {
   static const VISIBLE_CURRENCY_CODES = ['EUR', 'GBP', 'RUB', 'USD'];
 
   static CurrencyMap collectMissingCurrencies(
-      final CurrencyMap existingCurrencies, final CurrencyMap fetchedCurrencies) {
+      final CurrencyMap existingCurrencies,
+      final CurrencyMap fetchedCurrencies) {
     final CurrencyMap resultCurrencies = {};
     fetchedCurrencies.forEach((currencyCode, currency) {
       if (!existingCurrencies.containsKey(currencyCode)) {

@@ -11,12 +11,12 @@ final class LocaleSettingTableRow extends TableRow {
   LocaleSettingTableRow(
     BuildContext this.context,
   ) : super(children: [
-    Text(AppLocalizations.of(context).settingSelectLanguage),
-    Row(
-      children: _buildLocaleList(context),
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    )
-  ]);
+          Text(AppLocalizations.of(context).settingSelectLanguage),
+          Row(
+            children: _buildLocaleList(context),
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          )
+        ]);
 
   static List<Widget> _buildLocaleList(BuildContext context) {
     final tr = AppLocalizations.of(context);
@@ -31,20 +31,22 @@ final class LocaleSettingTableRow extends TableRow {
         'value': AppearanceConstant.LC_RU,
         'icon': 'icons/flags/svg/ru.svg',
       },
-    ];;
+    ];
+    ;
 
     final List<Widget> languageWidgetList = options.map((language) {
       final settingModel = context.read<SettingModel>();
       return Expanded(
           child: RadioListTile(
-            title: SvgPicture.asset(language['icon']!,
-                package: 'country_icons',
-                height: 32,
-                semanticsLabel: language['title']),
-            value: language['value'],
-            groupValue: settingModel.languageCode,
-            onChanged: (languageCode) => settingModel.updateLanguageCode(languageCode),
-          ));
+        title: SvgPicture.asset(language['icon']!,
+            package: 'country_icons',
+            height: 32,
+            semanticsLabel: language['title']),
+        value: language['value'],
+        groupValue: settingModel.languageCode,
+        onChanged: (languageCode) =>
+            settingModel.updateLanguageCode(languageCode),
+      ));
     }).toList();
 
     return languageWidgetList;

@@ -18,15 +18,19 @@ final class SettingRepositoryImpl implements SettingRepository {
     return await _settingDataSource.getStringList("visibleSourceCurrencyCodes");
   }
 
-  Future<void> saveVisibleSourceCurrencyCodes(List<String> currencyCodes) async {
-    await _settingDataSource.setStringList("visibleSourceCurrencyCodes", currencyCodes);
+  Future<void> saveVisibleSourceCurrencyCodes(
+      List<String> currencyCodes) async {
+    await _settingDataSource.setStringList(
+        "visibleSourceCurrencyCodes", currencyCodes);
   }
 
   Future<List<String>?> loadVisibleTargetCurrencyCodes() async {
     return await _settingDataSource.getStringList("visibleTargetCurrencyCodes");
   }
 
-  Future<void> saveVisibleTargetCurrencyCodes(List<String> currencyCodes) async {
-    await _settingDataSource.setStringList("visibleTargetCurrencyCodes", currencyCodes);
+  Future<void> saveVisibleTargetCurrencyCodes(
+      List<String> currencyCodes) async {
+    await _settingDataSource.setStringList(
+        "visibleTargetCurrencyCodes", currencyCodes);
   }
 }

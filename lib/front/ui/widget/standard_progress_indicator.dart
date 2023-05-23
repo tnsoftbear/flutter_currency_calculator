@@ -11,15 +11,15 @@ final class StandardProgressIndicator extends StatelessWidget {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              SizedBox(
-                width: 60,
-                height: 60,
-                child: CircularProgressIndicator(),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 16),
-                child: Text(tr.generalLoading),
-              ),
-            ]));
+          SizedBox(
+            width: 60,
+            height: 60,
+            child: CircularProgressIndicator(),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 16),
+            child: Text(tr.generalLoading),
+          ),
+        ]));
   }
 }

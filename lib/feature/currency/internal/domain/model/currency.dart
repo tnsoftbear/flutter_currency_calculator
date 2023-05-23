@@ -48,8 +48,8 @@ final class Currency {
   @override
   int get hashCode {
     return code.hashCode ^
-    name.hashCode ^
-    isVisibleForSource.hashCode ^
-    isVisibleForTarget.hashCode;
+        name.hashCode ^
+        isVisibleForSource.hashCode ^
+        isVisibleForTarget.hashCode;
   }
 }
