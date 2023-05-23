@@ -44,7 +44,7 @@ class _CurrencyCheckboxState extends State<CurrencyCheckbox> {
           : _currency.isVisibleForTarget,
       onChanged: (bool? visible) async {
         Currency? updatedCurrency =
-            await onChange(_currency, visible, settingModel);
+            await onChange(_currency.code, visible, settingModel);
         if (updatedCurrency != null) {
           setState(() {
             _currency = updatedCurrency;
