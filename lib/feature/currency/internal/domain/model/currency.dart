@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
 part 'currency.g.dart';
@@ -5,7 +6,7 @@ part 'currency.g.dart';
 typedef CurrencyMap = Map<String, Currency>;
 
 @HiveType(typeId: 2)
-final class Currency {
+final class Currency with EquatableMixin {
   Currency(this.code, this.name,
       [this.isVisibleForSource = false, this.isVisibleForTarget = false]) {
     code = code.toUpperCase();
@@ -14,11 +15,11 @@ final class Currency {
   @HiveField(0)
   String code;
   @HiveField(1)
-  String name;
+  final String name;
   @HiveField(2)
-  bool isVisibleForSource;
+  final bool isVisibleForSource;
   @HiveField(3)
-  bool isVisibleForTarget;
+  final bool isVisibleForTarget;
 
   Currency copyWith({
     String? code,
@@ -34,22 +35,24 @@ final class Currency {
     );
   }
 
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
+  get props => [code, name, isVisibleForSource, isVisibleForTarget];
 
-    return other is Currency &&
-        other.code == code &&
-        other.name == name &&
-        other.isVisibleForSource == isVisibleForSource &&
-        other.isVisibleForTarget == isVisibleForTarget;
-  }
-
-  @override
-  int get hashCode {
-    return code.hashCode ^
-        name.hashCode ^
-        isVisibleForSource.hashCode ^
-        isVisibleForTarget.hashCode;
-  }
+  // @override
+  // bool operator ==(Object other) {
+  //   if (identical(this, other)) return true;
+  //
+  //   return other is Currency &&
+  //       other.code == code &&
+  //       other.name == name &&
+  //       other.isVisibleForSource == isVisibleForSource &&
+  //       other.isVisibleForTarget == isVisibleForTarget;
+  // }
+  //
+  // @override
+  // int get hashCode {
+  //   return code.hashCode ^
+  //       name.hashCode ^
+  //       isVisibleForSource.hashCode ^
+  //       isVisibleForTarget.hashCode;
+  // }
 }
