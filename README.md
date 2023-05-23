@@ -154,7 +154,7 @@ Few reminders for myself:
 
 ```sh
 # Generate code
-flutter pub run build_runner build --delete-conflicting-outputs
+dart run build_runner build --delete-conflicting-outputs
 # Generate translation classes
 flutter gen-l10n
 # Generate splash screens

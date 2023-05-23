@@ -5,10 +5,16 @@ lib
 +---core
 |   \---network
 |       \---http
-|               dio_http_client.dart
-|               http_client.dart
-|               http_http_client.dart
-|               
+|           |   http_client.dart
+|           |   
+|           +---exception
+|           |       could_not_fetch_any_http_response.dart
+|           |       could_not_fetch_success_http_response.dart
+|           |       
+|           \---impl
+|                   dio_http_client.dart
+|                   http_http_client.dart
+|                   
 +---feature
 |   +---about
 |   |   +---internal
@@ -41,15 +47,20 @@ lib
 |   |   |   |   |   |   rate_fetcher_factory.dart
 |   |   |   |   |   |   
 |   |   |   |   |   +---cache
-|   |   |   |   |   |       caching_type.dart
-|   |   |   |   |   |       rate_cacher.dart
-|   |   |   |   |   |       rate_cacher_impl.dart
-|   |   |   |   |   |       rate_memory_cacher.dart
-|   |   |   |   |   |       
+|   |   |   |   |   |   |   caching_type.dart
+|   |   |   |   |   |   |   rate_cacher.dart
+|   |   |   |   |   |   |   
+|   |   |   |   |   |   \---impl
+|   |   |   |   |   |           rate_memory_cacher.dart
+|   |   |   |   |   |           rate_repository_cacher.dart
+|   |   |   |   |   |           
 |   |   |   |   |   \---load
 |   |   |   |   |       |   fetching_type.dart
 |   |   |   |   |       |   rate_fetcher.dart
 |   |   |   |   |       |   
+|   |   |   |   |       +---exception
+|   |   |   |   |       |       could_not_fetch_exchange_rate.dart
+|   |   |   |   |       |       
 |   |   |   |   |       +---fawaz_ahmed
 |   |   |   |   |       |       fawaz_ahmed_rate_data.dart
 |   |   |   |   |       |       fawaz_ahmed_rate_fetcher.dart
@@ -100,6 +111,9 @@ lib
 |   |   |   |   |   \---load
 |   |   |   |   |       |   currency_fetcher.dart
 |   |   |   |   |       |   
+|   |   |   |   |       +---exception
+|   |   |   |   |       |       could_not_fetch_exchange_rate.dart
+|   |   |   |   |       |       
 |   |   |   |   |       \---fawaz_ahmed
 |   |   |   |   |               fawaz_ahmed_available_currency_fetcher.dart
 |   |   |   |   |               
@@ -117,8 +131,12 @@ lib
 |   |   |   |   |       update_time_data_source.dart
 |   |   |   |   |       
 |   |   |   |   \---update
-|   |   |   |           currency_visibility_updater.dart
-|   |   |   |           
+|   |   |   |       |   currency_visibility_updater.dart
+|   |   |   |       |   
+|   |   |   |       \---internal
+|   |   |   |           \---selection
+|   |   |   |                   currency_selection_corrector.dart
+|   |   |   |                   
 |   |   |   +---infra
 |   |   |   |   \---data_source
 |   |   |   |           currency_hive_data_source.dart
