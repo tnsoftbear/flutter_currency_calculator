@@ -36,23 +36,4 @@ final class Currency with EquatableMixin {
   }
 
   get props => [code, name, isVisibleForSource, isVisibleForTarget];
-
-  // @override
-  // bool operator ==(Object other) {
-  //   if (identical(this, other)) return true;
-  //
-  //   return other is Currency &&
-  //       other.code == code &&
-  //       other.name == name &&
-  //       other.isVisibleForSource == isVisibleForSource &&
-  //       other.isVisibleForTarget == isVisibleForTarget;
-  // }
-  //
-  // @override
-  // int get hashCode {
-  //   return code.hashCode ^
-  //       name.hashCode ^
-  //       isVisibleForSource.hashCode ^
-  //       isVisibleForTarget.hashCode;
-  // }
 }
