@@ -25,8 +25,7 @@ final class AppearanceConstant {
       'assets/images/portugal-sea.jpg';
   static const String BG_IMAGE_FOR_CURRENCY_CONVERSION_ALL_HISTORY_SCREEN =
       'assets/images/cloudy-sky-portrait.jpg';
-  static const String BG_IMAGE_FOR_MAIN_MENU_AVATAR =
-      'assets/images/rio.jpg';
+  static const String BG_IMAGE_FOR_MAIN_MENU_AVATAR = 'assets/images/rio.jpg';
 
   static const String THEME_BLUE = 'blue';
   static const String THEME_GREEN = 'green';

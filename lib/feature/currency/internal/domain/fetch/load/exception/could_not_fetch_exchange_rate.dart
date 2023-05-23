@@ -2,8 +2,7 @@ final class CouldNotFetchAvailableCurrencyList implements Exception {
   static const messageDefault = 'Could not fetch available currency list';
 
   CouldNotFetchAvailableCurrencyList(
-      {String this.message = messageDefault,
-      String? this.reason});
+      {String this.message = messageDefault, String? this.reason});
 
   final String message;
   final String? reason;

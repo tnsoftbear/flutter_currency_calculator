@@ -10,9 +10,12 @@ import 'fawaz_ahmed_available_currency_fetcher_test.mocks.dart';
 @GenerateNiceMocks([MockSpec<HttpClient>()])
 void main() {
   group('FawazAhmedAvailableCurrencyFetcher', () {
-    test('fetchAvailableCurrencies() should fetch and parse available currencies', () async {
+    test(
+        'fetchAvailableCurrencies() should fetch and parse available currencies',
+        () async {
       final url = 'https://example.com/currencies';
-      final httpClient = MockHttpClient(); // Provide a mock or test implementation of HttpClient
+      final httpClient =
+          MockHttpClient(); // Provide a mock or test implementation of HttpClient
 
       final sut = FawazAhmedAvailableCurrencyFetcher(
         url: url,
@@ -20,21 +23,27 @@ void main() {
       );
 
       // Provide a mock implementation of the HTTP response
-      final encodedJson = '{"USD": "US Dollar", "EUR": "Euro", "GBP": "British Pound"}';
+      final encodedJson =
+          '{"USD": "US Dollar", "EUR": "Euro", "GBP": "British Pound"}';
       when(httpClient.get(url)).thenAnswer((_) async => encodedJson);
 
       final result = await sut.fetchAvailableCurrencies();
 
-      expect(result, equals({
-        'USD': Currency('USD', 'US Dollar'),
-        'EUR': Currency('EUR', 'Euro'),
-        'GBP': Currency('GBP', 'British Pound'),
-      }));
+      expect(
+          result,
+          equals({
+            'USD': Currency('USD', 'US Dollar'),
+            'EUR': Currency('EUR', 'Euro'),
+            'GBP': Currency('GBP', 'British Pound'),
+          }));
     });
 
-    test('fetchAvailableCurrencies() should throw CouldNotFetchAvailableCurrencyList on exception', () async {
+    test(
+        'fetchAvailableCurrencies() should throw CouldNotFetchAvailableCurrencyList on exception',
+        () async {
       final url = 'https://example.com/currencies';
-      final httpClient = MockHttpClient(); // Provide a mock or test implementation of HttpClient
+      final httpClient =
+          MockHttpClient(); // Provide a mock or test implementation of HttpClient
       const errorMessage = 'Failed to fetch currencies';
 
       final fetcher = FawazAhmedAvailableCurrencyFetcher(
@@ -46,7 +55,7 @@ void main() {
       when(httpClient.get(any)).thenThrow(Exception(errorMessage));
 
       expect(
-            () async => await fetcher.fetchAvailableCurrencies(),
+        () async => await fetcher.fetchAvailableCurrencies(),
         throwsA(isA<CouldNotFetchAvailableCurrencyList>()),
       );
     });

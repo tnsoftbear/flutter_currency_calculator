@@ -5,8 +5,7 @@ final class ConversionValidationTranslator {
   ConversionValidationTranslator();
 
   String translateConcatenatedErrorMessage(
-      AppLocalizations tr,
-      ConversionValidationResult validationResult,
+      AppLocalizations tr, ConversionValidationResult validationResult,
       [String separator = "\n"]) {
     final List<String> errorMessages =
         _translateErrorMessages(tr, validationResult.errors);

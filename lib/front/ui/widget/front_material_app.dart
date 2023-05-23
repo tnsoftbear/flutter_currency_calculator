@@ -14,7 +14,8 @@ final class FrontMaterialApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
-      theme: ThemeBuilder.buildTheme(settingModel.themeType, settingModel.fontFamily),
+      theme: ThemeBuilder.buildTheme(
+          settingModel.themeType, settingModel.fontFamily),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: settingModel.detectLocale(),

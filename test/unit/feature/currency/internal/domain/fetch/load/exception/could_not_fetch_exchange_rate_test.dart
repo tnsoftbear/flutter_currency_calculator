@@ -17,7 +17,9 @@ void main() {
       expect(result, equals('$message - $reason'));
     });
 
-    test('toString should return the correct string representation when reason is null', () {
+    test(
+        'toString should return the correct string representation when reason is null',
+        () {
       // Arrange
       final message = 'Could not fetch available currency list';
       final sut = CouldNotFetchAvailableCurrencyList(
