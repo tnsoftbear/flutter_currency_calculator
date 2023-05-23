@@ -28,7 +28,8 @@ final class CurrencyVisibilityUpdater {
 
     settingModel.updateVisibleSourceCurrencyCodes(
         await _currencyRepository.loadVisibleSourceCurrencyCodes());
-    await _currencySelectionCorrector.correctSelectedSourceCurrency(currency, settingModel);
+    await _currencySelectionCorrector.correctSelectedSourceCurrency(
+        currency, settingModel);
     return currency;
   }
 
@@ -50,7 +51,8 @@ final class CurrencyVisibilityUpdater {
 
     settingModel.updateVisibleTargetCurrencyCodes(
         await _currencyRepository.loadVisibleTargetCurrencyCodes());
-    await _currencySelectionCorrector.correctSelectedTargetCurrency(currency, settingModel);
+    await _currencySelectionCorrector.correctSelectedTargetCurrency(
+        currency, settingModel);
     return currency;
   }
 }

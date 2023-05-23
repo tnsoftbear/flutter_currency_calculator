@@ -42,9 +42,9 @@ void main() {
       // Act, Assert
       expect(
         () => fetcher.fetchExchangeRate('XXX', 'YYY'),
-        throwsA(predicate((e) => e is CouldNotFetchExchangeRate
-            && e.reason == "Exception: $errorMessage"
-        )),
+        throwsA(predicate((e) =>
+            e is CouldNotFetchExchangeRate &&
+            e.reason == "Exception: $errorMessage")),
       );
       verify(httpClient.get(any)).called(1);
     });

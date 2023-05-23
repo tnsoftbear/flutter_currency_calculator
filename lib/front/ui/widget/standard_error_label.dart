@@ -4,12 +4,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 final class StandardErrorLabel extends StatefulWidget {
   final String errorText;
 
-  const StandardErrorLabel(this.errorText, {Key? key})
-      : super(key: key);
+  const StandardErrorLabel(this.errorText, {Key? key}) : super(key: key);
 
   @override
-  State<StandardErrorLabel> createState() =>
-      _StandardErrorLabelState();
+  State<StandardErrorLabel> createState() => _StandardErrorLabelState();
 }
 
 final class _StandardErrorLabelState extends State<StandardErrorLabel> {
@@ -20,16 +18,15 @@ final class _StandardErrorLabelState extends State<StandardErrorLabel> {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Icon(
-                Icons.error_outline,
-                color: Colors.red,
-                size: 60,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: Text(tr.generalError(widget.errorText)),
-              ),
-            ]));
+          const Icon(
+            Icons.error_outline,
+            color: Colors.red,
+            size: 60,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 16),
+            child: Text(tr.generalError(widget.errorText)),
+          ),
+        ]));
   }
 }
-

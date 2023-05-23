@@ -1,9 +1,0 @@
-#!/bin/bash
-
-dart format --set-exit-if-changed .
-RESULT=$?
-
-if [ $RESULT -ne 0 ]; then
-    echo "Error: Flutter code style check failed. Please fix the style issues before committing."
-    exit 1
-fi

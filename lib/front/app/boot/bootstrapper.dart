@@ -17,8 +17,8 @@ final class Bootstrapper {
     final currencyFeatureFacade = CurrencyFeatureFacade();
     await currencyFeatureFacade.populateIfNeeded();
 
-    final settingModel = await SettingFeatureFacade()
-        .createSettingModel(currencyFeatureFacade);
+    final settingModel =
+        await SettingFeatureFacade().createSettingModel(currencyFeatureFacade);
 
     FlutterNativeSplash.remove();
 

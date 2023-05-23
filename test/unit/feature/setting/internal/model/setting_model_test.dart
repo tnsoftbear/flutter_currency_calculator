@@ -59,9 +59,7 @@ void main() {
           equals(visibleTargetCurrencyCodes));
     });
 
-    test(
-        'updateLanguageCode should update the language code',
-        () {
+    test('updateLanguageCode should update the language code', () {
       // Arrange
       final languageCode = 'en';
       // Act
@@ -95,7 +93,9 @@ void main() {
       verify(settingModelManager.saveThemeType(themeType)).called(1);
     });
 
-    test('updateSelectedSourceCurrencyCode should update the selected source currency code', () {
+    test(
+        'updateSelectedSourceCurrencyCode should update the selected source currency code',
+        () {
       // Arrange
       final currencyCode = 'USD';
 
@@ -104,10 +104,13 @@ void main() {
 
       // Assert
       expect(sut.selectedSourceCurrencyCode, equals(currencyCode));
-      verify(settingModelManager.saveDefaultSourceCurrencyCode(currencyCode)).called(1);
+      verify(settingModelManager.saveDefaultSourceCurrencyCode(currencyCode))
+          .called(1);
     });
 
-    test('updateSelectedTargetCurrencyCode should update the selected target currency code', () {
+    test(
+        'updateSelectedTargetCurrencyCode should update the selected target currency code',
+        () {
       // Arrange
       final currencyCode = 'EUR';
 
@@ -116,10 +119,13 @@ void main() {
 
       // Assert
       expect(sut.selectedTargetCurrencyCode, equals(currencyCode));
-      verify(settingModelManager.saveDefaultTargetCurrencyCode(currencyCode)).called(1);
+      verify(settingModelManager.saveDefaultTargetCurrencyCode(currencyCode))
+          .called(1);
     });
 
-    test('updateVisibleSourceCurrencyCodes should update the visible source currency codes', () {
+    test(
+        'updateVisibleSourceCurrencyCodes should update the visible source currency codes',
+        () {
       // Arrange
       final currencyCodes = ['USD', 'EUR', 'GBP'];
 
@@ -128,10 +134,13 @@ void main() {
 
       // Assert
       expect(sut.visibleSourceCurrencyCodes, equals(currencyCodes));
-      verify(settingModelManager.saveVisibleSourceCurrencyCodes(currencyCodes)).called(1);
+      verify(settingModelManager.saveVisibleSourceCurrencyCodes(currencyCodes))
+          .called(1);
     });
 
-    test('updateVisibleTargetCurrencyCodes should update the visible target currency codes', () {
+    test(
+        'updateVisibleTargetCurrencyCodes should update the visible target currency codes',
+        () {
       // Arrange
       final currencyCodes = ['EUR', 'GBP'];
 
@@ -140,7 +149,8 @@ void main() {
 
       // Assert
       expect(sut.visibleTargetCurrencyCodes, equals(currencyCodes));
-      verify(settingModelManager.saveVisibleTargetCurrencyCodes(currencyCodes)).called(1);
+      verify(settingModelManager.saveVisibleTargetCurrencyCodes(currencyCodes))
+          .called(1);
     });
   });
 }
