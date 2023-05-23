@@ -18,8 +18,10 @@ final class CurrencyCollector {
   static void applyVisibility(final CurrencyMap currencies) {
     VISIBLE_CURRENCY_CODES.forEach((currencyCode) {
       if (currencies.containsKey(currencyCode)) {
-        currencies[currencyCode]!.isVisibleForSource = true;
-        currencies[currencyCode]!.isVisibleForTarget = true;
+        currencies[currencyCode] = currencies[currencyCode]!.copyWith(
+          isVisibleForSource: true,
+          isVisibleForTarget: true,
+        );
       }
     });
   }
