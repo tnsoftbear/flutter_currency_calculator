@@ -17,10 +17,11 @@ import 'rate_fetcher_factory_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<HttpClient>()])
 @GenerateNiceMocks([MockSpec<ExchangeRateRecordRepository>()])
-
 void main() {
   group('RateFetcherFactory', () {
-    test('create returns RateCachedFetcher with FixerIoRateFetcher and RateRepositoryCacher', () {
+    test(
+        'create returns RateCachedFetcher with FixerIoRateFetcher and RateRepositoryCacher',
+        () {
       final config = ConversionConfig(
         currencyConversionRateFetcherType: FetchingType.fixerIo,
         currencyConversionRateCacheType: CachingType.repository,
@@ -45,7 +46,9 @@ void main() {
       expect(rateFetcher.cacher, isA<RateRepositoryCacher>());
     });
 
-    test('create returns RateCachedFetcher with FawazAhmedExchangeRateFetcher and RateMemoryCacher', () {
+    test(
+        'create returns RateCachedFetcher with FawazAhmedExchangeRateFetcher and RateMemoryCacher',
+        () {
       final config = ConversionConfig(
         currencyConversionRateFetcherType: FetchingType.fawazAhmed,
         currencyConversionRateCacheType: CachingType.memory,

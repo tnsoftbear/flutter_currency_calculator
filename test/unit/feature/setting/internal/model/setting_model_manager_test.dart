@@ -26,41 +26,41 @@ void main() {
   });
 
   test('detectLanguageCode should return the saved language code if available',
-          () async {
-        // Arrange
-        final savedLanguageCode = 'en';
-        when(settingRepository.loadString('languageCode'))
-            .thenAnswer((_) => Future.value(savedLanguageCode));
-        // Act
-        final result = await sut.detectLanguageCode();
-        // Assert
-        expect(result, equals(savedLanguageCode));
-      });
+      () async {
+    // Arrange
+    final savedLanguageCode = 'en';
+    when(settingRepository.loadString('languageCode'))
+        .thenAnswer((_) => Future.value(savedLanguageCode));
+    // Act
+    final result = await sut.detectLanguageCode();
+    // Assert
+    expect(result, equals(savedLanguageCode));
+  });
 
   test(
       'detectLanguageCode should return the default language code if not saved',
-          () async {
-        // Arrange
-        when(settingRepository.loadString('languageCode'))
-            .thenAnswer((_) => Future.value(null));
-        // Act
-        final result = await sut.detectLanguageCode();
-        // Assert
-        expect(result, equals(AppearanceConstant.LC_DEFAULT));
-      });
+      () async {
+    // Arrange
+    when(settingRepository.loadString('languageCode'))
+        .thenAnswer((_) => Future.value(null));
+    // Act
+    final result = await sut.detectLanguageCode();
+    // Assert
+    expect(result, equals(AppearanceConstant.LC_DEFAULT));
+  });
 
   test(
       'detectLocale should return the Locale based on the detected language code',
-          () async {
-        // Arrange
-        final languageCode = 'en';
-        when(settingRepository.loadString('languageCode'))
-            .thenAnswer((_) => Future.value(languageCode));
-        // Act
-        final result = await sut.detectLocale();
-        // Assert
-        expect(result, equals(Locale(languageCode)));
-      });
+      () async {
+    // Arrange
+    final languageCode = 'en';
+    when(settingRepository.loadString('languageCode'))
+        .thenAnswer((_) => Future.value(languageCode));
+    // Act
+    final result = await sut.detectLocale();
+    // Assert
+    expect(result, equals(Locale(languageCode)));
+  });
 
   test('saveLanguageCode should save the given language code', () async {
     // Arrange
@@ -73,27 +73,27 @@ void main() {
   });
 
   test('detectFontFamily should return the saved font family if available',
-          () async {
-        // Arrange
-        final savedFontFamily = 'Roboto';
-        when(settingRepository.loadString('fontFamily'))
-            .thenAnswer((_) => Future.value(savedFontFamily));
-        // Act
-        final result = await sut.detectFontFamily();
-        // Assert
-        expect(result, equals(savedFontFamily));
-      });
+      () async {
+    // Arrange
+    final savedFontFamily = 'Roboto';
+    when(settingRepository.loadString('fontFamily'))
+        .thenAnswer((_) => Future.value(savedFontFamily));
+    // Act
+    final result = await sut.detectFontFamily();
+    // Assert
+    expect(result, equals(savedFontFamily));
+  });
 
   test('detectFontFamily should return the default font family if not saved',
-          () async {
-        // Arrange
-        when(settingRepository.loadString('fontFamily'))
-            .thenAnswer((_) => Future.value(null));
-        // Act
-        final result = await sut.detectFontFamily();
-        // Assert
-        expect(result, equals(AppearanceConstant.FF_DEFAULT));
-      });
+      () async {
+    // Arrange
+    when(settingRepository.loadString('fontFamily'))
+        .thenAnswer((_) => Future.value(null));
+    // Act
+    final result = await sut.detectFontFamily();
+    // Assert
+    expect(result, equals(AppearanceConstant.FF_DEFAULT));
+  });
 
   test('saveFontFamily should save the given font family', () async {
     // Arrange
@@ -105,27 +105,27 @@ void main() {
   });
 
   test('detectThemeType should return the saved theme type if available',
-          () async {
-        // Arrange
-        final savedThemeType = 'dark';
-        when(settingRepository.loadString('themeType'))
-            .thenAnswer((_) => Future.value(savedThemeType));
-        // Act
-        final result = await sut.detectThemeType();
-        // Assert
-        expect(result, equals(savedThemeType));
-      });
+      () async {
+    // Arrange
+    final savedThemeType = 'dark';
+    when(settingRepository.loadString('themeType'))
+        .thenAnswer((_) => Future.value(savedThemeType));
+    // Act
+    final result = await sut.detectThemeType();
+    // Assert
+    expect(result, equals(savedThemeType));
+  });
 
   test('detectThemeType should return the default theme type if not saved',
-          () async {
-        // Arrange
-        when(settingRepository.loadString('themeType'))
-            .thenAnswer((_) => Future.value(null));
-        // Act
-        final result = await sut.detectThemeType();
-        // Assert
-        expect(result, equals(AppearanceConstant.THEME_DEFAULT));
-      });
+      () async {
+    // Arrange
+    when(settingRepository.loadString('themeType'))
+        .thenAnswer((_) => Future.value(null));
+    // Act
+    final result = await sut.detectThemeType();
+    // Assert
+    expect(result, equals(AppearanceConstant.THEME_DEFAULT));
+  });
 
   test('saveThemeType should save the given theme type', () async {
     // Arrange
@@ -138,94 +138,91 @@ void main() {
 
   test(
       'detectSelectedSourceCurrencyCode should return the saved selected source currency code if available',
-          () async {
-        // Arrange
-        when(settingRepository.loadString('selectedSourceCurrencyCode'))
-            .thenAnswer((_) => Future.value('USD'));
-        when(currencyFeatureFacade.loadVisibleSourceCurrencyCodes())
-            .thenAnswer((_) => Future.value(['USD', 'EUR']));
-        // Act
-        final result = await sut.detectSelectedSourceCurrencyCode();
-        // Assert
-        expect(result, equals('USD'));
-      });
+      () async {
+    // Arrange
+    when(settingRepository.loadString('selectedSourceCurrencyCode'))
+        .thenAnswer((_) => Future.value('USD'));
+    when(currencyFeatureFacade.loadVisibleSourceCurrencyCodes())
+        .thenAnswer((_) => Future.value(['USD', 'EUR']));
+    // Act
+    final result = await sut.detectSelectedSourceCurrencyCode();
+    // Assert
+    expect(result, equals('USD'));
+  });
 
   test(
       'detectSelectedSourceCurrencyCode should return the first visible source currency code,' +
           ' if selected source currency code is not available in repository',
-          () async {
-        // Arrange
-        when(settingRepository.loadString('selectedSourceCurrencyCode'))
-            .thenAnswer((_) => Future.value('RUB'));
-        when(currencyFeatureFacade.loadVisibleSourceCurrencyCodes())
-            .thenAnswer((_) => Future.value(['USD', 'EUR']));
-        // Act
-        final result = await sut.detectSelectedSourceCurrencyCode();
-        // Assert
-        expect(result, equals('USD'));
-      });
+      () async {
+    // Arrange
+    when(settingRepository.loadString('selectedSourceCurrencyCode'))
+        .thenAnswer((_) => Future.value('RUB'));
+    when(currencyFeatureFacade.loadVisibleSourceCurrencyCodes())
+        .thenAnswer((_) => Future.value(['USD', 'EUR']));
+    // Act
+    final result = await sut.detectSelectedSourceCurrencyCode();
+    // Assert
+    expect(result, equals('USD'));
+  });
 
   test(
       'saveDefaultSourceCurrencyCode should save the given default source currency code',
-          () async {
-        // Arrange
-        final currencyCode = 'USD';
-        // Act
-        await sut.saveDefaultSourceCurrencyCode(currencyCode);
-        // Assert
-        verify(settingRepository.saveString(
+      () async {
+    // Arrange
+    final currencyCode = 'USD';
+    // Act
+    await sut.saveDefaultSourceCurrencyCode(currencyCode);
+    // Assert
+    verify(settingRepository.saveString(
             'selectedSourceCurrencyCode', currencyCode))
-            .called(1);
-      });
+        .called(1);
+  });
 
   test(
-      'detectSelectedTargetCurrencyCode should return the first visible target currency code,'
-          + ' if selected target currency code is not available in repository',
-          () async {
-        // Arrange
-        when(settingRepository.loadString('selectedTargetCurrencyCode'))
-            .thenAnswer((_) => Future.value('RUB'));
-        when(currencyFeatureFacade.loadVisibleTargetCurrencyCodes())
-            .thenAnswer((_) => Future.value(['EUR', 'GBP']));
-        // Act
-        final result = await sut.detectSelectedTargetCurrencyCode('USD');
-        // Assert
-        expect(result, equals('EUR'));
-      });
+      'detectSelectedTargetCurrencyCode should return the first visible target currency code,' +
+          ' if selected target currency code is not available in repository',
+      () async {
+    // Arrange
+    when(settingRepository.loadString('selectedTargetCurrencyCode'))
+        .thenAnswer((_) => Future.value('RUB'));
+    when(currencyFeatureFacade.loadVisibleTargetCurrencyCodes())
+        .thenAnswer((_) => Future.value(['EUR', 'GBP']));
+    // Act
+    final result = await sut.detectSelectedTargetCurrencyCode('USD');
+    // Assert
+    expect(result, equals('EUR'));
+  });
 
   test(
-      'detectSelectedTargetCurrencyCode should return the first visible target currency code,'
-          +
+      'detectSelectedTargetCurrencyCode should return the first visible target currency code,' +
           ' if selected target currency code is the same as source currency code',
-          () async {
-        // Arrange
-        when(settingRepository.loadString('selectedTargetCurrencyCode'))
-            .thenAnswer((_) => Future.value('USD'));
-        when(currencyFeatureFacade.loadVisibleTargetCurrencyCodes())
-            .thenAnswer((_) => Future.value(['EUR', 'GBP']));
-        // Act
-        final result = await sut.detectSelectedTargetCurrencyCode('USD');
-        // Assert
-        expect(result, equals('EUR'));
-      });
+      () async {
+    // Arrange
+    when(settingRepository.loadString('selectedTargetCurrencyCode'))
+        .thenAnswer((_) => Future.value('USD'));
+    when(currencyFeatureFacade.loadVisibleTargetCurrencyCodes())
+        .thenAnswer((_) => Future.value(['EUR', 'GBP']));
+    // Act
+    final result = await sut.detectSelectedTargetCurrencyCode('USD');
+    // Assert
+    expect(result, equals('EUR'));
+  });
 
   test(
-      'detectSelectedTargetCurrencyCode should return the second visible target currency code,'
-          +
-          ' if selected target currency code is not among available target currency codes'
-          +
+      'detectSelectedTargetCurrencyCode should return the second visible target currency code,' +
+          ' if selected target currency code is not among available target currency codes' +
           ' and the first visible target currency code is the same as source currency code',
-    () async {
-      // Arrange
-      when(settingRepository.loadString('selectedTargetCurrencyCode'))
-          .thenAnswer((_) => Future.value('USD'));
-      when(currencyFeatureFacade.loadVisibleTargetCurrencyCodes())
-          .thenAnswer((_) => Future.value(['EUR', 'GBP']));
-      // Act
-      final result = await sut.detectSelectedTargetCurrencyCode('EUR');
-      // Assert
-      expect(result, equals('GBP'));
-    });
+      () async {
+    // Arrange
+    when(settingRepository.loadString('selectedTargetCurrencyCode'))
+        .thenAnswer((_) => Future.value('USD'));
+    when(currencyFeatureFacade.loadVisibleTargetCurrencyCodes())
+        .thenAnswer((_) => Future.value(['EUR', 'GBP']));
+    // Act
+    final result = await sut.detectSelectedTargetCurrencyCode('EUR');
+    // Assert
+    expect(result, equals('GBP'));
+  });
 
   test(
       'saveDefaultTargetCurrencyCode should save the given default target currency code',
@@ -241,9 +238,8 @@ void main() {
   });
 
   test(
-      'detectVisibleSourceCurrencyCodes should return the saved in setting'
-          + ' repository visible source currency codes if available',
-      () async {
+      'detectVisibleSourceCurrencyCodes should return the saved in setting' +
+          ' repository visible source currency codes if available', () async {
     // Arrange
     final savedCurrencyCodes = ['USD', 'EUR'];
     when(settingRepository.loadVisibleSourceCurrencyCodes())
@@ -255,8 +251,8 @@ void main() {
   });
 
   test(
-      'detectVisibleSourceCurrencyCodes should load visible source currency codes'
-          + ' from currency feature facade (currency repository) if not saved',
+      'detectVisibleSourceCurrencyCodes should load visible source currency codes' +
+          ' from currency feature facade (currency repository) if not saved',
       () async {
     // Arrange
     final visibleCurrencyCodes = ['USD', 'EUR'];

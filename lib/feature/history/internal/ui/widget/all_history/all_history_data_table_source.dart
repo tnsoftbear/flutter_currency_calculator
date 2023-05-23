@@ -2,10 +2,8 @@ import 'package:currency_calc/feature/history/internal/ui/widget/history_output/
 import 'package:flutter/material.dart';
 
 final class AllHistoryDataTableSource extends DataTableSource {
-  AllHistoryDataTableSource(
-      BuildContext this._context,
-      List<HistoryOutputDto> this._historyRecords,
-      Function this._deleteRecord);
+  AllHistoryDataTableSource(BuildContext this._context,
+      List<HistoryOutputDto> this._historyRecords, Function this._deleteRecord);
 
   BuildContext _context;
   List<HistoryOutputDto> _historyRecords;

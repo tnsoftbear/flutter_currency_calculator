@@ -25,8 +25,9 @@ void main() {
     ];
 
     for (var data in testData) {
-      test('- ${data['description']} for amount ${data['amount']} and rate ${data['rate']}',
-            () {
+      test(
+        '- ${data['description']} for amount ${data['amount']} and rate ${data['rate']}',
+        () {
           // Arrange
           final amount = data['amount'] as double;
           final rate = data['rate'] as double;
@@ -42,8 +43,7 @@ void main() {
     }
   });
 
-  group('CurrencyConverter.convert() fail cases', ()
-  {
+  group('CurrencyConverter.convert() fail cases', () {
     final testData = [
       {
         'amount': -100.0,
@@ -58,7 +58,9 @@ void main() {
     ];
 
     for (var data in testData) {
-      test('- ${data['description']} for amount ${data['amount']} and rate ${data['rate']}', () {
+      test(
+          '- ${data['description']} for amount ${data['amount']} and rate ${data['rate']}',
+          () {
         // Arrange
         final amount = data['amount'] as double;
         final rate = data['rate'] as double;

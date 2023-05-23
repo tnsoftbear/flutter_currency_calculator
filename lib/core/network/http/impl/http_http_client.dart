@@ -12,8 +12,7 @@ final class HttpHttpClient implements HttpClient {
 
   @override
   Future<T> get<T>(String url,
-      {QueryParams? queryParams,
-      HttpHeaders? headers}) async {
+      {QueryParams? queryParams, HttpHeaders? headers}) async {
     if (queryParams != null && queryParams.length > 0) {
       url = url + '?' + Uri(queryParameters: queryParams).query;
     }
@@ -29,8 +28,7 @@ final class HttpHttpClient implements HttpClient {
       return response.body as T;
     } else {
       throw CouldNotFetchSuccessHttpResponse(
-          reasonPhrase: response.reasonPhrase,
-          statusCode: response.statusCode);
+          reasonPhrase: response.reasonPhrase, statusCode: response.statusCode);
     }
   }
 }

@@ -51,11 +51,11 @@ final class ConversionHistoryRecord extends Equatable {
 
   @override
   List<Object> get props => [
-    sourceCurrencyCode,
-    sourceAmount,
-    targetCurrencyCode,
-    targetAmount,
-    rate,
-    date
-  ];
+        sourceCurrencyCode,
+        sourceAmount,
+        targetCurrencyCode,
+        targetAmount,
+        rate,
+        date
+      ];
 }

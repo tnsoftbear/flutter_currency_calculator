@@ -5,11 +5,12 @@ final class ConversionConfig {
   ConversionConfig(
       {int this.currencyConversionRateCacheExpiryInSeconds = 24 * 60 * 60,
       CachingType this.currencyConversionRateCacheType = CachingType.repository,
-      FetchingType this.currencyConversionRateFetcherType = FetchingType.fawazAhmed,
+      FetchingType this.currencyConversionRateFetcherType =
+          FetchingType.fawazAhmed,
       String this.fixerIoApiBaseUrl = 'https://api.apilayer.com/fixer/convert',
       String this.fixerIoApiKey = '1yUWc2Kb2Bzr13w7hryFnkKBCxGV38Ia',
-      String this.fawazAhmedApiBaseUrl = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest'}) {
-  }
+      String this.fawazAhmedApiBaseUrl =
+          'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest'}) {}
 
   late final int currencyConversionRateCacheExpiryInSeconds; // 1 day
   late final CachingType currencyConversionRateCacheType;

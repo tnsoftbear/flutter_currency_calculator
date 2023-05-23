@@ -54,8 +54,7 @@ final class ThemeBuilder {
         ),
         appBarTheme: AppBarTheme(
             backgroundColor: Colors.red[300],
-            titleTextStyle: appBarTitleTextStyle
-        ),
+            titleTextStyle: appBarTitleTextStyle),
         iconTheme: const IconThemeData(color: Colors.white),
         listTileTheme: const ListTileThemeData(
           iconColor: Colors.white,
@@ -83,8 +82,7 @@ final class ThemeBuilder {
       ),
       appBarTheme: AppBarTheme(
           backgroundColor: Colors.blue[300],
-          titleTextStyle: appBarTitleTextStyle
-      ),
+          titleTextStyle: appBarTitleTextStyle),
       iconTheme: const IconThemeData(color: Colors.white),
       listTileTheme: const ListTileThemeData(
         iconColor: Colors.white,

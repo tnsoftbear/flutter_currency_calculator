@@ -10,12 +10,12 @@ final class ThemeSettingTableRow extends TableRow {
   ThemeSettingTableRow(
     this.context,
   ) : super(children: [
-    Text(AppLocalizations.of(context).settingSelectTheme),
-    Row(
-      children: _buildThemeList(context),
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    )
-  ]);
+          Text(AppLocalizations.of(context).settingSelectTheme),
+          Row(
+            children: _buildThemeList(context),
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          )
+        ]);
 
   static List<Widget> _buildThemeList(BuildContext context) {
     final tr = AppLocalizations.of(context);

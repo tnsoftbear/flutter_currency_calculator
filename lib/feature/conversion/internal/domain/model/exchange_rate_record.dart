@@ -40,9 +40,9 @@ final class ExchangeRateRecord extends Equatable {
 
   @override
   List<Object> get props => [
-    sourceCurrencyCode,
-    targetCurrencyCode,
-    exchangeRate,
-    createdAt,
-  ];
+        sourceCurrencyCode,
+        targetCurrencyCode,
+        exchangeRate,
+        createdAt,
+      ];
 }

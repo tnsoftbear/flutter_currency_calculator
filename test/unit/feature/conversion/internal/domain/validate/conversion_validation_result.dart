@@ -6,7 +6,8 @@ void main() {
     test('addError() should add the error to the errors list', () {
       final result = ConversionValidationResult();
       result.addError(ConversionValidationResult.ERR_SOURCE_CURRENCY_INVALID);
-      expect(result.errors, [ConversionValidationResult.ERR_SOURCE_CURRENCY_INVALID]);
+      expect(result.errors,
+          [ConversionValidationResult.ERR_SOURCE_CURRENCY_INVALID]);
     });
 
     test('isSuccess() should return true if there are no errors', () {

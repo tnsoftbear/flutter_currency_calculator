@@ -12,8 +12,7 @@ final class DioHttpClient implements HttpClient {
 
   @override
   Future<T> get<T>(String url,
-      {QueryParams? queryParams,
-      HttpHeaders? headers}) async {
+      {QueryParams? queryParams, HttpHeaders? headers}) async {
     final Options options = Options(headers: headers);
     late final Response response;
     try {

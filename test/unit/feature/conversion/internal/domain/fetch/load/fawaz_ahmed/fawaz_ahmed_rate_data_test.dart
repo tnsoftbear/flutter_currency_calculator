@@ -20,18 +20,20 @@ void main() {
       final targetCurrency = 'usd';
       // Act, Assert
       expect(
-            () => FawazAhmedRateData.fromJson(encodedJson, targetCurrency),
+        () => FawazAhmedRateData.fromJson(encodedJson, targetCurrency),
         throwsException,
       );
     });
 
-    test('fromJson() throws an exception if the target currency is not found in the JSON', () {
+    test(
+        'fromJson() throws an exception if the target currency is not found in the JSON',
+        () {
       // Arrange
       final encodedJson = '{"date": "2023-05-18", "eur": 0.9}';
       final targetCurrency = 'usd';
       // Act, Assert
       expect(
-            () => FawazAhmedRateData.fromJson(encodedJson, targetCurrency),
+        () => FawazAhmedRateData.fromJson(encodedJson, targetCurrency),
         throwsA(isA<TypeError>()),
       );
     });

@@ -9,7 +9,8 @@ final class FawazAhmedAvailableCurrencyFetcher implements CurrencyFetcher {
   String _baseUrl;
   HttpClient _httpClient;
 
-  FawazAhmedAvailableCurrencyFetcher({required String url, required HttpClient httpClient})
+  FawazAhmedAvailableCurrencyFetcher(
+      {required String url, required HttpClient httpClient})
       : _baseUrl = url,
         _httpClient = httpClient;
 
@@ -23,8 +24,8 @@ final class FawazAhmedAvailableCurrencyFetcher implements CurrencyFetcher {
     }
 
     final fetchedCurrencies = json.decode(encodedJson);
-    dev.log("Available currencies fetched from API. Count: ${fetchedCurrencies
-        .length}");
+    dev.log(
+        "Available currencies fetched from API. Count: ${fetchedCurrencies.length}");
     final CurrencyMap resultCurrencies = {};
     for (var key in fetchedCurrencies.keys) {
       Currency currency = Currency(key, fetchedCurrencies[key]!);
