@@ -61,7 +61,14 @@ flutter_native_splash:
 
 # rps unit, rps widget
 scripts:
+  gen-all: |
+    $gen
+    $l10n
   gen: dart run build_runner build --delete-conflicting-outputs
   get: dart pub get
+  l10n: flutter gen-l10n
   unit: flutter test test/unit
   widget: flutter test test/widget
+  reset:
+    flutter clean
+    flutter pub get
