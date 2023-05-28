@@ -14,7 +14,6 @@ dependencies:
   intl: any
   shared_preferences: ^2.1.0
   hive_flutter: ^1.1.0
-  country_icons: ^2.0.2
   flutter_svg: ^2.0.5
   provider: ^6.0.5
   equatable: ^2.0.5

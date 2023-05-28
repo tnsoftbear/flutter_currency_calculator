@@ -24,12 +24,12 @@ final class LocaleSettingTableRow extends TableRow {
       {
         'title': tr.settingLocaleEnLabel,
         'value': AppearanceConstant.LC_EN,
-        'icon': 'icons/flags/svg/us.svg',
+        'icon': 'images/flags/svg/us.svg',
       },
       {
         'title': tr.settingLocaleRuLabel,
         'value': AppearanceConstant.LC_RU,
-        'icon': 'icons/flags/svg/ru.svg',
+        'icon': 'images/flags/svg/ru.svg',
       },
     ];
     ;
@@ -39,9 +39,7 @@ final class LocaleSettingTableRow extends TableRow {
       return Expanded(
           child: RadioListTile(
         title: SvgPicture.asset(language['icon']!,
-            package: 'country_icons',
-            height: 32,
-            semanticsLabel: language['title']),
+            height: 32, semanticsLabel: language['title']),
         value: language['value'],
         groupValue: settingModel.languageCode,
         onChanged: (languageCode) =>
