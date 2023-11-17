@@ -20,6 +20,6 @@ jobs:
         - run: flutter --disable-analytics && flutter --version
         - run: flutter doctor -v
         - name: Checkout code
-          uses: actions/checkout@v2
+          uses: actions/checkout@v4
         - run: make get
         - run: make test
