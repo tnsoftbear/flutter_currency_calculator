@@ -16,8 +16,7 @@ final class FawazAhmedExchangeRateFetcher implements RateFetcher {
       String sourceCurrencyCode, String targetCurrencyCode) async {
     targetCurrencyCode = targetCurrencyCode.toLowerCase();
     sourceCurrencyCode = sourceCurrencyCode.toLowerCase();
-    final url =
-        _baseUrl + '/currencies/$sourceCurrencyCode/$targetCurrencyCode.json';
+    final url = _baseUrl + '/currencies/$sourceCurrencyCode.json';
     String encodedJson;
     try {
       encodedJson = await _httpClient.get<String>(url);
@@ -25,8 +24,8 @@ final class FawazAhmedExchangeRateFetcher implements RateFetcher {
       throw CouldNotFetchExchangeRate(reason: e.toString());
     }
 
-    final rateData =
-        FawazAhmedRateData.fromJson(encodedJson, targetCurrencyCode);
+    final rateData = FawazAhmedRateData.fromJson(
+        encodedJson, sourceCurrencyCode, targetCurrencyCode);
     return rateData.rate;
   }
 }

@@ -17,7 +17,7 @@ final class CurrencyFeatureDic {
     );
     final currencyFetcher = FawazAhmedAvailableCurrencyFetcher(
         url:
-            "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.json",
+            "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies.json",
         httpClient: HttpHttpClient() // Used instead of DioHttpClient() for fun
         );
     _currencyPopulator =

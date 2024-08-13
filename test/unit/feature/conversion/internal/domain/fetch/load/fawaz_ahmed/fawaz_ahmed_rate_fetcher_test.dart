@@ -19,12 +19,13 @@ void main() {
 
     test('fetchExchangeRate() returns the correct exchange rate', () async {
       // Arrange
-      final sourceCurrencyCode = 'USD';
-      final targetCurrencyCode = 'EUR';
-      final url = '$baseUrl/currencies/usd/eur.json';
-      final encodedJson = '{"date": "2023-05-18", "usd": 0.9, "eur": 1.1}';
-      final rateData =
-          FawazAhmedRateData.fromJson(encodedJson, targetCurrencyCode);
+      final sourceCurrencyCode = 'EUR';
+      final targetCurrencyCode = 'USD';
+      final url = '$baseUrl/currencies/eur.json';
+      final encodedJson =
+          '{"date": "2023-05-18", "eur": { "usd": 0.9, "gbp": 1.1 }}';
+      final rateData = FawazAhmedRateData.fromJson(
+          encodedJson, sourceCurrencyCode, targetCurrencyCode);
       when(httpClient.get(url)).thenAnswer((_) async => encodedJson);
       // Act
       final exchangeRate = await fetcher.fetchExchangeRate(

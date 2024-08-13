@@ -159,6 +159,8 @@ dart run build_runner build --delete-conflicting-outputs
 flutter gen-l10n
 # Generate splash screens
 flutter pub run flutter_native_splash:create
+# Format source code
+dart format .
 ```
 
 #### Document
@@ -172,7 +174,7 @@ echo ```sh > ./doc/lib_tree.md & echo lib >> ./doc/lib_tree.md & tree /F /A lib 
 
 * [ ] Riverpod(?)
 * [ ] Swipe screens (History <- Calculator -> Settings)
-* [ ] Tests
+* [ ] More tests
 * [ ] Compare exchange rate with past dates
 * [ ] Notes
 
