@@ -15,8 +15,8 @@ final class ThemeBuilder {
         fontFamily: fontFamily,
         primaryColor: Colors.green[300],
         scaffoldBackgroundColor: Colors.green[300],
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.green,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.green,
         ),
         drawerTheme: DrawerThemeData(
           backgroundColor: Colors.green[300],
@@ -46,8 +46,8 @@ final class ThemeBuilder {
         fontFamily: fontFamily,
         primaryColor: Colors.red[300],
         scaffoldBackgroundColor: Colors.red[300],
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.red,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.red,
         ),
         drawerTheme: DrawerThemeData(
           backgroundColor: Colors.red[300],
@@ -74,8 +74,8 @@ final class ThemeBuilder {
       fontFamily: fontFamily,
       primaryColor: Colors.blue[300],
       scaffoldBackgroundColor: Colors.blue[300],
-      colorScheme: ColorScheme.fromSwatch(
-        primarySwatch: Colors.blue,
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: Colors.blue,
       ),
       drawerTheme: DrawerThemeData(
         backgroundColor: Colors.blue[300],

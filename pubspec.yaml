@@ -14,8 +14,8 @@ dependencies:
   intl: any
   shared_preferences: ^2.3.0
   hive_flutter: ^1.1.0
-  flutter_svg: ^2.0.5
-  provider: ^6.0.5
+  flutter_svg: ^2.0.10+1
+  provider: ^6.1.2
   equatable: ^2.0.5
   # vertical_tabs_flutter: ^1.0.0
   vertical_tabs_flutter:
@@ -23,17 +23,17 @@ dependencies:
       url: https://github.com/tnsoftbear/vertical_tabs_flutter.git
       ref: fix_transparency
   clock: ^1.1.1
-  dio: ^5.1.2
+  dio: ^5.6.0
   flutter_native_splash: ^2.4.1
-  mockito: ^5.4.0
+  mockito: ^5.4.4
   flutter_hooks: ^0.20.5
-  http: ^1.0.0
+  http: ^1.2.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  hive_generator: ^2.0.0
-  build_runner: ^2.3.3
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.12
   lints: ^4.0.0
   flutter_lints: ^4.0.0
 
