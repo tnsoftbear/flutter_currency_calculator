@@ -24,9 +24,9 @@ dependencies:
       ref: fix_transparency
   clock: ^1.1.1
   dio: ^5.1.2
-  flutter_native_splash: ^2.3.0
+  flutter_native_splash: ^2.4.1
   mockito: ^5.4.0
-  flutter_hooks: ^0.18.6
+  flutter_hooks: ^0.20.5
   http: ^1.0.0
 
 dev_dependencies:
@@ -34,8 +34,8 @@ dev_dependencies:
     sdk: flutter
   hive_generator: ^2.0.0
   build_runner: ^2.3.3
-  lints: ^2.0.1
-  flutter_lints: ^2.0.1
+  lints: ^4.0.0
+  flutter_lints: ^4.0.0
 
 flutter:
   generate: true # Enable generation of localized Strings from arb files.
@@ -53,10 +53,10 @@ flutter:
       fonts:
         - asset: fonts/Montserrat-Regular.ttf
 
+# Don't forget to run on changes: dart run flutter_native_splash:create
 flutter_native_splash:
   background_image: "assets/images/splash.png"
-  # web splash screen is not working (idk why)
-  # background_image_web: "assets/images/splash-web.png"
+  background_image_web: "assets/images/splash-web.png"
 
 # rps unit, rps widget
 scripts:
