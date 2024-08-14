@@ -2,8 +2,8 @@ import 'package:currency_calc/feature/setting/internal/domain/repository/setting
 import 'package:shared_preferences/shared_preferences.dart';
 
 final class SettingSharedPrefsDataSource implements SettingDataSource {
-  Future<SharedPreferences> getInstance() async {
-    return await SharedPreferences.getInstance();
+  Future<SharedPreferencesAsync> getInstance() async {
+    return SharedPreferencesAsync();
   }
 
   @override
@@ -13,7 +13,7 @@ final class SettingSharedPrefsDataSource implements SettingDataSource {
   }
 
   @override
-  Future<bool> setString(String key, String value) async {
+  Future<void> setString(String key, String value) async {
     final prefs = await getInstance();
     return await prefs.setString(key, value);
   }
@@ -25,7 +25,7 @@ final class SettingSharedPrefsDataSource implements SettingDataSource {
   }
 
   @override
-  Future<bool> setStringList(String key, List<String> value) async {
+  Future<void> setStringList(String key, List<String> value) async {
     final prefs = await getInstance();
     return await prefs.setStringList(key, value);
   }

@@ -11,18 +11,19 @@ final class UpdateTimeSharedPrefsDataSource implements UpdateTimeDataSource {
 
   @override
   Future<DateTime?> loadLastUpdateDate() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (!prefs.containsKey(lastUpdateTimestampKey)) {
+    final SharedPreferencesAsync prefs = SharedPreferencesAsync();
+    if (!await prefs.containsKey(lastUpdateTimestampKey)) {
       return null;
     }
 
-    final int lastUpdateTimestamp = prefs.getInt(lastUpdateTimestampKey) ?? 0;
+    final int lastUpdateTimestamp =
+        await prefs.getInt(lastUpdateTimestampKey) ?? 0;
     return DateTime.fromMillisecondsSinceEpoch(lastUpdateTimestamp);
   }
 
   @override
   Future<void> saveLastUpdateDateToNow() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final SharedPreferencesAsync prefs = SharedPreferencesAsync();
     final currentDateUtcTs = _clock.now().toUtc().millisecondsSinceEpoch;
     await prefs.setInt(lastUpdateTimestampKey, currentDateUtcTs);
   }
