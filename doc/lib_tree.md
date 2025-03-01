@@ -125,6 +125,7 @@ lib
 |   |   |   |   |       currency_populator.dart
 |   |   |   |   |       
 |   |   |   |   +---repository
+|   |   |   |   |       could_not_load_currency.dart
 |   |   |   |   |       currency_data_source.dart
 |   |   |   |   |       currency_repository.dart
 |   |   |   |   |       currency_repository_impl.dart

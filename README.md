@@ -185,6 +185,18 @@ echo ```sh > ./doc/lib_tree.md & echo lib >> ./doc/lib_tree.md & tree /F /A lib 
 ![Settings screen - Appearance](./doc/pic/scr-3.png)
 ![Settings screen - Currency](./doc/pic/scr-4.jpg)
 
+## Github Actions
+
+The repository includes GitHub Actions pipelines that set up the Flutter environment, verify the setup, install dependencies, and run tests on pull requests and pushes.
+
+## Contribution
+
+Since this is a learning project focused on application with Flutter, I would be incredibly grateful for any advice or ideas for improvement!
+
+## Licence
+
+MIT
+
 ## Links
 
 * [Flutter App Architecture with Riverpod](https://codewithandrea.com/articles/flutter-app-architecture-riverpod-introduction/)
