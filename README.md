@@ -195,7 +195,7 @@ Since this is a learning project focused on application with Flutter, I would be
 
 ## Licence
 
-MIT
+[MIT](LICENSE)
 
 ## Links
 
